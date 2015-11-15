@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <script>
+            function message() {
+                alert("this is from the onload event!!");
+            }
+        </script>
+    </head>
+    <body onload="message()">
+        <p>hello world</p>
+        <script type="text/javascript">
+            String.prototype.write = function(prompt) {
+                document.write("<p>" + prompt + ": " + this + "</p>");
+            }
+            function writeP(prompt, s) {
+                document.write("<p>" + prompt + ": " + s + "</p>");
+            }
+            var txt = "Hello World!";
+            document.write("<p>Big: " + txt.big() + "</p>");
+            document.write("<p>Small: " + txt.small() + "</p>");
+            txt.italics().write("Italic");
+            writeP("Blink", txt.blink());
+            writeP("Fixed", txt.fixed());
+            writeP("Strike", txt.strike());
+            writeP("Fontcolor", txt.fontcolor("Red"));
+            writeP("Fontsize", txt.fontsize(16));
+            writeP("Lowercase", txt.toLowerCase());
+            writeP("Upcase", txt.toUpperCase());
+            writeP("Subscript", txt.sub());
+            writeP("Supperscript", txt.sup());
+            writeP("Link", txt.link("http://bbxyard.com"));
+        </script>
+    </body>
+</html>
