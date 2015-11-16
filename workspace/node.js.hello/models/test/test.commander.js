@@ -7,7 +7,7 @@
 var app = require("commander");
 
 /**
- * pizza demo
+ * demo pizza
  */
 function demo_pizza() {
      app.version("1.0.0")
@@ -24,4 +24,48 @@ function demo_pizza() {
     console.log("   - %s cheese", app.cheese);   
 }
 
-demo_pizza();
+/**
+ * demo data type
+ */
+function demo_data_type() {
+    function range(val) {
+      return val.split('..').map(Number);
+    }    
+    function list(val) {
+      return val.split(',');
+    }    
+    function collect(val, memo) {
+      memo.push(val);
+      return memo;
+    }    
+    function increaseVerbosity(v, total) {
+      return total + 1;
+    }
+    
+    var program = app;
+    program
+      .version('0.0.1')
+      .usage('[options] <file ...>')
+      .option('-i, --integer <n>', 'An integer argument', parseInt)
+      .option('-f, --float <n>', 'A float argument', parseFloat)
+      .option('-r, --range <a>..<b>', 'A range', range)
+      .option('-l, --list <items>', 'A list', list)
+      .option('-o, --optional [value]', 'An optional value')
+      .option('-c, --collect [value]', 'A repeatable value', collect, [])
+      .option('-v, --verbose', 'A value that can be increased', increaseVerbosity, 0)
+      .parse(process.argv);
+    
+    console.log(' int: %j', program.integer);
+    console.log(' float: %j', program.float);
+    console.log(' optional: %j', program.optional);
+    program.range = program.range || [];
+    console.log(' range: %j..%j', program.range[0], program.range[1]);
+    console.log(' list: %j', program.list);
+    console.log(' collect: %j', program.collect);
+    console.log(' verbosity: %j', program.verbose);
+    console.log(' args: %j', program.args);       
+}
+
+
+//demo_pizza();
+demo_data_type();
