@@ -1,0 +1,41 @@
+# bbxyard bash run script
+# define some useful functions
+# @author boxu
+# @create 2015.11.19 
+
+
+# safe tmp work dir
+TMP_DIR=$HOME/var/run/$(basename $0).$$
+function do_init_tmp_dir() { mkdir -p "$TMP_DIR"; }
+function do_fini_tmp_dir() { rm -rvf  "$TMP_DIR"; }
+
+# test can I have root power!
+function amiroot()
+{
+    ROOT_UID=0
+    echo "input $1"
+    if [ "$UID" = "$ROOT_UID" ]; then
+        echo "You are root"
+    else
+        echo "You are just an ordinary user(but mom loves you too)."
+    fi
+}
+
+# verify and re-symbol dir link 
+function verify_dir_symlink()
+{
+	src_file=$1
+	dst_link=$2
+	
+	# if dir-link exists unlink
+	[ -h "$dst_link" ] && unlink "$dst_link"
+
+	# if dir-real exists rename with date
+	if [ -d "$dst_link" ]; then
+		NOW=$(date +%Y-%m-%d-%H-%M-%S)
+		mv "$dst_link" "$dst_link.$NOW"
+	fi
+	
+	# re-link
+	[ ! -d "$dst_link" ] && ln -s "$src_file" "$dst_link"
+}
