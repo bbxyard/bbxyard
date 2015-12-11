@@ -12,6 +12,15 @@ function do_init_tmp_dir() { mkdir -p "$TMP_DIR"; }
 function do_fini_tmp_dir() { rm -rvf  "$TMP_DIR"; }
 
 
+# sudo wrap
+function invoke_sudo()
+{
+    # sent the pass and invoke a null command once.
+    echo $SUDO_PASSWD | sudo -S cat /dev/null
+    # execute the real command
+    sudo $@
+}
+
 # test can I have root power!
 function amiroot()
 {
