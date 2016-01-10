@@ -16,5 +16,15 @@ function doTestArguments2() {
     }
 }
 
+function printCmdline(argv) {
+    for (var i = 0; i < argv.length; ++i) {
+        console.log(argv[i]);
+    }
+    argv.forEach(function(val, index, array) {
+        console.log("index " + index + ": " + val);
+    })
+}
+
 doTestArguments("hello", "boxu", 2015, 11, 14);
 doTestArguments2("world", "boxu", 1985, 7, 18);
+printCmdline(process.argv.slice(2));

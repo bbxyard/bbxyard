@@ -1,6 +1,10 @@
 fs = require("fs");
 Path = require("path");
 
+
+/**
+ * 计算文件md5, 支持大文件
+ */
 function calcFileMd5(file) {
     var md5 = "";
     if (!fs.existsSync(file)) {
@@ -21,32 +25,47 @@ function calcFileMd5(file) {
     return md5;
 }
 
-function FileInfo(path, size) {
+
+/**
+ * 文件信息类
+ */
+function FileInfo(path, states) {
 	this.path = path;					// name with path
 	this.name = Path.basename(path);	// name only
-	this.size = size | 0;	// size
-	this.md5  = calcFileMd5(this.path);
+	this.size = 0;	// size
+    if (null != states) {
+        this.size = states.size;
+        this.mtime = states.mtime;
+    }
+	this._id  = calcFileMd5(this.path);
 }
-
 FileInfo.prototype.info = function() {
-	var s = ("path=" + this.path + "; name=" + this.name +
+	var s = ("path=" + this.path
+                     + "; name=" + this.name
 					 + "; size=" + (this.size / 1024).toFixed(2) + "KB"
-				 	 + "; md5=" + this.md5);
+				 	 + "; md5=" + this._id
+                     + "; mtime=" + this.mtime);
 	return s;
 }
+FileInfo.prototype.toString = function() {
+    var s = JSON.stringify(this);
+    return s;
+}
 
+
+/**
+ * 列表序列化到string
+ */
 function flist2string(flist) {
 	var s = "";
 	for (var i = 0; i < flist.length; ++i) {
-		s += flist[i].info() + "\n";
+		s += flist[i].toString() + "\n";
 	}
 	return s;
 }
 
 /**
- *
  * get file list
- *
  */
 function getFileList(path) {
 	var flist = [];
@@ -59,13 +78,13 @@ function readFile(path, flist) {
 	files = fs.readdirSync(path);
 	files.forEach(walk);
 	function walk(file) {
-		fpath = path + '/' + file;
+		fpath = Path.join(path, file);
 		states = fs.statSync(fpath);
 		if (states.isDirectory()) {
 			readFile(fpath, flist);	// 递归
 		} else {
-			var f = new FileInfo(fpath, states.size);
-			console.log("add: " + f.info());
+			var f = new FileInfo(fpath, states);
+            console.log("add: " + f.toString());
 			flist.push(f);
 		}
 	}
@@ -73,10 +92,8 @@ function readFile(path, flist) {
 
 // write utf-8 buffer string to file
 function writeFile(file, data) {
-	fs.writeFile(file, data, "utf-8", onFinish);
-	function onFinish() {
-		console.log("file wrote finished!!");
-	}
+	fs.writeFileSync(file, data, "utf-8");
+    console.log("file wrote finished!!");
 }
 
 // file sort handler
@@ -90,13 +107,38 @@ function sortHandlerBySize(lhs, rhs) {
 	}
 }
 
-// demo
-function fsUtilsDemo() {
-	var flist = getFileList("/Users/bbxyard/stub");
+
+function run(indir, outfile) {
+	var flist = getFileList(indir);
 	flist.sort(sortHandlerBySize);
-	writeFile("/tmp/stub.lst", flist2string(flist));
-	console.log(flist);
+	writeFile(outfile, flist2string(flist));
+	//console.log(flist);
+    console.log("total process time: " + process.uptime());
+    return 0;
 }
 
+function showUsage() {
+    var jsname = Path.basename(process.argv[1]);
+    console.log("Usage: node %s <indir> <outfile>", jsname);
+}
+
+
+/**
+ * main入口
+ */
+function main(argv) {
+    if (argv.length < 2) {
+        showUsage();
+        return 2;
+    }
+    var indir = argv[0];
+    var outfile = argv[1];
+    console.log("indir=%s\noutfile=%s", indir, outfile);
+    var ret = run(indir, outfile);
+    process.exit(ret);
+}
+
+
 // just do it!
-fsUtilsDemo();
+// run("/Users/bbxyard/stub", "/tmp/stub.lst");
+main(process.argv.slice(2));
