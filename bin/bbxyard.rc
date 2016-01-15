@@ -1,7 +1,17 @@
 # bbxyard bash run script
 # define some useful functions
 # @author boxu
-# @create 2015.11.19 
+# @create 2015.11.19
+
+
+# color echo
+NORMAL=$(tput sgr0)
+GREEN=$(tput setaf 2; tput bold)
+YELLOW=$(tput setaf 3)
+RED=$(tput setaf 1)
+function red()    { echo -e "$RED$*$NORMAL"; }
+function green()  { echo -e "$GREEN$*$NORMAL"; }
+function yellow() { echo -e "$YELLOW$*$NORMAL"; }
 
 
 # safe tmp work dir
@@ -33,12 +43,12 @@ function amiroot()
     fi
 }
 
-# verify and re-symbol dir link 
+# verify and re-symbol dir link
 function verify_dir_symlink()
 {
 	src_file=$1
 	dst_link=$2
-	
+
 	# if dir-link exists unlink
 	[ -h "$dst_link" ] && unlink "$dst_link"
 
@@ -47,7 +57,7 @@ function verify_dir_symlink()
 		NOW=$(date +%Y-%m-%d-%H-%M-%S)
 		mv "$dst_link" "$dst_link.$NOW"
 	fi
-	
+
 	# re-link
 	[ ! -d "$dst_link" ] && ln -s "$src_file" "$dst_link"
 }
