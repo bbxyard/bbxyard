@@ -2,7 +2,8 @@ var mongoose = require("mongoose");
 var User = require("./mtabs").User;
 var Word = require("./mtabs").Word;
 
-function do_connect(uri) {
+
+function doConnect(uri) {
 	mongoose.connect(uri);
 	var db = mongoose.connection;
 	db.on("error", console.error.bind(console, "connection error:"));
@@ -15,22 +16,29 @@ function do_connect(uri) {
 }
 
 // callback
-function on_collection_save(err, c) {
+function onCollectionSave(err, c) {
 	if (err)
 		return console.error(err);
 	console.log(c);	
 }
 
 
-function do_add() {
-	var user = new User({_id:"20151112.5u9", userid:"990719", "passwd":"123456"});
-	var word = new Word({_id:"20151112.5w9", name:"hallo", mean:"你好", memo:"this is a test"});
-	word.save(function(err, w) { on_collection_save(err, w)});
-	user.save(function(err, u) { on_collection_save(err, u)});
+function doAdd() {
+	var user = new User({_id:"20151112.5u1", userid:"990719", "passwd":"123456"});
+	var word = new Word({_id:"20151112.5w1", name:"hallo", mean:"你好", memo:"this is a test"});
+	word.save(function(err, w) { onCollectionSave(err, w)});
+	user.save(function(err, u) { onCollectionSave(err, u)});
 	user.speak();
 }
 
-function do_query() {
+function doQuery() {
+
+	User.find({}, function(err, docs) {
+		docs.forEach(function(doc, idx, array) {
+			console.log("index %d: ", idx, doc);
+		});
+	});
+
 	
 	// Person.
   // find({
@@ -51,26 +59,10 @@ function do_query() {
 	// 	.exec(callback);
 }
 
-var db = do_connect("mongodb://localhost/test");
 
-//do_add();
-////do_query();
-
-// doc.array = [1,2,3];
-
-//  var shifted = doc.array.$shift();
-//  console.log(shifted); // 1
-//  console.log(doc.array); // [2,3]
-
-//  // no affect
-//  shifted = doc.array.$shift();
-//  console.log(doc.array); // [2,3]
-
-//  doc.save(function (err) {
-//    if (err) return handleError(err);
-
-//    // we saved, now $shift works again
-//    shifted = doc.array.$shift();
-//    console.log(shifted ); // 2
-//    console.log(doc.array); // [3]
-//  })
+/**
+ * main
+ */
+var db = doConnect("mongodb://localhost/bbx");
+doAdd();
+doQuery();
