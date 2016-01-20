@@ -3,6 +3,8 @@ package com.bbxyard.hmongo;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bbxyard.util.IStructLog;
+import com.bbxyard.util.impl.StructMongoLog;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -12,6 +14,19 @@ import com.mongodb.MongoClient;
 import com.mongodb.util.JSON;
 
 public class MongoDemo {
+	
+	public static void testSL() {
+		IStructLog slog = new StructMongoLog();
+		slog.open("mongodb://127.0.0.1:27017", "dname=bbx;cname=c120");
+		for (int i = 0; i < 40; ++i) {
+			IStructLog.ISLNode node = slog.createNode();
+			node.put("name", "boxu" + i);
+			node.put("sno", i + 2000);
+			node.put("age", i * 10);
+			slog.write(node);			
+		}
+		slog.close();
+	}
 	
 	public static void add() {
 
@@ -85,6 +100,7 @@ public class MongoDemo {
 	}
 	
 	public static void main(String[] args) {
+		testSL();
 		test();
 		add();
 		System.out.println("hello");
