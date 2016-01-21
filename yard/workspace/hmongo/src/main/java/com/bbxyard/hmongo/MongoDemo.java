@@ -1,5 +1,8 @@
 package com.bbxyard.hmongo;
 
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.util.JSON;
+import com.mongodb.util.JSONSerializers;
 
 public class MongoDemo {
 	
@@ -40,6 +44,8 @@ public class MongoDemo {
 	    user.put("passwd", "123123");
 	    user.put("age", 30);
 	    users.save(user);
+	    System.out.println("user: " + user.toString() );
+	    
 	  
 	    //扩展字段，随意添加字段，不影响现有数据
 	    user.put("sex", "男");
@@ -99,7 +105,11 @@ public class MongoDemo {
         System.out.println(JSON.serialize(cur));
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnknownHostException {
+		
+		InetAddress address = Inet4Address.getLocalHost();
+		String serverAddr = InetAddress.getLocalHost().getHostAddress();
+		
 		testSL();
 		test();
 		add();
