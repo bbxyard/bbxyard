@@ -1,0 +1,94 @@
+#!/bin/bash
+#
+# Init file for lamppd service daemon
+#
+# chkconfig: 2345 99 20
+# description: lamppd service daemon
+#
+# processname: lamppd
+
+### BEGIN INIT INFO
+# Provides:          lamppd
+# Required-Start:    $syslog $network $time
+# Required-Stop:     $syslog
+# Should-Start:      $local_fs
+# Should-Stop:       $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: lamppd - daemon
+# Description:       lamppd - daemon
+### END INIT INFO
+
+
+# load env
+source $HOME/.bashrc &>/dev/null
+
+THIS_ROOT_HOME=$(pushd `dirname $0` >/dev/null; pwd; popd >/dev/null);
+THIS_ABS_PATH=$THIS_ROOT_HOME/$(basename $0)
+#SVC_USER=$(ls -lhrt $0 | awk '{print $3}')
+DAEMON=/opt/lampp/lampp
+DAEMON_START="$DAEMON start"
+DAEMON_STOP="$DAEMON stop"
+SVC_USER=$(ls -lhrt $DAEMON | awk '{print $3}')
+[ -x "$DAEMON" ] || (chmod +x "$DAEMON" &>/dev/null)
+
+do_echo_status()
+{
+	if [ $? -eq 0 ]; then echo -e "[\033[32m  OK  \033[0m]"; else echo -e "[\033[31;5mFAILED\033[0m]"; fi
+	echo -n -e "\033[?25h"
+}
+do_start()
+{	
+	echo -n -e "Starting lamppd daemon:                                       \033[?25l" 2>/dev/null
+	$DAEMON_START &>/dev/null
+	do_echo_status
+}
+do_stop()
+{
+	echo -n -e "Shutting down lamppd daemon:                                  \033[?25l" 2>/dev/null
+	$DAEMON_STOP &>/dev/null
+	do_echo_status
+}
+
+# user mode start services!!
+start()
+{
+	if [ "$USER" = "$SVC_USER" ]; then
+		do_start
+	else
+		# echo need sub process to start.
+		su -l "$SVC_USER" -c "$THIS_ABS_PATH start"
+	fi
+}
+
+
+# user mode stop services!!
+stop()
+{
+	if [ "$USER" = "$SVC_USER" ]; then
+		do_stop
+	else
+		# echo need sub process to stop.
+		su -l "$SVC_USER" -c "$THIS_ABS_PATH stop"
+	fi
+}
+
+
+
+RETVAL=0
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		stop
+		start
+		;;
+	*)
+		echo $"Usage: $0 {start|stop|restart}"
+		RETVAL=1
+esac
+exit $RETVAL
