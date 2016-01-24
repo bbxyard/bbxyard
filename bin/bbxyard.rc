@@ -61,3 +61,45 @@ function verify_dir_symlink()
 	# re-link
 	[ ! -d "$dst_link" ] && ln -s "$src_file" "$dst_link"
 }
+
+# get os release name
+function get_os_name()
+{
+    RETVAL=0
+    for ((i=0; i<1; ++i))
+    {
+        os_type=$(uname -s)
+        case "$os_type" in
+            Linux)
+                fr=/etc/issue
+                grep -io Ubuntu     "$fr" && break;
+                grep -io LinuxMint  "$fr" && break;
+                grep -io Redhat     "$fr" && break;
+                grep -io CentOS     "$fr" && break;
+                grep -io Suse       "$fr" && break;
+                ;;
+            Darwin)  echo "Darwin"  ;;
+            FreeBSD) echo "FreeBSD" ;;
+            *)
+                echo "Unknown"
+                RETVAL=-1
+                ;;
+        esac
+    }
+    return $RETVAL
+}
+
+# get user bash profile
+function get_user_bash_profile()
+{
+    os_name=$(get_os_name)
+    case "$os_name" in
+        Ubuntu|Mint|Suse)
+            echo "$HOME/.bashrc"
+            ;;
+        *)
+            echo "$HOME/.bash_profile"
+            ;;
+    esac
+    return 0;
+}
