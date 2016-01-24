@@ -1,6 +1,4 @@
 var mongoose = require("mongoose");
-var User = require("./mtabs").User;
-var Word = require("./mtabs").Word;
 
 
 /**
@@ -96,6 +94,8 @@ function doAddTest() {
 		console.log(c);
 	}
 
+	var User = require("./mgschemas").Query("User");
+	var Word = require("./mgschemas").Query("Word");
 	var user = new User({userid:"990719", "passwd":"123456"});
 	var word = new Word({name:"hallo", mean:"你好", memo:"this is a test"});
 	word.save(function(err, w) { onCollectionSave(err, w)});
@@ -189,5 +189,16 @@ function MongoAppMain() {
 //doAdd();
 //doQuery();
 // new MongoQuickDemo().demo();
+
 MongoAppMain();
 
+var GetSchema = require("./mgschemas").GetSchema;
+var User2 = GetSchema("user");
+var user2 = new User2();
+console.log(user2);
+
+var Word = require("./mgschemas").Query("Word");
+//console.log(Word);
+
+var XXXX = require("./mgschemas").Query("XXXX");
+console.log(XXXX);
