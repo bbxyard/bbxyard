@@ -11,6 +11,7 @@ function MongoUtil() {
 	this.doAdd = doAdd;
 	this.doImport = doImport;
 	this.doExport = doExport;
+    this.doQuery  = doQuery;
 
 	/**
 	 *
@@ -40,6 +41,36 @@ function MongoUtil() {
 
 		})
 	}
+
+    /**
+     * Query 查询
+     * @param uri [string]
+     * @param cname
+     * @param inJsonCond
+     * @param outFile
+     * @param inJsonSort
+     * @param limit
+     */
+    function doQuery(uri, cname, inJsonCond, outFile, inJsonSort, limit) {
+        var User = require("./mgschemas").Query("User");
+
+        var inJsonCondObj = JSON.parse(inJsonCond);
+        console.log(inJsonCond);
+
+        connectOnly(uri).once("open", function() {
+            User.find(inJsonCondObj, function(err, docs) {
+                docs.forEach(function(doc, idx, array) {
+                    console.log("index %d: ", idx, doc);
+                });
+            }).limit(3);
+            console.log("finished");
+
+            //User.find().limit(10).forEach(function (doc, idx, array) {
+            //    console.log("index %d: ", idx, doc);
+            //});
+            //onFinished();
+        });
+    }
 
 
 	/**
@@ -133,12 +164,14 @@ function doQuery() {
 }
 
 
-
 /**
  * MongoAppMain App Main router
  * @constructor
  */
 function MongoAppMain() {
+    // default args
+    var DEF_MONGO_URI = "mongodb://localhost/bbx";
+    var DEF_COLLECTION_NAME = "users";
 	var mu = new MongoUtil();
 	var program = require("commander");
 	program
@@ -152,8 +185,8 @@ function MongoAppMain() {
 		.option("-o, --outJsonFile [file]", "output json log file")
 		.option("-c, --cname <cname>", "collection name")
 		.action(function(inListFile, options){
-			var uri = options.uri || "mongodb://localhost/bbx";
-			var cname = options.cname || "users";
+			var uri = options.uri || DEF_MONGO_URI;
+			var cname = options.cname || DEF_COLLECTION_NAME;
 			inListFile = inListFile || "in.lst";
 			var outJsonFile = options.outJsonFile || "out.json";
 			mu.doAdd(uri, options.cname, inListFile, outJsonFile);
@@ -175,6 +208,22 @@ function MongoAppMain() {
 			console.log();
 		});
 	program
+        .command("query <inJsonCond>")
+        .alias("find")
+        .description("query the db")
+        .option("-c, --cname <cname>", "collection name")
+        .option("-s, --sort <json>", "sort json condition")
+        .option("-o, --out <file>", "output file json or csv format")
+        .action(function(inJsonCond, options) {
+            var uri = options.uri || DEF_MONGO_URI;
+            var cname = options.cname || DEF_COLLECTION_NAME;
+            mu.doQuery(uri, cname, inJsonCond, "out.json", "", 12);
+        })
+        .on("--help", function(){
+            console.log("  Examples: ");
+            console.log();
+        })
+	program
 		.command("*")
 		.action(function(cmd) {
 			console.log("unknown command %s", cmd);
@@ -186,19 +235,20 @@ function MongoAppMain() {
 
 
 
+//var GetSchema = require("./mgschemas").GetSchema;
+//var User = GetSchema("user");
+//var user = new User();
+//console.log(user);
+
 //doAdd();
 //doQuery();
 // new MongoQuickDemo().demo();
 
 MongoAppMain();
 
-var GetSchema = require("./mgschemas").GetSchema;
-var User2 = GetSchema("user");
-var user2 = new User2();
-console.log(user2);
-
-var Word = require("./mgschemas").Query("Word");
-//console.log(Word);
-
-var XXXX = require("./mgschemas").Query("XXXX");
-console.log(XXXX);
+//
+//var Word = require("./mgschemas").Query("Word");
+////console.log(Word);
+//
+//var XXXX = require("./mgschemas").Query("XXXX");
+//console.log(XXXX);
