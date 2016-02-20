@@ -35,11 +35,8 @@ p.list {
 
 
 /* 设置超链接 */
-h5 {
-    color: #000;
-    text-decoration: none;
-}
-
+/** 这种方式不是太常用
+ * 助记LoVe,HAte
 a:link {
     color: red;
     text-decoration: none;
@@ -57,6 +54,17 @@ a:active {
     color: blue;
     text-decoration: none;
 }
+*/
+a {
+    color: red;
+    text-decoration: none;
+}
+a:hover {
+    color: green;
+    text-decoration: underline;
+    cursor: help;
+}
+
 
 span { cursor: pointer; }
 div {
