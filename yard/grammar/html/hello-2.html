@@ -1,16 +1,35 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Untitled Document</title>
+<title>link-test</title>
+    <style type="text/css">
+        a:link {
+            color: red;
+            text-decoration: none;
+        }
+        a:visited {
+            color: coral;
+            text-decoration: none;
+        }
+        a:hover {
+            color: green;
+            text-decoration: underline;
+            cursor: help;
+        }
+        a:active {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
-<menu compact="compact">
+<ol>
  <li><a href="docs/apr/1.5/">Version 1.5</a></li>
  <li><a href="docs/apr/trunk/">Trunk</a> (dev)</li>
- </menu>
+</ol>
 
+<!--
 <table border="0" cellspacing="0" cellpadding="2" width="100%">
      <tr>
      <td bgcolor="#828DA6">
@@ -45,6 +64,7 @@
      </blockquote>
      </td></tr>
 	</table>
+-->
 
 </body>
 </html>

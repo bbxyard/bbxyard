@@ -34,15 +34,28 @@ p.list {
 }
 
 
-a {
+/* 设置超链接 */
+h5 {
     color: #000;
     text-decoration: none;
 }
 
+a:link {
+    color: red;
+    text-decoration: none;
+}
+a:visited {
+    color: purple;
+    text-decoration: none;
+}
 a:hover {
-    color: #B46210;
+    color: green;
     text-decoration: underline;
     cursor: help;
+}
+a:active {
+    color: blue;
+    text-decoration: none;
 }
 
 span { cursor: pointer; }
@@ -53,7 +66,11 @@ div {
 }
 
 
-.nav-box { width: 210px; }
+.nav-box {
+    background-color: #B1191A;
+    width: 210px;
+    height: 800px;
+}
 .nav-top {
     height: 45px;
     font-size: 16px;
