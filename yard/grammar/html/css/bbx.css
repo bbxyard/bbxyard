@@ -1,0 +1,77 @@
+body {
+    background-color: yellow;
+}
+
+h1 {
+    background-color: #00ff00;
+}
+
+h2 {
+    background-color: transparent;
+}
+
+h3 {
+    background-color: green;
+}
+
+h4 {
+    background-color: lime;
+}
+
+p {
+    font-size: 16px;
+    background-color: rgb(255, 0, 255);
+}
+
+p.no2 {
+    background-color: gray;
+    padding:20px;
+}
+
+p.list {
+    background-color: blue;
+    padding: 40px;
+}
+
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #B46210;
+    text-decoration: underline;
+    cursor: help;
+}
+
+span { cursor: pointer; }
+div {
+    width: 100px;
+    height:100px;
+    font-size: 32px;
+}
+
+
+.nav-box { width: 210px; }
+.nav-top {
+    height: 45px;
+    font-size: 16px;
+    line-height: 45px;
+    padding: 0 10px;
+    background-color: #B1191A;
+    color: #fff;
+}
+
+.myshopping {
+    width: 80px;
+    height: 35px;
+    border: 4px #dfdfdf solid;
+    padding-left: 30px;
+    line-height: 35px;
+    font-size: 16px;
+}
+
+#hometown {
+    background-color: brown;
+}
