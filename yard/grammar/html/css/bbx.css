@@ -91,10 +91,11 @@ div {
 .myshopping {
     width: 80px;
     height: 35px;
-    border: 4px #dfdfdf solid;
+    border: 1px #dfdfdf solid;
     padding-left: 30px;
     line-height: 35px;
     font-size: 16px;
+    background: url("../images/buy.png") #f9f9f9 no-repeat 10px center;
 }
 
 #hometown {
