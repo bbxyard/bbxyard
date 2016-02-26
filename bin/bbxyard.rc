@@ -103,3 +103,10 @@ function get_user_bash_profile()
     esac
     return 0;
 }
+
+# git operator
+function git_auto_pom()
+{
+    git commit -am "$1"
+    git push origin master
+}
