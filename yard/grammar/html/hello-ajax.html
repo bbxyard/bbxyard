@@ -1,31 +1,31 @@
 <html>
-  <head>
-    <script type="text/javascript">
-      function loadXMLDoc() {
-        var xmlhttp;
-        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-          xmlhttp = new XMLHttpRequest();
-        } else { // code for IE6, IE5
-          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
-          }
-        }
-        alert("hello");
-        xmlhttp.open("GET", "https://www.baidu.com", true);
-        xmlhttp.send();
+<head>
+<script type="text/javascript">
+  function loadXMLDoc() {
+    var xmlhttp;
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          alert("ready");
+        document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
       }
-    </script>
-  </head>
+    }
+    //alert("hello");
+    xmlhttp.open("GET", "http://www.w3school.com.cn/ajax/demo_get.asp", true);
+    xmlhttp.send();
+  }
+</script>
+</head>
 
-  <body>
+<body>
     <h2>AJAX</h2>
     <button type="button" onclick="loadXMLDoc()">
       request-data
     </button>
-    <div id="myDiv">geek
-    </div>
-  </body>
+    <div id="myDiv">geek</div>
+</body>
 </html>
