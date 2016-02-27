@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="http://www.w3school.com.cn/jquery/jquery.js"></script>
+    <!--<script type="text/javascript" src="../../scripts/jquery-1.11.2.min.js"></script-->
+    <script type="text/javascript">
+    $(document).ready(function(){
+        // var url = "http://www.w3school.com.cn/ajax/demo_get.asp";
+        url = "http://d.bbxyard.com/doc/1.txt";
+        // use load method
+        function updateByLoad() {
+            $('#myDiv').load('test1.txt');
+            alert("from load method");
+        }
+        // use load method access remote
+        function updateByLoadRemote() {
+            $('#myDiv').load("http://d.bbxyard.com/doc/1.txt");
+            alert("from load method from remote");
+        }
+        // use load with callback
+        function updateBytLoadWithCB() {
+            $("#myDiv").load("http://d.bbxyard.com/doc/1.txt", function(responseTxt, statusTxt, xhr){
+              if (statusTxt == "success")
+                alert("外部内容加载成功！");
+              else if (statusTxt == "error")
+                alert("Error: " + xhr.status + ": " + xhr.statusText + "#");
+            });
+        }
+
+        // use AJAX
+        function updateByAJAXSync() {
+            aobj = $.ajax({url:"test1.txt", async:false});
+            document.getElementById("myDiv").innerHTML = aobj.responseText;
+            alert("this is updated by AJAX sync mode");
+        }
+        function updateByAJAXGet() {
+            aaobj = $.get(url, function(data, status) {
+                $("#myDiv").html(data);
+                alert("GET status: " + status);
+            });
+        }
+        // curl -d '{"name":"boxu", "id":"0718"}' http://localhost/html/sub/jquery/show.php
+        function updateByAJAXPost() {
+            $urlPost = "show.php";
+            $reqPar  = {"name":"boxu", "id":"1985"};
+            aaobj = $.post($urlPost, $reqPar, function(data, status) {
+                //$("#myDiv").html(data);
+                document.getElementById("myDiv").innerHTML = data;
+                alert("POST status: " + status);
+            });
+        }
+
+
+        $("#b01").click(function(){
+
+            // updateByLoad();
+            // updateByLoadRemote();
+            // updateBytLoadWithCB();
+
+            // updateByAJAXSync();
+            // updateByAJAXGet();
+            updateByAJAXPost();
+
+            //document.getElementById("myDiv").innerHTML = "hahshslfdsafa";
+        });
+    });
+    </script>
+</head>
+<body>
+
+<div id="myDiv"><h2>通过 AJAX 改变文本</h2></div>
+<button id="b01" type="button">改变内容</button>
+
+</body>
+</html>

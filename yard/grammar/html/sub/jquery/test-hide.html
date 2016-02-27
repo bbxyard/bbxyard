@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="http://www.w3school.com.cn/jquery/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // hide the button
+            $("button").click(function(){
+                $(this).hide();
+            });
+            // hide the p
+            $("p").click(function(){
+                alert("this background-color is: " + $(this).css("background-color"));
+                //$(this).hide();
+            });
+            // hide the title
+            $("h2").click(function(){
+                //$(this).hide();
+                $(this).css("background-color", "#123456");
+                $(this).css("font-size", "200%");
+            });
+            // hide by id
+            $("#boxu").click(function(){
+                $("#boxu").hide();
+            });
+            // hide by class
+            $(".kk").click(function(){
+                $(".kk").hide();
+            });
+            // animate
+            $("#animate").click(function(){
+                var div=$(this);
+                div.animate({height:'300px',opacity:'0.4'},"slow");
+                div.animate({width:'300px',opacity:'0.8'},"slow");
+                div.animate({height:'100px',opacity:'0.4'},"slow");
+                div.animate({width:'100px',opacity:'0.8'},"slow");
+            });
+            // fadeout
+            $("#fadeout").click(function(){
+                $("#div1").fadeOut();
+                $("#div2").fadeOut("slow");
+                $("#div3").fadeOut(3000);
+            });
+            // slide
+            $(".flip").click(function(){
+                $(".panel").slideToggle("slow");
+                $(this).html("我帅吧?");
+            });
+            // append content
+            $("#expand").click(function(){
+                $(this).append("<b> amazing</b>");
+                //$(this).hide();
+            });
+            $("#list").click(function(){
+                $(this).append("<li>new</li>");
+            });
+            $("#btnBefore").click(function(){
+                $("img").before("<b>好好学习</b>");
+            });
+            $("#btnAfter").click(function(){
+                $("img").after("<b>天天向上</b>");
+            });
+        });
+    </script>
+    <style type="text/css">
+        div.panel, div.flip
+        {
+            margin: 0px;
+            padding: 5px;
+            text-align: center;
+            background: #e5eecc;
+            border: solid 1px #c3c3c3;
+        }
+        div.panel
+        {
+            height: 120px;
+            display: none;
+        }
+    </style>
+</head>
+
+
+<body>
+    <button type="button">Click me</button>
+    <h2>This is a heading</h2>
+    <p style="background-color:#ff0000">This is a paragraph.</p>
+    <p style="background-color:#00ff00" class="kk">This is another paragraph.</p>
+    <p style="background-color:#0000ff">This is the 3rd paragraph.</p>
+    <button type="button">Click me</button>
+    <div class="kk" style="width:100px; height:100px; background-color:red">ABC
+    </div>
+    <div class="bx" id="boxu" style="width:100px; height:100px; background-color:#ff00ff">
+        DEFG
+    </div>
+    <div id="animate" style="background:#98bf21;height:100px;width:100px;position:absolute;">
+        <br>
+        <p>动画测试</p>
+        <br>
+    </div>
+    <div class="blank" style="background:#fd12b3;height:100px;width:100px;">
+    </div>
+
+    <hr>
+    <h2>演示带有不同参数的 <b>fadeOut()</b> 方法</h2>
+    <button id="fadeout">点击这里，使三个矩形淡出</button>
+    <br><br>
+    <div id="div1" style="width:80px;height:80px;background-color:red;"></div><br>
+    <div id="div2" style="width:80px;height:80px;background-color:green;"></div><br>
+    <div id="div3" style="width:80px;height:80px;background-color:blue;"></div><br>
+
+    <hr>
+    <h2>演示简单的 Slide Panel 效果</h2>
+    <div class="panel">
+        <p>夫天地者，万物之逆旅</p>
+        <p>光阴者，百代之<a href="http://www.bbxyard.com">过客</a>也</p>
+    </div>
+    <div class="flip">请点击这里</div>
+    <a href="#animate">animate-再来一遍动画</a>
+
+    <hr>
+    <h2>更新内容测试</h2>
+    <p id="expand"><b>start:</b></p>
+    <div class="xx">
+        <ol id="list">
+            <li>apple</li>
+            <li>banana</li>
+            <li>pear</li>
+        </ol>
+    </div>
+    <img src="http://www.w3school.com.cn/i/eg_w3school.gif" alt="W3School Logo" /><br><br>
+    <button id="btnBefore">前插</button><button id="btnAfter">后放</button>
+</body>
+
+</html>
