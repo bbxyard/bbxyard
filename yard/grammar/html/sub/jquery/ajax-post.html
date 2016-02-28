@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta chartset="utf-8">
+    <meta name="name" content="content">
+    <script type="text/javascript" src="../../scripts/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery.form.js"></script>
+    <script type="text/javascript">
+        var options = {
+            target : '#output',    // 把服务器返回的内容放入id为output的元素中
+            beforeSubmit : onShowRequest,   // 提交前的回调函数
+            success : onShowResponse,       // 提交后的回调函数
+            // url : url,    //默认是form的action，如果申明，则会覆盖
+            // type : type,    // 默认值是form的method("GET" or "POST")，如果声明，则会覆盖
+            // dataType : null,    // html（默认）、xml、script、json接受服务器端返回的类型
+            // clearForm : true,    // 成功提交后，清除所有表单元素的值
+            // resetForm : true,    // 成功提交后，重置所有表单元素的值
+            timeout : 10000    // 限制请求的时间，当请求大于3秒后，跳出请求
+        }
+        var optionsXml  = { target: "#output", beforeSubmit: onShowRequest, success:onShowResponseXml,  timeout:5000 };
+        var optionsJson = { target: "#output", beforeSubmit: onShowRequest, success:onShowResponseJson, timeout:5000 };
+
+        /**
+         * @formData: 数组对象，提交表单时，form插件会以ajax方式自动提交这些数据，
+         *            格式如[{name:user,value:val},{name:pwd,value:pwd}]
+         * @jqForm:   jQuery对象，封装了表单的元素
+         * @options:  options对象
+         */
+        function onShowRequest(formData, jqForm, options) {
+            var queryString = $.param(formData);
+            alert('About to submit: \n\n' + queryString);
+
+            var formElement = jqForm[0];        // 将jqForm转换为DOM对象
+            var memo = formElement.memo.value;// 访问jqForm的DOM元素
+            //alert(gname);
+            return true; // 只要不返回false，表单都会提交，在这里可以对表单元素进行验证
+        }
+
+        /**
+         *
+         * @responseText
+         * @statusText
+         // for normal html responses, the first argument to the success callback
+         // is the XMLHttpRequest object's responseText property
+
+         // if the ajaxForm method was passed an Options Object with the dataType
+         // property set to 'xml' then the first argument to the success callback
+         // is the XMLHttpRequest object's responseXML property
+
+         // if the ajaxForm method was passed an Options Object with the dataType
+         // property set to 'json' then the first argument to the success callback
+         // is the json data object returned by the server
+         *
+         */
+        function onShowResponse(responseText, statusText, xhr, $form) {
+            alert('status: #' + statusText + '#\n\nresponseText: \n' + responseText +
+                '\n\nThe output div should have already been updated with the responseText.');
+            //alert("responseXML: " + responseXML + "\n");
+            //alert("data: " + data + "\n");
+        }
+        function onShowResponseXml(responseXML) {
+            // 'responseXML' is the XML document returned by the server; we use
+            // jQuery to extract the content of the message node from the XML doc
+            var memo = $('memo', responseXML).text();
+            alert("XML read memo: " + memo);
+        }
+        function onShowResponseJson(data) {
+            // 'data' is the json object returned from the server
+            alert("JSON read memo: " + data.memo);
+        }
+
+        $(document).ready(function() {
+            // # method-01
+            // bind form and provide a simple callback function
+            // $("#local").ajaxForm(function() {
+            //     alert("Thank you for your comment!");
+            // })
+
+            // # method-02
+            // bind form using "ajaxForm"
+            // $("#local").ajaxForm(options);
+            // $("#local").ajaxForm(optionsXml);
+            // $("#local").ajaxForm(optionsJson);
+
+            // # method-03
+            // bind to the form's submit event
+            $('#local').submit(function() {
+                var t = $(this);
+                var queryString = t.formSerialize();
+                //alert(queryString);
+                var outfmt = queryString.split("&")[0].split("=")[1];
+                if (outfmt == "xml") {
+                    options = optionsXml;
+                } else if (outfmt == "json") {
+                    options = optionsJson;
+                }
+                alert("outfmt is: " + outfmt);
+
+                // inside event callbacks 'this' is the DOM element so we first
+                // wrap it in a jQuery object and then invoke ajaxSubmit
+                t.ajaxSubmit(options);
+
+                // !!! Important !!!
+                // always return false to prevent standard browser submit and page navigation
+                return false;
+            });
+        });
+    </script>
+    <style type="text/css">
+        div#output {
+            margin-top: 30px;
+            //margin-right: 400px;
+            //margin: 80px;
+            padding: 25px;
+            text-align: center;
+            background-color: #e5eecc;
+            border: solid 1px #c3c3c3;
+            width: 600px;
+            height: 160px;
+            font-size: 20px;
+            color: rgb(255, 0, 255);
+        }
+    </style>
+</head>
+
+<body>
+    <form id="local" action="ajax-post.php" method="post">
+        <h3>AJAX Form test!</h3>
+        <!-- <b>gname:</b> <br /><input type="text" name="gname" /> <br />
+        <b>name:</b><br /><input type="text" size="64" name="name"/> <br />
+        <b>cn-name:</b><br /><input type="text" size="64" name="cnname"/> <br /> -->
+        <b>outfmt:</b><input type="text" name="outfmt" value="html" /> <br />
+        <b>uri: </b><br /><input type="text" size="100" name="uri" value="http://www.x.com"/> <br />
+        <b>memo: </b><br /><textarea cols="100" rows="3" name="memo" value="input sth..."></textarea> <br />
+        <input type="reset"> <input type="submit" /> <br />
+    </form>
+    <div id="output">here is the content of the output!</div><br />
+</body>
+</html>
