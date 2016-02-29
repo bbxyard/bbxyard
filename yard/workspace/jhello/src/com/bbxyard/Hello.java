@@ -1,8 +1,12 @@
-package com.bbxyard.hello;
+package com.bbxyard;
 
 import java.awt.Color;
 
-
+/**
+ * @class singleton  test
+ * @author bbxyard
+ *
+ */
 class Singleton {
 	public static Singleton getInstance() {
 		if (null == inst) {
@@ -21,6 +25,12 @@ class Singleton {
 	private static Singleton inst = null;
 }
 
+
+/**
+ * @class ALG-汉诺塔
+ * @author bbxyard
+ *
+ */
 class HanoiTower {
     public static void moveDish(int level, char from, char inter, char to) {
         if (level == 1) {// 如果只有一个盘子就退出迭代
