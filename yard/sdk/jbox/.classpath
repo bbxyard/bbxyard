@@ -8,4 +8,5 @@
   <classpathentry kind="var" path="M2_REPO/org/mongodb/mongodb-driver-async/3.2.1/mongodb-driver-async-3.2.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mongodb/bson/3.2.1/bson-3.2.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mongodb/mongodb-driver-core/3.2.1/mongodb-driver-core-3.2.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/mongodb/mongo-java-driver/3.2.1/mongo-java-driver-3.2.1.jar"/>
 </classpath>
