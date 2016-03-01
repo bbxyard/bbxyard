@@ -1,4 +1,4 @@
-package com.bbxyard.hmongo;
+package com.bbxyard.jbox.mongo;
 
 import java.util.ArrayList;
 import java.util.HashMap;

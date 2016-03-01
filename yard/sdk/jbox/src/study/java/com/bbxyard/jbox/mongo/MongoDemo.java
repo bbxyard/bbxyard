@@ -1,4 +1,4 @@
-package com.bbxyard.hmongo;
+package com.bbxyard.jbox.mongo;
 
 
 import java.net.UnknownHostException;
