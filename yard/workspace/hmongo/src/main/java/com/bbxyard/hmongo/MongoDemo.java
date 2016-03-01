@@ -1,7 +1,6 @@
 package com.bbxyard.hmongo;
 
-import java.net.Inet4Address;
-import java.net.InetAddress;
+
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,6 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.util.JSON;
-import com.mongodb.util.JSONSerializers;
 
 public class MongoDemo {
 	
@@ -27,7 +25,7 @@ public class MongoDemo {
 			node.put("name", "boxu" + i);
 			node.put("sno", i + 2000);
 			node.put("age", i * 10);
-			slog.write(node);			
+			slog.write(node, null);			
 		}
 		slog.close();
 	}
@@ -71,11 +69,13 @@ public class MongoDemo {
 	    System.out.println("count: " + users.count());
 
 	    // queryAll();
-
+	    users.getDB().getMongo().close();	// 关闭数据库连接
 	}
 	
+	@SuppressWarnings("deprecation")
 	static DBCollection getCollection(String host, int port, String dbname, String cname) {
-	    MongoClient mg = new MongoClient(host, port);
+	    @SuppressWarnings("resource")
+		MongoClient mg = new MongoClient(host, port);
 	
 	    //查询所有的Database
 	    for (String name : mg.getDatabaseNames()) {
@@ -103,13 +103,10 @@ public class MongoDemo {
         System.out.println(cur.count());
         System.out.println(cur.getCursorId());
         System.out.println(JSON.serialize(cur));
+        users.getDB().getMongo().close();	// 关闭数据库连接
 	}
 	
-	public static void main(String[] args) throws UnknownHostException {
-		
-		InetAddress address = Inet4Address.getLocalHost();
-		String serverAddr = InetAddress.getLocalHost().getHostAddress();
-		
+	public static void main(String[] args) throws UnknownHostException {		
 		testSL();
 		test();
 		add();

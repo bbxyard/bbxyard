@@ -60,13 +60,19 @@ public class StructMongoLog implements IStructLog {
 	}
 
 	@Override
-	public void write(ISLNode node) {
+	public void write(ISLNode node, final EventCallback ecb) {
 		DBObject object = ((SLNodeImpl)node).getDBObject();
+		int status = 0;
 		try {
 			dbc.save(object);			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
+			status = -1;
+		}
+		// 通知完成.
+		if (ecb != null) {
+			ecb.onFinish(status);
+		}
 	}
 
 	private MongoClient mg;

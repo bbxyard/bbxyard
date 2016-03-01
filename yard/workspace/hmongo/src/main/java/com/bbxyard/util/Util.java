@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Util {
 	public static HashMap<String, String> parseStringParams(String params) {
@@ -27,6 +28,10 @@ public class Util {
         String now = sdf.format(c1.getTime());
         return now;
     }
+    
+    public static <K,V> Map<K,V> newHashMap() { 
+        return new HashMap<K,V>();  
+    } 
 
 //    public static String getClientAddr(HttpServletRequest request) {
 //        String ip = request.getHeader("x-forwarded-for");
