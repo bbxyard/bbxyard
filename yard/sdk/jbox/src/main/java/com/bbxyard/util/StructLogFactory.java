@@ -11,8 +11,8 @@ import com.bbxyard.util.impl.StructMongoLog;
 public class StructLogFactory {
 	
 	/**
-	 * 
-	 * @param name 
+	 * @brief 创建结构化对象类
+	 * @param name 可取值"mongo|mongo-async"
 	 * @return
 	 */
 	public static IStructLog create(String name) {
@@ -31,6 +31,10 @@ public class StructLogFactory {
 		return slog;
 	}
 	
+	/**
+	 * @brief 可选关闭方法，由GC自动完成即可
+	 * @param slog
+	 */
 	public static void destory(IStructLog slog) {
 		if (slog != null) {
 			slog.close();
