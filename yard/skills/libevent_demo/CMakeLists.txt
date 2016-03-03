@@ -23,6 +23,15 @@ link_directories(${LIBEVENT_LIBRARY_DIRS})
 # combine libs
 set(CUR_PROJ_LIB ${LIBEVENT_LIBRARIES})
 
+# flags
+if (debug) 
+    add_definitions("-g -D_DEBUG")
+    message("debug mode")
+else()
+    add_definitions("-DNDEBUG -O2")
+    message("release mode")
+endif()
+
 # final
 add_executable(${PROJECT_NAME} ${SRCS})
 target_link_libraries(${PROJECT_NAME} ${CUR_PROJ_LIB})
