@@ -10,6 +10,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.mongodb.util.JSON;
 
 public class StructMongoLog implements IStructLog {
 	
@@ -20,12 +21,20 @@ public class StructMongoLog implements IStructLog {
 		public DBObject getDBObject() {
 			return obj;
 		}
-		
+
 		@Override
 		public void put(String key, Object value) {
 			obj.put(key, value);
-		}		
-		
+		}
+
+		@Override
+		public String toString() {
+			String sout = JSON.serialize(obj);
+			return sout;
+		}
+
+
+
 		private DBObject obj;
 	}
 

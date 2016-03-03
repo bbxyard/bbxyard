@@ -21,6 +21,7 @@ public class App
 					System.out.printf("add finished!! status=%d\n", status );
 				}
 			});
+			System.out.println(node.toString());
 		}
 	}
 	

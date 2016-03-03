@@ -7,17 +7,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Util {
-	public static HashMap<String, String> parseStringParams(String params) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		String[] attrs = params.split(";");
-		for (String attr: attrs) {
-			String[] sub = attr.split("=");
-			if (sub.length < 2)
-				continue;
-			map.put(sub[0], sub[1]);
-		}
-		return map;
-	}
+    public static HashMap<String, String> parseStringParams(String params) {
+        HashMap<String, String> map = new HashMap<String, String>();
+        String[] attrs = params.split(";");
+        for (String attr: attrs) {
+            String[] sub = attr.split("=");
+            if (sub.length < 2)
+                continue;
+            map.put(sub[0], sub[1]);
+        }
+        return map;
+    }
+
+    public static String getOrDefaultFromHashMap(HashMap<String, String> map, String key, String defValue) {
+        // jdk1.8+ 支持 getOrDefault
+        // jdk1.7 兼容自己山寨一个.
+        String value = map.get(key);
+        return (value != null)? value: defValue;
+    }
 	
 	// e.g. sfmt "yyyy-MM-dd HH:mm:ss"
     public static String getCurrentDataTime(String sfmt) {

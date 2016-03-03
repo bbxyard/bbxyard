@@ -12,6 +12,8 @@ import com.mongodb.async.client.MongoClient;
 import com.mongodb.async.client.MongoClients;
 import com.mongodb.async.client.MongoCollection;
 import com.mongodb.async.client.MongoDatabase;
+import com.mongodb.util.JSON;
+import com.mongodb.util.JSONSerializers;
 
 /**
  * 
@@ -38,8 +40,14 @@ public class StructMongoAsyncLog implements IStructLog{
 		@Override
 		public void put(String key, Object value) {
 			map.put(key, value);
-		}		
-		
+		}
+
+		@Override
+		public String toString() {
+			String sout = JSON.serialize(map);
+			return sout;
+		};
+
 		private Map<String, Object> map;
 	}
 	
