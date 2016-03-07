@@ -45,7 +45,7 @@
 #endif
 
 /* Compatibility for possible missing IPv6 declarations */
-#include "../util-internal.h"
+/* #include "../util-internal.h" */
 
 #ifdef WIN32
 #define stat _stat
@@ -100,11 +100,13 @@ not_found:
 static void
 dump_request_cb(struct evhttp_request *req, void *arg)
 {
-	const char *cmdtype;
-	struct evkeyvalq *headers;
-	struct evkeyval *header;
-	struct evbuffer *buf;
+	const char *cmdtype = NULL;
+	struct evkeyvalq *headers = NULL;
+	struct evkeyval *header = NULL;
+	struct evbuffer *buf = NULL;
+    const char* url = NULL;
 
+    // 获得请求类型
 	switch (evhttp_request_get_command(req)) {
 	case EVHTTP_REQ_GET: cmdtype = "GET"; break;
 	case EVHTTP_REQ_POST: cmdtype = "POST"; break;
@@ -117,16 +119,37 @@ dump_request_cb(struct evhttp_request *req, void *arg)
 	case EVHTTP_REQ_PATCH: cmdtype = "PATCH"; break;
 	default: cmdtype = "unknown"; break;
 	}
-
 	printf("Received a %s request for %s\nHeaders:\n",
 	    cmdtype, evhttp_request_get_uri(req));
 
+    // 获得input-HEAD数据
 	headers = evhttp_request_get_input_headers(req);
 	for (header = headers->tqh_first; header;
 	    header = header->next.tqe_next) {
 		printf("  %s: %s\n", header->key, header->value);
 	}
+	
+	// 获得GET数据.
+	{
+        struct evkeyvalq params;
+        url = evhttp_request_get_uri(req);        
+        char* decoded_uri = evhttp_decode_uri(url);
+        const char* uri_request_pos = strchr(decoded_uri, '?');
+        if (uri_request_pos != NULL && evhttp_parse_query_str(uri_request_pos + 1, &params) == 0)
+        {
+            // 基于查找
+            fprintf(stdout, "s=%s\n", evhttp_find_header(&params, "s"));
+            fprintf(stdout, "q=%s\n", evhttp_find_header(&params, "q"));
+            // 使用遍历
+            for (header = params.tqh_first; header != NULL; header = header->next.tqe_next)
+            {
+                fprintf(stdout, "key=%s;value=%s\n", header->key, header->value);
+            }
+        }
+        free(decoded_uri);
+	}
 
+	// 获得POST数据.
 	buf = evhttp_request_get_input_buffer(req);
 	puts("Input data: <<<");
 	while (evbuffer_get_length(buf)) {
@@ -149,7 +172,7 @@ static void
 send_document_cb(struct evhttp_request *req, void *arg)
 {
 	struct evbuffer *evb = NULL;
-	const char *docroot = arg;
+	const char *docroot = (const char*)arg;
 	const char *uri = evhttp_request_get_uri(req);
 	struct evhttp_uri *decoded = NULL;
 	const char *path;
@@ -190,7 +213,7 @@ send_document_cb(struct evhttp_request *req, void *arg)
 		goto err;
 
 	len = strlen(decoded_path)+strlen(docroot)+2;
-	if (!(whole_path = malloc(len))) {
+	if (!(whole_path = (char*)malloc(len))) {
 		perror("malloc");
 		goto err;
 	}

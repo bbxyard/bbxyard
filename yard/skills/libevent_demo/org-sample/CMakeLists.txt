@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(libevent_demo)
+project(org-sample)
 
 # define
 set(SLNDIR .)
@@ -32,8 +32,17 @@ else()
     message("release mode")
 endif()
 
-# final
-add_executable(${PROJECT_NAME} ${SRCS})
-target_link_libraries(${PROJECT_NAME} ${CUR_PROJ_LIB})
-install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX})
+function (deploy name)
+    add_executable(${name} ${name}.c)
+    target_link_libraries(${name} ${CUR_PROJ_LIB})
+    install(TARGETS ${name} DESTINATION ${CMAKE_INSTALL_PREFIX})
+endfunction()
 
+# final
+#add_executable(${PROJECT_NAME} ${SRCS})
+#target_link_libraries(${PROJECT_NAME} ${CUR_PROJ_LIB})
+#install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX})
+
+deploy("http-server")
+deploy("event-test")
+deploy("hello-world")
