@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(org-sample)
+project(libevent-thread)
 
 
 # define
@@ -15,6 +15,4 @@ add_depends_ev()
 show_dbg_info()
 
 # gen and deploy final apps
-addexe("http-server" "http-server.c")
-addexe("event-test" "event-test.c")
-addexe("hello-world" "hello-world.c")
+addexe("echoserver_threaded" ${SRCS})
