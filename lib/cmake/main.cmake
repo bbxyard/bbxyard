@@ -39,7 +39,11 @@ macro (set_common_flags)
     set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
     # os compile flags
-    set (OS_COMM_LIB pthread dl rt)
+    if (APPLE)
+        set (OS_COMM_LIB pthread dl)
+    else()
+        set (OS_COMM_LIB pthread dl rt)
+    endif()
     add_definitions ("-fpermissive -fPIC")
     add_definitions ("-D_GNU_SOURCE -DLINUX -w -pthread -pipe")
     # add_definitions ("-fshort-wchar -fwide-exec-charset=UTF-16LE")

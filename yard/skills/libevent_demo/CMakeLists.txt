@@ -1,39 +1,19 @@
 cmake_minimum_required(VERSION 2.8)
 project(libevent_demo)
 
-# define
-set(SLNDIR .)
-aux_source_directory(. SRCS)
-set(CMAKE_INSTALL_PREFIX $ENV{HOME}/bin)
 
-# find depends
-include(FindPkgConfig)
-pkg_check_modules(LIBEVENT REQUIRED libevent)
+# sub dirs
+add_subdirectory(org-sample)
+add_subdirectory(libevent-thread)
+
 
 # include common cmake
-#include(${SLNDIR}/...)
+include(../../../lib/cmake/main.cmake)
 
-# show debug info
-message("SRC files=${SRCS}  # CMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}")
+# add depends, flags and show debug info
+add_depends_ev()
+show_dbg_info()
 
-# add libevent deps
-include_directories(${LIBEVENT_INCLUDE_DIRS})
-link_directories(${LIBEVENT_LIBRARY_DIRS})
-
-# combine libs
-set(CUR_PROJ_LIB ${LIBEVENT_LIBRARIES})
-
-# flags
-if (debug) 
-    add_definitions("-g -D_DEBUG")
-    message("debug mode")
-else()
-    add_definitions("-DNDEBUG -O2")
-    message("release mode")
-endif()
-
-# final
-add_executable(${PROJECT_NAME} ${SRCS})
-target_link_libraries(${PROJECT_NAME} ${CUR_PROJ_LIB})
-install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX})
-
+# gen and deploy final apps
+aux_source_directory(. SRCS)
+addexe(${PROJECT_NAME} ${SRCS})
