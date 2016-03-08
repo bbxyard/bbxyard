@@ -69,6 +69,17 @@ macro (addexe name)
     install(TARGETS ${name} DESTINATION ${DIST_BIN_DIR})
 endmacro()
 
+macro (addso name)
+    add_library(${name} SHARED ${ARGN})
+    target_link_libraries(${name} ${CUR_PROJ_LIB} ${OS_COMM_LIB})
+    install(TARGETS ${name} DESTINATION ${DIST_LIB_DIR})
+endmacro()
+
+macro (addlib name)
+    add_library(${name} STATIC ${ARGN})
+    install(TARGETS ${name} DESTINATION ${DIST_LIB_DIR})
+endmacro()
+
 # show debug info
 macro (show_dbg_info)
     message("PROJECT_NAME=${PROJECT_NAME}")
