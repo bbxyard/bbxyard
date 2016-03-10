@@ -3,17 +3,17 @@ project(grammar)
 
 
 function(show_buildin_var)
-    message("PROJECT_NAME=${PROJECT_NAME}")
+    message(STATUS "PROJECT_NAME=${PROJECT_NAME}")
 endfunction()
 
 function(show_os_type)
-    message("CMAKE_SYSTEM=${CMAKE_SYSTEM}")
+    message(STATUS "CMAKE_SYSTEM=${CMAKE_SYSTEM}")
     if (APPLE)
-        message("CURRENT OS IS: APPLE")
+        message(STATUS "CURRENT OS IS: APPLE")
     elseif (UNIX)
-        message("CURRENT OS IS: UNIX")
+        message(STATUS "CURRENT OS IS: UNIX")
     elseif (WIN32)
-        message("CURRENT OS IS: Windows")
+        message(STATUS "CURRENT OS IS: Windows")
     endif()
 endfunction()
 

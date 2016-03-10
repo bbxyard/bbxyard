@@ -5,29 +5,33 @@
 #include <errno.h>
 #include <evhtp.h>
 
-void
-testcb(evhtp_request_t * req, void * a) {
-    const char * str = a;
+void testcb(evhtp_request_t * req, void * a)
+{
+    const char * str = (const char*)a;
+    fprintf(stderr, "%s\n", "testcb");
 
     evbuffer_add_printf(req->buffer_out, "%s", str);
     evhtp_send_reply(req, EVHTP_RES_OK);
 }
 
-int
-main(int argc, char ** argv) {
+int main(int argc, char ** argv)
+{
+    unsigned short port = 12345;
     evbase_t * evbase = event_base_new();
     evhtp_t  * htp    = evhtp_new(evbase, NULL);
 
     evhtp_set_cb(htp, "/simple/", testcb, "simple");
     evhtp_set_cb(htp, "/1/ping", testcb, "one");
     evhtp_set_cb(htp, "/1/ping.json", testcb, "two");
+
 #if 0
 #ifndef EVHTP_DISABLE_EVTHR
     evhtp_use_threads(htp, NULL, 4, NULL);
 #endif
 #endif
-    evhtp_bind_socket(htp, "0.0.0.0", 8081, 1024);
 
+    evhtp_bind_socket(htp, "0.0.0.0", port, 1024);
+    fprintf(stdout, "%s@me:%d\n", "server started!!", port);
     event_base_loop(evbase, 0);
 
     evhtp_unbind_socket(htp);
@@ -36,4 +40,3 @@ main(int argc, char ** argv) {
 
     return 0;
 }
-

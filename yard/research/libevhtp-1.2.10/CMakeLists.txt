@@ -7,6 +7,14 @@ set(PROJECT_PATCH_VERSION 10)
 
 #add_definitions(-D_FORTIFY_SOURCE=2)
 
+if (debug)
+    add_definitions("-g -D_DEBUG")
+    message("debug mode")
+else()
+    add_definitions("-DNDEBUG -O2")
+    message("release mode")
+endif()
+
 set (PROJECT_VERSION ${PROJECT_MAJOR_VERSION}.${PROJECT_MINOR_VERSION}.${PROJECT_PATCH_VERSION})
 set (CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
 

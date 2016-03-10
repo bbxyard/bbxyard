@@ -466,11 +466,9 @@ _run_test(htparser * p, struct testobj * obj) {
     return 0;
 }
 
-int
-main(int argc, char **argv) {
-    htparser * parser;
-
-    parser = htparser_new();
+int main(int argc, char* argv[])
+{
+    htparser* parser = htparser_new();
     assert(parser != NULL);
 
     _run_test(parser, &t1);
@@ -498,4 +496,3 @@ main(int argc, char **argv) {
 
     return 0;
 }
-

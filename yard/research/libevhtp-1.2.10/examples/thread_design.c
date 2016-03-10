@@ -179,8 +179,8 @@ redis_set_srcport_cb(redisAsyncContext * redis, void * redis_reply, void * arg) 
     }
 }
 
-void
-redis_get_srcport_cb(redisAsyncContext * redis, void * redis_reply, void * arg) {
+void redis_get_srcport_cb(redisAsyncContext * redis, void * redis_reply, void * arg)
+{
     redisReply      * reply   = redis_reply;
     evhtp_request_t * request = arg;
     int               i;
@@ -209,8 +209,8 @@ redis_get_srcport_cb(redisAsyncContext * redis, void * redis_reply, void * arg) 
     evhtp_request_resume(request);
 }
 
-void
-app_process_request(evhtp_request_t * request, void * arg) {
+void app_process_request(evhtp_request_t * request, void * arg)
+{
     struct sockaddr_in * sin;
     struct app_parent  * app_parent;
     struct app         * app;
@@ -247,8 +247,8 @@ app_process_request(evhtp_request_t * request, void * arg) {
     evhtp_request_pause(request);
 }
 
-void
-app_init_thread(evhtp_t * htp, evthr_t * thread, void * arg) {
+void app_init_thread(evhtp_t * htp, evthr_t * thread, void * arg)
+{
     struct app_parent * app_parent;
     struct app        * app;
 
@@ -264,11 +264,11 @@ app_init_thread(evhtp_t * htp, evthr_t * thread, void * arg) {
     evthr_set_aux(thread, app);
 }
 
-int
-main(int argc, char ** argv) {
-    evbase_t          * evbase;
-    evhtp_t           * evhtp;
-    struct app_parent * app_p;
+int main(int argc, char* argv[])
+{
+    evbase_t          * evbase = NULL;
+    evhtp_t           * evhtp  = NULL;
+    struct app_parent * app_p  = NULL;
 
     evbase            = event_base_new();
     evhtp             = evhtp_new(evbase, NULL);
@@ -287,4 +287,3 @@ main(int argc, char ** argv) {
 
     return 0;
 }
-
