@@ -13,6 +13,8 @@
 
 #include <string.h>
 #include <stdarg.h>
+#include <map>
+#include <string>
 
 
 static const int MAX_THREAD_CNT = 256;
@@ -26,6 +28,8 @@ static const int MAX_THREAD_CNT = 256;
 
 namespace wbox {
 
+typedef std::map<std::string, std::string>  str_map;
+
 /**
  *
  */
@@ -36,6 +40,12 @@ public:
         : req_(req)
     {
         resp_buf_ = evbuffer_new();
+        // URI
+        uri_ = evhttp_request_uri(req_);
+        // headers
+        headers_ = evhttp_request_get_input_headers(req_);
+        // 解析URI的参数(即GET方法的参数)
+        evhttp_parse_query_str(uri_, querys_);
     }
     virtual ~wbox_http_ctx_impl()
     {
@@ -45,17 +55,19 @@ public:
     // from URI
     virtual const char* uri() const
     {
-        return evhttp_request_uri(req_);
+        return uri_;
     }
-    virtual const char* get_params(const char* key) const
+    virtual const char* query(const char* key) const
     {
-        return "";
+        const char* value = evhttp_find_header(querys_, key);
+        return value;
     }
 
     // from HEAD
     virtual const char* get_hander(const char* key) const
     {
-        return "";
+        const char* value = evhttp_find_header(headers_, key);
+        return value;
     }
 
     // from DATA
@@ -67,6 +79,11 @@ public:
 
 
     // reply
+    virtual int  add_header(const char* key, const char* value)
+    {
+        int ret = evhttp_add_header(req_->output_headers, key, value);
+        return ret;
+    }
     virtual int  add_printf(const char *fmt, ...)
     {
         char tmp[4 * 1024] = {0};
@@ -84,8 +101,14 @@ public:
     }
 
 private:
+
+
+private:
     struct evhttp_request*  req_;
+    const  char*            uri_;
     struct evbuffer*        resp_buf_;
+    struct evkeyvalq*       headers_;
+    struct evkeyvalq*       querys_;
 };
 
 

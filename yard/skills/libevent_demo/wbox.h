@@ -39,7 +39,7 @@ struct wbox_http_ctx
     // request infomation
     // from URI
     virtual const char* uri() const = 0;
-    virtual const char* get_params(const char* key) const = 0;
+    virtual const char* query(const char* key) const = 0;
 
     // from HEAD
     virtual const char* get_hander(const char* key) const = 0;
@@ -48,6 +48,7 @@ struct wbox_http_ctx
     virtual const byte_t* get_chunk(uint32_t* sz) const = 0;
 
     // response infomation
+    virtual int  add_header(const char* key, const char* value) = 0;
     virtual int  add_printf(const char *fmt, ...) = 0;
     virtual int  add_data(const byte_t* data, uint32_t sz) = 0;
     virtual void send_reply(int code, const char *reason) = 0;

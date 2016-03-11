@@ -24,7 +24,18 @@
 
 static void http_request_on_dump(wbox_http_ctx* ctx)
 {
-    ctx->add_printf("dump from %s\n", ctx->uri());
+    // query info
+    ctx->add_printf("dump from %s\r\n", ctx->uri());
+    const char* name = ctx->query("name");
+    const char* id   = ctx->query("id");
+    ctx->add_printf("name=%s\r\n", name);
+    ctx->add_printf("id=%s\r\n", id);
+    // output head info
+    ctx->add_header("Server", "by libevent");
+    ctx->add_header("Author", "Brian");
+    ctx->add_header("Content-Type", "text/plain; charset=UTF-8");
+    ctx->add_header("Connection", "close");
+    // sent reply data
     ctx->send_reply(200, "dump finished!");
 }
 
