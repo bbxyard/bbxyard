@@ -61,18 +61,19 @@ public:
     // from DATA
     virtual const byte_t* get_chunk(uint32_t* sz) const
     {
-        return "";
+        *sz = 0;
+        return NULL;
     }
-    
-    
+
+
     // reply
     virtual int  add_printf(const char *fmt, ...)
     {
         char tmp[4 * 1024] = {0};
         FORMAT_PRINT_BUF(fmt, tmp);
-        return add_data(tmp, strlen(tmp));
+        return add_data((const byte_t*)tmp, strlen(tmp));
     }
-    virtual int  add_data(byte_t* data, uint32_t sz)
+    virtual int  add_data(const byte_t* data, uint32_t sz)
     {
         int ret = evbuffer_add(resp_buf_, data, sz);
         return ret;
@@ -234,7 +235,7 @@ void HTTPServer::ProcessRequest(struct evhttp_request *req)
             break;
         }
     }
-    
+
     // 处理具体请求
     if (NULL == handler)
     {

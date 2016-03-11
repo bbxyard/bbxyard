@@ -22,7 +22,7 @@
 typedef unsigned int uint32_t;
 typedef unsigned char byte_t;
 
-enum 
+enum
 {
     WBOX_MAX_HANDLER_CNT = 64
 };
@@ -30,7 +30,7 @@ enum
 #ifdef __cplusplus
 extern "C" {
 #endif
-    
+
 // 前向申明
 
 // 服务框架在内部完成封装
@@ -46,10 +46,10 @@ struct wbox_http_ctx
 
     // from DATA
     virtual const byte_t* get_chunk(uint32_t* sz) const = 0;
-    
+
     // response infomation
     virtual int  add_printf(const char *fmt, ...) = 0;
-    virtual int  add_data(byte_t* data, uint32_t sz) = 0;
+    virtual int  add_data(const byte_t* data, uint32_t sz) = 0;
     virtual void send_reply(int code, const char *reason) = 0;
 };
 

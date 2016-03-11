@@ -10,7 +10,7 @@
  *       Revision:  none
  *       Compiler:  gcc/g++
  *
- *         Author:  bbxyard (Brian), bbxyard@gmail.com 
+ *         Author:  bbxyard (Brian), bbxyard@gmail.com
  *      Copyright:  copyright (c) 2016, LGPL, bbxyard, http://www.bbxyard.com
  *
  * =====================================================================================
@@ -36,28 +36,33 @@ static void http_request_on_txt(wbox_http_ctx* ctx)
 
 
 
-/* 
+/*
  * ===  FUNCTION  ======================================================================
  *         Name:  main
  *       Author:  bbxyard
  *      Created:  2016年03月11日 17时00分06秒
- *  Description:  
+ *  Description:
  * =====================================================================================
  */
 int main (int argc, char* argv[])
 {
+    const char* libname = "libwbox.so";
     int ret = 0;
-    wbox_http_handler_node handles[WBOX_MAX_HANDLER_CNT] = 
+    wbox_http_handler_node handles[WBOX_MAX_HANDLER_CNT] =
     {
         { "/dump", "dump", http_request_on_dump},
         { "/text", "text", http_request_on_txt}
     };
-    
+
     // load so
-    void* h = dlopen("libwbox.so", RTLD_LAZY);
+    if (argc >= 2)
+    {
+        libname = argv[1];
+    }
+    void* h = dlopen(libname, RTLD_LAZY);
     if (NULL == h)
     {
-        perror("loaderr libwbox");
+        perror("load libwbox error");
         return -2;
     }
 
@@ -66,7 +71,7 @@ int main (int argc, char* argv[])
     {
         ret = wrun(4487, 10, handles, 2);
     }
-        
+
     dlclose(h);
     return ret;
 } /* -----  end of function main  ----- */
