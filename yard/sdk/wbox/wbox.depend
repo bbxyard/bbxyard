@@ -1,0 +1,62 @@
+# depslib dependency file v1.0
+1457670147 source:/home/bbxyard/devhome/www.github.com/bbxyard/yard/sdk/wbox/src/http-server.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+	<windows.h>
+	<io.h>
+	<fcntl.h>
+	<sys/stat.h>
+	<sys/socket.h>
+	<signal.h>
+	<fcntl.h>
+	<unistd.h>
+	<dirent.h>
+	<event2/event.h>
+	<event2/http.h>
+	<event2/buffer.h>
+	<event2/util.h>
+	<event2/keyvalq_struct.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+
+1436951854 /home/bbxyard/devhome/sdk/include/event2/event.h
+	<event2/event-config.h>
+	<sys/types.h>
+	<sys/time.h>
+	<stdio.h>
+	<event2/util.h>
+
+1436951854 /home/bbxyard/devhome/sdk/include/event2/event-config.h
+
+1436951854 /home/bbxyard/devhome/sdk/include/event2/util.h
+	<event2/event-config.h>
+	<sys/time.h>
+	<stdint.h>
+	<inttypes.h>
+	<sys/types.h>
+	<stddef.h>
+	<BaseTsd.h>
+	<stdarg.h>
+	<netdb.h>
+	<winsock2.h>
+	<sys/socket.h>
+
+1436951854 /home/bbxyard/devhome/sdk/include/event2/http.h
+	<event2/util.h>
+
+1436951854 /home/bbxyard/devhome/sdk/include/event2/buffer.h
+	<event2/event-config.h>
+	<stdarg.h>
+	<sys/types.h>
+	<sys/uio.h>
+	<event2/util.h>
+
+1436951854 /home/bbxyard/devhome/sdk/include/event2/keyvalq_struct.h
+
+1457669493 source:/home/bbxyard/devhome/www.github.com/bbxyard/yard/sdk/wbox/src/main.cpp
+

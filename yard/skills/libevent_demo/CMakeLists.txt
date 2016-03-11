@@ -16,4 +16,6 @@ show_dbg_info()
 
 # gen and deploy final apps
 aux_source_directory(. SRCS)
-addexe(${PROJECT_NAME} ${SRCS})
+#addexe(${PROJECT_NAME} ${SRCS})
+addexe(http-request http-request.cpp)
+addexe(ev-mt-httpd ev-mt-httpd.cpp)
