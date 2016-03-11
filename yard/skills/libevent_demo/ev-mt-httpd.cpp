@@ -1,32 +1,107 @@
+#include "wbox.h"
 #include <pthread.h>
 #include <unistd.h>
-
-#include <event.h>
-#include <evhttp.h>
-#include <errno.h>
-#include <string.h>
 #include <fcntl.h>
+#include <errno.h>
+
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <netinet/in.h>
 
+#include <event.h>
+#include <evhttp.h>
+
+#include <string.h>
+#include <stdarg.h>
+
 
 static const int MAX_THREAD_CNT = 256;
 
+#define FORMAT_PRINT_BUF(fmt, buf)  \
+    buf[0] = 0;                     \
+    va_list vl;                     \
+    va_start(vl, fmt);              \
+    vsprintf(buf, fmt, vl);         \
+    va_end(vl);                     \
+
 namespace wbox {
+
+/**
+ *
+ */
+class wbox_http_ctx_impl : public wbox_http_ctx
+{
+public:
+    wbox_http_ctx_impl(struct evhttp_request* req)
+        : req_(req)
+    {
+        resp_buf_ = evbuffer_new();
+    }
+    virtual ~wbox_http_ctx_impl()
+    {
+        evbuffer_free(resp_buf_);
+    }
+
+    // from URI
+    virtual const char* uri() const
+    {
+        return evhttp_request_uri(req_);
+    }
+    virtual const char* get_params(const char* key) const
+    {
+        return "";
+    }
+
+    // from HEAD
+    virtual const char* get_hander(const char* key) const
+    {
+        return "";
+    }
+
+    // from DATA
+    virtual const byte_t* get_chunk(uint32_t* sz) const
+    {
+        return "";
+    }
+    
+    
+    // reply
+    virtual int  add_printf(const char *fmt, ...)
+    {
+        char tmp[4 * 1024] = {0};
+        FORMAT_PRINT_BUF(fmt, tmp);
+        return add_data(tmp, strlen(tmp));
+    }
+    virtual int  add_data(byte_t* data, uint32_t sz)
+    {
+        int ret = evbuffer_add(resp_buf_, data, sz);
+        return ret;
+    }
+    virtual void send_reply(int code, const char *reason)
+    {
+        evhttp_send_reply(req_, code, reason, resp_buf_);
+    }
+
+private:
+    struct evhttp_request*  req_;
+    struct evbuffer*        resp_buf_;
+};
+
 
 class HTTPServer
 {
 public:
     HTTPServer() {}
     ~HTTPServer() {}
-    int run(int port, int nthreads);
-    int stop();
+    int run(int port, int nthreads, wbox_http_handler_node handlers[], int handler_cnt);
 protected:
     static void* Dispatch(void *arg);
     static void GenericHandler(struct evhttp_request *req, void *arg);
     void ProcessRequest(struct evhttp_request *request);
     int BindSocket(int port);
+private:
+    wbox_http_handler_node handlers_[WBOX_MAX_HANDLER_CNT];
+    int handler_cnt_;
 };
 
 int HTTPServer::BindSocket(int port)
@@ -83,14 +158,17 @@ int HTTPServer::BindSocket(int port)
     return nfd;
 }
 
-int HTTPServer::run(int port, int nthreads)
+int HTTPServer::run(int port, int nthreads, wbox_http_handler_node handlers[], int handler_cnt)
 {
     int ret = 0;
     int nfd = BindSocket(port);
-    if (nfd < 0)
+    if (nfd < 0 || handler_cnt == 0)
     {
         return -1;
     }
+
+    // copy handler;
+    memcpy(handlers_, handlers, handler_cnt * sizeof(handlers[0]));
 
     pthread_t thrds[MAX_THREAD_CNT] = {0};
     for (int i = 0; i < nthreads; i++)
@@ -126,6 +204,7 @@ int HTTPServer::run(int port, int nthreads)
     {
         pthread_join(thrds[i], NULL);
     }
+    return ret;
 }
 
 void* HTTPServer::Dispatch(void *arg)
@@ -141,19 +220,53 @@ void HTTPServer::GenericHandler(struct evhttp_request *req, void *arg)
 
 void HTTPServer::ProcessRequest(struct evhttp_request *req)
 {
-    sleep(30);
+    //sleep(30); for test
     pthread_t worker_id = pthread_self();
-    struct evbuffer *buf = evbuffer_new();
-    evbuffer_add_printf(buf, "Requested: %s and execute in thread[%ld]\n",
-        evhttp_request_uri(req), worker_id);
-    evhttp_send_reply(req, HTTP_OK, "OK", buf);
+
+    // 根据uri选择handler
+    wbox_fn_http_handler handler = NULL;
+    const char* uri = evhttp_request_uri(req);
+    for (int i = 0; i < handler_cnt_; ++i)
+    {
+        if (strncasecmp(handlers_[i].uri, uri, strlen(handlers_[i].uri)) == 0)
+        {
+            handler = handlers_[i].handler;
+            break;
+        }
+    }
+    
+    // 处理具体请求
+    if (NULL == handler)
+    {
+        fprintf(stderr, "unknown request %s - worker-id=%ld\n", uri, worker_id);
+        struct evbuffer* buf = evbuffer_new();
+        evhttp_send_reply(req, HTTP_OK, "could not find content for uri", buf);
+        evbuffer_free(buf);
+    }
+    else
+    {
+        wbox_http_ctx_impl ctx(req);
+        //#if _DEBUG
+        ctx.add_printf("Requested: %s and execute in thread[%ld]\n", evhttp_request_uri(req), worker_id);
+        //#endif
+        handler(&ctx);
+    }
 }
 
 } // namespace wbox
 
 
-int main(int argc, char* argv[])
+int test_main(int argc, char* argv[])
 {
     wbox::HTTPServer s;
-    s.run(4487, 10);
+    int ret = s.run(4487, 10, NULL, 0);
+    return ret;
+}
+
+
+int wbox_run(int port, int worker_cnt, wbox_http_handler_node handlers[], int handler_cnt)
+{
+    wbox::HTTPServer s;
+    int ret = s.run(port, worker_cnt, handlers, handler_cnt);
+    return ret;
 }
