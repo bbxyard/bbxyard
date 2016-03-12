@@ -1,6 +1,21 @@
 # bx common cmake head
 cmake_minimum_required (VERSION 2.8)
 
+# common lib
+include(FindPkgConfig)
+
+
+# test SDK_HOME
+set(CMAKE_INSTALL_PREFIX "$ENV{HOME}")
+set(USER_SDK_HOME "$ENV{SDK_HOME}")
+message(STATUS "##USER_HOME##=$ENV{HOME}")
+message(STATUS "##USER_SDK_HOME##=${USER_SDK_HOME}")
+
+# add sdk_depends
+macro (add_common_sdk_path)
+    include_directories(${USER_SDK_HOME}/include)
+    link_directories(${USER_SDK_HOME}/lib)
+endmacro()
 
 # options
 macro (check_flags)
@@ -50,18 +65,45 @@ macro (set_common_flags)
 endmacro()
 
 # FindPkgConfig
+macro (add_depends_apr)
+    pkg_check_modules(APR REQUIRED apr-1)
+    include_directories(${APR_INCLUDE_DIRS})
+    link_directories(${APR_LIBRARY_DIRS})
+    set(CUR_PROJ_LIB ${CUR_PROJ_LIB} ${APR_LIBRARIES})
+    message(STATUS "CUR_PROJ_LIB=${CUR_PROJ_LIB}")
+endmacro()
+macro (add_depends_apu)
+    pkg_check_modules(APU REQUIRED apr-util-1)
+    include_directories(${APU_INCLUDE_DIRS})
+    link_directories(${APU_LIBRARY_DIRS})
+    set(CUR_PROJ_LIB ${CUR_PROJ_LIB} ${APU_LIBRARIES})
+    message(STATUS "CUR_PROJ_LIB=${CUR_PROJ_LIB}")
+endmacro()
+
 macro (add_depends_ev)
-    include(FindPkgConfig)
     pkg_check_modules(LIBEVENT REQUIRED libevent)
     include_directories(${LIBEVENT_INCLUDE_DIRS})
     link_directories(${LIBEVENT_LIBRARY_DIRS})
     set(CUR_PROJ_LIB ${CUR_PROJ_LIB} ${LIBEVENT_LIBRARIES})
     message(STATUS "CUR_PROJ_LIB=${CUR_PROJ_LIB}")
 endmacro()
-
 macro (add_depends_evhtp)
     add_depends_ev()
     set(CUR_PROJ_LIB evhtp ${CUR_PROJ_LIB})
+    message(STATUS "CUR_PROJ_LIB=${CUR_PROJ_LIB}")
+endmacro()
+
+macro (add_depends_gtest)
+    set(CUR_PROJ_LIB ${CUR_PROJ_LIB} gtest)
+    message(STATUS "CUR_PROJ_LIB=${CUR_PROJ_LIB}")
+endmacro()
+macro (add_depends_gtest_with_main)
+    set(CUR_PROJ_LIB ${CUR_PROJ_LIB} gtest gtest_main)
+    message(STATUS "CUR_PROJ_LIB=${CUR_PROJ_LIB}")
+endmacro()
+
+macro (add_depends_protobuf)
+    set(CUR_PROJ_LIB ${CUR_PROJ_LIB} protobuf)
     message(STATUS "CUR_PROJ_LIB=${CUR_PROJ_LIB}")
 endmacro()
 
@@ -75,12 +117,14 @@ macro (addexe name)
     install(TARGETS ${name} DESTINATION ${DIST_BIN_DIR})
 endmacro()
 
+# addso - dynamic so
 macro (addso name)
     add_library(${name} SHARED ${ARGN})
     target_link_libraries(${name} ${CUR_PROJ_LIB} ${OS_COMM_LIB})
     install(TARGETS ${name} DESTINATION ${DIST_LIB_DIR})
 endmacro()
 
+# addlib - static lib
 macro (addlib name)
     add_library(${name} STATIC ${ARGN})
     install(TARGETS ${name} DESTINATION ${DIST_LIB_DIR})
@@ -98,3 +142,5 @@ endmacro()
 # common
 check_flags()
 set_common_flags()
+# include and lib path
+add_common_sdk_path()
