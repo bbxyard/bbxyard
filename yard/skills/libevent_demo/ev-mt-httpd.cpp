@@ -42,10 +42,12 @@ public:
         resp_buf_ = evbuffer_new();
         // URI
         uri_ = evhttp_request_uri(req_);
+        evh_uri_ = evhttp_request_get_evhttp_uri(req_);
+        raw_query_ = evhttp_uri_get_query(evh_uri_);
         // headers
         headers_ = evhttp_request_get_input_headers(req_);
         // 解析URI的参数(即GET方法的参数)
-        evhttp_parse_query_str(uri_, querys_);
+        evhttp_parse_query_str(raw_query_, querys_);
     }
     virtual ~wbox_http_ctx_impl()
     {
@@ -59,8 +61,14 @@ public:
     }
     virtual const char* query(const char* key) const
     {
+        if (NULL == key || 0 == *key)
+            return raw_query_;
         const char* value = evhttp_find_header(querys_, key);
         return value;
+    }
+    virtual wbox_cmd_type get_cmd_type() const
+    {
+        return (wbox_cmd_type)evhttp_request_get_command(req_);
     }
 
     // from HEAD
@@ -100,15 +108,31 @@ public:
         evhttp_send_reply(req_, code, reason, resp_buf_);
     }
 
+    // more info
+    virtual const char* get_remote_host() const
+    {
+        return req_->remote_host;
+    }
+    virtual port_t get_remote_port() const
+    {
+        return req_->remote_port;
+    }
+    virtual const char* get_fragment() const
+    {
+        return evhttp_uri_get_fragment(evh_uri_);
+    }
+
 private:
 
 
 private:
-    struct evhttp_request*  req_;
-    const  char*            uri_;
-    struct evbuffer*        resp_buf_;
-    struct evkeyvalq*       headers_;
-    struct evkeyvalq*       querys_;
+    struct evhttp_request*      req_;
+    const struct evhttp_uri*    evh_uri_;   // 格式化后URI
+    const  char*                uri_;
+    const  char*                raw_query_; // 原始的查询串
+    struct evbuffer*            resp_buf_;
+    struct evkeyvalq*           headers_;
+    struct evkeyvalq*           querys_;    // 查询串－健值对
 };
 
 

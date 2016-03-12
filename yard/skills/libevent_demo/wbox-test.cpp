@@ -28,6 +28,7 @@ static void http_request_on_dump(wbox_http_ctx* ctx)
     ctx->add_printf("dump from %s\r\n", ctx->uri());
     const char* name = ctx->query("name");
     const char* id   = ctx->query("id");
+    ctx->add_printf("querys=%s\r\n", ctx->query(NULL));
     ctx->add_printf("name=%s\r\n", name);
     ctx->add_printf("id=%s\r\n", id);
     // output head info

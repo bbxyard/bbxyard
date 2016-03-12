@@ -21,11 +21,25 @@
 
 typedef unsigned int uint32_t;
 typedef unsigned char byte_t;
+typedef unsigned short port_t;
 
 enum
 {
     WBOX_MAX_HANDLER_CNT = 64
 };
+
+typedef enum wbox_cmd_type  // value same as EVHTTP
+{
+	WBOX_REQ_GET     = 1 << 0,
+	WBOX_REQ_POST    = 1 << 1,
+	WBOX_REQ_HEAD    = 1 << 2,
+	WBOX_REQ_PUT     = 1 << 3,
+	WBOX_REQ_DELETE  = 1 << 4,
+	WBOX_REQ_OPTIONS = 1 << 5,
+	WBOX_REQ_TRACE   = 1 << 6,
+	WBOX_REQ_CONNECT = 1 << 7,
+	WBOX_REQ_PATCH   = 1 << 8
+} wbox_cmd_type;
 
 #ifdef __cplusplus
 extern "C" {
@@ -40,6 +54,7 @@ struct wbox_http_ctx
     // from URI
     virtual const char* uri() const = 0;
     virtual const char* query(const char* key) const = 0;
+    virtual wbox_cmd_type get_cmd_type() const = 0;
 
     // from HEAD
     virtual const char* get_hander(const char* key) const = 0;
@@ -52,6 +67,11 @@ struct wbox_http_ctx
     virtual int  add_printf(const char *fmt, ...) = 0;
     virtual int  add_data(const byte_t* data, uint32_t sz) = 0;
     virtual void send_reply(int code, const char *reason) = 0;
+
+    // more info
+    virtual const char* get_remote_host() const = 0;
+    virtual port_t get_remote_port() const = 0;
+    virtual const char* get_fragment() const = 0;
 };
 
 // 用户实现

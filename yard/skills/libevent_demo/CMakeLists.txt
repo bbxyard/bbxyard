@@ -5,6 +5,7 @@ project(libevent_demo)
 # sub dirs
 add_subdirectory(org-sample)
 add_subdirectory(libevent-thread)
+add_subdirectory(test)
 
 
 # include common cmake
