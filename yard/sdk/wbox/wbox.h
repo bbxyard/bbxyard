@@ -19,13 +19,15 @@
 #define __WBOX_H__
 
 
+#include <stdio.h>
+
 typedef unsigned int uint32_t;
 typedef unsigned char byte_t;
 typedef unsigned short port_t;
 
 enum
 {
-    WBOX_MAX_HANDLER_CNT = 64
+    WBOX_MAX_HANDLER_CNT = 128
 };
 
 typedef enum wbox_cmd_type  // value same as EVHTTP
@@ -54,13 +56,18 @@ struct wbox_http_ctx
     // from URI
     virtual const char* uri() const = 0;
     virtual const char* query(const char* key) const = 0;
+    virtual const char* get_cmd_stype() const = 0;
     virtual wbox_cmd_type get_cmd_type() const = 0;
 
     // from HEAD
     virtual const char* get_hander(const char* key) const = 0;
 
     // from DATA
-    virtual const byte_t* get_chunk(uint32_t* sz) const = 0;
+    virtual const byte_t* get_input_data(uint32_t* sz) const = 0;
+
+    // enums
+    virtual void enum_all_querys (const char* keys[], const char* values[], uint32_t* cnt) const = 0;
+    virtual void enum_all_headers(const char* keys[], const char* values[], uint32_t* cnt) const = 0;
 
     // response infomation
     virtual int  add_header(const char* key, const char* value) = 0;
@@ -75,6 +82,7 @@ struct wbox_http_ctx
     virtual const char* get_remote_host() const = 0;
     virtual port_t get_remote_port() const = 0;
     virtual const char* get_fragment() const = 0;
+    virtual void print_request(FILE* fp = stdout) const = 0;
 };
 
 // 用户实现

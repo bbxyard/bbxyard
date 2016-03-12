@@ -24,6 +24,8 @@
 
 static void http_request_on_dump(wbox_http_ctx* ctx)
 {
+    // print request to the screen
+    ctx->print_request();
     // query info
     ctx->add_data_printf("dump from %s\r\n", ctx->uri());
     const char* name = ctx->query("name");
