@@ -7,8 +7,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/wbox" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
+				<Option output="../bin/Debug/wbox" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -18,8 +18,8 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/wbox" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
+				<Option output="../bin/Release/wbox" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../obj/Release/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -43,10 +43,10 @@
 			<Add library="../../../../../sdk/lib/libevent.a" />
 			<Add directory="../../../../../sdk/lib" />
 		</Linker>
-		<Unit filename="src/http-server.c">
+		<Unit filename="../src/http-server.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="src/main.cpp" />
+		<Unit filename="../src/main.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

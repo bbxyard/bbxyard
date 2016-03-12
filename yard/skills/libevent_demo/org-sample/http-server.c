@@ -128,11 +128,11 @@ dump_request_cb(struct evhttp_request *req, void *arg)
 	    header = header->next.tqe_next) {
 		printf("  %s: %s\n", header->key, header->value);
 	}
-	
+
 	// 获得GET数据.
 	{
         struct evkeyvalq params;
-        url = evhttp_request_get_uri(req);        
+        url = evhttp_request_get_uri(req);
         char* decoded_uri = evhttp_decode_uri(url);
         const char* uri_request_pos = strchr(decoded_uri, '?');
         if (uri_request_pos != NULL && evhttp_parse_query_str(uri_request_pos + 1, &params) == 0)
@@ -336,8 +336,7 @@ syntax(void)
 	fprintf(stdout, "Syntax: http-server <docroot>\n");
 }
 
-int
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	struct event_base *base;
 	struct evhttp *http;
