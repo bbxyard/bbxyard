@@ -25,27 +25,32 @@
 static void http_request_on_dump(wbox_http_ctx* ctx)
 {
     // query info
-    ctx->add_printf("dump from %s\r\n", ctx->uri());
+    ctx->add_data_printf("dump from %s\r\n", ctx->uri());
     const char* name = ctx->query("name");
     const char* id   = ctx->query("id");
-    ctx->add_printf("querys=%s\r\n", ctx->query(NULL));
-    ctx->add_printf("name=%s\r\n", name);
-    ctx->add_printf("id=%s\r\n", id);
+    ctx->add_data_printf("querys=%s\r\n", ctx->query(NULL));
+    ctx->add_data_printf("name=%s\r\n", name);
+    ctx->add_data_printf("id=%s\r\n", id);
     // output head info
     ctx->add_header("Server", "by libevent");
     ctx->add_header("Author", "Brian");
     ctx->add_header("Content-Type", "text/plain; charset=UTF-8");
     ctx->add_header("Connection", "close");
     // sent reply data
-    ctx->send_reply(200, "dump finished!");
+    ctx->send_reply(200, NULL);
 }
 
 static void http_request_on_txt(wbox_http_ctx* ctx)
 {
-    ctx->add_printf("text from %s\n", ctx->uri());
-    ctx->send_reply(200, "text request");
+    ctx->add_data_printf("text from %s\n", ctx->uri());
+    ctx->send_reply(200, "Just A Test");
 }
 
+static void http_request_on_download(wbox_http_ctx* ctx)
+{
+    const char* file = ctx->query("file");
+    ctx->send_reply_with_file(file);
+}
 
 
 /*
@@ -63,7 +68,8 @@ int main (int argc, char* argv[])
     wbox_http_handler_node handles[WBOX_MAX_HANDLER_CNT] =
     {
         { "/dump", "dump", http_request_on_dump},
-        { "/text", "text", http_request_on_txt}
+        { "/text", "text", http_request_on_txt},
+        { "/download", "download", http_request_on_download}
     };
 
     // load so
@@ -81,7 +87,7 @@ int main (int argc, char* argv[])
     wbox_fn_run wrun = (wbox_fn_run)dlsym(h, "wbox_run");
     if (wrun != NULL)
     {
-        ret = wrun(4487, 10, handles, 2);
+        ret = wrun(4487, 10, handles, 3, "timeout=-1");
     }
 
     dlclose(h);

@@ -18,11 +18,11 @@
 #include "wbox.h"
 
 // 各种实现
-int wbox_evhttp_mt_run(int port, int worker_cnt, wbox_http_handler_node handlers[], int handler_cnt);
+int wbox_evhttp_mt_run(int port, int worker_cnt, wbox_http_handler_node handlers[], int handler_cnt, const char* params);
 
 
-int wbox_run(int port, int worker_cnt, wbox_http_handler_node handlers[], int handler_cnt)
+int wbox_run(int port, int worker_cnt, wbox_http_handler_node handlers[], int handler_cnt, const char* params)
 {
-    int ret = wbox_evhttp_mt_run(port, worker_cnt, handlers, handler_cnt);
+    int ret = wbox_evhttp_mt_run(port, worker_cnt, handlers, handler_cnt, params);
     return ret;
 }

@@ -22,6 +22,9 @@
 
 #include <string.h>
 #include <stdarg.h>
+#include <stdio.h>
+#include <time.h>
+
 #include <map>
 #include <string>
 
@@ -34,6 +37,25 @@ namespace wbox {
     va_start(vl, fmt);              \
     vsprintf(buf, fmt, vl);         \
     va_end(vl);                     \
+
+#define __QUOTE(x)                  # x
+#define  _QUOTE(x)                  __QUOTE(x)
+
+inline const char* get_basename(const char* file)
+{
+    // libgen.h not found the basename in some os, so we do itself.
+    const char* psz = strrchr(file, '/');
+    return (psz != NULL)? psz + 1: NULL;
+}
+
+#define DEBUG_PRINT(fmt, ...) do {                                                               \
+    time_t      t  = time(NULL);                                                                 \
+    struct tm * dm = localtime(&t);                                                              \
+    fprintf(stdout, "[%02d:%02d:%02d] %s:[" _QUOTE(__LINE__) "][%s]: "                           \
+            fmt "\n", dm->tm_hour, dm->tm_min, dm->tm_sec,                                       \
+            get_basename(__FILE__), __func__, ## __VA_ARGS__);                                   \
+    fflush(stdout);                                                                              \
+} while (0)
 
 typedef std::map<std::string, std::string>  str_map;
 
@@ -99,20 +121,68 @@ public:
         int ret = evhttp_add_header(req_->output_headers, key, value);
         return ret;
     }
-    virtual int  add_printf(const char *fmt, ...)
+    virtual int  add_header_printf(const char* key, const char *fmt, ...)
     {
         char tmp[4 * 1024] = {0};
         FORMAT_PRINT_BUF(fmt, tmp);
-        return add_data((const byte_t*)tmp, strlen(tmp));
+        return add_header(key, tmp);
     }
     virtual int  add_data(const byte_t* data, uint32_t sz)
     {
         int ret = evbuffer_add(resp_buf_, data, sz);
         return ret;
     }
+    virtual int  add_data_printf(const char *fmt, ...)
+    {
+        char tmp[4 * 1024] = {0};
+        FORMAT_PRINT_BUF(fmt, tmp);
+        return add_data((const byte_t*)tmp, strlen(tmp));
+    }
+
+    virtual int send_reply_with_file(const char* file)
+    {
+        uint32_t fsz = 0;
+        const char* fname = get_basename(file);
+        DEBUG_PRINT("open file %s for download\n", file);
+        FILE* fp = fopen(file, "rb");
+        if (NULL == fp)
+        {
+            send_reply(HTTP_NOTFOUND, 0);
+            return HTTP_NOTFOUND;
+        }
+        fseek(fp, 0, SEEK_END);
+        fsz = (uint32_t)ftell(fp);
+        fseek(fp, 0, SEEK_SET);
+
+        //输入文件标签
+        add_header("Content-type", "application/octet-stream");
+        add_header("Accept-Ranges", "bytes");
+        add_header_printf("Accept-Length", "%d", fsz);
+        add_header_printf("Content-Disposition", "attachment; filename=%s", fname);
+        // output data
+        byte_t buf[4096];
+        int rd = 0;
+        while ((rd = fread(buf, 1, sizeof(buf), fp)) > 0)
+        {
+            add_data(buf, rd);
+        }
+        fclose(fp);
+
+        // sent reply data
+        send_reply(200, "OK");
+        return 0;
+    }
+
     virtual void send_reply(int code, const char *reason)
     {
-        evhttp_send_reply(req_, code, reason, resp_buf_);
+        if (code != HTTP_OK)
+        {
+            evhttp_send_error(req_, code, reason);
+        }
+        else
+        {
+            evhttp_send_reply(req_, code, reason, resp_buf_);
+        }
     }
 
     // more info

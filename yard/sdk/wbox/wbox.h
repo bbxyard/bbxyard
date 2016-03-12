@@ -64,8 +64,11 @@ struct wbox_http_ctx
 
     // response infomation
     virtual int  add_header(const char* key, const char* value) = 0;
-    virtual int  add_printf(const char *fmt, ...) = 0;
+    virtual int  add_header_printf(const char* key, const char* fmt, ...) = 0;
     virtual int  add_data(const byte_t* data, uint32_t sz) = 0;
+    virtual int  add_data_printf(const char *fmt, ...) = 0;
+    // send
+    virtual int  send_reply_with_file(const char* file) = 0; // 自动设置headers
     virtual void send_reply(int code, const char *reason) = 0;
 
     // more info
@@ -87,8 +90,8 @@ typedef struct _wbox_http_handler_node
 /**
  *
  */
-typedef int (*wbox_fn_run)(int port, int worker_cnt, wbox_http_handler_node handlers[], int handler_cnt);
-int wbox_run(int port, int worker_cnt, wbox_http_handler_node handlers[], int handler_cnt);
+typedef int (*wbox_fn_run)(int port, int worker_cnt, wbox_http_handler_node handlers[], int handler_cnt, const char* params);
+int wbox_run(int port, int worker_cnt, wbox_http_handler_node handlers[], int handler_cnt, const char* params);
 
 #ifdef __cplusplus
 }

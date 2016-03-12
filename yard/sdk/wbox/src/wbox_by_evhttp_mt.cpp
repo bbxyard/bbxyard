@@ -172,7 +172,7 @@ void HTTPServer::ProcessRequest(struct evhttp_request *req)
     {
         wbox_http_ctx_impl ctx(req);
         //#if _DEBUG
-        ctx.add_printf("Requested: %s and execute in thread[%ld]\n", evhttp_request_uri(req), worker_id);
+        //ctx.add_data_printf("Requested: %s and execute in thread[%ld]\n", evhttp_request_uri(req), worker_id);
         //#endif
         handler(&ctx);
     }
@@ -181,14 +181,15 @@ void HTTPServer::ProcessRequest(struct evhttp_request *req)
 } // namespace wbox
 
 
-int wbox_evhttp_mt_run(int port, int worker_cnt, wbox_http_handler_node handlers[], int handler_cnt)
+int wbox_evhttp_mt_run(int port, int worker_cnt, wbox_http_handler_node handlers[], int handler_cnt, const char* params)
 {
     wbox::HTTPServer s;
+    // todo parse params
     int ret = s.run(port, worker_cnt, handlers, handler_cnt);
     return ret;
 }
 
 static int wbox_evhttp_mt_test_main(int argc, char* argv[])
 {
-    return wbox_evhttp_mt_run(4487, 10, NULL, 0);
+    return wbox_evhttp_mt_run(4487, 10, NULL, 0, "");
 }
