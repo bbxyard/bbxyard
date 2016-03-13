@@ -14,8 +14,8 @@ add_subdirectory(samples)
 
 # deploy
 # build a CPack driven installer package
-include (InstallRequiredSystemLibraries)
-set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
-set (CPACK_PACKAGE_VERSION_MAJOR "${WBOX_VERSION_MAJOR}")
-set (CPACK_PACKAGE_VERSION_MINOR "${WBOX_VERSION_MINOR}")
-include (CPack)
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set(CPACK_PACKAGE_VERSION_MAJOR "${WBOX_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${WBOX_VERSION_MINOR}")
+include(CPack)
