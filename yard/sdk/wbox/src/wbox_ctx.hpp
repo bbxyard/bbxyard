@@ -158,6 +158,10 @@ public:
         const char* value = evhttp_find_header(headers_, key);
         return value;
     }
+    virtual const char* get_input_content_type() const
+    {
+        return "";
+    }
 
     // from DATA
     virtual const byte_t* get_input_data(uint32_t* sz) const
@@ -165,6 +169,10 @@ public:
         if (sz != NULL)
             *sz = input_data_.sz;
         return input_data_.mem;
+    }
+    virtual const wbox_in_item_t* get_all_input_items(uint32_t* cnt)
+    {
+        return 0;
     }
 
     // enums

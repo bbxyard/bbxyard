@@ -43,6 +43,13 @@ typedef enum wbox_cmd_type  // value same as EVHTTP
 	WBOX_REQ_PATCH   = 1 << 8
 } wbox_cmd_type;
 
+typedef struct
+{
+    const char*     name;
+    const byte_t*   value;
+    uint32_t        value_size;
+} wbox_in_item_t;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -61,9 +68,11 @@ struct wbox_http_ctx
 
     // from HEAD
     virtual const char* get_hander(const char* key) const = 0;
+    virtual const char* get_input_content_type() const = 0;
 
     // from DATA
     virtual const byte_t* get_input_data(uint32_t* sz) const = 0;
+    virtual const wbox_in_item_t* get_all_input_items(uint32_t* cnt) = 0;
 
     // enums
     virtual void enum_all_querys (const char* keys[], const char* values[], uint32_t* cnt) const = 0;
