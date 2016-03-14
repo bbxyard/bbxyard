@@ -43,11 +43,18 @@ typedef enum wbox_cmd_type  // value same as EVHTTP
 	WBOX_REQ_PATCH   = 1 << 8
 } wbox_cmd_type;
 
+/**
+ *
+    Content-Disposition: form-data; name="fin"; filename="README.md"
+    Content-Type: text/markdown
+ */
 typedef struct
 {
-    const char*     name;
-    const byte_t*   value;
-    uint32_t        value_size;
+    const char*     name;   // ==> fin
+    const char*     attrs;  // for file another attrs. ==> filename="README.md"
+    const char*     content_type;   // ==> text/markdown
+    const byte_t*   content;
+    uint32_t        content_bytes;
 } wbox_in_item_t;
 
 #ifdef __cplusplus

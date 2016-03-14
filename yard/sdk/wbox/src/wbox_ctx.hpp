@@ -160,7 +160,7 @@ public:
     }
     virtual const char* get_input_content_type() const
     {
-        return "";
+        return get_hander("Content-Type");
     }
 
     // from DATA
@@ -273,6 +273,7 @@ public:
     {
         // # print uri info
         fprintf(fp, "REQUEST TYPE [%s]\n", get_cmd_stype() );
+        fprintf(fp, "Content Type [%s]\n", get_input_content_type() );
         fprintf(fp, "===============URI-INFO===============\n");
         print_uri_info(fp, evh_uri_);
 
@@ -339,6 +340,100 @@ private:
         fprintf(fp, "userinfo:%s\n", evhttp_uri_get_userinfo(http_uri));
         fprintf(fp, "fragment:%s\n", evhttp_uri_get_fragment(http_uri));
     }
+    // parse
+    // Content-Type : multipart/form-data; boundary=---------------------------12677192581372307319394741653
+    // Content-Length : 2057
+    void parse_content()
+    {
+        // parse head
+        *input_content_type_ = 0;
+        *input_content_boundary_ = 0;
+        const char* raw_content_type = get_hander("Content-Type");
+        if (NULL == raw_content_type)
+        {
+            const char* BOUND_MARK = "; boundary=";
+            const char* psz = strstr(raw_content_type, BOUND_MARK);
+            if (NULL != psz)
+            {
+                strncpy(input_content_type_, raw_content_type, psz - raw_content_type);
+                strcpy(input_content_boundary_, psz + strlen(BOUND_MARK));
+            }
+            else
+            {
+                strcpy(input_content_type_, raw_content_type);
+            }
+        }
+        // parse content
+        if (strcmp(input_content_type_, "multipart/form-data") == 0)
+        {
+            int content_size = (int)atoi(get_hander("Content-Length"));
+            if (content_size > 0)
+            {
+                // 正式解析
+                assert(content_size == input_data_.sz && "这个必须要相等哟!!");
+            }
+        }
+    }
+
+    #define VERIFY_AND_BREAK(cond)     if (!(cond))   break;
+
+    static void parse_content_i(mem_node_t* input_data, wbox_in_item_t[], uint32_t& cnt)
+    {
+        const char* BOUND_NEW_LINE = "\r\n";
+        const char* BOUND_DISPOSITION_MARK = "Content-Disposition: form-data; name=";
+        const char* BOUND_TYPE_MARK = "Content-Type: ";
+        const char* psz_content_disposition = NULL;
+        const char* psz_content_type = NULL;
+        byte_t* data_begin = input_data.mem;
+        char* BOUND_DATA_END = (char*)(input_data.mem + input_data.sz);
+        uint32_t pos = 0;
+        const uint32_t BOUND_NEW_LINE_LEN   = (uint32_t)strlen(BOUND_NEW_LINE);
+        const uint32_t BOUND_TYPE_MARK_LEN  = (uint32_t)strlen(BOUND_TYPE_MARK);
+        const uint32_t CONTENT_BOUNDARY_LEN = (uint32_t)strlen(input_content_boundary_);
+        while (true)
+        {
+            wbox_in_item_t item;
+            const char* psz = strstr((const char*)data_begin, input_content_boundary_);
+            if (NULL == psz || pos > input_data.sz )
+                break;
+            psz += CONTENT_BOUNDARY_LEN;
+            pos = (byte_t*)psz - input_data.mem;
+            if (pos + 2 >= input_data.mem)  // 正常＝2,应该是到结尾了"--"
+                break;
+            // 开始解析一块数据区.
+            // Content-Disposition: form-data; name="fin"; filename="README.md"
+            psz_content_disposition = strstr(psz, BOUND_DISPOSITION_MARK);
+            VERIFY_AND_BREAK(NULL != psz_content_disposition);
+            psz_content_disposition += strlen(BOUND_DISPOSITION_MARK);
+            char* p = strstr(psz_content_disposition, BOUND_NEW_LINE);
+            VERIFY_AND_BREAK(NULL != p && "此处必须要有\r\n");
+            *p = 0;
+            psz = p + BOUND_NEW_LINE_LEN; // 进入TYPE行
+            // Content-Type: text/markdown
+            if (strncmp(psz, BOUND_NEW_LINE, BOUND_NEW_LINE_LEN) == 0)
+            {
+                *item.content_type = "";
+                psz += BOUND_NEW_LINE;
+            }
+            else if (strncmp(psz, BOUND_TYPE_MARK, BOUND_TYPE_MARK_LEN) == 0)
+            {
+                psz += BOUND_TYPE_MARK_LEN;
+                item.content_type = psz;
+                char* p = strstr(psz, BOUND_NEW_LINE);
+                *p = 0; // 将回车置为0
+                psz = p + BOUND_NEW_LINE_LEN;
+            }
+            else
+            {
+                // 除非包出错啦!!
+                fprintf(stderr, "Invalid format!! RETURN! last_pos=%d\n", pos);
+                break;
+            }
+            // 以下就是纯数据区啦!
+            pos = (byte_t*)psz - input_data_.mem;
+            item.content = (byte_t*)psz;
+        }
+    }
 
 private:
     struct evhttp_request*      req_;
@@ -349,6 +444,8 @@ private:
     const struct evkeyvalq*     headers_;
     struct evkeyvalq            querys_;    // 查询串－健值对
     mem_node_t                  input_data_; // POST上传的数据
+    char                        input_content_type_[64];
+    char                        input_content_boundary_[256];
 };
 
 } // namespace wbox
