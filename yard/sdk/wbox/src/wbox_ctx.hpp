@@ -104,8 +104,10 @@ public:
         raw_query_ = evhttp_uri_get_query(evh_uri_);
         // headers
         headers_ = evhttp_request_get_input_headers(req_);
+        enum_all_from_evkeyvalq(headers_, input_header_kvpairs_, input_header_kvpair_cnt_);
         // 解析URI的参数(即GET方法的参数)
         evhttp_parse_query_str(raw_query_, &querys_);
+        enum_all_from_evkeyvalq(&querys_, input_query_kvpairs_, input_query_kvpair_cnt_);
         // 获得POST数据
         evbuffer* in_ev_buf = evhttp_request_get_input_buffer(req_);
         memset(&input_content_node_, 0, sizeof(input_content_node_));
@@ -116,7 +118,6 @@ public:
             input_data_.mem = new byte_t[input_data_.cap];
             evbuffer_copyout(in_ev_buf, input_data_.mem, input_data_.sz);
         }
-
         // 解析POST数据
         parse_content();
     }
@@ -161,21 +162,30 @@ public:
     }
 
     // from HEAD
-    virtual const char* get_hander(const char* key) const
+    virtual const char* get_input_header(const char* key) const
     {
         const char* value = evhttp_find_header(headers_, key);
         return value;
     }
     virtual const char* get_input_content_type() const
     {
-        return get_hander("Content-Type");
+        return get_input_header("Content-Type");
+    }
+    virtual const wbox_kvpair_t* get_all_querys(uint32_t* cnt) const
+    {
+        if (cnt != NULL) *cnt = input_query_kvpair_cnt_;
+        return input_query_kvpairs_;
+    }
+    virtual const wbox_kvpair_t* get_all_input_headers(uint32_t* cnt) const
+    {
+        if (cnt != NULL) *cnt = input_header_kvpair_cnt_;
+        return input_header_kvpairs_;
     }
 
     // from DATA
-    virtual const byte_t* get_input_data(uint32_t* sz) const
+    virtual const byte_t* get_input_data(uint32_t* bytes) const
     {
-        if (sz != NULL)
-            *sz = input_data_.sz;
+        if (bytes != NULL) *bytes = input_data_.sz;
         return input_data_.mem;
     }
     virtual const wbox_in_item_t* get_all_input_items(uint32_t* cnt) const
@@ -183,17 +193,6 @@ public:
         *cnt = input_content_item_cnt_;
         return input_content_items_;
     }
-
-    // enums
-    virtual void enum_all_querys (const char* keys[], const char* values[], uint32_t* cnt) const
-    {
-        enum_all_from_evkeyvalq(&querys_, keys, values, cnt);
-    }
-    virtual void enum_all_headers(const char* keys[], const char* values[], uint32_t* cnt) const
-    {
-        enum_all_from_evkeyvalq(headers_, keys, values, cnt);
-    }
-
 
     // reply
     virtual int  add_header(const char* key, const char* value)
@@ -289,32 +288,31 @@ public:
         // # print peer info
         fprintf(fp, "remote host:post = %s:%d\n", get_remote_host(), get_remote_port());
 
-        const char* keys[WBOX_MAX_HANDLER_CNT] = {0};
-        const char* values[WBOX_MAX_HANDLER_CNT] = {0};
         // # print headers
-        uint32_t max_cnt = WBOX_MAX_HANDLER_CNT;
-        enum_all_headers(keys, values, &max_cnt);
-        fprintf(fp, "============headers(%d)===============\n", max_cnt);
-        print_kvs(fp, keys, values, max_cnt);
+        uint32_t cnt = 0;
+        const wbox_kvpair_t* all_headers = get_all_input_headers(&cnt);
+        fprintf(fp, "============headers(%d)===============//by get_all_input_headers(&cnt)\n", cnt);
+        print_kvs(fp, all_headers, cnt);
 
         // # print querys
-        max_cnt = WBOX_MAX_HANDLER_CNT;
-        enum_all_querys(keys, values, &max_cnt);
-        fprintf(fp, "============querys(%d)===============\n", max_cnt);
-        print_kvs(fp, keys, values, max_cnt);
+        const wbox_kvpair_t* all_querys = get_all_querys(&cnt);
+        fprintf(fp, "============querys(%d)===============//by get_all_querys(&cnt)\n", cnt);
+        print_kvs(fp, all_querys, cnt);
 
         // print input data
-        fprintf(fp, "============input-data(%d)===============\n", input_data_.sz);
-        if (input_data_.mem != NULL)
+        uint32_t data_size = 0;
+        const byte_t* data = get_input_data(&data_size);
+        fprintf(fp, "============input-data(%d)===============//by get_input_data(&data_size)\n", data_size);
+        if (data != NULL)
         {
-            fwrite(input_data_.mem, sizeof(byte_t), input_data_.sz, fp);
+            fwrite(data, sizeof(byte_t), data_size, fp);
         }
         fprintf(fp, "\n");
 
         // print input data parsed result
         if (input_content_item_cnt_ > 0)
         {
-            fprintf(fp, "============input-data-parsed(%d)===============\n", input_content_item_cnt_);
+            fprintf(fp, "============input-data-parsed(%d)===============//by get_all_input_items(&item_cnt)\n", input_content_item_cnt_);
             uint32_t item_cnt = 0;
             const wbox_in_item_t* items = get_all_input_items(&item_cnt);
             for (uint32_t i = 0; i < item_cnt; ++i)
@@ -332,28 +330,24 @@ public:
         fprintf(fp, "==================END===============\n");
     }
 private:
-    static void enum_all_from_evkeyvalq(const evkeyvalq* kvq, const char* keys[], const char* values[], uint32_t* cnt)
+    static void enum_all_from_evkeyvalq(const evkeyvalq* kvq, wbox_kvpair_t kvs[], uint32_t& cnt)
     {
-        int max_cnt = 1024;
-        if (NULL != cnt)    // 若为空假定为无限大
-            max_cnt = *cnt;
-
         int i = 0;
         for (const struct evkeyval* node = kvq->tqh_first; node != NULL; node = node->next.tqe_next, ++i)
         {
-            if (i >= max_cnt)
+            if (i >= WBOX_MAX_HANDLER_CNT)
                 break;
-            keys[i] = node->key;
-            values[i] = node->value;
+            kvs[i].key = node->key;
+            kvs[i].value = node->value;
         }
-        if (NULL != cnt)
-            *cnt = i;
+        cnt = i;
     }
-    static void print_kvs(FILE* fp, const char* keys[], const char* values[], int max_cnt)
+    static void print_kvs(FILE* fp, const wbox_kvpair_t kvs[], int max_cnt)
     {
         for (int i = 0; i < max_cnt; ++i)
         {
-            fprintf(fp, "%s : %s\n", keys[i], values[i]);
+            const wbox_kvpair_t& kv = kvs[i];
+            fprintf(fp, "%s : %s\n", kv.key, kv.value);
         }
     }
     static void print_uri_info(FILE* fp, const struct evhttp_uri * http_uri)
@@ -376,7 +370,7 @@ private:
         input_content_item_cnt_ = 0;
         *input_content_type_ = 0;
         *input_content_boundary_ = 0;
-        const char* raw_content_type = get_hander("Content-Type");
+        const char* raw_content_type = get_input_header("Content-Type");
         if (NULL != raw_content_type)
         {
             const char* BOUND_MARK = "; boundary=";
@@ -394,7 +388,7 @@ private:
         // parse content
         if (strcmp(input_content_type_, "multipart/form-data") == 0)
         {
-            int content_size = (int)atoi(get_hander("Content-Length"));
+            int content_size = (int)atoi(get_input_header("Content-Length"));
             if (content_size > 0)
             {
                 // 分配内存块
@@ -541,12 +535,29 @@ private:
     const struct evkeyvalq*     headers_;
     struct evkeyvalq            querys_;    // 查询串－健值对
     mem_node_t                  input_data_;        // POST上传的数据
-    char                        input_content_type_[64];
-    char                        input_content_boundary_[256];
+    char                        input_content_type_[WBOX_MAX_CONTENT_TYPE_LEN];
+    char                        input_content_boundary_[WBOX_MAX_CONTENT_BOUNDARY_LEN];
+
+    // SDK 返回需要数据
+    wbox_kvpair_t               input_query_kvpairs_[WBOX_MAX_HANDLER_CNT];   // 存储所有query属性对
+    wbox_kvpair_t               input_header_kvpairs_[WBOX_MAX_HANDLER_CNT];  // 存储所有hander属性对
+    uint32_t                    input_query_kvpair_cnt_;
+    uint32_t                    input_header_kvpair_cnt_;
 
     mem_node_t                  input_content_node_;    // 内容buff
-    wbox_in_item_t              input_content_items_[64];
+    wbox_in_item_t              input_content_items_[WBOX_MAX_IN_ITEM_CNT];
     uint32_t                    input_content_item_cnt_;
 };
 
 } // namespace wbox
+
+
+// // enums
+// virtual void enum_all_querys (const char* keys[], const char* values[], uint32_t* cnt) const
+// {
+//     enum_all_from_evkeyvalq(&querys_, keys, values, cnt);
+// }
+// virtual void enum_all_headers(const char* keys[], const char* values[], uint32_t* cnt) const
+// {
+//     enum_all_from_evkeyvalq(headers_, keys, values, cnt);
+// }
