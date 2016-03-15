@@ -432,6 +432,15 @@ private:
             // 以下就是纯数据区啦!
             pos = (byte_t*)psz - input_data_.mem;
             item.content = (byte_t*)psz;
+            while (psz < BOUND_DATA_END)
+            {
+                // search '\r\n'
+                if (*psz != '\r')
+                    continue;
+                if (*(psz + 1) != '\n')
+                    continue;
+
+            }
         }
     }
 
