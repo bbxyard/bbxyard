@@ -79,7 +79,7 @@ struct wbox_http_ctx
 
     // from DATA
     virtual const byte_t* get_input_data(uint32_t* sz) const = 0;
-    virtual const wbox_in_item_t* get_all_input_items(uint32_t* cnt) = 0;
+    virtual const wbox_in_item_t* get_all_input_items(uint32_t* cnt) const = 0;
 
     // enums
     virtual void enum_all_querys (const char* keys[], const char* values[], uint32_t* cnt) const = 0;

@@ -178,7 +178,7 @@ public:
             *sz = input_data_.sz;
         return input_data_.mem;
     }
-    virtual const wbox_in_item_t* get_all_input_items(uint32_t* cnt)
+    virtual const wbox_in_item_t* get_all_input_items(uint32_t* cnt) const
     {
         *cnt = input_content_item_cnt_;
         return input_content_items_;
@@ -311,6 +311,23 @@ public:
         }
         fprintf(fp, "\n");
 
+        // print input data parsed result
+        if (input_content_item_cnt_ > 0)
+        {
+            fprintf(fp, "============input-data-parsed(%d)===============\n", input_content_item_cnt_);
+            uint32_t item_cnt = 0;
+            const wbox_in_item_t* items = get_all_input_items(&item_cnt);
+            for (uint32_t i = 0; i < item_cnt; ++i)
+            {
+                const wbox_in_item_t& item = items[i];
+                fprintf(fp, "##[%d]##{%s:%s, %s:%s, %s:%s, size:%d}\n", i,
+                                        "name", item.name, "attrs", item.attrs,
+                                        "content_type", item.content_type, item.content_bytes);
+                fwrite(item.content, 1, item.content_bytes, fp);
+                fprintf(fp, "\n-----------------------\n");
+            }
+        }
+
         // # end
         fprintf(fp, "==================END===============\n");
     }
@@ -420,6 +437,7 @@ private:
             psz += BOUND_DISPOSITION_MARK_LEN;
             item.name = item.attrs = psz;
             replace_crlf_2_zero_and_monvon(psz);
+            parse_content_name_and_other((char*&)item.name, (char*&)item.name, (char*&)item.attrs);
 
             // Content-Type: text/markdown
             if (is_blank_line(psz))
@@ -488,6 +506,30 @@ private:
     {
         bool bret = (strncmp(psz, "\r\n", 2) == 0);
         return bret;
+    }
+
+    // parse Content-Disposition: form-data; name="fin"; filename="README.md"
+    // key need to parse: "fin"; filename="README.md"
+    static int parse_content_name_and_other(char* psz, char*& part1, char*& part2)
+    {
+        part1 = part2 = "";
+        int cnt = 0;
+        char* left = strchr(psz, '\"');
+        char* right = strchr(psz + 1, '\"');
+        if (NULL != left && NULL != right)
+        {
+            part1 = left + 1;       // fin
+            *right = 0;             // 要引号置为字符串终止符0
+            ++cnt;
+            // 解析第二段
+            psz = right + 1;
+            if (*psz != 0 && (left = strstr(psz, "; ")) != NULL)
+            {
+                part2 = left + 2;   // filename="README.md"
+                ++cnt;
+            }
+        }
+        return cnt;
     }
 
 private:
