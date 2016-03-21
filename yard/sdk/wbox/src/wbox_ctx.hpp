@@ -378,6 +378,7 @@ private:
             if (NULL != psz)
             {
                 strncpy(input_content_type_, raw_content_type, psz - raw_content_type);
+                input_content_type_[psz - raw_content_type] = 0;
                 strcpy(input_content_boundary_, psz + strlen(BOUND_MARK));
             }
             else

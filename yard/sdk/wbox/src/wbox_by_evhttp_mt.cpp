@@ -16,7 +16,7 @@ namespace wbox {
 class HTTPServer
 {
 public:
-    HTTPServer() {}
+    HTTPServer();
     ~HTTPServer() {}
     int run(int port, int nthreads, wbox_http_handler_node handlers[], int handler_cnt);
 protected:
@@ -28,6 +28,12 @@ private:
     wbox_http_handler_node handlers_[WBOX_MAX_HANDLER_CNT];
     int handler_cnt_;
 };
+
+HTTPServer::HTTPServer()
+{
+    memset(handlers_, 0, sizeof(handlers_));
+    handler_cnt_ = 0;
+}
 
 int HTTPServer::BindSocket(int port)
 {
@@ -94,6 +100,7 @@ int HTTPServer::run(int port, int nthreads, wbox_http_handler_node handlers[], i
 
     // copy handler;
     memcpy(handlers_, handlers, handler_cnt * sizeof(handlers[0]));
+    handler_cnt_ = handler_cnt;
 
     pthread_t thrds[MAX_THREAD_CNT] = {0};
     for (int i = 0; i < nthreads; i++)
