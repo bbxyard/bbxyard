@@ -19,6 +19,10 @@
 #define __WBOX_H__
 
 
+#define WBOX_VERSION_MAJOR @WBOX_VERSION_MAJOR@
+#define WBOX_VERSION_MINOR @WBOX_VERSION_MINOR@
+
+
 #include <stdio.h>
 
 typedef unsigned int uint32_t;

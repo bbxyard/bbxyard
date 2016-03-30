@@ -6,6 +6,11 @@ project(wbox)
 set(WBOX_VERSION_MAJOR 1)
 set(WBOX_VERSION_MINOR 0)
 
+# configure
+configure_file("${PROJECT_SOURCE_DIR}/wbox.in.h" "${PROJECT_BINARY_DIR}/wbox.h")
+
+include(../../../lib/cmake/main.cmake)
+addinc("${PROJECT_BINARY_DIR}/wbox.h")
 
 # sub dirs
 add_subdirectory(src)
