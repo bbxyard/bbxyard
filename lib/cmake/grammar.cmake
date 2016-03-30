@@ -17,6 +17,11 @@ function(show_os_type)
     endif()
 endfunction()
 
+macro(show_macro_buildin)
+    message(STATUS "## ARGV=${ARGV} ##")
+    message(STATUS "## ARGV1=${ARGV1} ##")
+    message(STATUS "## ARGN=${ARGN} ##")
+endmacro()
 
 show_buildin_var()
 show_os_type()

@@ -31,7 +31,7 @@ function wbox_export()
     verify_empty_dir "$WBOX_LOCAL/lib"
     verify_empty_dir "$WBOX_LOCAL/yard/sdk/wbox"
 
-    cp -rvf "$PROJ_ROOT_HOME/lib" "$WBOX_LOCAL"
+    cp -rvf "$PROJ_ROOT_HOME/lib/cmake" "$WBOX_LOCAL/lib"
     cp -rvf "$PROJ_ROOT_HOME/yard/sdk/wbox" "$WBOX_LOCAL/yard/sdk"
     find "$WBOX_LOCAL" -type d -name "build*" -exec rm -rvf {} \;
     pushd "$WBOX_LOCAL" &>/dev/null

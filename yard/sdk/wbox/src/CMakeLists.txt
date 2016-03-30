@@ -15,6 +15,5 @@ add_depends_ev()
 show_dbg_info()
 
 # gen and deploy final apps
-include_directories(..)
 include_directories(${PROJECT_BINARY_DIR}/..)
 addso(wbox ${SRCS})

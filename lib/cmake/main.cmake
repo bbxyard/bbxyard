@@ -4,14 +4,15 @@ cmake_minimum_required (VERSION 2.8)
 # common lib
 include(FindPkgConfig)
 
-
 # test SDK_HOME
-set(USER_SDK_HOME "$ENV{SDK_HOME}")
 message(STATUS "##USER_HOME##=$ENV{HOME}")
-message(STATUS "##USER_SDK_HOME##=${USER_SDK_HOME}")
+message(STATUS "##CMAKE_INSTALL_PREFIX##=${CMAKE_INSTALL_PREFIX}")
+set (SLN_DIR "${CMAKE_CURRENT_LIST_DIR}/../..")
 
 # add sdk_depends
 macro (add_common_sdk_path)
+    set(USER_SDK_HOME "$ENV{SDK_HOME}")
+    message(STATUS "##USER_SDK_HOME##=$ENV{USER_SDK_HOME}")
     include_directories(${USER_SDK_HOME}/include)
     link_directories(${USER_SDK_HOME}/lib)
 endmacro()
@@ -46,14 +47,10 @@ endmacro()
 # compile option
 macro (set_common_flags)
     # output
-    if (NOT DEFINED CMAKE_INSTALL_PREFIX)
-        set (CMAKE_INSTALL_PREFIX "$ENV{HOME}")
-        message(STATUS "YYY#CMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}")
+    if (CMAKE_INSTALL_PREFIX STREQUAL "/usr/local")
+        set (CMAKE_INSTALL_PREFIX "${SLN_DIR}")
+        message(STATUS "==USER DEFINE#CMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}")
     endif()
-    set (ABS_DIST_DIR "${CMAKE_INSTALL_PREFIX}/")
-    set (DIST_BIN_DIR "${ABS_DIST_DIR}${BIN_DNAME}")
-    set (DIST_LIB_DIR "${ABS_DIST_DIR}${LIB_DNAME}")
-    set (DIST_INC_DIR "${ABS_DIST_DIR}${INC_DNAME}")
     set (CMAKE_LIBRARY_OUTPUT_DIRECTORY lib)
     set (CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 
@@ -113,30 +110,27 @@ endmacro()
 
 # addexe
 macro (addexe name)
-    #message("## ARGV=${ARGV} ##")
-    #message("## ARGV1=${ARGV1} ##")
-    #message("## ARGN=${ARGN} ##")
     add_executable(${name} ${ARGN})
     target_link_libraries(${name} ${CUR_PROJ_LIB} ${OS_COMM_LIB})
-    install(TARGETS ${name} DESTINATION ${DIST_BIN_DIR})
+    install(TARGETS ${name} DESTINATION ${BIN_DNAME})
 endmacro()
 
 # addso - dynamic so
 macro (addso name)
     add_library(${name} SHARED ${ARGN})
     target_link_libraries(${name} ${CUR_PROJ_LIB} ${OS_COMM_LIB})
-    install(TARGETS ${name} DESTINATION ${DIST_LIB_DIR})
+    install(TARGETS ${name} DESTINATION ${LIB_DNAME})
 endmacro()
 
 # addlib - static lib
 macro (addlib name)
     add_library(${name} STATIC ${ARGN})
-    install(TARGETS ${name} DESTINATION ${DIST_LIB_DIR})
+    install(TARGETS ${name} DESTINATION ${LIB_DNAME})
 endmacro()
 
 # add - head-file
 macro (addinc file)
-    install (FILES ${file} DESTINATION ${DIST_INC_DIR})
+    install (FILES ${file} DESTINATION ${INC_DNAME})
 endmacro()
 
 # show debug info
@@ -145,9 +139,9 @@ macro (show_dbg_info)
     message(STATUS "##SRC files##=${SRCS}")
     message(STATUS "##CUR_PROJ_LIB##=${CUR_PROJ_LIB}")
     message(STATUS "##CMAKE_INSTALL_PREFIX##=${CMAKE_INSTALL_PREFIX}")
-    message(STATUS "##DIST_BIN_DIR##=${DIST_BIN_DIR}")
-    message(STATUS "##DIST_LIB_DIR##=${DIST_LIB_DIR}")
-    message(STATUS "##DIST_INC_DIR##=${DIST_INC_DIR}")
+    message(STATUS "##DIST_BIN_DIR##=${CMAKE_INSTALL_PREFIX}/${BIN_DNAME}")
+    message(STATUS "##DIST_LIB_DIR##=${CMAKE_INSTALL_PREFIX}/${LIB_DNAME}")
+    message(STATUS "##DIST_INC_DIR##=${CMAKE_INSTALL_PREFIX}/${INC_DNAME}")
 endmacro()
 
 
