@@ -6,10 +6,12 @@
 
 # color echo
 NORMAL=$(tput sgr0)
+RED=$(tput setaf 1; tput bold)
+BLUE=$(tput setaf 4; tput bold)
 GREEN=$(tput setaf 2; tput bold)
-YELLOW=$(tput setaf 3)
-RED=$(tput setaf 1)
+YELLOW=$(tput setaf 3; tput bold)
 function red()    { echo -e "$RED$*$NORMAL"; }
+function blue()   { echo -e "$BLUE$*$NORMAL"; }
 function green()  { echo -e "$GREEN$*$NORMAL"; }
 function yellow() { echo -e "$YELLOW$*$NORMAL"; }
 
