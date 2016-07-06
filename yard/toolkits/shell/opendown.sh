@@ -14,3 +14,6 @@ wget https://d1opms6zj7jotq.cloudfront.net/idea/ideaIU-15.0.4.tar.gz
 wget https://d1opms6zj7jotq.cloudfront.net/cpp/clion-1.2.4.tar.gz
 wget https://d1opms6zj7jotq.cloudfront.net/webide/PhpStorm-10.0.3.tar.gz
 wget https://d1opms6zj7jotq.cloudfront.net/resharper/JetBrains.ReSharperUltimate.10.0.2.exe
+
+# tree
+wget http://mama.indstate.edu/users/ice/tree/src/tree-1.7.0.tgz
