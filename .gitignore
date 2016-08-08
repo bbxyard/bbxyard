@@ -16,3 +16,6 @@
 # eclipse
 workspace/.metadata
 
+# idea
+.idea/workspace.xml
+
