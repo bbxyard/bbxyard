@@ -13,7 +13,7 @@ public class Person {
 
     public void show()
     {
-        System.out.printf("装妆的-%s- \n", this.name);
+        System.out.printf("装妆的-%s   - \n", this.name);
     }
 
     public static void main(String[] args) {
