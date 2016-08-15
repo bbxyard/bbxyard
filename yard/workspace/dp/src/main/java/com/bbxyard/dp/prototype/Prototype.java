@@ -1,6 +1,4 @@
-package com.bbxyard.dp;
-
-import com.bbxyard.dp.strategy.Strategy;
+package com.bbxyard.dp.prototype;
 
 /**
  * Created by bbxyard on 16-8-14.
