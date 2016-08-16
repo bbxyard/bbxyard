@@ -1,4 +1,4 @@
-package com.bbxyard.dp.factory;
+package com.bbxyard.dp.abstract_factory;
 
 /**
  * Created by bbxyard on 16-8-14.
@@ -6,19 +6,14 @@ package com.bbxyard.dp.factory;
 public class AbstractFactory {
     public static void main(String[] args) {
         IAbstractFactory factoryX = new ConcreteFactoryX();
-        System.out.println("from factory X product A is: " + factoryX.createProductA().name());
-        System.out.println("from factory X product B is: " + factoryX.createProductB().name());
+        System.out.println("from abstract_factory X product A is: " + factoryX.createProductA().name());
+        System.out.println("from abstract_factory X product B is: " + factoryX.createProductB().name());
 
         IAbstractFactory factoryY = new ConcreteFactoryY();
-        System.out.println("from factory Y product A is: " + factoryY.createProductA().name());
-        System.out.println("from factory Y product B is: " + factoryY.createProductB().name());
+        System.out.println("from abstract_factory Y product A is: " + factoryY.createProductA().name());
+        System.out.println("from abstract_factory Y product B is: " + factoryY.createProductB().name());
 
-        System.out.println("AbstractFactory.main.done");
-    }
-}
-
-class Client {
-    public Client() {
+        System.out.println("AbstractFactory.main.done!!");
     }
 }
 

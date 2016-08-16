@@ -1,4 +1,4 @@
-package com.bbxyard.dp.chain;
+package com.bbxyard.dp.chain_of_responsibility;
 
 /**
  * Created by bbxyard on 16-8-15.

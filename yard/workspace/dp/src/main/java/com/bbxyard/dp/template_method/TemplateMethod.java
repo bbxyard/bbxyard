@@ -1,4 +1,4 @@
-package com.bbxyard.dp.templatemethod;
+package com.bbxyard.dp.template_method;
 
 /**
  * Created by bbxyard on 16-8-15.
