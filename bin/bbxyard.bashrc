@@ -106,6 +106,26 @@ function get_user_bash_profile()
     return 0;
 }
 
+
+# change file ext
+# e.g. chext /tmp/foobar.TXT txt --> /tmp/foobar.txt
+function chext()
+{
+    [ -z "$1" -o -z "$2" ] && {
+        echo "Usage chext <filepath> <ext>"
+        return 22
+    }
+    [ ! -f "$1" ] && echo "NOT found $1" && return 2
+
+    # remove surfix
+    local dstname=${1%.*}
+    # verify dst-ext include "."
+    [ "${2:0:1}" != "." ] && dstname=$dstname"."
+    dstname=$dstname"$2"
+    mv "$1" "$dstname"
+}
+
+
 # git operator
 function git_auto_pom()
 {
