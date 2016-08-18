@@ -4,6 +4,18 @@
 # @create 2015.11.19
 
 
+# SYSTEM ERROR-CODE
+ENOENT=2    # No such file or directory
+E2BIG=7     # Argument list too long
+EACCES=13   # Permission denied
+EEXIST=17   # File exists
+EINVAL=22   # Invalid argument
+
+# user error code
+ERR_NEED_ARGUMENT=$EINVAL
+ERR_NOT_EXIST=$ENOENT
+
+
 # color echo
 NORMAL=$(tput sgr0)
 RED=$(tput setaf 1; tput bold)
@@ -142,8 +154,8 @@ function git_auto_pom()
 function git_sync()
 {
     if [ -z "$1" ]; then
-        echo "usage: git_sync <git_dir>"
-        return 1
+        red "usage: git_sync <git_dir>"
+        return $ERR_NEED_ARGUMENT
     fi
 
     # locate git dir
@@ -162,14 +174,12 @@ function git_sync()
 }
 
 
-#
 # svn_sync: svn update
-#
 function svn_sync()
 {
     if [ -z "$1" ]; then
-        echo "usage: svn_sync <svn_dir>"
-        return 1
+        red "usage: svn_sync <svn_dir>"
+        return $ERR_NEED_ARGUMENT
     fi
     local DIR=$1
     [ ! -d ~/var/log ] && mkdir -p ~/var/log
@@ -179,4 +189,23 @@ function svn_sync()
     local RETVAL=$?
     echo $(date +"%Y-%m-%d %H:%M:%S")" $DIR sync end!! status=$RETVAL" | tee -ai $LOG_FILE
     return $RETVAL
+}
+
+
+# gbk to utf8 convert
+function gbk2u8()
+{
+    local app=gbk2u8
+    if [ -z "$1" ]; then
+        red "convert gbk file to uft-8"
+        red "usage: $app gbk-file"
+        return $ERR_NEED_ARGUMENT
+    fi
+    local BAK=$1.bak
+    iconv -f gbk -t utf-8 "$1" > "$BAK" && mv "$BAK" "$1"
+    [ -f "$BAK" ] && rm "$BAK"
+}
+function g2u()
+{
+    gbk2u8 $*
 }
