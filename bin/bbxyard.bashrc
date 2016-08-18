@@ -126,9 +126,57 @@ function chext()
 }
 
 
+# * * * * * * * * * * * * *
 # git operator
+# * * * * * * * * * * * * *
+# git commit and push
 function git_auto_pom()
 {
     git commit -am "$1"
     git push origin master
+}
+
+#
+# git_sync: git pull origin master from any dir
+#
+function git_sync()
+{
+    if [ -z "$1" ]; then
+        echo "usage: git_sync <git_dir>"
+        return 1
+    fi
+
+    # locate git dir
+    local DNAME=$(basename $1)
+    [ "$DNAME" == ".git" ] && DIR=$(dirname $1) || DIR=$1
+    [ ! -d "$DIR/.git" ] && echo "$1 not an git dir pass!!" && exit 2
+
+    # git pull and savelog
+    [ ! -d ~/var/log ] && mkdir -p ~/var/log
+    local LOG_FILE=~/var/log/git-sync.log
+    echo $(date +"%Y-%m-%d %H:%M:%S")" $DIR sync begin!!" | tee -ai $LOG_FILE
+    git -C "$DIR" pull origin master 2>&1 | tee -ai $LOG_FILE
+    local RETVAL=$?
+    echo $(date +"%Y-%m-%d %H:%M:%S")" $DIR sync end!! status=$RETVAL" | tee -ai $LOG_FILE
+    return $RETVAL
+}
+
+
+#
+# svn_sync: svn update
+#
+function svn_sync()
+{
+    if [ -z "$1" ]; then
+        echo "usage: svn_sync <svn_dir>"
+        return 1
+    fi
+    local DIR=$1
+    [ ! -d ~/var/log ] && mkdir -p ~/var/log
+    local LOG_FILE=~/var/log/svn-sync.log
+    echo $(date +"%Y-%m-%d %H:%M:%S")" $DIR sync begin!!" | tee -ai $LOG_FILE
+    svn up "$DIR" 2>&1 | tee -ai $LOG_FILE
+    local RETVAL=$?
+    echo $(date +"%Y-%m-%d %H:%M:%S")" $DIR sync end!! status=$RETVAL" | tee -ai $LOG_FILE
+    return $RETVAL
 }
