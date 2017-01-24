@@ -11,6 +11,9 @@ EACCES=13   # Permission denied
 EEXIST=17   # File exists
 EINVAL=22   # Invalid argument
 
+# set history format with date and time
+export HISTTIMEFORMAT="%F %T|"
+
 # user error code
 ERR_NEED_ARGUMENT=$EINVAL
 ERR_NOT_EXIST=$ENOENT
