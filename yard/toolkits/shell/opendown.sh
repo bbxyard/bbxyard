@@ -1,6 +1,11 @@
 #!/bin/bash
 # opensrc download
 
+# JDK
+wget http://download.oracle.com/otn-pub/java/jdk/7u25-b15/jdk-7u25-linux-x64.tar.gz?AuthParam=1376323821_4186dd6f9b1edde5aae7c0c5e050c6a9
+
+# eclipse
+wget http://mirrors.ustc.edu.cn/eclipse/technology/epp/downloads/release/kepler/R/eclipse-standard-kepler-R-linux-gtk-x86_64.tar.gz
 
 # glibc
 wget http://mirrors.ustc.edu.cn/gnu/glibc/glibc-2.16.0.tar.bz2

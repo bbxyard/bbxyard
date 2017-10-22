@@ -4,6 +4,15 @@
             function message() {
                 alert("this is from the onload event!!");
             }
+            function testUrlcode() {
+                var url = "&lt;p&gt;&lt;img src=&quot;http://dcstatic.shizhencaiyuan.com/Uploads/2016-12-07/58479b8e645c2.jpeg&quot; alt=&quot;&quot; style=&quot;max-width:100%;&quot;&gt;&lt;/p&gt;";
+                var deurl = decodeURL(url);
+                var enurl = encodeURL(deurl);
+                alert(deurl);
+                alert(enurl);
+                document.write("decode: " + deurl  + " </br>");
+                document.write("encode: " + enurl) + " </br>";
+            }
         </script>
     </head>
     <body onload="message()">
@@ -29,6 +38,7 @@
             writeP("Subscript", txt.sub());
             writeP("Supperscript", txt.sup());
             writeP("Link", txt.link("http://bbxyard.com"));
+            testUrlcode();
         </script>
     </body>
 </html>
