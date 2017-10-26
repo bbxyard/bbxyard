@@ -25,6 +25,15 @@ function funcByJson(obj) {
     if (onFail != null) onFail("FAIL");
 }
 
+function testDefaultValue(arg1, arg2, arg3) {
+  var a1 = arg1;
+  var arg2 = arg2 || "hello world";
+  var a3 = arg3;
+  console.log("Arg1: ", a1);
+  console.log("Arg2: ", arg2);
+  console.log("Arg3: ", a3);
+}
+
 func("foo", "bar", function(res){
     console.log("SUCC: " + res);
 });
@@ -36,3 +45,6 @@ funcByJson({
         console.log("So cool! " + res);
     }
 });
+
+testDefaultValue("foo", "bar");
+testDefaultValue("FOO");
