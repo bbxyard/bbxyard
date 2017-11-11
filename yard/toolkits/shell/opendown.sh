@@ -1,6 +1,11 @@
 #!/bin/bash
 # opensrc download
 
+# nodejs
+wget http://mirrors.ustc.edu.cn/node/v8.9.1/node-v8.9.1-darwin-x64.tar.gz
+wget https://nodejs.org/dist/v8.9.1/node-v8.9.1-linux-x64.tar.xz
+wget https://nodejs.org/dist/v8.9.1/node-v8.9.1-darwin-x64.tar.gz
+
 # JDK
 wget http://download.oracle.com/otn-pub/java/jdk/7u25-b15/jdk-7u25-linux-x64.tar.gz?AuthParam=1376323821_4186dd6f9b1edde5aae7c0c5e050c6a9
 
