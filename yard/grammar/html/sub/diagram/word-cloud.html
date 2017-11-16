@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="http://d.bbxyard.com/pic/favicon/favicon-bo-hz.ico"/>
+  <link rel="bookmark" href="http://d.bbxyard.com/pic/favicon/favicon-bo-hz.ico"/>
+  <script src="http://d.bbxyard.com/js/wordcloud2.js"></script>
+  <script src="http://d.bbxyard.com/js/jquery-1.11.2.min.js"></script>
+  <title>cloud tag demo</title>
+</head>
+<body>
+  Just do it!
+  <div id="canvas-cn" style="width:600px; height:400px;"></div>
+  <div id="canvas-group" align="center">
+    <canvas id="canvas-cn-bak" style="width:600px; height:400px"></canvas>
+  </div>
+  Just do next!
+  <div id="canvas-en" style="width:600px; height:400px;"></div>
+
+  <script type="text/javascript">
+    var options = eval({
+      "list": [['傻猎豹', 2], ['不如', 2], ['麻花疼', 2], ['麻云', 1],['李眼红', 2], ['雷布斯', 1],['周红衣', 2],['刘墙洞', 1],['李国情', 2]],
+      "gridSize": 16,
+      "weightFactor": 16,
+      "fontFamily": 'Hiragino Mincho Pro, serif',
+      "color": 'random-dark',
+      "backgroundColor": '#f0f0f0',
+      "rotateRatio": 0
+    });
+    var canvas = document.getElementById('canvas-cn');
+    WordCloud(canvas, options);
+
+    var options = eval({
+      "list": [['bruce-sha', 10], ['buru', 9], ['tencent', 7], ['alibaba', 6], ['baidu', 4], ['xiaomi', 5],['360', 4],['jingdong', 3],['dangdang', 3],['ibruce.info', 1]],
+      "gridSize": 16,
+      "weightFactor": 16,
+      "fontFamily": 'Times, serif',
+      "color": 'random-light',
+      "backgroundColor": '#333',
+      "rotateRatio": 0
+    });
+    var canvas = document.getElementById('canvas-en');
+    WordCloud(canvas, options);
+  </script>
+</body>
+</html>

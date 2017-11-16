@@ -147,6 +147,7 @@ function chext()
 # git commit and push
 function git_auto_pom()
 {
+    git add .
     git commit -am "$1"
     git push origin master
 }
