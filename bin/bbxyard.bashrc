@@ -33,7 +33,7 @@ function yellow() { echo -e "$YELLOW$*$NORMAL"; }
 
 # safe tmp work dir
 THIS_SCRIPT=$0
-[ "${THIS_SCRIPT:0:1}" == "-" ] && THIS_SCRIPT=${THIS_SCRIPT:1}
+[ "${THIS_SCRIPT:0:1}" = "-" ] && THIS_SCRIPT=${THIS_SCRIPT:1}
 TMP_DIR=$HOME/var/run/$(basename "$THIS_SCRIPT").$$
 function do_init_tmp_dir() { mkdir -p "$TMP_DIR"; }
 function do_fini_tmp_dir() { rm -rvf  "$TMP_DIR"; }
@@ -164,7 +164,7 @@ function git_sync()
 
     # locate git dir
     local DNAME=$(basename $1)
-    [ "$DNAME" == ".git" ] && DIR=$(dirname $1) || DIR=$1
+    [ "$DNAME" = ".git" ] && DIR=$(dirname $1) || DIR=$1
     [ ! -d "$DIR/.git" ] && echo "$1 not an git dir pass!!" && exit 2
 
     # git pull and savelog
