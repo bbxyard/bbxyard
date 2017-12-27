@@ -16,7 +16,7 @@ function testMapAttr() {
       {name: "李小璐",  "email": "li@email.com"}
     ];
     var names = users.map(function(item) { return item.name; });
-    var emails = users.map(function(item){ return item.email; });
+    var emails = users.map(item => { return item.email; });
     console.log("names: ", names);
     console.log("emails: ", emails.join(", "));
 }
