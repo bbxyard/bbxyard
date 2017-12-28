@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>react-demo</title>
+    <script src="./lib/react.js"></script>
+    <script src="./lib/react-dom.js"></script>
+    <script src="./lib/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="demo1">demo1</div>
+    <hr>
+    <div id="demo2"></div>
+    <div id="demo3"></div>
+    <hr>
+    <div id="demo4">this is the demo4</div>
+    <hr>
+
+    </div>
+
+    <!-- demo1 -->
+    <script type="text/babel">
+    ReactDOM.render(
+      <h1>Hello Awesome React! #demo1 </h1>,
+      document.getElementById("demo1")
+    );
+    </script>
+
+    <!-- demo2, demo3 -->
+    <script type="text/babel">
+      var names = ['Alice', 'Emily', 'Kate'];
+      ReactDOM.render(
+        <div>
+        <h2> #demo2 </h2>
+        {
+          names.map((name, index) => {
+            return <div key={index}>Hello, {name}!</div>
+          })
+        }
+        </div>,
+        document.getElementById("demo2")
+      );
+
+      var arr = [
+        <h1 key="1">Hello world! #demo3</h1>,
+        <h2 key="2">React is awesome</h2>,
+      ];
+      ReactDOM.render(
+        <div>{arr}</div>,
+        document.getElementById('demo3')
+      );
+    </script>
+
+    <!-- demo4 -->
+    <script type="text/babel">
+      var HelloMessage = React.createClass({
+        render: function() {
+          return <h1>Hello {this.props.name}</h1>;
+        }
+      });
+      ReactDOM.render(
+        <HelloMessage name="Boxu" />, document.getElementById("demo4")
+      );
+    </script>
+  </body>
+</html>
