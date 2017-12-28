@@ -6,6 +6,7 @@
     <script src="./lib/react.js"></script>
     <script src="./lib/react-dom.js"></script>
     <script src="./lib/browser.min.js"></script>
+    <script src="./lib/jquery.min.js"></script>
   </head>
   <body>
     <div id="demo1">demo1</div>
@@ -211,6 +212,82 @@
         }
       });
       ReactDOM.render(<CompLife name="World"/>, document.getElementById("demo10"));
+    </script>
+
+    <!-- demo11 ajax with jquery -->
+    <script type="text/babel">
+      var reqUrl = "https://api.github.com/users/octocat/gists";
+      var UserGist = React.createClass({
+        getInitialState: function() {
+          return { username: "", lastGistUrl: "" };
+        },
+        componentDidMount: function() {
+          $.get(this.props.source, function(result){
+            var lastGist = result[0];
+            if (this.isMounted()) {
+              this.setState({
+                username: lastGist.owner.login,
+                lastGistUrl: lastGist.html_url
+              });
+            }
+          }.bind(this));
+        },
+        render: function() {
+          return (
+            <h2>
+              {this.state.username} last gist is <a href={this.state.lastGistUrl}>here</a> #demo11
+            </h2>
+          );
+        }
+      });
+
+      ReactDOM.render( <UserGist source={reqUrl}/>, document.getElementById("demo11"));
+    </script>
+
+    <!-- demo12 -->
+    <script type="text/babel">
+      var reqUrl = "https://api.github.com/search/repositories?q=javascript&sort=stars";
+      var RepoList = React.createClass({
+        getInitialState: function() {
+          return { loading: true, data: null, error: null };
+        },
+
+        componentDidMount: function() {
+          this.props.promise.then(
+            value => this.setState({ loading: false, data: value }),
+            error => this.setState({ loading: false, error: error })
+          );
+        },
+
+        render: function() {
+          if (this.state.loading) {
+            return (<span>loading...</span>);
+          } else if (this.state.error) {
+            return (<span>Error: {this.state.error.message} </span>);
+          } else {
+            var repos = this.state.data.items;
+            var repoList = repos.map( (repo, index) => {
+              return (
+                <li key={index}>
+                  <a href={repo.html_url}>{repo.name}</a> ({repo.stargazers_count} stars) <br />
+                  {repo.description}
+                </li>
+              );
+            });
+            return (
+              <div>
+                <h1>#demo12 Most Popular JavaScript Projects in Github</h1>
+                <ol>{repoList}</ol>
+              </div>
+            );
+          }
+        }
+      });
+
+      ReactDOM.render(
+        <RepoList promise = { $.getJSON(reqUrl) } />,
+        document.getElementById("demo12")
+      );
     </script>
   </body>
 </html>
