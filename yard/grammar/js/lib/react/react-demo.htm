@@ -15,15 +15,31 @@
     <hr>
     <div id="demo4">this is the demo4</div>
     <hr>
-
-    </div>
+    <div id="demo5">this is the demo5</div>
+    <hr>
+    <div id="demo6">Das ist demo6</div>
+    <hr>
+    <div id="demo7">Das ist demo7</div>
+    <hr>
+    <div id="demo8">Das ist Demo8</div>
+    <hr>
+    <div id="demo9">Das ist demo9</div>
+    <hr>
+    <div id="demo10">Das ist demo10</div>
+    <hr>
+    <div id="demo11">Das ist demo11</div>
+    <hr>
+    <div id="demo12">Das ist demo12</div>
+    <hr>
+    <div id="demo13">Das ist demo13</div>
+    <hr>
 
     <!-- demo1 -->
     <script type="text/babel">
-    ReactDOM.render(
-      <h1>Hello Awesome React! #demo1 </h1>,
-      document.getElementById("demo1")
-    );
+      ReactDOM.render(
+        <h1>Hello Awesome React! #demo1 </h1>,
+        document.getElementById("demo1")
+      );
     </script>
 
     <!-- demo2, demo3 -->
@@ -55,11 +71,74 @@
     <script type="text/babel">
       var HelloMessage = React.createClass({
         render: function() {
-          return <h1>Hello {this.props.name}</h1>;
+          return <h1>Hello {this.props.name} #demo4</h1>;
         }
       });
       ReactDOM.render(
         <HelloMessage name="Boxu" />, document.getElementById("demo4")
+      );
+    </script>
+
+    <!-- demo5 -->
+    <script type="text/babel">
+      var NodesList = React.createClass({
+        render: function() {
+          return (
+            <div>
+            <h1>#demo5</h1>
+            <ol>
+              {
+                React.Children.map(this.props.children, (child) => {
+                  return <li>{child}</li>;
+                })
+              }
+            </ol>
+            </div>
+          );
+        }
+      });
+      ReactDOM.render(
+        <NodesList>
+          <span>hello</span>
+          <span>world</span>
+        </NodesList>,
+        document.getElementById("demo5")
+      );
+    </script>
+
+    <!-- demo6 -->
+    <script type="text/babel">
+      var data = "ABC";
+      var MyTitle = React.createClass({
+        propTypes: {
+          title: React.PropTypes.string.isRequired,
+        },
+        render: function() {
+          return <h1> #demo6 {this.props.title} </h1>;
+        }
+      });
+      ReactDOM.render(
+        <MyTitle title={data} />, document.getElementById("demo6")
+      );
+    </script>
+
+    <!-- demo7 -->
+    <script type="text/babel">
+      var Comp7 = React.createClass({
+        handleClick: function() {
+          this.refs.myTextInput.focus();
+        },
+        render: function() {
+          return (
+            <div>
+              <input type="text" ref="myTextInput" placeholder="auto focus" />
+              <input type="button" value="Focus the text input" onClick={this.handleClick} />
+            </div>
+          );
+        }
+      });
+      ReactDOM.render(
+        <Comp7 />, document.getElementById("demo7")
       );
     </script>
   </body>
