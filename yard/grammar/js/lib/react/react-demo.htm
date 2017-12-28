@@ -132,7 +132,7 @@
           return (
             <div>
               <input type="text" ref="myTextInput" placeholder="auto focus" />
-              <input type="button" value="Focus the text input" onClick={this.handleClick} />
+              <input type="button" value="Focus the text input-#demo7" onClick={this.handleClick} />
             </div>
           );
         }
@@ -140,6 +140,77 @@
       ReactDOM.render(
         <Comp7 />, document.getElementById("demo7")
       );
+    </script>
+
+    <!-- demo8 -->
+    <script type="text/babel">
+      var LikeButton = React.createClass({
+        getInitialState: function() {
+          return { liked: false };
+        },
+        handleClick: function(event) {
+          this.setState({ liked: !this.state.liked });
+        },
+        render: function() {
+          var text = this.state.liked? "like": "have not liked";
+          return (
+            <h1 onClick={this.handleClick}>
+              You {text} this. Click to toggle. #demo8
+            </h1>
+          );
+        }
+      });
+      ReactDOM.render(<LikeButton />, document.getElementById("demo8"));
+    </script>
+
+    <!-- demo9 -->
+    <script type="text/babel">
+      var MyInput = React.createClass({
+        getInitialState: function() {
+          return { value: "Hello" };
+        },
+        onChange: function(event) {
+          this.setState({value: event.target.value});
+        },
+        render: function() {
+          var value = this.state.value;
+          return (
+            <div>
+              <h1>#demo9</h1>
+              <input type="text" value={value} onChange={this.onChange} />
+              <p>{value}</p>
+            </div>
+          );
+        }
+      });
+      ReactDOM.render(<MyInput />, document.getElementById("demo9"));
+    </script>
+
+    <!-- demo10 组件的生命周期 -->
+    <script type="text/babel">
+      var CompLife = React.createClass({
+        getInitialState: function() {
+          return { opacity: 1.0 };
+        },
+        componentDidMount: function() {
+          this.timer = setInterval(function(){
+            var opacity = this.state.opacity;
+            opacity -= 0.05;
+            if (opacity < 0.1) {
+              opacity = 1.0;
+            }
+            this.setState( { opacity: opacity } );
+          }.bind(this), 100);
+        },
+        render: function() {
+          return (
+            <h1 style={{opacity: this.state.opacity}}>
+              Hello {this.props.name} #demo10
+            </h1>
+          );
+        }
+      });
+      ReactDOM.render(<CompLife name="World"/>, document.getElementById("demo10"));
     </script>
   </body>
 </html>
