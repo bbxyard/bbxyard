@@ -8,9 +8,13 @@ module.exports = function(grunt) {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> by boxu */\n'
       },
-      build: {
+      dist: {
         src: 'src/<%= pkg.name %>.js',
         dest: 'dist/<%= pkg.name %>.min.js'
+      },
+      diy: {
+        src: 'src/jurl.js',
+        dest: 'dist/jurl.min.js'
       }
     },
 
@@ -19,7 +23,7 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: ['gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
+      files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
       options: {
         //这里是覆盖JSHint默认配置的选项
         globals: {
@@ -39,6 +43,12 @@ module.exports = function(grunt) {
     watch: {
       files: ['<%= jshint.files %>'],
       tasks: ['jshint', 'qunit']
+    },
+
+    log: {
+      foo: [1985, 7, 18],
+      bar: 'XuBo',
+      xyz: false
     }
   });
 
@@ -56,4 +66,9 @@ module.exports = function(grunt) {
   grunt.registerTask('dev', ['uglify', 'concat']);
   grunt.registerTask('test', ['qunit']);
   grunt.registerTask('all', ['uglify', 'concat', 'jshint', 'watch']);
+
+  // multiple task
+  grunt.registerMultiTask('log', 'Log STUFF', function(){
+    grunt.log.writeln(this.target + ": " + this.data);
+  });
 };
