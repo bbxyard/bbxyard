@@ -68,7 +68,35 @@ module.exports = function(grunt) {
   grunt.registerTask('all', ['uglify', 'concat', 'jshint', 'watch']);
 
   // multiple task
+  var PKG = grunt.file.readJSON("package.json");
+  var PKG_BUF = grunt.file.read("package.json");
+  var LOG_PREFIX = grunt.template.today("yyyy-mm-dd") + " ";
   grunt.registerMultiTask('log', 'Log STUFF', function(){
-    grunt.log.writeln(this.target + ": " + this.data);
+    grunt.log.writeln(LOG_PREFIX + this.target + ": " + this.data);
+  });
+
+  grunt.registerTask('haha', 'A sample task that logs stuff.', function(arg1, arg2){
+    if (arguments.length === 0)
+      grunt.log.writeln(LOG_PREFIX + this.name + ": NO ARGS");
+    else
+      grunt.log.writeln(LOG_PREFIX + this.name + ": " + arg1 + " " + arg2);
+  });
+
+  grunt.registerTask('xixi', 'Simple task', function(){
+    grunt.log.writeln("Currently running the task: ", this.name);
+    grunt.task.requires('uglify');  // add depends
+    grunt.task.run(['uglify', 'concat']);
+  });
+
+  grunt.registerTask('fs', 'FS Demo', function(){
+    grunt.log.writeln("fs grunt.file.* demo");
+    grunt.file.mkdir("dist/fs/foo/bar");
+    grunt.file.copy("package.json", "dist/fs/foo/bar/pkg.json");
+    grunt.file.write("dist/fs/foo/pkg.json", JSON.stringify(PKG));
+    grunt.file.write("dist/fs/foo/pkg2.json", PKG_BUF);
+    grunt.file.recurse("dist", function(abspath, rootdir, subdir, filename){
+      grunt.log.writeln("  -- " + abspath + "|" + subdir + "|" + filename);
+    });
+    grunt.file.delete("dist/fs");
   });
 };
