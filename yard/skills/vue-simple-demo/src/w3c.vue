@@ -20,19 +20,64 @@
     <div v-for="(key, val) in me"> {{key}}-{{val}}</div>
     <hr>
     <h2>Form Study</h2>
-    <div id="checkbox-demo">
-      <input type="checkbox" id="checkbox" v-model="checked" />
-      <label for="checkbox">{{checked}}</label>
+    <div class="form-demo">
+      <!-- checkbox -->
+      <div id="checkbox-demo">
+        <input type="checkbox" id="checkbox" v-model="checked" />
+        <label for="checkbox">{{checked}}</label>
+      </div>
+      <div id="checkbox-mult-demo">
+        <input type="checkbox" id="name" :value="me.name" v-model="checkedme">
+        <label for="name">{{me.name}}</label>
+        <input type="checkbox" id="age" :value="me.age" v-model="checkedme">
+        <label for="age">{{me.age}}</label>
+        <input type="checkbox" id="gender" :value="me.gender" v-model="checkedme">
+        <label for="gender">{{me.gender}}</label>
+        <br />
+        <span>Your info is: {{checkedme}}</span>
+      </div>
+      <!-- radio -->
+      <div id="radio-demo">
+        <input type="radio" id="1st" value="1st" v-model="picked">
+        <label for="1st">1st</label>
+        <input type="radio" id="2nd" value="2nd" v-model="picked">
+        <label for="2nd">2nd</label>
+        <br />
+        <span>Picked: {{ picked }}</span>
+      </div>
+      <!-- select -->
+      <div id="select-demo">
+        <select class="select" name="select" v-model="selected" style="width: 50px">
+          <option selected>A</option>
+          <option>B</option>
+          <option>C</option>
+        </select>
+        <span>Selected: {{selected}}</span>
+      </div>
+      <div id="select-mult-demo">
+        <select class="select" name="select-mult" multiple v-model="selectedMe" style="width: 100px">
+          <option>{{me.name}}</option>
+          <option selected>{{me.age}}</option>
+          <option>{{me.gender}}</option>
+        </select>
+        <span>SelectedMe: {{selectedMe}}</span>
+      </div>
+      <div id="select-mult-vfor-demo">
+        <select class="select" name="select-mult-vfor" multiple v-model="selectedMe" style="width: 120px">
+          <option v-for="(k, v) in me" :value="k">
+            {{v}}
+          </option>
+        </select>
+        <span>SelectedMe: {{selectedMe}}</span>
+      </div>
     </div>
-    <div id="checkbox-mult-demo">
-      <input type="checkbox" id="name" :value="me.name" v-model="checkedme">
-      <label for="name">{{me.name}}</label>
-      <input type="checkbox" id="age" :value="me.age" v-model="checkedme">
-      <label for="age">{{me.age}}</label>
-      <input type="checkbox" id="gender" :value="me.gender" v-model="checkedme">
-      <label for="gender">{{me.gender}}</label>
-      <br />
-      <span>Your info is: {{checkedme}}</span>
+
+    <!-- 特效 -->
+    <hr>
+    <div id="transition-demo">
+      <div v-if="checked" transition="expand">
+        <h1>Hallo Awesome-Vue</h1>
+      </div>
     </div>
   </div>
 </template>
@@ -50,8 +95,9 @@
           { text: "Study Management", dateEnd: "2018.03.14" }
         ],
         me: { name: "boxu", age: 32, gender: "male" },
-        checked: true,
-        checkedme: []
+        checked: true, checkedme: [],
+        picked: '',
+        selected: null, selectedMe: []
       };
     },
     methods: {
@@ -70,6 +116,34 @@
       submit: function(event) {
         alert("done");
         console.log("submit: " + event);
+      }
+    },
+    transitions: {
+      expand: {
+        beforeEnter: function (el) {
+          el.textContent = 'beforeEnter';
+          console.log('beforeEnter', el);
+        },
+        enter: function (el) {
+          el.textContent = 'enter';
+          console.log('enter', el);
+        },
+        afterEnter: function (el) {
+          el.textContent = 'afterEnter';
+          console.log('afterEnter', afterEnter);
+        },
+        beforeLeave: function (el) {
+          el.textContent = 'beforeLeave';
+          console.log('el.textContent', el.textContent);
+        },
+        leave: function (el) {
+          el.textContent = 'leave';
+          console.log('el.textContent', el.textContent);
+        },
+        afterLeave: function (el) {
+          el.textContent = 'afterLeave';
+          console.log('el.textContent', el.textContent);
+        }
       }
     }
   }
