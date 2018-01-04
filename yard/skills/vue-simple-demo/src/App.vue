@@ -38,10 +38,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
+  text-shadow: 5px 5px 5px #FF0000;
 }
 
 ul {
