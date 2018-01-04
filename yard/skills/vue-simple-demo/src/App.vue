@@ -1,21 +1,17 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <!-- <img src="./assets/logo.png"> -->
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
+      <li v-for="item in links"><a :href="item.url" target="_blank">{{item.name}}</a></li>
     </ul>
     <h2>Ecosystem</h2>
     <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
+      <li v-for="item in ecosystem"><a :href="item.url" target="_blank">{{item.name}}</a></li>
     </ul>
+    <textarea type="text" v-model="msg" />
+    <button v-on:click="reverseMessage">Reverse Message</button>
   </div>
 </template>
 
@@ -24,21 +20,42 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      links: [
+        { url: "https://vuejs.org", name: "Core Docs" },
+        { url: "https://forum.vuejs.org", name: "Forum" },
+        { url: "https://chat.vuejs.org", name: "Community Chat" },
+        { url: "https://twitter.com/vuejs", name: "Twitter" },
+      ],
+      ecosystem: [
+        { url: "http://router.vuejs.org", name: "vue-router" },
+        { url: "http://vuex.vuejs.org", name: "vuex" },
+        { url: "http://vue-loader.vuejs.org", name: "vue-loader" },
+        { url: "https://github.com/vuejs/awesome-vue", name: "awesome-vue" }
+      ]
+    }
+  },
+  methods: {
+    reverseMessage: function() {
+      this.msg = this.msg.split('').reverse().join('');
     }
   }
 }
 </script>
 
 <style lang="scss">
-#app {
+#app, input, textarea {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  text-align: left;
   color: #2c3e50;
   margin-top: 60px;
-  text-shadow: 5px 5px 5px #FF0000;
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: orange;
 }
 
 ul {
@@ -54,4 +71,5 @@ li {
 a {
   color: #42b983;
 }
+
 </style>

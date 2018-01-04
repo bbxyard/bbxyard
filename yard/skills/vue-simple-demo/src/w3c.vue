@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>{{ msg }}</h1>
+    <h1 v-if="showWelcome">{{ msg }}</h1>
     <input v-model="msg">
     <ol>
       <li v-for="todo in todos">{{todo.text}}@{{todo.dateEnd}}</li>
@@ -11,6 +11,7 @@
     <table>
       <tr><th>content</th><th>date</th></tr>
     </table>
+    <button type="button" v-on:click="btnSwitchShow">switch-show</button>
   </div>
 </template>
 
@@ -19,6 +20,7 @@
     name: 'app',
     data () {
       return {
+        showWelcome: true,
         msg: 'Let us study from w3c school',
         todos: [
           { text: "Study Vue", dateEnd: "2018.01.10" },
@@ -26,6 +28,11 @@
           { text: "Study Management", dateEnd: "2018.03.14" }
         ]
       };
+    },
+    methods: {
+      btnSwitchShow: function() {
+        this.showWelcome = !this.showWelcome;
+      }
     }
   }
 </script>
@@ -46,15 +53,5 @@ h1 {
   font-weight: bold;
   color: red;
   text-shadow: 5px 5px 5px #FF0000;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
 }
 </styple>
