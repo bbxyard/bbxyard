@@ -21,6 +21,7 @@ workspace/.metadata
 
 # idea
 .idea/workspace.xml
+.idea/
 
 # npm
 node_modules
