@@ -1,0 +1,21 @@
+<style lang="less">
+</style>
+
+<template>
+  <lineChart />
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import Chart from 'wepy-com-charts'
+
+  export default class DemoChart extends wepy.component {
+    components = {
+      lineChart: Chart
+    }
+
+    data = {
+      ref: 'https://github.com/CalvinHong/wepy-com-charts'
+    }
+  }
+</script>

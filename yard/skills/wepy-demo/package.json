@@ -12,6 +12,9 @@
   "license": "MIT",
   "dependencies": {
     "wepy": "^1.6.0",
+    "wepy-async-function": "^1.4.4",
+    "wepy-com-charts": "^1.0.6",
+    "wepy-com-swiper": "^1.0.0",
     "wepy-com-toast": "^1.0.2",
     "wepy-swipe-delete": "^1.0.2"
   },
