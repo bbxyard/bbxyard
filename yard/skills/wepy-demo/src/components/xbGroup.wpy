@@ -1,0 +1,44 @@
+<style lang="less">
+  .group {
+    width: 50%;
+    color: orange;
+    margin-bottom: 20rpx;
+  }
+  .index {
+    width: 100%;
+    color: red;
+  }
+</style>
+
+<template>
+  <view class="group">
+    <text class="index">index={{index}}</text>
+    <text class="id">{{groupList.id}}. </text>
+    <text class="name" @top="tap">{{groupList.name}}</text>
+    <view>
+      <repeat for="{{groupList.list}}" item="item">
+        <groupItem :gItem="item" />
+      </repeat>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import MyGroupItem from './xbGroupItem';
+
+  export default class XBGroup extends wepy.component {
+    props = {
+      groupList: {},
+      index: {}
+    }
+
+    components = { groupItem: MyGroupItem }
+    methods = {
+      tap() {
+        this.groupList.name = `Parent Random(${Math.random()})`;
+        console.log(`Clicked Group ${this.$index}, ID is ${this.groupList.id}`);
+      }
+    }
+  }
+</script>

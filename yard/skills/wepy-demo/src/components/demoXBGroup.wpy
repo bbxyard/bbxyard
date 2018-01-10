@@ -1,0 +1,39 @@
+<style>
+  .demoXBGroup {
+
+  }
+</style>
+
+<template>
+  <view class="demoXBGroup">
+    <view class="page__title">测试Group组件</view>
+    <group :groupList="groupData" :index="index" />
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import MyGroup from './xbGroup';
+
+  export default class DemoXBGroup extends wepy.component {
+    components = {
+      group: MyGroup
+    }
+    data = {
+      index: 100,
+      groupData: {
+        id: 1,
+        name: 'tap to change',
+        list: [
+          { childId: '1.1', childName: 'sub 1.1' },
+          { childId: '1.2', childName: 'sub 1.2' },
+          { childId: '1.3', childName: 'sub 1.3' },
+          { childId: '1.4', childName: 'sub 1.4' }
+        ]
+      }
+    }
+    methods = {
+
+    }
+  }
+</script>

@@ -1,0 +1,33 @@
+<style>
+  .group_title {
+    display: block;
+    text-align: left;
+    color: purple;
+    font-weight: bold;
+  }
+</style>
+
+<template>
+  <view class="group_title">
+    <text @tap="handleTitle">{{title}}</text>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class XBTitle extends wepy.component {
+    props = {
+      title: {
+        type: [String],
+        default: 'This is the Group title'
+      }
+    }
+    data = {}
+    methods = {
+      handleTitle(event) {
+        console.log(event);
+      }
+    }
+  }
+</script>

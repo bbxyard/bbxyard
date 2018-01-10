@@ -1,11 +1,19 @@
 <style lang="less">
 </style>
+
 <template>
   <view class="container">
-    Hello world
+    {{subject}}
   </view>
 
+  <title1 />
+  <title2 :title.sync="subject"/>
+
   <demoList />
+
+  <counter1 :num.sync="age" />
+
+  <demoGroup />
 
   <toast ></toast>
 </template>
@@ -13,16 +21,28 @@
 <script>
   import wepy from 'wepy';
   import Toast from 'wepy-com-toast';
-  import DemoList from '../components/demolist';
+  import DemoList  from '../components/demolist';
+  import DemoGroup from '../components/demoXBGroup';
+  import MyTitle   from '../components/xbTitle';
+  import MyCounter from '../components/xbCounter';
 
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: 'test'
+      navigationBarTitleText: 'WepyIsAwesome'
     }
 
     components = {
+      title1: MyTitle,
+      title2: MyTitle,
+      counter1: MyCounter,
       demoList: DemoList,
+      demoGroup: DemoGroup,
       toast: Toast
+    }
+
+    data = {
+      subject: 'Wepy and UI demo',
+      age: 32
     }
 
     onLoad() {

@@ -1,0 +1,28 @@
+<style lang="less">
+  .groupItem {
+
+  }
+</style>
+
+<template>
+  <view class="groupItem">
+    --<text class="id">{{gItem.childId}}</text>
+    <text class="name" @tap="tap"> {{gItem.childName}}</text>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class XBGroupItem extends wepy.component {
+    props = { gItem: {} }
+    data = {}
+    methods = {
+      tap() {
+        let val = ~~(Math.random()) + 30;
+        this.gItem.childName = `Child - Random(${val})`;
+        console.log(`Clicked Group ${this.$parent.$index}. Item ${this.$index}, ID is ${this.gItem.childId}`);
+      }
+    }
+  }
+</script>
