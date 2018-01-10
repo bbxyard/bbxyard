@@ -24,7 +24,8 @@ page{
 .page__title {
     text-align: left;
     font-size: 20px;
-    font-weight: 400;
+    font-weight: bold;
+    color: green;
 }
 
 .page__desc {
@@ -43,7 +44,8 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/index',
-      'pages/list'
+      'pages/list',
+      'pages/progress'
     ],
     window: {
       backgroundTextStyle: 'light',
