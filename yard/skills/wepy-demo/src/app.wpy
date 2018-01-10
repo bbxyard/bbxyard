@@ -37,7 +37,7 @@ page{
 </style>
 
 <script>
-import wepy from 'wepy'
+import wepy from 'wepy';
 
 export default class extends wepy.app {
   config = {
@@ -54,7 +54,7 @@ export default class extends wepy.app {
   }
 
   onLaunch() {
-    console.log('on launch')
+    console.log('on launch');
   }
 }
 </script>

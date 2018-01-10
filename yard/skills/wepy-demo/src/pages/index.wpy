@@ -11,9 +11,9 @@
 </template>
 
 <script>
-  import wepy from 'wepy'
-  import Toast from 'wepy-com-toast'
-  import DemoList from '../components/demolist'
+  import wepy from 'wepy';
+  import Toast from 'wepy-com-toast';
+  import DemoList from '../components/demolist';
 
   export default class Index extends wepy.page {
     config = {
@@ -26,16 +26,16 @@
     }
 
     onLoad() {
-      console.log('onLoad')
+      console.log('onLoad');
 
       let promise = this.$invoke('toast', 'show', {
         title: 'Just',
         img: 'https://raw.githubusercontent.com/kiinlam/wetoast/master/images/star.png'
-      })
+      });
 
       promise.then((d) => {
-        console.log('toast done')
-      })
+        console.log('toast done');
+      });
     }
   }
 </script>
