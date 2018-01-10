@@ -1,5 +1,6 @@
 <style lang="less">
   .group {
+    border: 0px solid blue;
     width: 80%;
     color: orange;
     margin-top: 10rpx;
@@ -7,10 +8,14 @@
   }
   .red { color: red;}
   .green { color: green; }
+  .title-padding {
+    padding-left: 10rpx;
+  }
 </style>
 
 <template>
   <view class="group">
+    <text class="title-padding"></text>
     <text class="id red">{{index}}-</text>
     <text class="id green">{{groupList.id}}. </text>
     <text class="name" @tap="changeName">{{groupList.name}}</text>

@@ -4,6 +4,7 @@
     text-align: left;
     color: purple;
     font-weight: bold;
+    padding-left: 10rpx;
   }
 </style>
 

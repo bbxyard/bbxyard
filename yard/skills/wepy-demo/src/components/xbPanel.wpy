@@ -1,0 +1,38 @@
+<style lang="less">
+  .panel {
+    width: 100%;
+    margin-top: 20rpx;
+    text-align: left;
+    padding-top: 20rpx;
+    padding-left: 10rpx;
+    padding-bottom: 20rpx;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .title {
+      padding-bottom: 20rpx;
+      font-weight: bold;
+      width: 100%;
+      color: orange;
+    }
+
+    .info {
+      padding: 15rpx;
+      color: forestgreen;
+    }
+  }
+</style>
+
+<template>
+  <view class="panel">
+    <slot name="slot1">Title</slot>
+    <slot></slot>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  export default class XBPanel extends wepy.component {}
+</script>

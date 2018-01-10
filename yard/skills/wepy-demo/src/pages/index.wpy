@@ -1,4 +1,7 @@
 <style lang="less">
+  .w90 {
+    width: 90%;
+  }
 </style>
 
 <template>
@@ -9,9 +12,19 @@
   <title1 />
   <title2 :value.sync="subject"/>
 
-  <demoList />
+  <panel>
+    <view class="title" slot="slot1">测试组件SwiperDeleteList</view>
+    <view class="w90">
+      <demoList />
+    </view>
+  </panel>
 
-  <counter1 :num.sync="age" />
+  <panel>
+    <view class="title" slot="slot1">计数组件</view>
+    <view class="w90">
+      <counter1 :num.sync="age" />
+    </view>
+  </panel>
 
   <demoGroup />
 
@@ -24,6 +37,7 @@
   import DemoList  from '../components/demolist';
   import DemoGroup from '../components/demoXBGroup';
   import MyTitle   from '../components/xbTitle';
+  import MyPanel   from '../components/xbPanel';
   import MyCounter from '../components/xbCounter';
 
   export default class Index extends wepy.page {
@@ -37,6 +51,7 @@
       counter1: MyCounter,
       demoList: DemoList,
       demoGroup: DemoGroup,
+      panel: MyPanel,
       toast: Toast
     }
 

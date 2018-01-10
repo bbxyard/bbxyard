@@ -1,7 +1,6 @@
 <style>
   .demoXBGroup {
-    border-width: 2;
-    border-color: yellow;
+    border: 0px solid #ccc;
     margin-top: 20rpx;
     margin-bottom: 20rpx;
   }
