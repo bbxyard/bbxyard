@@ -28,6 +28,13 @@
 
   <demoGroup />
 
+  <panel>
+    <view class="title" slot="slot1">列表组件</view>
+    <view class="w90">
+      <list1 />
+    </view>
+  </panel>
+
   <toast ></toast>
 </template>
 
@@ -38,6 +45,7 @@
   import DemoGroup from '../components/demoXBGroup';
   import MyTitle   from '../components/xbTitle';
   import MyPanel   from '../components/xbPanel';
+  import MyList    from '../components/xbList';
   import MyCounter from '../components/xbCounter';
 
   export default class Index extends wepy.page {
@@ -52,6 +60,7 @@
       demoList: DemoList,
       demoGroup: DemoGroup,
       panel: MyPanel,
+      list1: MyList,
       toast: Toast
     }
 
