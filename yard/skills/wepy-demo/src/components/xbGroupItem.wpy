@@ -1,13 +1,13 @@
 <style lang="less">
   .groupItem {
-
+    padding-left: 20rpx;
   }
 </style>
 
 <template>
   <view class="groupItem">
     --<text class="id">{{gItem.childId}}</text>
-    <text class="name" @tap="tap"> {{gItem.childName}}</text>
+    <text class="name" @tap="handleItemTap"> {{gItem.childName}}</text>
   </view>
 </template>
 
@@ -18,7 +18,7 @@
     props = { gItem: {} }
     data = {}
     methods = {
-      tap() {
+      handleItemTap() {
         let val = ~~(Math.random()) + 30;
         this.gItem.childName = `Child - Random(${val})`;
         console.log(`Clicked Group ${this.$parent.$index}. Item ${this.$index}, ID is ${this.gItem.childId}`);

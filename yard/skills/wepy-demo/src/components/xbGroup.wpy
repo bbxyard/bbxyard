@@ -1,20 +1,19 @@
 <style lang="less">
   .group {
-    width: 50%;
+    width: 80%;
     color: orange;
+    margin-top: 10rpx;
     margin-bottom: 20rpx;
   }
-  .index {
-    width: 100%;
-    color: red;
-  }
+  .red { color: red;}
+  .green { color: green; }
 </style>
 
 <template>
   <view class="group">
-    <text class="index">index={{index}}</text>
-    <text class="id">{{groupList.id}}. </text>
-    <text class="name" @top="tap">{{groupList.name}}</text>
+    <text class="id red">{{index}}-</text>
+    <text class="id green">{{groupList.id}}. </text>
+    <text class="name" @tap="changeName">{{groupList.name}}</text>
     <view>
       <repeat for="{{groupList.list}}" item="item">
         <groupItem :gItem="item" />
@@ -35,7 +34,7 @@
 
     components = { groupItem: MyGroupItem }
     methods = {
-      tap() {
+      changeName() {
         this.groupList.name = `Parent Random(${Math.random()})`;
         console.log(`Clicked Group ${this.$index}, ID is ${this.groupList.id}`);
       }

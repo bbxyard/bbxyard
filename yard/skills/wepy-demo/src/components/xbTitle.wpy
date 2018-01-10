@@ -9,7 +9,7 @@
 
 <template>
   <view class="group_title">
-    <text @tap="handleTitle">{{title}}</text>
+    <text @tap="handleTitle">{{value}}</text>
   </view>
 </template>
 
@@ -18,7 +18,7 @@
 
   export default class XBTitle extends wepy.component {
     props = {
-      title: {
+      value: {
         type: [String],
         default: 'This is the Group title'
       }

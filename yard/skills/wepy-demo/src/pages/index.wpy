@@ -7,7 +7,7 @@
   </view>
 
   <title1 />
-  <title2 :title.sync="subject"/>
+  <title2 :value.sync="subject"/>
 
   <demoList />
 
