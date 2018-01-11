@@ -45,6 +45,7 @@
         this.color = randomColor();
         this.groupList.name = `Parent - color:${this.color})`;
         console.log(`Clicked Group ${this.$index}, ID is ${this.groupList.id}`);
+        this.$emit('color-change', this.color);
       }
     }
 

@@ -27,6 +27,7 @@
         this.color = val;
         this.gItem.childName = `Child - color:${val}`;
         console.log(`Clicked Group ${this.$parent.$index}. Item ${this.$index}, ID is ${this.gItem.childId}`);
+        this.$emit('color-change', this.color);
       }
     }
   }

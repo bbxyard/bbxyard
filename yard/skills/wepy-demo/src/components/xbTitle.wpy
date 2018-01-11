@@ -32,9 +32,9 @@
     data = { style: '' }
     methods = {
       handleTitle(event) {
-        console.log(event);
-        let color = randomColor();
-        this.color = color;
+        // console.log(event);
+        this.color = randomColor();
+        this.$emit('color-change', this.color);
       }
     }
   }

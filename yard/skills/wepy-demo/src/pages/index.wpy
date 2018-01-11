@@ -28,7 +28,7 @@
     <view  class="userInfo-nickName"> {{userInfo.nickName}}</view>
   </view>
 
-  <title1 />
+  <title1 @color-change.user="onTitleColorChange" />
   <title2 :value.sync="subject"/>
 
   <panel>
@@ -49,8 +49,6 @@
       <demoList />
     </view>
   </panel>
-
-
 
   <demoGroup />
 
@@ -111,15 +109,32 @@
       },
       onCounterEmit(...args) {
         let $event = args[args.length - 1];
-        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`);
+        console.log(this.genEventLogPrefix('onCounterEmit', $event));
+      },
+      onTitleColorChange(...args) {
+        let color = args[0];
+        let $event = args[args.length - 1];
+        let prefix = this.genEventLogPrefix('onTitleColorChange', $event);
+        console.log(`${prefix} where new-color=${color}`);
       }
     }
 
     events = {
       'index-emit': (...args) => {
         let $event = args[args.length - 1];
-        console.log(`${this.$name} receive ${$event.name} from ${$event.source.$name}`);
+        console.log(this.genEventLogPrefix('events-index-emit', $event));
+      },
+      'color-change': (...args) => {
+        let color = args[0];
+        let $event = args[args.length - 1];
+        let prefix = this.genEventLogPrefix('events-color-change', $event);
+        console.log(`${prefix} where new-color=${color}`);
       }
+    }
+
+    genEventLogPrefix(func, event) {
+      let prefix = `${func} | ${this.$name} receive ${event.name} from ${event.source.$name}`;
+      return prefix;
     }
 
     onLoad() {
