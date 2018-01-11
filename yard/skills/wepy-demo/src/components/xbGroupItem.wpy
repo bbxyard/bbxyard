@@ -7,20 +7,25 @@
 <template>
   <view class="groupItem">
     --<text class="id">{{gItem.childId}}</text>
-    <text class="name" @tap="handleItemTap"> {{gItem.childName}}</text>
+    <text class="name" @tap="handleItemTap" style="color:{{color}}"> {{gItem.childName}}</text>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy';
+  import randomColor from 'randomcolor';
 
   export default class XBGroupItem extends wepy.component {
-    props = { gItem: {} }
+    props = {
+      gItem: {},
+      color: {type: [String], default: 'orange'}
+    }
     data = {}
     methods = {
       handleItemTap() {
-        let val = ~~(Math.random()) + 30;
-        this.gItem.childName = `Child - Random(${val})`;
+        let val = randomColor();
+        this.color = val;
+        this.gItem.childName = `Child - color:${val}`;
         console.log(`Clicked Group ${this.$parent.$index}. Item ${this.$index}, ID is ${this.gItem.childId}`);
       }
     }

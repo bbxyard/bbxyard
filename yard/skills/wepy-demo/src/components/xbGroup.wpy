@@ -18,7 +18,7 @@
     <text class="title-padding"></text>
     <text class="id red">{{index}}-</text>
     <text class="id green">{{groupList.id}}. </text>
-    <text class="name" @tap="changeName">{{groupList.name}}</text>
+    <text class="name" @tap="changeName" style="color:{{color}}">{{groupList.name}}</text>
     <view>
       <repeat for="{{groupList.list}}" item="item">
         <groupItem :gItem="item" />
@@ -29,18 +29,21 @@
 
 <script>
   import wepy from 'wepy';
+  import randomColor from 'randomcolor';
   import MyGroupItem from './xbGroupItem';
 
   export default class XBGroup extends wepy.component {
     props = {
       groupList: {},
-      index: {}
+      index: {},
+      color: { type: [String], default: 'orange' }
     }
 
     components = { groupItem: MyGroupItem }
     methods = {
       changeName() {
-        this.groupList.name = `Parent Random(${Math.random()})`;
+        this.color = randomColor();
+        this.groupList.name = `Parent - color:${this.color})`;
         console.log(`Clicked Group ${this.$index}, ID is ${this.groupList.id}`);
       }
     }

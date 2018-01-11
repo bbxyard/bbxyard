@@ -10,24 +10,31 @@
 
 <template>
   <view class="group_title">
-    <text @tap="handleTitle">{{value}}</text>
+    <text @tap="handleTitle" style="color:{{color}}">{{value}} {{color}}</text>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy';
+  import randomColor from 'randomcolor';
 
   export default class XBTitle extends wepy.component {
     props = {
       value: {
         type: [String],
         default: 'This is the Group title'
+      },
+      color: {
+        type: [String],
+        default: 'purple'
       }
     }
-    data = {}
+    data = { style: '' }
     methods = {
       handleTitle(event) {
         console.log(event);
+        let color = randomColor();
+        this.color = color;
       }
     }
   }
