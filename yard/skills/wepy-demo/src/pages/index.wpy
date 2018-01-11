@@ -133,6 +133,14 @@
       promise.then((d) => {
         console.log('toast done');
       });
+
+      let self = this;
+      this.$parent.getUserInfo(function(userInfo) {
+        if (userInfo) {
+          self.userInfo = userInfo;
+        }
+        self.$apply();
+      });
     }
   }
 </script>
