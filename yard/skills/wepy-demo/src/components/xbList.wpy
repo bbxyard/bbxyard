@@ -42,7 +42,7 @@
     }
 
     onLoad() {
-      console.log("xbList loaded");
+      console.log('xbList loaded');
     }
   }
 </script>

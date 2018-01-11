@@ -44,5 +44,9 @@
         console.log(`Clicked Group ${this.$index}, ID is ${this.groupList.id}`);
       }
     }
+
+    onLoad() {
+      console.log('Group loaded done!');
+    }
   }
 </script>

@@ -34,5 +34,9 @@
 
 <script>
   import wepy from 'wepy';
-  export default class XBPanel extends wepy.component {}
+  export default class XBPanel extends wepy.component {
+    onLoad() {
+      console.log('Panel loaded done!');
+    }
+  }
 </script>
