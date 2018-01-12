@@ -31,6 +31,11 @@
   <title1 @color-change.user="onTitleColorChange" />
   <title2 :value.sync="subject"/>
 
+  <button class="weui-btn mini-btn" type="primary" size="mini">按钮</button>
+  <button class="weui-btn mini-btn" type="default" size="mini">按钮</button>
+  <button class="weui-btn mini-btn" type="warn" size="mini">按钮</button>
+
+
   <panel>
     <view class="title" slot="slot1" @tap="communicate">计数组件</view>
     <!-- 绑定用户事件 -->
