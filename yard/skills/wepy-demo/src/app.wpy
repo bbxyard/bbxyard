@@ -42,6 +42,7 @@ import wepy from 'wepy';
 export default class extends wepy.app {
   config = {
     pages: [
+      'pages/index-list',
       'pages/index',
       'pages/list',
       'pages/progress'
