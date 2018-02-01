@@ -43,9 +43,10 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/index-list',
+      'pages/progress',
+      'pages/navbar',
       'pages/index',
-      'pages/list',
-      'pages/progress'
+      'pages/list'
     ],
     window: {
       backgroundTextStyle: 'light',

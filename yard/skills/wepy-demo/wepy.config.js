@@ -13,7 +13,8 @@ module.exports = {
     babel: {
       'sourceMap': true,
       'presets': [
-        'env'
+        'es2015',
+        'stage-3'
       ],
       'plugins': [
         'babel-plugin-transform-class-properties',
