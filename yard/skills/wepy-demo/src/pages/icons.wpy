@@ -1,0 +1,61 @@
+<style lang="less">
+  .icons {
+    icon { margin-right: 13px; }
+    .page__bd { padding-left: 40px; padding-right: 40px; text-align: left; }
+    .icon-box { margin-bottom: 25px; display: flex; align-items: center; }
+    .icon-box__ctn { flex-shrink: 100; }
+    .icon-box__title { font-size: 20px; }
+    .icon-box__desc { margin-top: 6px; font-size: 12px; color: #888888; }
+    .icon_sp_area { margin-top: 10px; text-align: left; }
+  }
+</style>
+
+<template>
+  <view class="icons page">
+    <view class="page__hd">
+      <view class="page__title">Icons</view>
+      <view class="page__desc">图标</view>
+    </view>
+    <view class="page__bd">
+      <!-- 大图标 -->
+      <repeat for="{{larger}}" key="*this">
+        <view class="icon-box">
+          <icon type="{{item.type}}" size="{{item.size}}" color="{{item.color? item.color: ''}}"></icon>
+          <view class="icon-box__ctn">
+            <view class="icon-box__title">{{item.title}}</view>
+            <view class="icon-box__desc">{{item.desc}}</view>
+          </view>
+        </view>
+      </repeat>
+      <!-- 小图标 -->
+      <repeat for="{{smaller}}" key="*this">
+        <icon type="{{item.type}}" size="{{item.size}}"></icon>
+      </repeat>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  export default class Icons extends wepy.page {
+    data = {
+      larger: [
+        { type: 'success', size: 93, title: '成功', desc: '用于表示操作顺利达成' },
+        { type: 'info', size: 93, title: '提示', desc: '用于表示信息提示；也常用于缺乏条件的操作拦截，提示用户所需信息' },
+        { type: 'warn', size: 93, color: '#FFBE00', title: '普通警告', desc: '用于表示操作后将引起一定后果的情况' },
+        { type: 'warn', size: 93, title: '强烈警告', desc: '用于表示操作后将引起严重的不可挽回的后果的情况' },
+        { type: 'waiting', size: 93, title: '等待', desc: '用于表示等待' }
+      ],
+      smaller: [
+        { type: 'success', size: 23 },
+        { type: 'success_no_circle', size: 23 },
+        { type: 'circle', size: 23 },
+        { type: 'warn', size: 23, color: '#F43530' },
+        { type: 'download', size: 23 },
+        { type: 'info_circle', size: 23 },
+        { type: 'cancel', size: 23 },
+        { type: 'search', size: 20 }
+      ]
+    };
+  }
+</script>

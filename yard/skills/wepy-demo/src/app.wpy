@@ -45,6 +45,7 @@ export default class extends wepy.app {
       'pages/index-list',
       'pages/progress',
       'pages/navbar',
+      'pages/icons',
       'pages/index',
       'pages/list'
     ],
