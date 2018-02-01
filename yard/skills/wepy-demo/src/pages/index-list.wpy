@@ -70,7 +70,7 @@
   export default class Index extends wepy.page {
     data = {
       list: [
-        { id: 'form', name: '表单', open: false, pages: ['index', 'list'] },
+        { id: 'form', name: '表单', open: false, pages: ['index', 'list', 'uploader'] },
         { id: 'widget', name: '基础组件', open: false, pages: ['progress', 'icons'] },
         { id: 'nav', name: '导航相关', open: false, pages: ['navbar'] }
       ]
