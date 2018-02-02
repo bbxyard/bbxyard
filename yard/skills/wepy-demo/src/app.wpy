@@ -43,10 +43,14 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages-weui/index',
-      'pages-weui/progress',
-      'pages-weui/uploader',
-      'pages-weui/navbar',
+      'pages-weui/actionsheet',
+      'pages-weui/flex',
       'pages-weui/icons',
+      'pages-weui/navbar',
+      'pages-weui/picker',
+      'pages-weui/progress',
+      'pages-weui/searchbar',
+      'pages-weui/uploader',
       'pages/index',
       'pages/list'
     ],
