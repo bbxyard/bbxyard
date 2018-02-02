@@ -42,11 +42,11 @@ import wepy from 'wepy';
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/index-list',
-      'pages/progress',
-      'pages/uploader',
-      'pages/navbar',
-      'pages/icons',
+      'pages-weui/index',
+      'pages-weui/progress',
+      'pages-weui/uploader',
+      'pages-weui/navbar',
+      'pages-weui/icons',
       'pages/index',
       'pages/list'
     ],
