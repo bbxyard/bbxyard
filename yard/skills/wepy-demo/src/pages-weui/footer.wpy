@@ -1,0 +1,60 @@
+<style>
+  .weui-footer { margin-bottom: 50px; }
+  .weui-footer_fixed-bottom { margin-bottom: 0; }
+</style>
+
+<template>
+  <view class="page">
+    <title name="Footer" desc="页脚" />
+  </view>
+  <view class="page__bd page__bd_spacing">
+    <!-- copy right only -->
+    <view class="weui-footer">
+      <view class="weui-footer__text">{{copyright}}</view>
+    </view>
+
+    <!-- link + copy right  -->
+    <view class="weui-footer">
+      <view class="weui-footer__links">
+        <navigator url="http://bbxyard.com" class="weui-footer__link">底部链接</navigator>
+      </view>
+      <view class="weui-footer__text">{{copyright}}</view>
+    </view>
+
+    <!-- link x 2 + copy right -->
+    <view class="weui-footer">
+      <view class="weui-footer__links">
+        <navigator class="weui-footer__link" url="http://baidu.com">底部链接A</navigator>
+        <navigator class="weui-footer__link" url="http://bbxyard.com">底部链接B</navigator>
+      </view>
+      <view class="weui-footer__text">{{copyright}}</view>
+    </view>
+
+    <!-- fixed bottom -->
+    <!-- <view class="weui-footer weui-footer_fixed-bottom">
+      <view class="weui-footer__links">
+        <navigator class="weui-footer__link" url="index">WeUI首页</navigator>
+      </view>
+      <view class="weui-footer__text">{{copyright}}</view>
+    </view> -->
+    <footer :copyright.sync="copyright" :links.sync="refLinks" />
+
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import Title from '../components/xbWeTitle';
+  import XbFooter from '../components/xbWeFooter';
+  export default class Footer extends wepy.page {
+    components = { title: Title, footer: XbFooter };
+    data = {
+      copyright: 'Copyright © 2008-2018 weui.io',
+      refLinks: [
+        { txt: '底部链接AA', url: 'grid' },
+        { txt: '底部链接BB', url: 'index' },
+        { txt: '底部链接CC', url: 'navbar' }
+      ]
+    };
+  }
+</script>

@@ -44,7 +44,10 @@ export default class extends wepy.app {
     pages: [
       'pages-weui/index',
       'pages-weui/actionsheet',
+      'pages-weui/badge',
       'pages-weui/flex',
+      'pages-weui/footer',
+      'pages-weui/grid',
       'pages-weui/icons',
       'pages-weui/navbar',
       'pages-weui/picker',

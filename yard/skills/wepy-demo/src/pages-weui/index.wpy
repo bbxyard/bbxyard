@@ -71,9 +71,9 @@
     data = {
       list: [
         { id: 'form', name: '表单', open: false, pages: ['../pages/index', '../pages/list', 'uploader'] },
-        { id: 'widget', name: '基础组件', open: false, pages: ['flex', 'icons', 'progress'] },
+        { id: 'widget', name: '基础组件', open: false, pages: ['badge', 'flex', 'grid', 'icons', 'progress'] },
         { id: 'feedback', name: '操作反馈', open: false, pages: ['actionsheet', 'picker'] },
-        { id: 'nav', name: '导航相关', open: false, pages: ['navbar'] },
+        { id: 'nav', name: '导航相关', open: false, pages: ['navbar', 'footer'] },
         { id: 'search', name: '搜索相关', open: false, pages: ['searchbar'] }
       ]
     };

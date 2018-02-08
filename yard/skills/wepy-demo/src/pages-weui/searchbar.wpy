@@ -14,7 +14,7 @@
       <view class="page__desc">搜索栏</view>
     </view>
     <view class="page__bd">
-      <sbar1 :history="history" />
+      <sbar1 :history.sync="history" />
       <sbar2 :history="history" />
     </view>
   </view>
@@ -22,7 +22,7 @@
 
 <script>
   import wepy from 'wepy';
-  import sbar from '../components/xbSearchbar';
+  import sbar from '../components/xbWeSearchbar';
 
   export default class Searcher extends wepy.page {
 

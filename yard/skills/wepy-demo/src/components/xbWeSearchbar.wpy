@@ -32,7 +32,7 @@
       <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
         <repeat for="{{history}}">
           <view class="weui-cells" hover-class="weui-cell_active">
-            <view>A{{item.txt}}B</view>
+            <view>{{item.txt}}</view>
           </view>
         </repeat>
       </view>
@@ -47,10 +47,9 @@
 
     props = {
       inputShowed: { type: [Boolean], default: false },
-      inputVal: { type: [String], default: '' }
+      inputVal: { type: [String], default: '' },
+      history: { type: [Array], default: [] }
     };
-
-    data = { history: [] };
 
     methods = {
       showInput() { this.inputShowed = true; },
