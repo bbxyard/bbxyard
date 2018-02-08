@@ -31,9 +31,9 @@
 
       <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
         <repeat for="{{history}}">
-          <navigator url="{{item.url}}" class="weui-cell" hover-class="weui-cell_active">
-            <view>{{item.txt}}</view>
-          </navigator>
+          <view class="weui-cells" hover-class="weui-cell_active">
+            <view>A{{item.txt}}B</view>
+          </view>
         </repeat>
       </view>
 
@@ -47,7 +47,7 @@
 
     props = {
       inputShowed: { type: [Boolean], default: false },
-      inputVal: { type: [String], default: '' },
+      inputVal: { type: [String], default: '' }
     };
 
     data = { history: [] };
@@ -55,13 +55,9 @@
     methods = {
       showInput() { this.inputShowed = true; },
       hideInput() { this.inputVal = ''; this.inputShowed = false; },
-      clearInput(){ this.inputVal = ''; },
-      inputTyping() { this.inputVal = e.detail.value; }
-
-      handleTitle(event) {
-        // console.log(event);
-        this.color = randomColor();
-        this.$emit('color-change', this.color);
+      clearInput() { this.inputVal = ''; },
+      inputTyping(e) {
+        this.inputVal = e.detail.value;
       }
     };
 

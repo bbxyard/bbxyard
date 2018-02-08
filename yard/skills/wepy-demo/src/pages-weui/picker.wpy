@@ -10,9 +10,6 @@
     </view>
     <view class="page__bd">
       <view class="weui-btn-area">
-        <!-- <picker value="{{index}}" range="{{array}}" @change="bindPickerChange" >
-          <button type="default">单列选择器</button>
-        </picker> -->
         <picker value="{{index}}" range="{{names}}" @change="bindPickerChange" >
           <button type="default">单列选择器</button>
         </picker>

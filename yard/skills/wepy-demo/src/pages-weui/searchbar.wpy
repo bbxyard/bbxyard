@@ -15,6 +15,7 @@
     </view>
     <view class="page__bd">
       <sbar1 :history="history" />
+      <sbar2 :history="history" />
     </view>
   </view>
 </template>
@@ -26,15 +27,16 @@
   export default class Searcher extends wepy.page {
 
     components = {
-      sbar1: sbar
+      sbar1: sbar,
+      sbar2: sbar
     };
 
     data = {
       history: [
-        { url: '', txt: '实时搜索文本' },
-        { url: '', txt: '实时搜索文本' },
-        { url: '', txt: '实时搜索文本' },
-        { url: '', txt: '实时搜索文本' }
+        { url: '', txt: '实时搜索文本A' },
+        { url: '', txt: '实时搜索文本B' },
+        { url: '', txt: '实时搜索文本C' },
+        { url: '', txt: '实时搜索文本D' }
       ]
     };
 
