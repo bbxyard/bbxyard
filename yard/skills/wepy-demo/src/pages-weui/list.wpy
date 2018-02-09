@@ -97,7 +97,7 @@
 
     onLoad() {
       // this.icon = require('../images/base64.js').icon20;
-      this.icon = "../images/icon_nav_feedback.png";
+      this.icon = '../images/icon_nav_feedback.png';
     }
   }
 </script>

@@ -11,12 +11,12 @@
   export default class XBGroupTitle extends wepy.component {
     props = {
       name: { type: [String], default: '' },
-      color: { type: [String], default: 'grey' },
+      color: { type: [String], default: 'grey' }
     };
     methods = {
       tap() {
         this.color = randomColor();
-        this.$emit("grouptitle-color-changed", this.color);
+        this.$emit('grouptitle-color-changed', this.color);
       }
     };
   }
