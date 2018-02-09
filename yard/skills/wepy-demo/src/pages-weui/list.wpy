@@ -1,0 +1,103 @@
+<style>
+  image {
+    margin-right: 5px;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+  }
+</style>
+
+<template>
+  <view class="page">
+    <title name="List" desc="列表" />
+    <view class="page__bd">
+      <gtitleA name="带说明的列表项" />
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">{{txtBody}}</view>
+          <view class="weui-cell__ft">{{txtFoot}}</view>
+        </view>
+      </view>
+
+      <gtitleB name="带图标、说明的列表项" />
+      <view class="weui-cells weui-cells_after-title">
+        <block wx:for="{{groupLoopOnly}}" wx:key="*this">
+          <view class="weui-cell weui-cell_access">
+            <view class="weui-cell__hd"> <image src="{{icon}}"/> </view>
+            <view class="weui-cell__bd">{{txtBody}}</view>
+            <view class="weui-cell__ft">{{txtFoot}}</view>
+          </view>
+        </block>
+      </view>
+
+      <gtitleC name="带跳转的列表项" />
+      <view class="weui-cells weui-cells_after-title">
+        <repeat for="{{groupLoopOnly}}" key="*this">
+          <navigator url="{{NAV_GO}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">{{txtBody}}</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </navigator>
+        </repeat>
+      </view>
+
+      <gtitleD name="带说明、跳转的列表项" />
+      <view class="weui-cells weui-cells_after-title">
+        <repeat for="{{groupLoopOnly}}" key="*this">
+          <navigator url="{{NAV_GO}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">{{txtBody}}</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access">{{txtFoot}}</view>
+          </navigator>
+        </repeat>
+      </view>
+
+      <gtitleE name="带图标、说明、跳转的列表项" />
+      <view class="weui-cells weui-cells_after-title">
+        <block wx:for="{{groupLoopOnly}}" wx:key="*this">
+          <navigator url="{{NAV_GO}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__hd">
+              <image src="{{icon}}" />
+            </view>
+            <view class="weui-cell__bd">{{txtBody}}</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access">{{txtFoot}}</view>
+          </navigator>
+        </block>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import Title from '../components/xbWeTitle';
+  import GTitle from '../components/xbWeGroupTitle';
+
+  const NAV_GO = 'index';
+
+  export default class List extends wepy.page {
+    components = {
+      title: Title,
+      gtitleA: GTitle,
+      gtitleB: GTitle,
+      gtitleC: GTitle,
+      gtitleD: GTitle,
+      gtitleE: GTitle
+    };
+
+    data = {
+      txtBody: '标题文字',
+      txtFoot: '说明文字',
+      NAV_GO: NAV_GO,
+      icon: {},
+      groupB: [
+        { icon: '', txtBody: '标题文字', txtFoot: '说明文字', nav: false },
+        { icon: '', txtBody: '标题文字', txtFoot: '说明文字', nav: false }
+      ],
+      groupLoopOnly: [1, 2]
+    };
+
+    onLoad() {
+      // this.icon = require('../images/base64.js').icon20;
+      this.icon = "../images/icon_nav_feedback.png";
+    }
+  }
+</script>

@@ -1,0 +1,81 @@
+<style>
+</style>
+
+<template>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import Title from '../components/xbWeTitle';
+  export default class Input extends wepy.page {
+    data = {
+      tipsFlag: false,
+
+      radioItems: [
+        { name: 'cell standard', value: '0', checked: false },
+        { name: 'cell standard', value: '1', checked: true }
+      ],
+      checkboxItems: [
+        { name: 'standard is dealt for u.', value: '0', checked: true },
+        { name: 'standard is DEALT for u.', value: '1', checked: false }
+      ],
+
+      date: '2018-02-15',
+      time: '12:12',
+
+      countryCodes: ['+86', '+80', '+84', '+87'],
+      countryCodeIndex: 0,
+      countries: ['CN', 'US', 'UK'],
+      countryIndex: 0,
+
+      accounts: ['WeChat', 'QQ', 'Email'],
+      accountIndex: 0,
+      isAgree: false
+    };
+
+    methods = {
+      radioChange(e) {
+        console.log(`radio occured change event, where value is: ${e.detail.value}`);
+        this.radioItems.forEach(v => { v.checked = (v.value === e.detail.value); });
+      },
+      checkboxChange(e) {
+        console.log(`checkbox occured change event, where value is: ${e.detail.value}`);
+        let items = this.checkboxItems;
+        let values = e.detail.value;
+        for (var i = 0; i < items.length; ++i) {
+          items[i].checked = false;
+          for (var j = 0; j < values.length; ++j) {
+            if (items[i].value === values[j]) {
+              itmes[i].checked = true;
+              break;
+            }
+          }
+        }
+        this.checkboxItems = items;
+      },
+      bindDateChange(e) { this.date = e.detail.value; },
+      bindTimeChange(e) { this.time = e.detail.value; },
+      bindCountryCodeChange(e) {
+        console.log('picker country code changed, where value is: ', e.detail.value);
+        this.countryCodeIndex = e.detail.value;
+      },
+      bindAccountChange(e) {
+        console.log('picker country changed, where value is: ', e.detail.value);
+        this.accountIndex = e.detail.value;
+      },
+      bindCountryChange(e) { this.countryIndex = e.detail.value; },
+      bindAgreeChange(e) { this.isAgree = !!e.detail.value.length; },
+      showTopTips() {
+        this.tipsFlag = true;
+        setTimeout(() => {
+          this.tipsFlag = false;
+          this.$apply();
+        }, 3000);
+      }
+    };
+
+    onLoad () {
+      this.icon = require('../images/base64.js').icon20;
+    }
+  }
+</script>

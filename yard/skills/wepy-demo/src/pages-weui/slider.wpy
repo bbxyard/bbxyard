@@ -1,0 +1,27 @@
+<style>
+  slider { margin-bottom: 30px; }
+</style>
+
+<template>
+  <view class="page">
+    <title name="Slider" desc="滑块，这里采用小程序原生的slider" />
+    <view class="page__bd page__bd_spacing">
+      <slider disabled="true" />
+      <slider min="20" max="80" color="red" active-color="blue" background-color="yellow" />
+      <slider show-value value="50" step="5" @change="mychange" />
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import Title from '../components/xbWeTitle';
+  export default class Slider extends wepy.page {
+    components = { title: Title };
+    methods = {
+      mychange (e) {
+        console.log(`value is ${e.detail.value}`);
+      }
+    };
+  }
+</script>
