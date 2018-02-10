@@ -1,11 +1,44 @@
 <style>
+  .group-9x9 {
+    display: flex;
+    color: purple;
+    background-color: grey;
+  }
+  .red { color: red; }
+  .green { color: green; }
 </style>
 
 <template>
+  <template name="odd"> <text class="red">odd</text> </template>
+  <template name="even"> <text class="green">even</text> </template>
+
   <view class="page">
     <title name="wx:for" desc="for基本用法" />
     <view class="page__hd">
-      todo
+
+      <gtitleE name="自定义index,item" />
+      <block wx:for="{{['AA', 'BB', 'CC']}}" wx:for-item="it" wx:for-index="idx" wx:key="*this">
+        <view>wx:for-index="idx"->{{idx}} wx:for-item="it"->{{it}}</view>
+      </block>
+
+      <gtitleF name="奇偶渲染" />
+      <block wx:for="{{[1,2,3,4,5]}}" wx:for-item="i" wx:key="*this">
+        <template is="{{i % 2 == 0? 'even': 'odd'}}" />
+      </block>
+
+      <gtitleG name="9x9乘法表" />
+      <view class="group-9x9">
+        <view class="weui-grids">
+        <block wx:for="{{[1,2,3,4,5,6,7,8,9]}}" wx:for-item="i" wx:key="*this">
+          <block wx:for="{{[1,2,3,4,5,6,7,8,9]}}" wx:for-item="j" wx:key="*this">
+            <view class="weui-grid" wx:if="{{i <= j}}">
+              {{i}} x {{j}} = {{i * j}}
+            </view>
+          </block>
+        </block>
+        </view>
+      </view>
+
     </view>
   </view>
 </template>
@@ -13,9 +46,17 @@
 <script>
   import wepy from 'wepy';
   import Title from '../../components/xbWeTitle';
+  import GTitle from '../../components/xbWeGroupTitle';
   export default class GrFor extends wepy.page {
     components = {
-      title: Title
+      title: Title,
+      gtitleA: GTitle,
+      gtitleB: GTitle,
+      gtitleC: GTitle,
+      gtitleD: GTitle,
+      gtitleE: GTitle,
+      gtitleF: GTitle,
+      gtitleG: GTitle
     };
     onLoad() {
       console.log(`${this.$name} loaded done`);
