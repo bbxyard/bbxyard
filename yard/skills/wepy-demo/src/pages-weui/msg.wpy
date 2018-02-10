@@ -1,0 +1,50 @@
+<style>
+  page {
+    background-color: #FFFFFF;
+  }
+  .weui-btn-area {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+</style>
+
+<template>
+  <view class="page">
+    <title name="Msg" desc="提示页" />
+    <view class="page__bd">
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" @tap="openSuccess">成功提示页</button>
+        <button class="weui-btn" type="warn" @tap="openFail">失败提示页</button>
+        <button class="weui-btn" type="info" @tap="openInfo">自定义提示页</button>
+      </view>
+      <footer :links="ftLinks" :copyright="ftCopyright" />
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import Title from '../components/xbWeTitle';
+  import Footer from '../components/xbWeFooter';
+  export default class Msg extends wepy.page {
+    components = {
+      title: Title,
+      footer: Footer
+    };
+    data = {
+      ftLinks: [ { url: 'index', txt: '主页' } ],
+      ftCopyright: 'Copyright © 2008-2018 weui.io and bbxyard.com'
+    };
+    methods = {
+      openSuccess() {
+        this.$navigate('./msg_success');
+      },
+      openFail() {
+        this.$navigate('./msg_fail');
+      },
+      openInfo() {
+        this.$navigate('./msg_info');
+      }
+    }
+  }
+</script>

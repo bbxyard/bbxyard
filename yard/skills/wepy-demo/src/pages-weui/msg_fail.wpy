@@ -1,0 +1,60 @@
+<style>
+  page {
+    background-color: #FFFFFF;
+  }
+</style>
+
+<template>
+  <view class="page">
+    <view class="weui-msg">
+      <!-- 图标区域 -->
+      <view class="weui-msg__icon-area">
+        <icon type="warn" size="93" />
+      </view>
+      <!-- (提示)文字区域 -->
+      <view class="weui-msg__text-area">
+        <view class="weui-msg__title">操作失败</view>
+        <view class="weui-msg__desc">
+          内容详情，可根据实际需要安排，如果换行则不超过规定长度，居中展现
+          <navigator url="msg" class="weui-msg__link">文字链接</navigator>
+        </view>
+      </view>
+      <!-- 操作区域 -->
+      <view class="weui-msg__opr-area">
+        <view class="weui-btn-area">
+          <button class="weui-btn" type="primary" @tap="tapRecommand">推荐操作</button>
+          <button class="weui-btn" type="default" @tap="tapAux">辅助操作</button>
+        </view>
+      </view>
+      <!-- 扩展区域 -->
+      <view class="weui-msg__extra-area">
+        <footer :links="ftLinks" :copyright="ftCopyright" />
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import Footer from '../components/xbWeFooter';
+  export default class MsgFail extends wepy.page {
+    components = {
+      footer: Footer
+    };
+    data = {
+      ftLinks: [ { url: 'index', txt: '主页' }, { url: 'msg', txt: '提示页' } ],
+      ftCopyright: 'Copyright © 2008-2018 weui.io and bbxyard.com'
+    };
+    methods = {
+      tapRecommand() {
+        console.log(`tap recommand: ${this.$name}`);
+      },
+      tapAux() {
+        console.log(`tap aux: ${this.$name}`);
+      }
+    };
+    onLoad() {
+      console.log('MsgFail page loaded done!');
+    }
+  }
+</script>
