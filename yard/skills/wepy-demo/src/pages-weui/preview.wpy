@@ -1,0 +1,79 @@
+<style>
+  .weui-form-preview {
+    margin-bottom: 25px;
+  }
+</style>
+
+<template>
+  <view class="page">
+    <title name="Preview" desc="表单预览" />
+    <view class="page__bd">
+      <block wx:for="{{orders}}" wx:for-item="order" wx:key="head.value">
+        <view class="weui-form-preview">
+          <!-- preview-hd -->
+          <view class="weui-form-preview__hd">
+            <view class="weui-form-preview__label">{{order.head.label}}</view>
+            <view class="weui-form-preview__value_in-hd">{{order.head.value}}</view>
+          </view>
+
+          <!-- preview-bd -->
+          <view class="weui-form-preview__bd">
+            <block wx:for="{{order.body}}" wx:for-item="kv" wx:key="label">
+              <view class="weui-form-preview__item">
+                <view class="weui-form-preview__label">{{kv.label}}</view>
+                <view class="weui-form-preview__value">{{kv.value}}</view>
+              </view>
+            </block>
+          </view>
+
+          <!-- priview-ft -->
+          <view class="weui-form-preview__ft">
+            <repeat for="{{order.foot}}" item="ft" key="label">
+              <navigator url="{{ft.url}}" class="weui-form-preview__btn weui-form-preview__btn_{{ft.btn_type}}" hover-class="weui-form-preview__btn_active">{{ft.txt}}</navigator>
+            </repeat>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import Title from '../components/xbWeTitle';
+  export default class Preview extends wepy.page {
+    components = {
+      title: Title
+    };
+    data = {
+      orders: [
+        {
+          head: { label: '付款金额', value: '$256' },
+          body: [
+            { label: '商品', value: '电动打蛋机' },
+            { label: '标题标AA', value: '名字名字名字' },
+            { label: '标题标BB', value: '很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字' }
+          ],
+          foot: [
+            { btn_type: 'primary', txt: '操作', url: 'index' }
+          ]
+        },
+        {
+          head: { label: '付款金额', value: '¥4096' },
+          body: [
+            { label: '商品', value: '电动打蛋机' },
+            { label: '标题AA', value: '名字名字名字' },
+            { label: '标题BB', value: '很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字' }
+          ],
+          foot: [
+            { btn_type: 'default', txt: '辅助操作', url: 'input' },
+            { btn_type: 'primary', txt: '操作', url: 'index' }
+          ]
+        }
+      ]
+    };
+    onLoad() {
+      console.log(`${this.$name} loaded done`);
+    }
+  }
+</script>

@@ -57,12 +57,14 @@ export default class extends wepy.app {
       'pages-weui/msg_success',
       'pages-weui/navbar',
       'pages-weui/picker',
+      'pages-weui/preview',
       'pages-weui/progress',
       'pages-weui/searchbar',
       'pages-weui/slider',
       'pages-weui/uploader',
       'pages/index',
-      'pages/list'
+      'pages/list',
+      'pages/gr/for'
     ],
     window: {
       backgroundTextStyle: 'light',

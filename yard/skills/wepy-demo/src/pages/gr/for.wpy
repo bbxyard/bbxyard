@@ -1,0 +1,24 @@
+<style>
+</style>
+
+<template>
+  <view class="page">
+    <title name="wx:for" desc="for基本用法" />
+    <view class="page__hd">
+      todo
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import Title from '../../components/xbWeTitle';
+  export default class GrFor extends wepy.page {
+    components = {
+      title: Title
+    };
+    onLoad() {
+      console.log(`${this.$name} loaded done`);
+    }
+  }
+</script>
