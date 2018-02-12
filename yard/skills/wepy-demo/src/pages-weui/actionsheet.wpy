@@ -25,15 +25,11 @@
   export default class ActionSheet extends wepy.page {
 
     methods = {
-      open() {
-        wx.showActionSheet({
-          itemList: ['A', 'B', 'C'],
-          success: function(res) {
-            if (!res.cancel) {
-              console.log(res.tapIndex);
-            }
-          }
-        })
+      async open() {
+        let res = await wepy.showActionSheet({ itemList: ['A', 'B', 'C'] });
+        if (!res.cancel) {
+          console.log(res.tapIndex);
+        }
       }
     }
 
