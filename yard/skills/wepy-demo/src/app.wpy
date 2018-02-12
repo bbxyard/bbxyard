@@ -44,6 +44,7 @@ export default class extends wepy.app {
     pages: [
       'pages-weui/index',
       'pages-weui/actionsheet',
+      'pages-weui/article',
       'pages-weui/badge',
       'pages-weui/flex',
       'pages-weui/footer',
@@ -51,6 +52,7 @@ export default class extends wepy.app {
       'pages-weui/icons',
       'pages-weui/input',
       'pages-weui/list',
+      'pages-weui/loadmore',
       'pages-weui/msg',
       'pages-weui/msg_fail',
       'pages-weui/msg_info',

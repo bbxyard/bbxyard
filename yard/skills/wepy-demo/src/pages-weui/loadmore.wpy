@@ -1,0 +1,38 @@
+<style>
+  page {
+    background-color: #FFFFFF;
+  }
+</style>
+
+<template>
+  <view class="page">
+    <title name="Loadmore" desc="加载更多" />
+    <view class="page__hd">
+      <view class="{{prefix}}">
+        <view class="weui-loading"></view>
+        <view class="{{prefix}}__tips">正在加载</view>
+      </view>
+      <view class="{{prefix}} {{prefix}}_line">
+        <view class="{{prefix}}__tips {{prefix}}__tips_in-line">暂无数据</view>
+      </view>
+      <view class="{{prefix}} {{prefix}}_line {{prefix}}_dot">
+        <view class="{{prefix}}__tips {{prefix}}__tips_in-line {{prefix}}__tips_in-dot"></view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import Title from '../components/xbWeTitle';
+  export default class Loadmore extends wepy.page {
+    components = { title: Title };
+    data = {
+      // prefix: { type: [String], default: 'weui-loadmore' }
+      prefix: 'weui-loadmore'
+    };
+    onLoad() {
+      console.log(`${this.$name} /prefix=${this.prefix}/`);
+    }
+  }
+</script>
