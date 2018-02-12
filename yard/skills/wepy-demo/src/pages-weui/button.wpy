@@ -1,0 +1,48 @@
+<style>
+  .button-sp-area {
+    margin: 0 auto;
+    padding-top: 15px;
+    width: 60%;
+  }
+  .mini-btn { margin-right: 5px; }
+</style>
+
+<template>
+  <view class="page">
+    <title name="Button" desc="按钮，WeUI采用小程序原生的按钮为主体，加入一些间距的样式。" />
+    <view class="page__bd page__bd_spacing">
+      <button class="{{subject}}" type="primary">页面主操作 Normal</button>
+      <button class="{{subject}}" type="primary" disabled="true">页面主操作 Disabled</button>
+      <button class="{{subject}}" type="default">页面次要操作 Normal</button>
+      <button class="{{subject}}" type="default" disabled="true">页面次要操作 Disabled</button>
+      <button class="{{subject}}" type="warn">警告类操作 Normal</button>
+      <button class="{{subject}}" type="warn" disabled="true">警告类操作 Disabled</button>
+
+      <view class="button-sp-area">
+        <button class="{{subject}}" type="primary" plain="true">{{name}}</button>
+        <button class="{{subject}}" type="primary" plain="true" disabled="true">{{name}}</button>
+        <button class="{{subject}}" type="default" plain="true">{{name}}</button>
+        <button class="{{subject}}" type="default" plain="true" disabled="true">{{name}}</button>
+
+        <button class="{{subject}} mini-btn" type="primary" size="mini">{{name}}</button>
+        <button class="{{subject}} mini-btn" type="default" size="mini">{{name}}</button>
+        <button class="{{subject}} mini-btn" type="warn" size="mini">{{name}}</button>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import Title from '../components/xbWeTitle';
+  export default class Button extends wepy.page {
+    components = { title: Title };
+    data = {
+      subject: 'weui-btn',
+      name: '按钮'
+    };
+    onLoad() {
+
+    }
+  }
+</script>
