@@ -1,11 +1,18 @@
 {
   "name": "bbxyard",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "bbxyard's main project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "bbxyard",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.1.2",
+    "mocha": "^5.0.1",
+    "mochawesome": "^3.0.2"
+  }
 }
