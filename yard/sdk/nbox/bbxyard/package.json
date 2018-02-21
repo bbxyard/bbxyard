@@ -4,7 +4,7 @@
   "description": "bbxyard's main project",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --recursive"
   },
   "author": "bbxyard",
   "license": "MIT",
@@ -14,5 +14,9 @@
     "chai": "^4.1.2",
     "mocha": "^5.0.1",
     "mochawesome": "^3.0.2"
+  },
+  "dependencies": {
+    "node-fetch": "^2.0.0",
+    "superagent": "^3.8.2"
   }
 }
