@@ -1,0 +1,14 @@
+<template>
+  <view>
+    Just do it.
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  export default class GrIf extends wepy.page {
+    onLoad() {
+      console.log(`${this.$name} loaded`);
+    }
+  }
+</script>

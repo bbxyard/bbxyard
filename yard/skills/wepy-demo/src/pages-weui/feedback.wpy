@@ -1,0 +1,29 @@
+<style>
+</style>
+
+<template>
+  <feedback max="400" />
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import MyFeedback from '../components/xbWeFeedback';
+
+  export default class Feedback extends wepy.page {
+    config = {
+      navigationBarTitleText: '反馈意见'
+    };
+
+    components = {
+      feedback: MyFeedback
+    };
+
+    data = {
+
+    };
+
+    onLoad() {
+      console.log(`${this.$name} loaded`);
+    }
+  }
+</script>

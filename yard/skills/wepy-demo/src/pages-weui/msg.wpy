@@ -16,6 +16,7 @@
         <button class="weui-btn" type="primary" @tap="openSuccess">成功提示页</button>
         <button class="weui-btn" type="warn" @tap="openFail">失败提示页</button>
         <button class="weui-btn" type="info" @tap="openInfo">自定义提示页</button>
+        <button class="weui-btn" type="secondary" @tap="openFeedback">反馈意见</button>
       </view>
       <footer :links="ftLinks" :copyright="ftCopyright" />
     </view>
@@ -44,6 +45,9 @@
       },
       openInfo() {
         this.$navigate('./msg_info');
+      },
+      openFeedback() {
+        this.$navigate('./feedback');
       }
     }
   }

@@ -49,6 +49,7 @@ export default class extends wepy.app {
       'pages-weui/badge',
       'pages-weui/button',
       'pages-weui/dialog',
+      'pages-weui/feedback',
       'pages-weui/flex',
       'pages-weui/footer',
       'pages-weui/grid',
@@ -70,7 +71,8 @@ export default class extends wepy.app {
       'pages-weui/uploader',
       'pages/index',
       'pages/list',
-      'pages/gr/for'
+      'pages/gr/for',
+      'pages/gr/if'
     ],
     window: {
       backgroundTextStyle: '#F8F8F8',
