@@ -1,0 +1,18 @@
+{
+  "name": "nbox-wepy",
+  "version": "0.1.0",
+  "description": "node js utils for wepy ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "utils",
+    "wepy",
+    "weapp"
+  ],
+  "author": "bbxyard",
+  "license": "MIT"
+}
