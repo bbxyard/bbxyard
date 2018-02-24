@@ -39,6 +39,7 @@ page{
 <script>
 import wepy from 'wepy';
 import 'wepy-async-function';
+import gconfig from './config';
 
 export default class extends wepy.app {
   config = {
@@ -72,7 +73,8 @@ export default class extends wepy.app {
       'pages/index',
       'pages/list',
       'pages/gr/for',
-      'pages/gr/if'
+      'pages/gr/if',
+      'pages/fun/wheel'
     ],
     window: {
       backgroundTextStyle: '#F8F8F8',
@@ -89,7 +91,8 @@ export default class extends wepy.app {
   }
 
   globalData = {
-    userInfo: null
+    userInfo: null,
+    gconfig: gconfig
   }
 
   constructor() {
@@ -115,6 +118,10 @@ export default class extends wepy.app {
   async testAsync() {
     const data = await this.sleep(3);
     console.log(data);
+  }
+
+  getGConfig() {
+    return this.globalData.gconfig;
   }
 
   getUserInfo(cb) {

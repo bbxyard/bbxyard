@@ -1,106 +1,17 @@
 <style>
-  .index-hd {
-    padding: 80rpx;
-    text-align: center;
-    padding: 20rpx 26rpx 40rpx;
-  }
 
-  .index-desc {
-    margin-top: 20rpx;
-    color: #888;
-    font-size: 28rpx;
-  }
-
-  .index-tip{
-    color: #888;
-    font-size: 28rpx;
-    text-align: center;
-    margin: 20rpx 0;
-  }
-  .index-mod{
-    margin: 30rpx 80rpx 60rpx 60rpx;
-    color: #888;
-  }
-  .index-mod text{
-    display: inline-block;
-    line-height: 20px;
-  }
-  .index-mod-btn{
-    display: inline-block;
-    flex: 1;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    border: 1px solid #666;
-    border-radius: 6rpx;
-    font-size: 12px;
-    padding: 0 20rpx;
-  }
-  .index-mod-btn.on{
-    color: #3985ff;
-    border: 1px solid #3985ff;
-  }
-  .index-mod-btn:last-child{
-    margin-left: 20rpx;
-  }
 </style>
 
 <template>
-  <view>
-    <view class="index-hd">
-      <view class="index-desc">以下是小程序大转盘组件，组件样式仅供参考，开发者可根据自身需求自定义组件样式，具体属性参数详见开发文档。</view>
-    </view>
 
-    <view class="index-mod">
-    	<text>选择旋转物体：</text>
-    	<view class="index-mod-btn {{mode == 1 ? 'on' : ''}}" @tap = "switchMode" data-mode="1">指针旋转</view>
-    	<view class="index-mod-btn {{mode == 2 ? 'on' : ''}}" @tap = "switchMode" data-mode="2">大转盘旋转</view>
-    </view>
-
-    <wheel :areaNumber="areaNumber" :speed="speed" :awardNumber="awardNumber" :mode.sync="mode" />
-    <view class="index-tip">tip: 点击开始抽奖</view>
-  </view>
 </template>
 
 <script>
   import wepy from 'wepy';
-  import Wheel from '../../components/fun/wheel/wheel';
 
   export default class GrIf extends wepy.page {
 
-    config = { 'navigationBarTitleText': '大转盘' };
-    components = { wheel: Wheel };
-    data = {
-      areaNumber: 8,
-      speed: 16,
-      awardNumber: 1,
-      mode: 1
-    };
-
-    methods = {
-      switchMode(e) {
-        let mode = e.currentTarget.dataset.mode;
-        this.mode = mode;
-      }
-    };
-
-    events = {
-      'wheel': (...args) => {
-        let $event = args[args.length - 1];
-        console.log('event: ', $event);
-        this.handleFinished();
-      }
-    };
-
-    async handleFinished() {
-      let res = await wepy.showModal({title: '提示', content: '恭喜您，中奖了', showCancel: true});
-      if (res.confirm) {
-        console.log('用户点击确定');
-      } else if (res.cancel) {
-        console.log('用户点击取消');
-      }
-      this.$invoke('wheel', 'reset');
-    }
+    config = { 'navigationBarTitleText': 'IF study' };
 
     onLoad() {
       console.log(`${this.$name} loaded`);
