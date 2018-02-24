@@ -1,16 +1,4 @@
 <style>
-  .index-hd {
-    padding: 80rpx;
-    text-align: center;
-    padding: 20rpx 26rpx 40rpx;
-  }
-
-  .index-desc {
-    margin-top: 20rpx;
-    color: #888;
-    font-size: 28rpx;
-  }
-
   .index-tip{
     color: #888;
     font-size: 28rpx;
@@ -47,9 +35,7 @@
 
 <template>
   <view>
-    <view class="index-hd">
-      <view class="index-desc">以下是小程序大转盘组件，组件样式仅供参考，开发者可根据自身需求自定义组件样式，具体属性参数详见开发文档。</view>
-    </view>
+    <title name="大转盘" desc="以下是小程序大转盘组件，组件样式仅供参考，开发者可根据自身需求自定义组件样式" />
 
     <view class="index-mod">
     	<text>选择旋转物体：</text>
@@ -64,12 +50,13 @@
 
 <script>
   import wepy from 'wepy';
+  import Title from '../../components/xbWeTitle';
   import Wheel from '../../components/fun/wheel/wheel';
 
   export default class FunWheel extends wepy.page {
 
     config = { 'navigationBarTitleText': '大转盘' };
-    components = { wheel: Wheel };
+    components = { wheel: Wheel, title: Title };
     data = {
       areaNumber: 8,
       speed: 16,
