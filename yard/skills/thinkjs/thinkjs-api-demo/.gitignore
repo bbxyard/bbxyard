@@ -29,6 +29,7 @@ node_modules/
 # output
 output/
 output.tar.gz
+.nyc_output
 
 runtime/
 app/
