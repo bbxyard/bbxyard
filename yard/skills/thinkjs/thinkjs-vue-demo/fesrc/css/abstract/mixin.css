@@ -1,0 +1,10 @@
+/* 
+  定义mixin，避免代码重复
+
+  如下垂直居中：
+    @define-mixin vertical-center {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+ */
