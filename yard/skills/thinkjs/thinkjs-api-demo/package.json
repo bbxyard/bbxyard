@@ -11,9 +11,13 @@
     "lint-fix": "eslint --fix src/"
   },
   "dependencies": {
+    "jsonwebtoken": "^8.1.1",
+    "lodash": "^4.17.5",
+    "md5": "^2.2.1",
+    "request-promise": "^4.2.2",
+    "think-logger3": "^1.0.0",
     "think-model": "^1.0.0",
     "think-model-mysql": "^1.0.0",
-    "think-logger3": "^1.0.0",
     "thinkjs": "^3.0.0"
   },
   "devDependencies": {
