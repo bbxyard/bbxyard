@@ -24,3 +24,15 @@ testOne "${mod}goods/related?id=1006007"
 testOne "${mod}goods/related?id=1181000"
 testOne "${mod}goods/new"
 testOne "${mod}goods/hot"
+
+testOne "${mod}topic/list"
+testOne "${mod}topic/related"
+testOne "${mod}topic/detail?id=300"
+
+testOne "${mod}search/index"
+testOne "${mod}search/helper?keyword=520"
+testOne "${mod}search/clearHistory"
+
+testOne "${mod}region/info?regionId=20"
+testOne "${mod}region/list?parentId=20"
+
