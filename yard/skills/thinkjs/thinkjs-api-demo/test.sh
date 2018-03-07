@@ -36,3 +36,8 @@ testOne "${mod}search/clearHistory"
 testOne "${mod}region/info?regionId=20"
 testOne "${mod}region/list?parentId=20"
 
+testOne "${mod}pay/prepay?orderId=2"
+testOne "${mod}pay/notify"
+
+testOne "${mod}index"
+
