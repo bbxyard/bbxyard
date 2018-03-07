@@ -3,7 +3,14 @@ module.exports = class extends think.Logic {
 
   }
 
-  currentAction() {
+  listAction() {
+    this.rules = {
+      page: { required: true },
+      size: { required: true }
+    };
+  }
+
+  detailAction() {
     this.rules = {
       id: { required: true }
     };
