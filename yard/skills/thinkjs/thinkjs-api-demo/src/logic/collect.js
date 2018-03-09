@@ -3,14 +3,11 @@ module.exports = class extends think.Logic {
 
   }
 
-  countAction() {
-    this.rules = {
-      typeId: { required: true },
-      valueId: { required: true }
-    };
+  listAction() {
+    this.rules = { typeId: { required: true } };
   }
 
-  listAction() {
+  addOrDelAction() {
     this.rules = {
       typeId: { required: true },
       valueId: { required: true }

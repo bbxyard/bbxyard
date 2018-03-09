@@ -7,7 +7,9 @@ module.exports = class extends Base {
    */
   async indexAction() {
     const model = this.model('goods');
-    const goodsList = await model.select();
+    const page = this.get('page') || 2;
+    const size = this.get('size') || 10;
+    const goodsList = await model.field(['id', 'goods_sn', 'name', 'retail_price']).page(page, size).countSelect();
     return this.success(goodsList);
   }
 
@@ -20,10 +22,10 @@ module.exports = class extends Base {
     const goodsId = this.get('id');
     const model = this.model('goods');
     return this.success({
-      productList: await model.getProductList(goodsId, ['id', 'goods_id', 'goods_number'])
+      specList: await model.getSpecList(goodsId),
+      productList: await model.getProductList(goodsId, ['id', 'goods_id', 'goods_number', 'retail_price'])
     });
   }
-
 
   /**
    * [categoryAction description]
@@ -109,7 +111,7 @@ module.exports = class extends Base {
       .page(page, size)
       .countSelect();
     goodsData.filterCat = filterCat.map( (v) => {
-      v.checked = (think.isEmpty(catId) && v.id === 0) || (v.id === parseInt(catid));
+      v.checked = (think.isEmpty(catId) && v.id === 0) || (v.id === parseInt(catId));
       return v;
     });
     goodsData.goodsList = goodsData.data;

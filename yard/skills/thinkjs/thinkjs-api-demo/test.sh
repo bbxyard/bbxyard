@@ -15,7 +15,11 @@ function testOne()
 
 mod=
 
-testOne "${mod}goods/sku?id=1006007"
+testOne "${mod}comment/count?typeId=0&valueId=1006002"
+testOne "${mod}comment/list?typeId=0&valueId=1006002&showType=1"
+
+testOne "${mod}goods/index"
+testOne "${mod}goods/sku?id=1181000"
 testOne "${mod}goods/category?id=1008001"
 
 # SELECT COUNT(`id`) AS think_count FROM `xshop_goods` WHERE ( `is_delete` = 0 ) AND ( `is_on_sale` = 1 ) LIMIT 1
@@ -40,4 +44,7 @@ testOne "${mod}pay/prepay?orderId=2"
 testOne "${mod}pay/notify"
 
 testOne "${mod}index"
+
+testOne "${mod}brand/list?page=5&size=7"
+testOne "${mod}brand/detail?id=1024000"
 
