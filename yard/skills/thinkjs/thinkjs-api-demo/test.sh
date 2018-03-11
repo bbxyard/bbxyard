@@ -48,3 +48,4 @@ testOne "${mod}index"
 testOne "${mod}brand/list?page=5&size=7"
 testOne "${mod}brand/detail?id=1024000"
 
+testOne "${mod}admin/category/info?id=1005008"

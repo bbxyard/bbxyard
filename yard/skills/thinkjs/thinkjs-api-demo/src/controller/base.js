@@ -1,4 +1,9 @@
 module.exports = class extends think.Controller {
+  constructor(ctx) {
+    super(ctx);
+    this.db = this.service('me/db');
+  }
+
   async __before() {
     this.showRequest();
     // 根据token值获取用户id
@@ -22,8 +27,8 @@ module.exports = class extends think.Controller {
    * @return {[type]} [description]
    */
   showRequest() {
-    console.log('this.ctx: ', this.ctx);
-    console.log(`this.ctx.header: ${this.ctx.header}`);
+    // console.log('this.ctx: ', this.ctx);
+    // console.log(`this.ctx.header: ${this.ctx.header}`);
   }
 
   /**
@@ -40,5 +45,11 @@ module.exports = class extends think.Controller {
    */
   getLoginUserId() {
     return think.userId;
+  }
+
+  getDB() {
+    // const db = this.service('me/db');
+    const db = this.db;
+    return db;
   }
 };
