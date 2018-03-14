@@ -41,3 +41,6 @@ jspm_packages
 .build/
 dist/
 yarn.lock
+
+# Spec for user only file
+src/*.user.js
