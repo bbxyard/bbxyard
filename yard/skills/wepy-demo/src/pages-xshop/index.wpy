@@ -1,0 +1,277 @@
+<style type="less">
+@import '../style/xb.less';
+
+.banner {
+  width: @xbBannerWidth;
+  height: @xbBannerHeight;
+  image {
+    width: 100%;
+    height: 417rpx;
+  }
+}
+
+.m-menu {
+  display: flex;
+  height: 181rpx;
+  width: 100%;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  .item {
+    flex: 1;
+    display: block;
+    padding: 20rpx 0;
+  }
+  image {
+    display: block;
+    width: 58rpx;
+    height: 58rpx;
+    margin: 0 auto;
+    margin-bottom: 12rpx;
+  }
+  text {
+    display: block;
+    font-size: 24rpx;
+    text-align: center;
+    margin: 0 auto;
+    line-height: 1;
+    color: #333;
+  }
+}
+
+.a-section {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  background: #fff;
+  color: #333;
+  margin-top: 20rpx;
+  .h {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    height: 130rpx;
+    .txt {
+      padding-right: 30rpx;
+      background: url("http://ac-3yr0g9cz.clouddn.com/2cdba05369e10f934e54.png") right 4rpx no-repeat;
+      background-size: 16.656rpx 27rpx;
+      display: inline-block;
+      height: 36rpx;
+      font-size: 33rpx;
+      line-height: 36rpx;
+    }
+  }
+}
+
+.a-brand {
+  .b {
+    width: 750rpx;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+  }
+  .wrap {
+    position: relative;
+  }
+  .img {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .mt {
+    position: absolute;
+    z-index: 2;
+    padding: 27rpx 31rpx;
+    left: 0;
+    top: 0;
+    .brand {
+      display: block;
+      font-size: 33rpx;
+      height: 43rpx;
+      color: #333;
+    }
+    .price {
+      font-size: 25rpx;
+      color: #999;
+    }
+    .unit {
+      font-size: 25rpx;
+      color: #999;
+    }
+  }
+  .item-1 {
+    float: left;
+    width: 375rpx;
+    height: 252rpx;
+    overflow: hidden;
+    border-top: 1rpx solid #fff;
+    margin-left: 1rpx;
+    &:nth-child(2n+1){
+      margin-left: 0;
+      width: 374rpx;
+    }
+    .img {
+      width: 375rpx;
+      height: 253rpx;
+    }
+  }
+}
+
+.container {
+  box-sizing: border-box;
+  background-color: #f4f4f4;
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+}
+
+view,image,text,navigator{
+  box-sizing: border-box;
+  padding:0;
+  margin:0;
+
+}
+
+view,text{
+  font-family: PingFangSC-Light,helvetica,'Heiti SC';
+  font-size: 29rpx;
+  color: #333;
+}
+</style>
+
+<template>
+  <view class='index page'>
+    <!-- <view class="page__hd">
+      <title name="xshop" desc="Just shop it." />
+    </view> -->
+
+    <!-- banner -->
+    <view wx:if="{{showBanner}}">
+    <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
+      <swiper-item wx:for="{{banner}}" wx:key="{{item.id}}">
+        <navigator url="{{item.link}}">
+          <image src="{{item.image_url}}" background-size="cover" />
+        </navigator>
+      </swiper-item>
+    </swiper>
+    </view>
+
+    <!-- m-menu -->
+    <view class="m-menu" wx:if="{{showChannel}}">
+      <block wx:for="{{channel}}" wx:key="{{item.id}}">
+      <navigator class="item" url="{{item.url}}">
+        <image src="{{item.icon_url}}" background-size="cover" />
+        <text>{{item.name}}</text>
+      </navigator>
+      </block>
+    </view>
+  </view>
+
+  <!-- a-section a-brand -->
+  <view class="a-section a-brand" wx:if="showBrands">
+    <view class="h">
+      <navigator url="../brand">
+        <text class="txt">品牌制造商直供</text>
+      </navigator>
+    </view>
+    <view class="b">
+      <block wx:for="{{brands}}" wx:key="{{item.id}}">
+        <navigator class="item item-1" url="/pages/brandDetail/brandDetail?id={{item.id}}">
+          <view class="wrap">
+            <image class="img" src="{{item.new_pic_url}}" mode="aspectFill" />
+            <view class="mt">
+              <text class="brand">{{item.name}}</text>
+              <text class="price">{{item.floor_price}}</text>
+              <text class="unit">元起</text>
+            </view>
+          </view>
+        </navigator>
+      </block>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import Title from '../components/xbWeTitle';
+  import util from '../utils/util';
+  import config from '../config';
+  const api = config.api;
+
+  export default class Index extends wepy.page {
+    constructor() {
+      super();
+      console.log(`${this.$name} created.`);
+    }
+
+    components = {
+      title: Title
+    };
+
+    data = {
+      newGoods: [],
+      hotGoods: [],
+      topics: [],
+      brands: [],
+      floorGoods: [],
+      banner: [],
+      channel: [],
+      showNewGoods: true,
+      showHotGoods: true,
+      showTopics: true,
+      showBrands: true,
+      showFloorGoods: true,
+      showBanner: true,
+      showChannel: true
+    };
+
+    methods = {
+
+    };
+
+    getIndexData() {
+      let that = this;
+      util.request(api.IndexUrl).then((res) => {
+        if (res.errno === 0) {
+          const d = res.data;
+          that.setData({
+            newGoods: d.newGoodsList,
+            hotGoods: d.hotGoodsList,
+            topics: d.topicList,
+            brands: d.brandList,
+            floorGoods: d.categoryList,
+            banner: d.banner,
+            channel: d.channel
+          });
+        }
+      });
+    }
+
+    onShareAppMessage() {
+      return {
+        title: 'xshop',
+        desc: 'xshop mall',
+        path: '/pages-xshop/index'
+      };
+    }
+
+    onLoad() {
+      this.getIndexData();
+      console.log(`${this.$name} loaded.`);
+    }
+
+    onUnload() {
+      console.log(`${this.$name} unloaded.`);
+    }
+
+    onPageScroll() {
+      this.getIndexData();
+      console.log(`${this.$name} onPageScroll.`);
+    }
+
+    onReachBottom() {
+      this.getIndexData();
+      console.log(`${this.$name} onReachBottom.`);
+    }
+  }
+</script>

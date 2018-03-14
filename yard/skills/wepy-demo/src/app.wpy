@@ -74,7 +74,8 @@ export default class extends wepy.app {
       'pages/list',
       'pages/gr/for',
       'pages/gr/if',
-      'pages/fun/wheel'
+      'pages/fun/wheel',
+      'pages-xshop/index'
     ],
     window: {
       backgroundTextStyle: '#F8F8F8',
@@ -83,11 +84,12 @@ export default class extends wepy.app {
       navigationBarTextStyle: 'black'
     },
     'networkTimeout': {
-      'request': 10000,
-      'connectSocket': 10000,
-      'uploadFile': 10000,
-      'downloadFile': 10000
-    }
+      'request': 600000,
+      'connectSocket': 60000,
+      'uploadFile': 600000,
+      'downloadFile': 600000
+    },
+    debug: true
   }
 
   globalData = {
