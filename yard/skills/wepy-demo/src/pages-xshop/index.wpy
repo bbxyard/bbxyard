@@ -119,7 +119,213 @@
   }
 }
 
-.container {
+.a-new {
+  .b {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    padding: 0 31rpx 45rpx 31rpx;
+    .item {
+      float: left;
+      width: 302rpx;
+      margin-top: 10rpx;
+      margin-left: 21rpx;
+      margin-right: 21rpx;
+    }
+    .item-b { margin-left: 42rpx; }
+    .img { width: 302rpx; height: 302rpx; }
+    .name {
+      text-align: center;
+      display: block;
+      width: 302rpx;
+      height: 35rpx;
+      margin-bottom: 14rpx;
+      overflow: hidden;
+      font-size: 30rpx;
+      color: #333;
+    }
+    .price {
+      display: block;
+      text-align: center;
+      line-height: 30rpx;
+      font-size: 30rpx;
+      color: #b4282d;
+    }
+  }
+}
+
+.a-popular {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  .b {
+    .item {
+      border-top: 1px solid #d9d9d9;
+      margin: 0 20rpx;
+      height: 264rpx;
+      width: 710rpx;
+    }
+    .img {
+      margin-top: 12rpx;
+      margin-right: 12rpx;
+      float: left;
+      width: 240rpx;
+      height: 240rpx;
+    }
+    .right {
+      float: right;
+      height: 264rpx;
+      width: 456rpx;
+      display: flex;
+      flex-flow: row nowrap;
+    }
+    .text {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      overflow: hidden;
+      height: 264rpx;
+      width: 456rpx;
+    }
+    .name {
+      display: block;
+      width: 456rpx;
+      color: #333;
+      line-height: 50rpx;
+      font-size: 30rpx;
+    }
+    .desc {
+      display: block;
+      width: 456rpx;
+      color: #999;
+      line-height: 50rpx;
+      font-size: 25rpx;
+    }
+    .price {
+      display: block;
+      width: 456rpx;
+      color: #b4282d;
+      line-height: 50rpx;
+      font-size: 33rpx;
+    }
+  }
+}
+
+.topic {
+  .b {
+    width: 100%;
+    height: 533rpx;
+    padding: 0 0 48rpx 0;
+    .list {
+      width: 100%;
+      height: 533rpx;
+      white-space: nowrap;
+    }
+    .item {
+      display: inline-block;
+      width: 680.5rpx;
+      height: 533rpx;
+      margin-left: 30rpx;
+      overflow: hidden;
+      &:last-child { margin-right: 30rpx; }
+    }
+    .img {
+      width: 680.5rpx;
+      height: 387.5rpx;
+      margin-bottom: 30rpx;
+    }
+    .np {
+      height: 35rpx;
+      margin-bottom: 13.5rpx;
+      color: #333;
+      font-size: 30rpx;
+      .price { margin-left: 20.8rpx; color: #b4282d; }
+    }
+    .desc {
+      display: block;
+      height: 30rpx;
+      color: #999;
+      font-size: 24rpx;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.good-grid {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  .h {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    height: 130rpx;
+    font-size: 33rpx;
+    color: #333;
+  }
+  .b {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    padding: 0 6.25rpx;
+    .item {
+      width: 365rpx;
+      height: 452rpx;
+      float: left;
+      overflow: hidden;
+      text-align: center;
+      background: #fff;
+      margin-bottom: 6.25rpx;
+      .a { width: 100%; height: 452rpx; }
+    }
+    .item-b { margin-left: 6.25rpx; }
+  }
+  .item {
+    .img { width: 302rpx; height: 302rpx; margin-top: 20rpx; }
+    .name {
+      display: block;
+      width: 365.625rpx;
+      height: 35rpx;
+      color: #333;
+      font-size: 30rpx;
+      text-align: center;
+      overflow: hidden;
+      padding: 0 20rpx;
+      margin: 11.5rpx 0 22rpx 0;
+    }
+    .price {
+      display: block;
+      width: 365.625rpx;
+      height: 30rpx;
+      text-align: center;
+      font-size: 30rpx;
+      color: #b4282d;
+    }
+  }
+  .more-item { width: 100%; height: 100%; }
+  .more-a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    .txt {
+      width: 100%;
+      height: 33rpx;
+      line-height: 33rpx;
+      color: #333;
+      font-size: 33rpx;
+    }
+    .icon { width: 70rpx; height: 70rpx; margin: 60rpx auto 0 auto; }
+  }
+}
+
+
+.page {
   box-sizing: border-box;
   background-color: #f4f4f4;
   font-family: PingFangSC-Light,helvetica,'Heiti SC';
@@ -129,7 +335,6 @@ view,image,text,navigator{
   box-sizing: border-box;
   padding:0;
   margin:0;
-
 }
 
 view,text{
@@ -140,7 +345,7 @@ view,text{
 </style>
 
 <template>
-  <view class='index page'>
+  <view class="page">
     <!-- <view class="page__hd">
       <title name="xshop" desc="Just shop it." />
     </view> -->
@@ -165,29 +370,120 @@ view,text{
       </navigator>
       </block>
     </view>
-  </view>
 
-  <!-- a-section a-brand -->
-  <view class="a-section a-brand" wx:if="showBrands">
-    <view class="h">
-      <navigator url="../brand">
-        <text class="txt">品牌制造商直供</text>
-      </navigator>
-    </view>
-    <view class="b">
-      <block wx:for="{{brands}}" wx:key="{{item.id}}">
-        <navigator class="item item-1" url="/pages/brandDetail/brandDetail?id={{item.id}}">
-          <view class="wrap">
-            <image class="img" src="{{item.new_pic_url}}" mode="aspectFill" />
-            <view class="mt">
-              <text class="brand">{{item.name}}</text>
-              <text class="price">{{item.floor_price}}</text>
-              <text class="unit">元起</text>
-            </view>
-          </view>
+    <!-- a-section a-brand -->
+    <view class="a-section a-brand" wx:if="showBrands">
+      <view class="h">
+        <navigator url="../brand">
+          <text class="txt">品牌制造商直供</text>
         </navigator>
+      </view>
+      <view class="b">
+        <block wx:for="{{brands}}" wx:key="{{item.id}}">
+          <navigator class="item item-1" url="/pages/brandDetail/brandDetail?id={{item.id}}">
+            <view class="wrap">
+              <image class="img" src="{{item.new_pic_url}}" mode="aspectFill" />
+              <view class="mt">
+                <text class="brand">{{item.name}}</text>
+                <text class="price">{{item.floor_price}}</text>
+                <text class="unit">元起</text>
+              </view>
+            </view>
+          </navigator>
+        </block>
+      </view>
+    </view>
+
+    <!-- a-new -->
+    <view class="a-section a-new" wx:if="{{newGoods.length > 0}}">
+      <view class="h">
+        <navigator url="../newGoods">
+          <text class="txt">周一周四 · 新品首发</text>
+        </navigator>
+      </view>
+      <view class="b">
+        <block wx:for="{{newGoods}}" wx:for-index="index" wx:key="{{item.id}}">
+          <navigator class="item" url="../goods/goods?id={{item.id}}">
+            <image class="img" src="{{item.list_pic_url}}" background-size="cover" />
+            <text class="name">{{item.name}}</text>
+            <text class="price">￥{{item.retail_price}}</text>
+          </navigator>
+        </block>
+      </view>
+    </view>
+
+    <!-- popular -->
+    <view class="a-section a-popular" wx:if="{{hotGoods.length > 0}}">
+      <view class="h">
+        <navigator url="../hotGoods">
+          <text class="txt">人气推荐</text>
+        </navigator>
+      </view>
+      <view class="b">
+        <block wx:for="{{hotGoods}}" wx:for-index="index" wx:for-item="item" wx:key="{{item.id}}">
+          <navigator class="item" url="/pages/goods/goods?id={{item.id}}">
+            <image class="img" src="{{item.list_pic_url}}" background-size="cover" />
+            <view class="right">
+              <view class="text">
+                <text class="name">{{item.name}}</text>
+                <text class="desc">{{item.goods_brief}}</text>
+                <text class="price">￥{{item.retail_price}}</text>
+              </view>
+            </view>
+          </navigator>
+        </block>
+      </view>
+    </view>
+
+    <!-- topic -->
+    <view class="a-section a-topic" wx:if="{{topics.length > 0}}">
+      <view class="h">
+        <navigator url="../topic/topic" open-type="switchTab">
+          <text class="txt">专题精选</text>
+        </navigator>
+      </view>
+      <view class="b">
+        <scroll-view scroll-x="true" class="list">
+          <view clss="item" wx:for="{{topics}}" wx:key="{{item.id}}">
+            <navigator url="../topicDetail/topicDetail?id={{item.id}}">
+              <image class="img" src="{{item.scene_pic_url}}" background-size="cover" />
+              <view class="np">
+                <text class="name">{{item.title}}</text>
+                <text class="price">￥{{item.price_info}}元起</text>
+              </view>
+              <text class="desc">{{item.subtitle}}</text>
+            </navigator>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+
+    <!-- goods -->
+    <view class="good-grid">
+      <block wx:for="{{floorGoods}}" wx:key="{{item.id}}">
+        <view class="h">
+          <text>{{item.name}}</text>
+        </view>
+        <view class="b">
+          <block wx:for="{{item.goodsList}}" wx:for-index="ii" wx:for-item="elem" wx:key="{{elem.id}}" >
+            <view class="item {{ii % 2 == 0 ? '' : 'item-b'}}">
+              <navigator class="a" url="../goods/goods?id={{elem.id}}">
+                <image class="img" src="{{elem.list_pic_url}}" background-size="cover" />
+                <text class="name">{{elem.name}}</text>
+                <text class="price">￥{{elem.retail_price}}元起</text>
+              </navigator>
+            </view>
+          </block>
+          <view class="item item-b item-more">
+            <navigator class="more-a" url="/pages/category/category?id={{item.id}}">
+              <view class="txt">{{'更多'+item.name+'好物'}}</view>
+              <image class="icon" src="../images/icon_go_more.png" background-size="cover" />
+            </navigator>
+          </view>
+        </view>
       </block>
     </view>
+
   </view>
 </template>
 
@@ -234,15 +530,14 @@ view,text{
       util.request(api.IndexUrl).then((res) => {
         if (res.errno === 0) {
           const d = res.data;
-          that.setData({
-            newGoods: d.newGoodsList,
-            hotGoods: d.hotGoodsList,
-            topics: d.topicList,
-            brands: d.brandList,
-            floorGoods: d.categoryList,
-            banner: d.banner,
-            channel: d.channel
-          });
+          that.newGoods = d.newGoodsList;
+          that.hotGoods = d.hotGoodsList;
+          that.topics = d.topicList;
+          that.brands = d.brandList;
+          that.floorGoods = d.categoryList;
+          that.banner = d.banner;
+          that.channel = d.channel;
+          that.$apply();
         }
       });
     }
@@ -264,13 +559,14 @@ view,text{
       console.log(`${this.$name} unloaded.`);
     }
 
+    onReady() {
+    }
+
     onPageScroll() {
-      this.getIndexData();
       console.log(`${this.$name} onPageScroll.`);
     }
 
     onReachBottom() {
-      this.getIndexData();
       console.log(`${this.$name} onReachBottom.`);
     }
   }

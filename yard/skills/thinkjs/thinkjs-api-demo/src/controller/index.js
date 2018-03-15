@@ -16,7 +16,7 @@ module.exports = class extends Base {
       const catGoods = await this.model('goods').field(['id', 'name', 'list_pic_url', 'retail_price']).where({category_id: ['IN', childCatIds]}).limit(7).select();
       newCategoryList.push({
         id: item.id,
-        naem: item.name,
+        name: item.name,
         goodsList: catGoods
       });
     }
