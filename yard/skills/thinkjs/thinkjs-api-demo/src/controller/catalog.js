@@ -1,14 +1,14 @@
 const Base = require('./base.js');
 
 module.exports = class extends Base {
-  getField() {
-    return ['id', 'parent_id', 'name', 'front_name'];
+  getOutField() {
+    return ['id', 'parent_id', 'name', 'front_name', 'wap_banner_url'];
   }
 
   async indexAction() {
     const catId = this.get('id');
     const model = this.model('category');
-    const data = await model.limit(10).field(this.getField()).where({parent_id: 0}).select();
+    const data = await model.limit(10).field(this.getOutField()).where({parent_id: 0}).select();
 
     let currentCategory = null;
     if (catId) {
@@ -21,7 +21,7 @@ module.exports = class extends Base {
     // 获取子分类数据
     if (currentCategory && currentCategory.id) {
       currentCategory.subCategoryList = await model
-        .field(this.getField())
+        .field(this.getOutField())
         .where({parent_id: currentCategory.id})
         .select();
     }
@@ -42,7 +42,7 @@ module.exports = class extends Base {
     }
     // 获取子分类数据
     if (currentCategory && currentCategory.id) {
-      currentCategory.subCategoryList = await model.field(this.getField()).where({'parent_id': currentCategory.id}).select();
+      currentCategory.subCategoryList = await model.field(this.getOutField()).where({'parent_id': currentCategory.id}).select();
     }
 
     return this.success({
