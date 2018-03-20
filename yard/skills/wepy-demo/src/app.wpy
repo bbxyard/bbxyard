@@ -75,7 +75,8 @@ export default class extends wepy.app {
       'pages/gr/for',
       'pages/gr/if',
       'pages/fun/wheel',
-      'pages-xshop/index'
+      'pages-xshop/index',
+      'pages-xshop/catalog'
     ],
     window: {
       backgroundTextStyle: '#F8F8F8',

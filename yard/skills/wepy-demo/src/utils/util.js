@@ -1,4 +1,6 @@
-var api = require('../config.js').api;
+import wepy from 'wepy';
+// import 'wepy-async-function';
+const api = require('../config.js').api;
 
 /**
  * [formatTime description]
@@ -87,6 +89,38 @@ function request(url, data = {}, method = "GET") {
         console.log('failed');
       }
     });
+  });
+}
+
+/**
+ * request and set-values
+ * @param  {[type]} url  [description]
+ * @param  {[type]} succ [description]
+ * @param  {[type]} fail [description]
+ * @return {[type]}      [description]
+ */
+function Requester(url, data, method) {
+  this.url = url;
+  this.data = data || {};
+  this.method = method || 'GET';
+  this.run = function(succ, fail) {
+    request(this.url, this.data, this.method)
+    .then((res) => {
+      succ(res.data);
+    }, (err) => {
+      fail(err);
+    }); 
+  };
+  this.done = function(fn) {
+    console.log('request done');
+  }
+}
+
+function quickRequest(url, succ, fail) {
+  request(url).then((res) => {
+    succ(res.data);
+  }, (err) => {
+    fail(err);
   });
 }
 
@@ -180,6 +214,8 @@ function showErrorToast(msg) {
 module.exports = {
   formatTime,
   request,
+  Requester,
+  quickRequest,
   redirect,
   showErrorToast,
   checkSession,

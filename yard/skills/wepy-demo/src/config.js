@@ -1,6 +1,11 @@
+const xshopPages = [
+  '../pages-xshop/index',
+  '../pages-xshop/catalog'
+];
+
 const index = {
   list: [
-    { id: 'fun', name: '好玩', open: false, pages: ['../pages/fun/wheel', '../pages-xshop/index'] },
+    { id: 'fun', name: '好玩', open: false, pages: ['../pages/fun/wheel'].concat(xshopPages) },
     { id: 'grammar', name: '基础语法', open: false, pages: ['../pages/gr/for', '../pages/gr/if'] },
     { id: 'form', name: '表单', open: false, pages: ['../pages/index', '../pages/list', 'input', 'list', 'uploader'] },
     { id: 'widget', name: '基础组件', open: false, pages: ['article', 'badge', 'button', 'flex', 'grid', 'icons', 'loadmore', 'panel', 'preview', 'progress', 'slider'] },
