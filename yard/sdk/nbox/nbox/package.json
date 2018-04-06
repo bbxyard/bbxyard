@@ -1,6 +1,6 @@
 {
   "name": "nbox",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "npm and js utils box",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,7 @@
   "dependencies": {
     "node-fetch": "^2.0.0",
     "sprintf-js": "^1.1.1",
-    "superagent": "^3.8.2"
+    "superagent": "^3.8.2",
+    "wepy": "^1.7.1"
   }
 }

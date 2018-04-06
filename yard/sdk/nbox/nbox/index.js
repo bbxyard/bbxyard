@@ -1,9 +1,10 @@
+import UT from './lib/utils/util';
 
-
-function welcome() {
-  console.log("welcome use my npm package");
+function help() {
+  console.log("UT: ", UT);
 }
 
 module.exports = {
-  welcome: welcome
-}
+  help: help,
+  UT: UT
+};

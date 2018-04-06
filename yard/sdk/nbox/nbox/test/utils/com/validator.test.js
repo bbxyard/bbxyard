@@ -1,6 +1,9 @@
 var expect = require('chai').expect;
-import Validate from '../../lib/utils/Validate';
+import { UT } from '../../../index';
 
+const Validator = UT.Validator;
+
+// console.log(UT);
 
 /**
  * 手机号验证
@@ -8,10 +11,10 @@ import Validate from '../../lib/utils/Validate';
  */
 describe('手机号验证', function(){
   it('13x 11 digits', () => {
-    expect(Validate.tel('13581506320')).to.be.ok;
+    expect(Validator.tel('13581506320')).to.be.ok;
   });
   it('13x +86 not-ok', () => {
-    expect(Validate.tel('+8613581506320')).to.be.not.ok;
+    expect(Validator.tel('+8613581506320')).to.be.not.ok;
   });
 });
 
@@ -22,6 +25,6 @@ describe('手机号验证', function(){
  */
 describe('email测试', function(){
   it('stdandard email', () => {
-    expect(Validate.email('bbxyard@gmail.com')).to.be.ok;
+    expect(Validator.email('bbxyard@gmail.com')).to.be.ok;
   });
 });

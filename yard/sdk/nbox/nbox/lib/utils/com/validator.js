@@ -1,4 +1,8 @@
-export default class Validate {
+/**
+ * @file validator.js
+ * @description 数字、字符串校验相关
+ */
+class Validator {
   /**
    * 验证必填元素
    */
@@ -148,3 +152,7 @@ export default class Validate {
     return (param - value) > 0 || param == null;
   }
 }
+
+module.exports = {
+  Validator
+};

@@ -41,7 +41,7 @@ describe('sprintf-js', function() {
     debugPrint(s);
   });
   it('sprintf-object', () => {
-    let s = sprintf('Hallo %s: ' + ME.toString(), 'Object');
+    let s = sprintf('Hallo %s: %j', 'Object', ME);
     debugPrint(s);
   });
   it('sprintf-Named-arguments', () => {

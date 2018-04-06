@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var foo = require("../lib/foo");
+var foo = require("./foo");
 var add = foo.add;
 var mult = foo.mult;
 
