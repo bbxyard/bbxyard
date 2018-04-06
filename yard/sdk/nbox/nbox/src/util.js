@@ -10,7 +10,7 @@ const log = require('./com/logger'); // 日志
 const val = require('./com/validator'); // 检验器
 
 // 微信相关
-const wxapp = require('./wxapp/wxapp');
+const wxapp = require('./wxapp/misc');
 
 /**
  * 快捷私有接口

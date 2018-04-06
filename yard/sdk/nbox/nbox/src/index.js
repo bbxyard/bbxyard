@@ -1,4 +1,4 @@
-var UT = require('./lib/utils/util');
+var UT = require('./util');
 
 function help() {
   console.log("UT: ", UT);

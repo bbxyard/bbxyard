@@ -1,26 +1,34 @@
 const webpack = require('webpack');
+const pkg = require('./package.json');
+const fs = require('fs');
 
 const pubs = {
-  undefined: { mode: 'none', filename: 'main.js' },
-  development: { mode: 'development', filename: 'main.dev.js' },
-  production: { mode: 'production', filename: 'main.prod.js' }
+  undefined: { mode: 'none', filename: pkg.name + '.js' },
+  development: { mode: 'development', filename: pkg.name + '.dev.js' },
+  production: { mode: 'production', filename: pkg.name + '.prod.js' }
 };
 const NODE_ENV = process.env.NODE_ENV;
 const pub = pubs[NODE_ENV] || pubs['undefined'];
-const LABEL = '';
+const SrcMainJS = __dirname + '/src/index.js';
+const DistPath = __dirname + '/lib';
+
+const UTBasic = require('./src/com/misc');
+
+const now = UTBasic.genDataTimeHRStr();
+const LABEL = `Auto Gen ${pkg.version} at ${now} by ${pkg.author}.`;
 
 console.log('current publish is: ', pub);
 
 module.exports = {
   mode: pub.mode,
   devtool: 'null',
-  entry:  __dirname + "/lib/utils/util.js", //已多次提及的唯一入口文件
+  entry:  SrcMainJS, // 已多次提及的唯一入口文件
   output: {
-    path: __dirname + "/dist", //打包后的文件存放的地方
-    filename: pub.filename //打包后输出文件的文件名
+    path: DistPath, // 打包后的文件存放的地方
+    filename: pub.filename // 打包后输出文件的文件名
   },
   plugins:[
-    new webpack.BannerPlugin('Just do it.')
+    new webpack.BannerPlugin(LABEL)
   ],
   externals: {
     'wepy': 'wepy',
