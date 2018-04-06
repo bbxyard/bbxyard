@@ -2,8 +2,8 @@
  * @file strfmt
  * @description 字符串格式化
  */
-import {sprintf, vsprintf} from 'sprintf-js';
-import {genDataTimeHRStr} from './misc';
+import { sprintf, vsprintf } from 'sprintf-js';
+import { genDataTimeHRStr } from './misc';
 
 /**
  * @name tsprintf
@@ -89,19 +89,19 @@ function jtsprintf5(errno, subject, level, prompt, ...args) {
  * @description 对外接口
  */
 module.exports = {
-  sprintf: sprintf,
+  sprintf,
 
   // 带时间日期plain字符串版本
-  tsprintf: tsprintf,
-  tsprintf2: tsprintf2,
-  tsprintf3: tsprintf3,
-  tsprintf4: tsprintf4,
-  tsprintf5: tsprintf5,
+  tsprintf,
+  tsprintf2,
+  tsprintf3,
+  tsprintf4,
+  tsprintf5,
 
   // 带时间日期json对象版本.
-  jtsprintf: jtsprintf,
-  jtsprintf2: jtsprintf2,
-  jtsprintf3: jtsprintf3,
-  jtsprintf4: jtsprintf4,
-  jtsprintf5: jtsprintf5
+  jtsprintf,
+  jtsprintf2,
+  jtsprintf3,
+  jtsprintf4,
+  jtsprintf5
 };

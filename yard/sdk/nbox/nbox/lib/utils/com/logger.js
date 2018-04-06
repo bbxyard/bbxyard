@@ -2,7 +2,8 @@
  * @name logger
  * @description 基本Logger
  */
-import sfmt from './strfmt';
+const strfmt = require('./strfmt');
+// import { tsprintf, jtsprintf }  from './strfmt';
 import { debugPrint, CycleTask } from './misc';
 
 const LogLevelNameTable = [
@@ -106,7 +107,7 @@ class LoggerBase {
       combObj.canOutput = res.canOutput;
       combObj.level = res.name;
     }
-    const fn = (this.option.fmt === 'json') ? sfmt.jtsprintf : sfmt.tsprintf;
+    const fn = (this.option.fmt === 'json') ? strfmt.jtsprintf : strfmt.tsprintf;
     const item = fn(combObj);
     this.writeOneItem(item);
     // this.history.push(item);
