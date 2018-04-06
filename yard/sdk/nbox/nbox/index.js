@@ -1,4 +1,4 @@
-import UT from './lib/utils/util';
+var UT = require('./lib/utils/util');
 
 function help() {
   console.log("UT: ", UT);

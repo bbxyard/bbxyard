@@ -1,6 +1,6 @@
 {
   "name": "nbox",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "npm and js utils box",
   "main": "index.js",
   "scripts": {
