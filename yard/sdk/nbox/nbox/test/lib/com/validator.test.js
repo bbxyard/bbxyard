@@ -1,9 +1,8 @@
-var expect = require('chai').expect;
-import { UT } from '../../../lib/nbox';
-
+const expect = require('chai').expect;
+const nbox = require('../../../lib/nbox');
+const UT = nbox.com;
 const Validator = UT.Validator;
 
-// console.log(UT);
 
 /**
  * 手机号验证

@@ -1,7 +1,8 @@
 import chai from 'chai';
 const expect = chai.expect;
 
-import { UT } from '../../../lib/nbox';
+const nbox = require('../../../lib/nbox');
+const UT = nbox.com;
 
 const data = {
   info: {

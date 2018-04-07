@@ -4,12 +4,17 @@
   "description": "npm and js utils box",
   "main": "lib/nbox.js",
   "scripts": {
-    "test": "mocha --recursive",
-    "tree": "tree -d -L 2 -I node_modules",
     "build": "grunt build",
     "build-reserved": "webpack-cli",
     "build-dev-reserved": "NODE_ENV=development webpack-cli",
-    "build-prod-reserved": "NODE_ENV=production webpack-cli"
+    "build-prod-reserved": "NODE_ENV=production webpack-cli",
+    "clean": "grunt clean",
+    "test": "mocha --recursive test",
+    "test-lib": "mocha --recursive test/lib",
+    "test-3rd": "mocha --recursive test/_3rd",
+    "test-in": "mocha --recursive test/_in",
+    "test-mocha": "mocha --recursive test/_mocha",
+    "tree": "tree -d -L 2 -I node_modules"
   },
   "keywords": [
     "node",

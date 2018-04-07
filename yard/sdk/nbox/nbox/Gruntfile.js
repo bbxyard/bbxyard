@@ -77,10 +77,16 @@ module.exports = function(grunt) {
       grunt.log.writeln(LOG_PREFIX + this.name + ": " + arg1 + " " + arg2);
   });
 
-  grunt.registerTask('build', 'build and clean', function() {
-    grunt.log.writeln("build and clean");
+  grunt.registerTask('build', 'build', function() {
+    grunt.log.writeln("build: concat");
     grunt.task.run(['concat']);
-    grunt.file.delete("build");
+    // grunt.log.writeln('clean build dir');
+    // grunt.file.delete("build");
+  });
+
+  grunt.registerTask('clean', 'clean build and swap files', function() {
+    grunt.file.delete('build');
+    grunt.file.delete('dist');
   });
 
   grunt.registerTask('fs', 'FS Demo', function(){

@@ -1,13 +1,9 @@
 import chai from 'chai';
 const expect = chai.expect;
 
-import { UT } from '../../lib/nbox';
+const nbox = require('../../../lib/nbox');
+const UT = nbox.com;
 
-describe('Help', function() {
-  it('Show', () => {
-    console.log('UT: ', UT);
-  });
-})
 
 /**
  * @name String 区
@@ -31,7 +27,6 @@ describe('String', function() {
 describe('DT', function() {
   it('Format', () => {
     let s = UT.genDataTimeHRStr(new Date());
-    console.log('now is: ' + s);
-    // expect(4 + 5).to.be.equal(9);
+    UT.debugPrint('now is: ' + s);
   });
 });
