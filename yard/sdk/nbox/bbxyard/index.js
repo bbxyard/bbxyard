@@ -1,5 +1,3 @@
-
-
 function welcome() {
   console.log("welcome use my npm package");
 }
