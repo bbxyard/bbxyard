@@ -1,3 +1,7 @@
+/**
+ * @file webpack.config.js
+ * @description 目前编译出来用不了，暂时挂起 - 20180407
+ */
 const webpack = require('webpack');
 const pkg = require('./package.json');
 const fs = require('fs');
@@ -9,7 +13,8 @@ const pubs = {
 };
 const NODE_ENV = process.env.NODE_ENV;
 const pub = pubs[NODE_ENV] || pubs['undefined'];
-const SrcMainJS = __dirname + '/src/index.js';
+// const SrcMainJS = __dirname + '/src/index.js';
+const SrcMainJS = __dirname + '/src/com/foo.js';
 const DistPath = __dirname + '/lib';
 
 const UTBasic = require('./src/com/misc');
@@ -30,8 +35,8 @@ module.exports = {
   plugins:[
     new webpack.BannerPlugin(LABEL)
   ],
+  // target: 'node',
   externals: {
-    'wepy': 'wepy',
-    'sprintf-js': 'sprintf-js'
+    // 'wepy': 'wepy'
   }
 };

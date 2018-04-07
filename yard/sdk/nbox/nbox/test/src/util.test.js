@@ -1,7 +1,7 @@
 import chai from 'chai';
 const expect = chai.expect;
 
-import { UT } from '../../index';
+import { UT } from '../../lib/nbox';
 
 describe('Help', function() {
   it('Show', () => {

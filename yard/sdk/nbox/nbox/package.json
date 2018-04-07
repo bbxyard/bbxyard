@@ -1,13 +1,15 @@
 {
   "name": "nbox",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "npm and js utils box",
   "main": "lib/nbox.js",
   "scripts": {
     "test": "mocha --recursive",
-    "build": "webpack-cli",
-    "build-dev": "NODE_ENV=development webpack-cli",
-    "build-prod": "NODE_ENV=production webpack-cli"
+    "tree": "tree -d -L 2 -I node_modules",
+    "build": "grunt build",
+    "build-reserved": "webpack-cli",
+    "build-dev-reserved": "NODE_ENV=development webpack-cli",
+    "build-prod-reserved": "NODE_ENV=production webpack-cli"
   },
   "keywords": [
     "node",
@@ -28,12 +30,12 @@
     "lodash": "^4.17.5",
     "mocha": "^5.0.1",
     "mochawesome": "^3.0.2",
-    "webpack": "^4.5.0"
+    "webpack": "^4.5.0",
+    "node-fetch": "^2.0.0",
+    "superagent": "^3.8.2"
   },
   "dependencies": {
-    "node-fetch": "^2.0.0",
     "sprintf-js": "^1.1.1",
-    "superagent": "^3.8.2",
     "wepy": "^1.7.1"
   }
 }

@@ -1,10 +1,19 @@
-var UT = require('./util');
+/**
+ * @file index.js
+ * @description nbox 统一对外接口文件
+ */
 
 function help() {
-  console.log("UT: ", UT);
+  console.log('ALL: ', module.exports);
 }
 
-module.exports = {
-  help: help,
-  UT: UT
-};
+const NBOX = Object.assign(
+  {},
+  SUB_COM,
+  SUB_WX,
+  SUB_FOOBAR,
+  help
+);
+
+module.exports.nbox = NBOX;
+module.exports.help = help;

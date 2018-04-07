@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-import { UT } from '../../../index';
+import { UT } from '../../../lib/nbox';
 
 const Validator = UT.Validator;
 

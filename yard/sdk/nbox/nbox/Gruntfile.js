@@ -1,28 +1,41 @@
 module.exports = function(grunt) {
+  var now = grunt.template.today("yyyy-mm-dd");
+  var year = grunt.template.today("yyyy");
+  var pkg = grunt.file.readJSON("package.json");
+  var banner = `\n/* Auto Gen ${pkg.name}-${pkg.version} on ${now} by ${pkg.author} */\n\n`;
+  var footer = `\n/* Copyright (C) 2013-${year} ${pkg.author}. All rights reserved */\n`;
+  var bannerUglify = `/*! Auto Gen and Uglify ${pkg.name}-${pkg.version} on ${now} by ${pkg.author} */\n`;
 
   // project configuration
   grunt.initConfig({
-    pkg: grunt.file.readJSON("package.json"),
+    pkg: pkg,
 
-    uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> by boxu */\n'
+    concat: {
+      options: { 
+        separator: '\n',
+        banner: banner,
+        footer: footer
       },
-      dist: {
-        src: 'src/<%= pkg.name %>.js',
-        dest: 'dist/<%= pkg.name %>.min.js'
+      sub: {
+        files: {
+          'build/com.js': ['src/com/misc.js', 'src/com/validator.js', 'src/com/strfmt.js', 'src/com/logger.js', 'src/com.js'],
+          'build/wx.js': ['src/wx/misc.js', 'src/wx.js'],
+          'build/foobar.js': ['src/foobar/foo.js', 'src/foobar/bar.js', 'src/foobar.js']
+        }
       },
-      diy: {
-        src: 'src/jurl.js',
-        dest: 'dist/jurl.min.js'
+      all: {
+        src: ['build/com.js', 'build/wx.js', 'build/foobar.js', 'src/index.js'],
+        dest: "lib/<%= pkg.name %>.js"
       }
     },
 
-    concat: {
-      options: { separator: ';' },
+    uglify: {
+      options: {
+        banner: bannerUglify
+      },
       dist: {
-        src: ['lib/**/*.js'],
-        dest: "dist/<%= pkg.name %>.concat.js"
+        src: 'lib/<%= pkg.name %>.js',
+        dest: 'lib/<%= pkg.name %>.min.js'
       }
     },
 
@@ -45,9 +58,9 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['concat']);
 
   // adv
-  grunt.registerTask('dev', ['uglify', 'concat']);
+  grunt.registerTask('dev', ['concat', 'uglify']);
   grunt.registerTask('test', ['qunit']);
-  grunt.registerTask('all', ['uglify', 'concat', 'qunit']);
+  grunt.registerTask('all', ['concat', 'uglify', 'qunit']);
 
   // multiple task
   var PKG = grunt.file.readJSON("package.json");
@@ -64,10 +77,10 @@ module.exports = function(grunt) {
       grunt.log.writeln(LOG_PREFIX + this.name + ": " + arg1 + " " + arg2);
   });
 
-  grunt.registerTask('xixi', 'Simple task', function(){
-    grunt.log.writeln("Currently running the task: ", this.name);
-    grunt.task.requires('uglify');  // add depends
-    grunt.task.run(['uglify', 'concat']);
+  grunt.registerTask('build', 'build and clean', function() {
+    grunt.log.writeln("build and clean");
+    grunt.task.run(['concat']);
+    grunt.file.delete("build");
   });
 
   grunt.registerTask('fs', 'FS Demo', function(){

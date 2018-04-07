@@ -1,4 +1,4 @@
 var Info = {
   name: 'boxu',
-  hobby: ['reading', 'running']
+  hobby: ['coding', 'reading', 'running']
 };
