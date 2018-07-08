@@ -16,7 +16,7 @@
     .kind-list {}
     .kind-list__item {
       margin: 10px 0;
-      background-color: #FFFFF;
+      background-color: #FFF;
       border-radius: 2px;
       overflow: hidden;
       &:first-child { margin-top: 0; }
@@ -42,7 +42,7 @@
       <view class="page__title">WeUI</view>
       <view class="page__desc">WeUI 是一套同微信原生视觉体验一致的基础样式库，由微信官方设计团队为微信内网页和微信小程序量身设计，令用户的使用感知更加统一。</view>
     </view>
-    <view class="page__bd page_bd_spacing">
+    <view class="page__bd page__bd_spacing">
       <view class="kind-list">
         <repeat for="{{list}}" key="id">
           <view class="kind-list__item">

@@ -1,9 +1,53 @@
-<style>
-
+<style lang="less">
+  .pg-if {
+    background: green;
+    width: 400px;
+    height: 800px;
+    .par1 {
+      position: absolute;
+      left: 50rpx;
+      width: 300rpx;
+      height: 300rpx;
+      background: red;
+      z-index: 15;
+      .son1 {
+        position: absolute;
+        left: 50rpx;
+        top: 50rpx;
+        width: 100rpx;
+        height: 100rpx;
+        background-color: blue;
+      }
+    }
+    .par2 {
+      position: absolute;
+      left: 100rpx;
+      top: 100rpx;
+      width: 300rpx;
+      height: 300rpx;
+      background-color: pink;
+      z-index: 10;
+      .son2 {
+        position: absolute;
+        left: 50rpx;
+        top: 50rpx;
+        width: 100rpx;
+        height: 100rpx;
+        background-color: yellow;
+      }
+    }
+  }
 </style>
 
 <template>
-
+  <view class="pg-if">
+    <view class="par1">
+      <view class="son1"></view>
+    </view>
+    <view class="par2">
+      <view class="son2"></view>
+    </view>
+  </view>
 </template>
 
 <script>

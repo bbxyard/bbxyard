@@ -1,19 +1,112 @@
-<style>
-  .group-9x9 {
-    display: flex;
-    color: purple;
-    background-color: grey;
+<style lang="less">
+.group-9x9 {
+  display: flex;
+  color: purple;
+  background-color: grey;
+}
+.red { color: red; }
+.green { color: green; }
+
+.theme-sky-blue {
+  .myButton {
+    -moz-box-shadow: 0px 10px 14px -7px #276873;
+    -webkit-box-shadow: 0px 10px 14px -7px #276873;
+    box-shadow: 0px 10px 14px -7px #276873;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #599bb3), color-stop(1, #408c99));
+    background:-moz-linear-gradient(top, #599bb3 5%, #408c99 100%);
+    background:-webkit-linear-gradient(top, #599bb3 5%, #408c99 100%);
+    background:-o-linear-gradient(top, #599bb3 5%, #408c99 100%);
+    background:-ms-linear-gradient(top, #599bb3 5%, #408c99 100%);
+    background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#599bb3', endColorstr='#408c99',GradientType=0);
+    background-color:#599bb3;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    border-radius:8px;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:20px;
+    font-weight:bold;
+    padding:13px 32px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #3d768a;
   }
-  .red { color: red; }
-  .green { color: green; }
+  .myButton:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #408c99), color-stop(1, #599bb3));
+    background:-moz-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    background:-webkit-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    background:-o-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    background:-ms-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
+    background-color:#408c99;
+  }
+  .myButton:active {
+    position:relative;
+    top:1px;
+  }
+}
+
+.theme-light-orange {
+  .myButton {
+    -moz-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+    box-shadow:inset 0px 1px 0px 0px #fce2c1;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffc477), color-stop(1, #fb9e25));
+    background:-moz-linear-gradient(top, #ffc477 5%, #fb9e25 100%);
+    background:-webkit-linear-gradient(top, #ffc477 5%, #fb9e25 100%);
+    background:-o-linear-gradient(top, #ffc477 5%, #fb9e25 100%);
+    background:-ms-linear-gradient(top, #ffc477 5%, #fb9e25 100%);
+    background:linear-gradient(to bottom, #ffc477 5%, #fb9e25 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc477', endColorstr='#fb9e25',GradientType=0);
+    background-color:#ffc477;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #eeb44f;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #cc9f52;
+  }
+  .myButton:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #fb9e25), color-stop(1, #ffc477));
+    background:-moz-linear-gradient(top, #fb9e25 5%, #ffc477 100%);
+    background:-webkit-linear-gradient(top, #fb9e25 5%, #ffc477 100%);
+    background:-o-linear-gradient(top, #fb9e25 5%, #ffc477 100%);
+    background:-ms-linear-gradient(top, #fb9e25 5%, #ffc477 100%);
+    background:linear-gradient(to bottom, #fb9e25 5%, #ffc477 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fb9e25', endColorstr='#ffc477',GradientType=0);
+    background-color:#fb9e25;
+  }
+  .myButton:active {
+    position:relative;
+    top:1px;
+  }
+}
+
 </style>
 
 <template>
+<block>
   <template name="odd"> <text class="red">odd</text> </template>
   <template name="even"> <text class="green">even</text> </template>
 
   <view class="page">
     <title name="wx:for" desc="for基本用法" />
+    <view class="theme-sky-blue">
+      <button class="myButton">Hallo</button>
+    </view>
+    <view class="theme-light-orange">
+      <button class="myButton">Hallo</button>
+    </view>
     <view class="page__hd">
 
       <gtitleE name="自定义index,item" />
@@ -41,6 +134,7 @@
 
     </view>
   </view>
+</block>
 </template>
 
 <script>
