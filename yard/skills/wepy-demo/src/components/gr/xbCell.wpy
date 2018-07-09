@@ -1,0 +1,22 @@
+<style lang="less">
+.xb-comp-gr-cell {
+  display: block;
+}
+</style>
+
+<template>
+  <view class="xb-comp-gr-cell">
+    <slot name="before">BEFORE</slot>
+    Das ist inside.
+    <slot name="after">AFTER</slot>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+export default class XBCell extends wepy.component {
+  onLoad() {
+    console.log(`${this.$name} loaded.`);
+  }
+};
+</script>

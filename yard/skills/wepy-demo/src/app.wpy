@@ -74,6 +74,7 @@ export default class extends wepy.app {
       'pages/list',
       'pages/gr/for',
       'pages/gr/if',
+      'pages/gr/comp',
       'pages/fun/wheel',
       'pages-xshop/index',
       'pages-xshop/catalog'

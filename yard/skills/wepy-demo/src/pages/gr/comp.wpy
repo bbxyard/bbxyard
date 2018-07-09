@@ -1,0 +1,25 @@
+<style lang="less">
+.page-gr-comp {
+  display: block;
+}
+</style>
+
+<template>
+  <view class="page-gr-comp">
+    <myCell>
+      <view slot="before">Slot Before updated.</view>
+      <view slot="after">Slot After updated.</view>
+    </myCell>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import MyCell from '../../components/gr/xbCell';
+export default class GrComp extends wepy.page {
+  components = { myCell: MyCell };
+  onLoad() {
+    console.log(`${this.$name} loaded.`);
+  }
+}
+</script>
