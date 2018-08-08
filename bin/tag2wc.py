@@ -44,7 +44,7 @@ def txt2dictOrList(txt):
             if len(kv) < 2:
                 continue
             dict[kv[0]] = int(kv[1])
-        print dict
+        # print dict
         return dict
     else:
         return txt
@@ -131,16 +131,17 @@ def parse_args(arguments):
         color_func = WC.get_single_color_func(args.color)
     
     if args.colormask == None:
-        print("NONE ")
+        pass
+        # print("NONE ")
     elif len(args.colormask) == 0:
         if args.mask != None:
             color_func = WC.ImageColorGenerator(args.mask)
-        print "Empty [] SAME AS mask"
+        # print "Empty [] SAME AS mask"
     elif len(args.colormask) == 1:
         cmfile = args.colormask[0]
         image = np.array(Image.open(cmfile))
         color_func = WC.ImageColorGenerator(image)
-        print args.colormask
+        # print args.colormask
 
     args.collocations = not args.no_collocations
 
