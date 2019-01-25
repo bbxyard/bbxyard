@@ -5,9 +5,12 @@ TTS 700
 MTTS 600
 ISA 700
 ITrans 700
+iflytek 700
+设计模式 600
 
 Interphonic 500
 ViviVoice 400
+en-dict 400
 
 C++ 800
 JS 500
@@ -15,28 +18,33 @@ BASH 400
 LESS 300
 HTML 300
 WeApp 400
+Nodejs 300
 
-cat 200
-sed 200
-awk 200
-grep 200
+vim 400
+sed 300
+awk 300
+valgrid 300
 
-VPN 300
+VPN 400
 ReviewBoard 200
 MediaWiki 300
 Hexo 200
+Mermaid 250
 
 Boost 500
 Protobuf 300
 
-Server 500
-MySQL 400
+HTTPS 500
+MySQL 300
 Nginx 400
 Apache 400
+GCC 400
 
 Linux 600
 Solaris 400
 Cygwin 300
+MacOS 400
+Redhat 400
 
 徐波 700
 Brian 500
