@@ -1,0 +1,18 @@
+<template>
+  <<%= pkgName %>></<%= pkgName %>>
+</template>
+
+<script>
+export default {
+  config: {
+    usingComponents: {
+      '<%= pkgName %>': '<%= npmScopeStr %><%= pkgName %>'
+    }
+  },
+  data: { },
+  methods: { }
+}
+</script>
+
+<style>
+</style>

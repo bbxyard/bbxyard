@@ -1,0 +1,18 @@
+<template>
+  <wxc-toast></wxc-toast>
+</template>
+
+<script>
+export default {
+  config: {
+    usingComponents: {
+      'wxc-toast': 'wxc-toast'
+    }
+  },
+  data: { },
+  methods: { }
+}
+</script>
+
+<style>
+</style>
