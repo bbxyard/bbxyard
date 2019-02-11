@@ -5,14 +5,14 @@ hallo:
 # Init
 # ################
 init: init-box init-ref
-init-ref:
+init-box:
 	-git remote add -f cbox git@github.com:0a0a/cbox.git
 	-git remote add -f jbox git@github.com:0a0a/jbox.git
 	-git remote add -f nbox git@github.com:0a0a/nbox.git
 	-git remote add -f pbox git@github.com:0a0a/pbox.git
 	-git remote add -f wbox git@github.com:0a0a/wbox.git
 	-git remote add -f ybox git@github.com:0a0a/ybox.git
-init-study:
+init-ref:
 	-git remote add -f min-cli git@github.com:meili/min-cli.git
 
 # ########################
