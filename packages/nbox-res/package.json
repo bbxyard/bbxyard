@@ -1,0 +1,33 @@
+{
+  "name": "nbox-res",
+  "version": "0.3.3",
+  "description": "node-box-res useful resources. such as citys",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp build",
+    "test": "echo pass"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bbxyard/nbox.git"
+  },
+  "keywords": [
+    "nbox",
+    "javascript",
+    "node",
+    "js",
+    "bbxyard",
+    "resource",
+    "res",
+    "citys"
+  ],
+  "author": "bbxyard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bbxyard/nbox/issues"
+  },
+  "homepage": "https://github.com/bbxyard/nbox#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}

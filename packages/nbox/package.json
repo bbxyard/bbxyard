@@ -1,0 +1,32 @@
+{
+  "name": "nbox",
+  "version": "0.3.3",
+  "description": "nbox all in one.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo pass"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bbxyard/nbox.git"
+  },
+  "keywords": [
+    "nbox",
+    "javascript",
+    "node",
+    "js",
+    "bbxyard",
+    "tool",
+    "kit"
+  ],
+  "author": "bbxyard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bbxyard/nbox/issues"
+  },
+  "homepage": "https://github.com/bbxyard/nbox#readme",
+  "dependencies": {
+    "sprintf-js": "^1.1.1",
+    "wepy": "^1.7.1"
+  }
+}

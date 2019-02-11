@@ -1,0 +1,56 @@
+{
+  "name": "nbox-core",
+  "version": "0.3.5",
+  "description": "node-box-core js common utils box",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp build",
+    "build-by-grunt": "grunt build",
+    "build-reserved": "webpack-cli",
+    "build-dev-reserved": "NODE_ENV=development webpack-cli",
+    "build-prod-reserved": "NODE_ENV=production webpack-cli",
+    "clean": "grunt clean",
+    "test": "mocha --recursive test",
+    "test-lib": "mocha --recursive test/lib",
+    "test-3rd": "mocha --recursive test/_3rd",
+    "test-in": "mocha --recursive test/_in",
+    "test-mocha": "mocha --recursive test/_mocha",
+    "tree": "tree -d -L 2 -I node_modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bbxyard/nbox.git"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "bbxyard",
+    "utils",
+    "test"
+  ],
+  "author": "bbxyard",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.1.2",
+    "grunt": "^1.0.2",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^3.3.0",
+    "lodash": "^4.17.5",
+    "mocha": "^5.0.1",
+    "mochawesome": "^3.0.2",
+    "mockjs": "^1.0.1-beta3",
+    "node-fetch": "^2.0.0",
+    "superagent": "^3.8.2",
+    "webpack": "^4.5.0"
+  },
+  "dependencies": {
+    "sprintf-js": "^1.1.1",
+    "wepy": "^1.7.1"
+  },
+  "bugs": {
+    "url": "https://github.com/bbxyard/nbox/issues"
+  },
+  "homepage": "https://github.com/bbxyard/nbox#readme"
+}
