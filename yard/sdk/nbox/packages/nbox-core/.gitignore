@@ -1,0 +1,16 @@
+# idea
+.idea/workspace.xml
+.idea/
+
+# npm
+node_modules
+
+# output
+mochawesome-report
+
+# build
+build
+
+# build-publish
+./lib
+index.js

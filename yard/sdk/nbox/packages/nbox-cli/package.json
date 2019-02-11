@@ -1,0 +1,46 @@
+{
+  "name": "nbox-cli",
+  "version": "0.3.4",
+  "description": "nbox command line interface.",
+  "main": "bin/nbox.js",
+  "bin": {
+    "nbox": "./bin/nbox.js"
+  },
+  "scripts": {
+    "test": "echo pass"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bbxyard/nbox.git"
+  },
+  "keywords": [
+    "nbox",
+    "javascript",
+    "node",
+    "js",
+    "bbxyard",
+    "cli",
+    "kit"
+  ],
+  "author": "bbxyard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bbxyard/nbox/issues"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "homepage": "https://github.com/bbxyard/nbox#readme",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "chalk": "^2.3.2",
+    "commander": "^2.15.1",
+    "nbox": "^0.3.3",
+    "sprintf-js": "^1.1.1",
+    "wepy": "^1.7.1"
+  }
+}
