@@ -14,6 +14,14 @@ class StrTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('/a/b/c/', $s2);
     }
 
+    public function testStrArr() {
+        $s = 'hallo welt';
+        $we = substr($s, 6, 2);
+        $this->assertEquals('we', $we);
+        $arr = compact('s', 'we');
+        var_dump($arr);
+    }
+
     public function testEncode()
     {
         // md5
