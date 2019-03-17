@@ -39,13 +39,6 @@ class StrTest extends \PHPUnit\Framework\TestCase
         var_dump($farr);
     }
 
-    public function testF()
-    {
-        $file = '/etc/passwd';
-        echo @file_get_contents($file);
-        printf("ctime: %s, mtime=%s, atime=%s\n", filectime($file), filemtime($file), fileatime($file));
-    }
-
     public function testMisc()
     {
         $aa = 60;

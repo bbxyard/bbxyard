@@ -13,6 +13,24 @@ class FsTest extends \PHPUnit\Framework\TestCase {
     var_dump(self::list_info('/etc/passwd'));
   }
 
+  public function testStat() {
+    $fp = fopen('/etc/passwd', "r");
+    $stat = fstat($fp);
+    fclose($fp);
+    var_dump($stat);
+  }
+
+  public function testF() {
+    $file = '/etc/passwd';
+    echo @file_get_contents($file);
+    printf("ctime: %s, mtime=%s, atime=%s\n", filectime($file), filemtime($file), fileatime($file));
+  }
+
+  public function testPathinfo() {
+    printf("PWD: %s\n", posix_getcwd());
+    var_dump(pathinfo('/etc/passwd.tar.bz2'));
+  }
+
   // utils
   /**
    * 返回指定文件和目录的信息
