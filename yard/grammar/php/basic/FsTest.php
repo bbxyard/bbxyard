@@ -31,7 +31,7 @@ class FsTest extends \PHPUnit\Framework\TestCase {
     $dir['atime']      = fileatime($file);//返回文件的上次访问时间。
     $dir['ctime']      = filectime($file);//返回文件的上次改变时间。
     $dir['perms']      = fileperms($file);//返回文件的权限。
-    $dir['size']       = self::byte_format(filesize($file),2);//返回文件大小。
+    // $dir['size']       = self::byte_format(filesize($file),2);//返回文件大小。
     $dir['type']       = filetype($file);//返回文件类型。
     $dir['ext']        = is_file($file) ? pathinfo($file,PATHINFO_EXTENSION) : '';//返回文件后缀名
     $dir['mtime']      = filemtime($file);//返回文件的上次修改时间。
