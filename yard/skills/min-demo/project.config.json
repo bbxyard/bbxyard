@@ -1,0 +1,16 @@
+{
+  "miniprogramRoot": "wx-dist",
+	"description": "项目配置文件。",
+	"compileType": "miniprogram",
+	"libVersion": "1.9.1",
+	"appid": "wx60808110b43fdf0c",
+	"projectname": "MinUI-Demo",
+  "setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"condition": {}
+}
