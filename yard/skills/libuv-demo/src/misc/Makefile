@@ -1,15 +1,19 @@
 .PHONY: clean all
 
-GCC := gcc -O2 -g
+GCC 		:= gcc -O2 -g -Wall
 BIN_DIR := ../../bin
 
+
+# ####################################
+# Dashboard AREA
+# ####################################
 all: init env $(BIN_DIR)/thread_demo $(BIN_DIR)/thread_sum $(BIN_DIR)/tcp_server
 $(BIN_DIR)/thread_demo: thread_demo.c
-	$(GCC) -o $@ $^ -Wall `pkg-config --cflags --libs libuv`	
+	$(GCC) -o $@ $^ `pkg-config --cflags --libs libuv`	
 $(BIN_DIR)/thread_sum: thread_sum.cc
-	$(GCC) -o $@ $< -Wall $(shell pkg-config --cflags --libs libuv)
+	$(GCC) -o $@ $< $(shell pkg-config --cflags --libs libuv)
 $(BIN_DIR)/tcp_server: tcp_server.c
-	$(GCC) -o $@ $< -Wall $(shell pkg-config --cflags --libs libuv)
+	$(GCC) -o $@ $< $(shell pkg-config --cflags --libs libuv)
 
 env:
 	echo PKG_CONFIG_PATH=$(PKG_CONFIG_PATH)
