@@ -8,13 +8,15 @@
 
 class StrTest extends \PHPUnit\Framework\TestCase
 {
-    public function testStrReplace() {
+    public function testStrReplace()
+    {
         $s1 = ":a:b:c:";
         $s2 = str_replace(':', '/', $s1);
         $this->assertEquals('/a/b/c/', $s2);
     }
 
-    public function testStrArr() {
+    public function testStrArr()
+    {
         $s = 'hallo welt';
         $we = substr($s, 6, 2);
         $this->assertEquals('we', $we);
@@ -38,6 +40,19 @@ class StrTest extends \PHPUnit\Framework\TestCase
         array_push($farr, floatval(3));
         var_dump($farr);
     }
+    
+    public function testConv()
+    {
+        $kw1 = '<h1>hallo "unt" welt</h1>';
+        // 转义
+        $kw2 = addslashes($kw1);    // 加\
+        $kw3 = htmlspecialchars($kw1); // 加&
+        // 逆向
+        $kw121 = stripslashes($kw2);
+        $kw131 = htmlspecialchars_decode($kw3);
+        $arr = compact('kw1', 'kw2', 'kw3', 'kw121', 'kw131');
+        var_dump($arr);
+    }
 
     public function testMisc()
     {
@@ -46,21 +61,21 @@ class StrTest extends \PHPUnit\Framework\TestCase
         $cc = uniqid('hay-');
         $arr = compact('aa', 'bb', 'cc');
         // list($x, $y, $z) = $arr;
-        list($x, , $y) = ['boxu', '24', '1985'];
+        list($x,, $y) = ['boxu', '24', '1985'];
         var_dump($arr);
         echo "aa = $aa - $x, bb = $bb - $y\n";
-        echo 'hello '.'xxx'.$aa."\n";
-        echo date('Y-m-d H:i:s',time())."\n";
-        echo substr(md5('hallo welt'), 12, 8)."\n";
-        echo str_replace('Das ist', 'This is', '##Das ist China##')."\n";
-        echo str_replace('Das2 ist', 'This is', '##Das ist China##')."\n";
+        echo 'hello ' . 'xxx' . $aa . "\n";
+        echo date('Y-m-d H:i:s', time()) . "\n";
+        echo substr(md5('hallo welt'), 12, 8) . "\n";
+        echo str_replace('Das ist', 'This is', '##Das ist China##') . "\n";
+        echo str_replace('Das2 ist', 'This is', '##Das ist China##') . "\n";
         var_dump(strstr('hallo', 'abc'));
         var_dump(strpos('hallo', 'hall'));
         // var_dump(compact('a', 'b', 'c'));
-        echo uniqid('#hallo welt#')."\n";
-        echo uniqid()."\n";
-        echo uniqid(true)."\n";
-        echo uniqid(1)."\n";
-        echo "PHP版本:".phpversion();
+        echo uniqid('#hallo welt#') . "\n";
+        echo uniqid() . "\n";
+        echo uniqid(true) . "\n";
+        echo uniqid(1) . "\n";
+        echo "PHP版本:" . phpversion();
     }
 }
