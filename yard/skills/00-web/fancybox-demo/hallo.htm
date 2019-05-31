@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Facybox demo</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    <script>
+      $.fancybox.defaults.animationEffect = "rotate";
+      $(document).ready(function() {
+        $("a").fancybox();
+        $('[data-fancybox="gallery"]').fancybox({
+          'overlayShow': false,
+          protect: true,
+          afterLoad: function(instance, current) {
+            var pixelRatio = window.devicePixelRatio || 1;
+            if ( pixelRatio > 1.5 ) {
+              current.width  = current.width  / pixelRatio;
+              current.height = current.height / pixelRatio;
+            }
+          }
+        });
+        $('[data-fancybox="gallery-2"]').fancybox({
+          'zoomSpeedIn': 3000,
+          'zoomSpeedOut': 3000,
+          'overlayShow': true
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-4 col-xs-offset-4">
+          <h3>hallo welt 2019</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div>
+            <!-- inline内容 -->
+            <a class="fancybox" href="#data">this shows content of element who has id="data"</a>
+            <!-- 图片 -->
+            <a href="../../A/pic/in/spt-0000.jpg" data-fancybox="gallery" data-caption="first one" data-animation-effect="rotate"><img src="../../A/pic/in/spt-0000.jpg" alt="spt-0000" width="300"></a>
+            <a href="../../A/pic/in/spt-0001.jpg" data-fancybox="gallery" data-caption="second one" data-animation-effect="zoom"><img src="../../A/pic/in/spt-0001.jpg" alt="spt-0001" width="300"></a>
+            <a href="../../A/pic/in/spt-0002.jpg" data-fancybox="gallery" data-caption="third one" data-animation-effect="fade" ><img src="../../A/pic/in/spt-0005.jpg" alt="spt-0005" width="300"></a>
+            <!-- 图片 -->
+            <a href="../../A/pic/in/spt-0000.jpg" data-fancybox="gallery-2" data-caption="first one" data-animation-effect="slide" data-width="400"><img src="../../A/pic/in/spt-0000.jpg" alt="spt-0000" width="200"></a>
+            <a href="../../A/pic/in/spt-0001.jpg" data-fancybox="gallery-2" data-caption="second one" data-animation-effect="circular" data-width="100"><img src="../../A/pic/in/spt-0001.jpg" alt="spt-0001" width="200"></a>
+            <a href="../../A/pic/in/spt-0002.jpg" data-fancybox="gallery-2" data-caption="third one" data-animation-effect="tube" ><img src="../../A/pic/in/spt-0005.jpg" alt="spt-0005" width="200"></a>
+            <a href="../../A/pic/in/spt-0010.jpg" data-fancybox="gallery-2" data-caption="tenth one" data-animation-effect="zoom-in-out" data-type="image"><img src="../../A/pic/in/spt-0010.jpg" alt="spt-0010" width="200"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  </body>
+</html>
