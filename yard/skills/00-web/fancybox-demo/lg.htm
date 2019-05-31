@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Lightgallery Demo</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./bower_components/lightgallery.js/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="./bower_components/lightgallery.js/dist/css/lg-transitions.min.css">
+    <!-- <link rel="stylesheet" href="./bower_components/lightgallery.js/dist/css/lg-fb-comment-box.min.css"> -->
+
+    <style>
+      #lg-section { margin-top: 200px; }
+    </style>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div id="lg-section">
+          <a href="../../A/pic/in/spt-0000.jpg"><img src="../../A/pic/in/spt-0000.jpg" alt="spt-0000" width="300"></a>
+          <a href="../../A/pic/in/spt-0001.jpg"><img src="../../A/pic/in/spt-0001.jpg" alt="spt-0001" width="300"></a>
+          <a href="../../A/pic/in/spt-0002.jpg"><img src="../../A/pic/in/spt-0002.jpg" alt="spt-0002" width="300"></a>
+        </div>
+      </div>
+    </div>
+
+    <div id="yh-gallery">
+      <a href="https://vt.yvhai.com/wp-content/uploads/2019/04/ce00c7_5a67237df5a143898d42b4c47e099d98.jpg">
+        <img src="https://vt.yvhai.com/wp-content/uploads/2019/04/ce00c7_5a67237df5a143898d42b4c47e099d98.jpg" width="800" />
+      </a>
+      <a href="https://vt.yvhai.com/wp-content/uploads/2019/04/ce00c7_59d169fb713648d1ad245c7392877a23.jpg">
+        <img src="https://vt.yvhai.com/wp-content/uploads/2019/04/ce00c7_59d169fb713648d1ad245c7392877a23.jpg" width="800" />
+      </a>
+      <a href="https://vt.yvhai.com/wp-content/uploads/2019/04/ce00c7_0f5e11d22d0149a98dc6461f82d16365.jpg">
+        <img src="https://vt.yvhai.com/wp-content/uploads/2019/04/ce00c7_0f5e11d22d0149a98dc6461f82d16365.jpg" width="800" />
+      </a>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./bower_components/lightgallery.js/dist/js/lightgallery.min.js"></script>
+    <script>
+      lightGallery(document.getElementById('lg-section'), {
+        mode: 'lg-fade'
+      });
+    </script>
+    <script>
+      lightGallery(document.getElementById('yh-gallery'), {
+        mode: 'lg-fade'
+      });
+    </script>
+  </body>
+</html>
