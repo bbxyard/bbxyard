@@ -1,0 +1,22 @@
+{
+  "name": "bower-demo",
+  "homepage": "https://github.com/bbxyard/bbxyard",
+  "authors": [
+    "徐波 <bbxyard@gmail.com>"
+  ],
+  "description": "bower demo",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fancybox": "^3.5.7",
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1"
+  }
+}
