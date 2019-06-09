@@ -7,6 +7,9 @@ init: virtualenv python-env python3-env python3-web-env
 
 web-dev: web-flask
 
+start-flask-demo:
+	python3-web-env/bin/python3 flask-demo/hallo.py
+
 # ####################################
 # Init AREA
 # ####################################
