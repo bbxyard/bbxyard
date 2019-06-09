@@ -1,0 +1,7 @@
+python-env/
+python3-env/
+python3-web-env/
+
+*.log
+*.bak
+*.pyc
