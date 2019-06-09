@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Bower Demo</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="bower_components/timesheet.js/dist/timesheet.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <div id="timesheet"></div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./bower_components/timesheet.js/dist/timesheet.min.js"></script>
+    <script>
+      new Timesheet('timesheet', 2002, 2013, [
+        ['2002', '09/2002', 'A freaking awesome time', 'lorem'],
+        ['06/2002', '09/2003', 'Some great memories', 'ipsum'],
+        ['2003', 'Had very bad luck'],
+        ['10/2003', '2006', 'At least had fun', 'dolor'],
+        ['02/2005', '05/2006', 'Enjoyed those times as well', 'ipsum'],
+        ['07/2005', '09/2005', 'Bad luck again', 'default'],
+        ['10/2005', '2008', 'For a long time nothing happened', 'dolor'],
+        ['01/2008', '05/2009', 'LOST Season #4', 'lorem'],
+        ['01/2009', '05/2009', 'LOST Season #4', 'lorem'],
+        ['02/2010', '05/2010', 'LOST Season #5', 'lorem'],
+        ['09/2008', '06/2010', 'FRINGE #1 & #2', 'ipsum']
+      ]);
+    </script>
+  </body>
+</html>

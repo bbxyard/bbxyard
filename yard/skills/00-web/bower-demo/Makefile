@@ -18,6 +18,8 @@ demo-add:
 	bower install fancybox --save
 	bower install bootstrap --save
 	bower install jquery --save
+	bower install https://github.com/sbstjn/timesheet.js.git --save
+
 
 # ####################################
 # Utils AREA

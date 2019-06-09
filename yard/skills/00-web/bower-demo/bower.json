@@ -17,6 +17,7 @@
   "dependencies": {
     "fancybox": "^3.5.7",
     "bootstrap": "^4.3.1",
-    "jquery": "^3.4.1"
+    "jquery": "^3.4.1",
+    "timesheet.js": "https://github.com/sbstjn/timesheet.js.git"
   }
 }
