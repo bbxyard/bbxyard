@@ -1,0 +1,17 @@
+/**
+ * 控制元素状态的CSS，用于使用Javascript给元素添加或移除class，来控制元素状态
+ * @section State
+ * @example
+ * @code {CSS}
+ * .is-hidden   // 隐藏状态
+ *
+ */
+
+.is-hidden {
+  display: none !important;
+}
+
+.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
