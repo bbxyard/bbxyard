@@ -21,14 +21,21 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf8")
 
-def txt2dict(txt):
+# lns = "a 5\nb 10\nc 20".splitlines()
+def term2dict(lns):
   dict = {}
-  # lns = "a 5\nb 10\nc 20".splitlines()
-  lns = txt.splitlines()
   for x in lns:
     kv = x.strip().split(' ')
-    dict[kv[0]] = int(kv[1])
-  print lns
+    if len(kv) == 0:
+        continue
+    if len(kv) == 1:
+        kv.append(100)
+    # print(kv[0], kv[1])
+    if (dict.get(kv[0])):
+        dict[kv[0]] += int(kv[1])
+    else:
+        dict[kv[0]] = int(kv[1])
+  print(dict)
   return dict
 
 def txt2dictOrList(txt):
@@ -38,15 +45,10 @@ def txt2dictOrList(txt):
     # 判断第一行.
     firstLn = lns[0].strip()
     if re.search(r" [0-9]+$", firstLn, re.M | re.I):
-        dict = {}
-        for x in lns:
-            kv = x.strip().split(' ')
-            if len(kv) < 2:
-                continue
-            dict[kv[0]] = int(kv[1])
-        # print dict
+        dict = term2dict(lns)
         return dict
     else:
+        # print(txt)
         return txt
 
 def main(args):
@@ -61,10 +63,12 @@ def main(args):
         collocations=args.collocations)
 
     if type(args.text) == type({}):
+        print("xxxx")
         wc.generate_from_frequencies(args.text)
     else:
         text_cut = jieba.cut(args.text)   #分词
         new_textlist = ' '.join(text_cut)   #组合
+        print(new_textlist)
         wc.generate(new_textlist)
 
     image = wc.to_image()
@@ -89,7 +93,7 @@ def parse_args(arguments):
         help='specify file of stopwords (containing one word per line) to remove from the given text after parsing')
     parser.add_argument('-M', '--colormask', metavar='[file]', nargs="*",
         help='color mask to use for image coloring')
-    parser.add_argument('--relative_scaling', type=float, default=0,
+    parser.add_argument('-S', '--relative_scaling', type=float, default=1,
         metavar='rs', help=' scaling of words by frequency (0 - 1)')
     parser.add_argument('--margin', type=int, default=2,
         metavar='size', help='spacing to leave around words')
@@ -122,6 +126,7 @@ def parse_args(arguments):
     if args.stopwords:
         with args.stopwords:
             args.stopwords = set(map(str.strip, args.stopwords.readlines()))
+            print(args.stopwords)
 
     if args.mask:
         args.mask = np.array(Image.open(args.mask))
