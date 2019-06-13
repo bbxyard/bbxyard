@@ -10,6 +10,7 @@ all:
 	$(call doNewProj,react)
 	$(call doNewProj,standard)
 	$(call doNewProj,typescript)
+	# $(call doNewProj,think-rbac0)
 mult:
 	thinkjs new thinkjs-api-mult-demo api -m
 	thinkjs new thinkjs-vue-mult-demo vue -m
