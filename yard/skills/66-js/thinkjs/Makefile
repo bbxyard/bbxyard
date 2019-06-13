@@ -10,6 +10,10 @@ all:
 	$(call doNewProj,react)
 	$(call doNewProj,standard)
 	$(call doNewProj,typescript)
+mult:
+	thinkjs new thinkjs-api-mult-demo api -m
+	thinkjs new thinkjs-vue-mult-demo vue -m
+
 
 all-by-shell:
 	for x in $(shell thinkjs list | grep "-" | awk '{print $2}'); do thinkjs new thinkjs-$$x-demo $$x; done;
