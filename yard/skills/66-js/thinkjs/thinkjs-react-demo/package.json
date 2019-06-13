@@ -1,8 +1,8 @@
 {
-  "name": "thinkjs-React-demo",
+  "name": "thinkjs-react-demo",
   "description": "application created by thinkjs",
   "version": "1.0.0",
-  "author": "徐波 <bbxyard@gmail.com>",
+  "author": "bbxyard <bbxyard@gmail.com>",
   "scripts": {
     "start": "node development.js",
     "compile": "babel --no-babelrc src/ --presets think-node --out-dir app/",
@@ -49,14 +49,14 @@
   "homepage": "http://mywebsite.com/static/build",
   "thinkjs": {
     "metadata": {
-      "name": "thinkjs-React-demo",
+      "name": "thinkjs-react-demo",
       "description": "application created by thinkjs",
-      "author": "�� <bbxyard@gmail.com>",
+      "author": "bbxyard <bbxyard@gmail.com>",
       "babel": true
     },
-    "projectName": "thinkjs-React-demo",
-    "templateName": "React",
-    "cacheTemplatePath": "/Users/bbxyard/.think-templates/React",
+    "projectName": "thinkjs-react-demo",
+    "templateName": "react",
+    "cacheTemplatePath": "/Users/bbxyard/.think-templates/react",
     "clone": false,
     "isMultiModule": false
   }

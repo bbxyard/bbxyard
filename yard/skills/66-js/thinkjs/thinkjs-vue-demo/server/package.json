@@ -1,8 +1,8 @@
 {
-  "name": "thinkjs-Vue-demo",
+  "name": "thinkjs-vue-demo",
   "description": "application created by thinkjs",
   "version": "1.0.0",
-  "author": "徐波 <bbxyard@gmail.com>",
+  "author": "bbxyard <bbxyard@gmail.com>",
   "scripts": {
     "start": "node development.js",
     "test": "cross-env THINK_UNIT_TEST=1 nyc ava test/ && nyc report --reporter=html",

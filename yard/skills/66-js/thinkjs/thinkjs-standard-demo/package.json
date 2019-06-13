@@ -1,8 +1,8 @@
 {
-  "name": "thinkjs-Standard-demo",
+  "name": "thinkjs-standard-demo",
   "description": "application created by thinkjs",
   "version": "1.0.0",
-  "author": "徐波 <bbxyard@gmail.com>",
+  "author": "bbxyard <bbxyard@gmail.com>",
   "scripts": {
     "start": "node development.js",
     "test": "THINK_UNIT_TEST=1 nyc ava test/ && nyc report --reporter=html",
@@ -42,14 +42,14 @@
   "readmeFilename": "README.md",
   "thinkjs": {
     "metadata": {
-      "name": "thinkjs-Standard-demo",
+      "name": "thinkjs-standard-demo",
       "description": "application created by thinkjs",
-      "author": "�� <bbxyard@gmail.com>",
+      "author": "bbxyard <bbxyard@gmail.com>",
       "babel": true
     },
-    "projectName": "thinkjs-Standard-demo",
-    "templateName": "Standard",
-    "cacheTemplatePath": "/Users/bbxyard/.think-templates/Standard",
+    "projectName": "thinkjs-standard-demo",
+    "templateName": "standard",
+    "cacheTemplatePath": "/Users/bbxyard/.think-templates/standard",
     "clone": false,
     "isMultiModule": false
   }

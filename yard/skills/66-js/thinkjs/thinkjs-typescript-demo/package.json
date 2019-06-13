@@ -2,7 +2,7 @@
   "name": "thinkjs-typescript-demo",
   "description": "application created by thinkjs",
   "version": "1.0.0",
-  "author": "徐波 <bbxyard@gmail.com>",
+  "author": "bbxyard <bbxyard@gmail.com>",
   "scripts": {
     "start": "node development.js",
     "compile": "npm run lint && tsc",
@@ -38,7 +38,7 @@
     "metadata": {
       "name": "thinkjs-typescript-demo",
       "description": "application created by thinkjs",
-      "author": "�� <bbxyard@gmail.com>"
+      "author": "bbxyard <bbxyard@gmail.com>"
     },
     "projectName": "thinkjs-typescript-demo",
     "templateName": "typescript",
