@@ -15,6 +15,6 @@ class MeijuSpider(scrapy.Spider):
         for each_movie in movies:
             item = MovieItem()
             item['name'] = each_movie.xpath('./h5/a/@title').extract()[0]
-            print(item['name'])
+            # print(item['name'])
             yield item
 

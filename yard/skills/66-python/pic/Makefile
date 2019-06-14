@@ -8,7 +8,7 @@ LOG_FILE = movie.log
 # Dashboard AREA
 # ####################################
 start: $(OUT_DIR)
-	scrapy crawl meiju --logfile=$(OUT_DIR)/$(LOG_FILE) --output=$(OUT_DIR)/$(OUT_FILE) --pidfile=$(OUT_DIR)/run.pid
+	scrapy crawl xh --logfile=$(OUT_DIR)/$(LOG_FILE) --output=$(OUT_DIR)/$(OUT_FILE) --pidfile=$(OUT_DIR)/run.pid
 
 
 # ####################################
