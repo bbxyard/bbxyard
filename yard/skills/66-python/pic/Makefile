@@ -2,7 +2,7 @@
 
 OUT_DIR = out
 OUT_FILE = output.jl
-LOG_FILE = movie.log
+LOG_FILE = xh.log
 
 # ####################################
 # Dashboard AREA

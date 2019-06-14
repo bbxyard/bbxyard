@@ -22,3 +22,28 @@ class XhSpider(scrapy.Spider):
             # print (item)
             # 返回爬取数据
             yield item
+
+        # 获取下一页
+        # self.fetchNext(response)
+        navPageList = response.xpath('//div[@id="page"]/div[@class="page_num"]/a')
+        # print(navPageList)
+        for navPage in navPageList:
+            txt = navPage.xpath('./text()').extract()[0]
+            url = navPage.xpath('./@href').extract()[0]
+            # print(txt)
+            if txt == '下一页':
+                print(url)
+                yield scrapy.Request(url, callback=self.parse)
+                break;
+
+    def fetchNext(self, response):
+        navPageList = response.xpath('//div[@id="page"]/div[@class="page_num"]/a')
+        print(navPageList)
+        for navPage in navPageList:
+            txt = navPage.xpath('./text()').extract()[0]
+            url = navPage.xpath('./@href').extract()[0]
+            print(txt)
+            if txt == '下一页':
+                print(url)
+                yield scrapy.Request(url, callback=self.parse)
+                break;
