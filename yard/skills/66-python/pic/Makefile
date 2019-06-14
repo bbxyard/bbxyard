@@ -3,11 +3,12 @@
 OUT_DIR = out
 OUT_FILE = output.jl
 LOG_FILE = xh.log
+DOWN_DIR = download
 
 # ####################################
 # Dashboard AREA
 # ####################################
-start: $(OUT_DIR)
+start: $(OUT_DIR) $(DOWN_DIR)
 	scrapy crawl xh --logfile=$(OUT_DIR)/$(LOG_FILE) --output=$(OUT_DIR)/$(OUT_FILE) --pidfile=$(OUT_DIR)/run.pid
 
 
@@ -15,6 +16,8 @@ start: $(OUT_DIR)
 # Deps AREA
 # ####################################
 $(OUT_DIR):
+	mkdir -p $@
+$(DOWN_DIR):
 	mkdir -p $@
 
 

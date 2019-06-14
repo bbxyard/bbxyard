@@ -34,6 +34,6 @@ class PicPipeline(object):
         }
         req = urllib.request.Request(url=item['addr'], headers=headers)
         res = urllib.request.urlopen(req)
-        filepath = os.path.join('out', item['name'] + '.jpg')
+        filepath = os.path.join('download', item['name'] + '.jpg')
         with open(filepath, 'wb') as fp:
             fp.write(res.read())
