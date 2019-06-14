@@ -16,8 +16,9 @@ class XhSpider(scrapy.Spider):
             item = PicItem()
             name = pic.xpath('./img/@alt').extract()[0]
             addr = pic.xpath('./img/@src').extract()[0]
-            addr = 'http://www.xiaohua.com' + addr
+            addr = 'http://www.xiaohuar.com' + addr
             item['name'] = name
             item['addr'] = addr
+            # print (item)
             # 返回爬取数据
             yield item
