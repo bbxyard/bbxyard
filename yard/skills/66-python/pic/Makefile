@@ -3,7 +3,7 @@
 OUT_DIR = out
 OUT_FILE = output.jl
 LOG_FILE = xh.log
-DOWN_DIR = download
+DOWN_DIR = xiaohuar.com
 
 # ####################################
 # Dashboard AREA
