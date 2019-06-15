@@ -8,7 +8,18 @@ OUT_CSDN_PATH = $(OUT_DIR)/csdn
 # ####################################
 # Dashboard AREA
 # ####################################
-init: $(OUT_ZHIHU_PATH) $(OUT_CSDN_PATH)
+init: deps $(OUT_ZHIHU_PATH) $(OUT_CSDN_PATH)
+
+zhihu:
+	python3 spider_ask_zhihu.py
+
+
+# ####################################
+# Deps AREA
+# ####################################
+deps:
+	pip3 install requests
+	pip3 install jieba
 
 
 # ####################################
