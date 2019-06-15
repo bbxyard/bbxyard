@@ -6,7 +6,7 @@ NOW_LABEL 	:= $(shell date '+%Y%m%d')
 # ####################################
 # Dashboard AREA
 # ####################################
-tar: tar-so tar-movie tar-pic
+tar: tar-so tar-movie tar-pic tar-misc
 
 
 # ####################################
@@ -18,6 +18,8 @@ tar-movie:
 	$(call archDir,spider-movie-meijutt)
 tar-pic:
 	$(call archDir,spider-pic-xiaohuar)
+tar-misc:
+	$(call archDir,spider-misc)
 
 
 # ####################################
