@@ -13,10 +13,14 @@ start: deps
 ar:
 	$(PY3) archive.py
 
+office:
+	$(PY3) io_fmt_csv.py
+
+
 # ####################################
 # Deps AREA
 # ####################################
-deps: $(VENV_HOME) http-libs
+deps: $(VENV_HOME) http-libs office-libs
 
 $(VENV_HOME):
 	virtualenv -p $(shell which python3) $@
@@ -25,6 +29,8 @@ http-libs:
 	$(PIP3) install requests
 	$(PIP3) install httplib2
 
+office-libs:
+	$(PIP3) install openpyxl
 
 # ####################################
 # Utils AREA
@@ -32,3 +38,4 @@ http-libs:
 clean:
 	rm -rvf *.bak *.log
 	rm -rvf 'https:/'
+	[ -d out ] && rm -rvf out || >/dev/null
