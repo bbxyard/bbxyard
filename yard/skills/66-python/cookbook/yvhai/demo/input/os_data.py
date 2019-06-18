@@ -18,7 +18,7 @@ class OSData:
                 elif out_type == 'dict':
                     item = {}
                     item['name'] = row[0]
-                    item['user'] = row[0]
+                    # item['user'] = row[0]
                     item['uid'] = int(row[2])
                     item['gid'] = int(row[3])
                     item['home'] = row[5]
