@@ -12,6 +12,9 @@ class YHDemo:
     def __del__(self):
         print('YHDemo/%s Destroyed' % self.name)
 
+    def set_name(self, name):
+        self.name = name
+
     # 查询配置
     @staticmethod
     def get_conf_value(key, default_value=None):

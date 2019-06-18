@@ -47,101 +47,116 @@ SQL_TABLE_SELECT = ''' '''
 '''
 
 
-class MySQLOrgDemo(YHDemo):
+class MySQLMan(YHDemo):
+    def __init__(self, name):
+        super(MySQLMan, self).__init__(name)
+        self.client = None
+        self.db = None
+        self.db_name = ''
+
+    def list_all_dbs(self):
+        for x in self._run_sql('show databases;'):
+            print(x)
+
+    # 判断数据库是否已经存在
+    def verify_exist_db(self):
+        cnt = 0
+        for it in self._run_sql(SQL_EXIST_DB.format(self.db_name)):
+            cnt += 1
+        return cnt > 0
+
+    # 确保数据表存在
+    def verify_table(self):
+        self._run_sql(SQL_TABLE_CREATE)
+
+    # 创建数据库
+    def auto_create_db(self):
+        # 判定存在性, 确认为空，方可创建
+        if not self.verify_exist_db():
+            cursor = self._run_sql(SQL_CREATE_DB.format(self.db_name))
+            # 拉出来溜溜
+            self.list_all_dbs()
+        # 切换为当前数据库
+        self._run_sql(SQL_USE_DB.format(self.db_name))
+        # 确保数据表存在
+        self.verify_table()
+
+    # 删除数据库
+    def destroy_db(self):
+        self._run_sql(SQL_DESTROY_DB.format(self.db_name))
+        # 确认一下
+        self.list_all_dbs()
+
+    # 插入数据
+    def upsert(self, rows):
+        cnt = 0
+        try:
+            # 执行sql语句
+            for row in rows:
+                values = (row['name'], row['uid'], row['gid'], row['home'], row['shell'], row['brief'])
+                cursor = self._run_sql(SQL_TABLE_INSERT, values)
+                cnt += cursor.rowcount
+            # 提交到数据库执行
+            self.client.commit()
+        except:
+            # 如果发生错误则回滚
+            self.client.rollback()
+            cnt = 0
+        print("共计插入 - %d - 条记录" % cnt)
+        return cnt
+
+    # 执行一条SQL语句
+    def _run_sql(self, sql, values=None):
+        # 使用 cursor() 方法创建一个游标对象 cursor
+        cursor = self.client.cursor()
+        # 使用 execute()  方法执行 SQL 查询
+        sql = sql.strip('\n').strip()
+        if values:
+            cursor.execute(sql, values)
+        else:
+            cursor.execute(sql)
+        return cursor
+
+
+class MySQLOrgDemo(MySQLMan):
     def __init__(self):
         super(MySQLOrgDemo, self).__init__('MySQLConnector')
         self.client = None
         self.db = None
+        self.db_name = ''
 
     def connect(self, params):
+        self.db_name = params['database']
         self.client = mysql.connector.connect(
             host=params['host'],
             user=params['user'],
             passwd=params['passwd']
         )
-
-    def list_all_dbs(self):
-        cursor = self.client.cursor()
-        cursor.execute('show databases;')
-        for x in cursor:
-            print(x)
-
-    # 判断数据库是否已经存在
-    def verify_exist_db(self, db_name):
-        sql_exist_db = SQL_EXIST_DB.format(db_name)
-        cursor = self.client.cursor()
-        cursor.execute(sql_exist_db)
-        # cnt = cursor.rowcount
-        cnt = 0
-        for it in cursor: cnt += 1
-        return cnt > 0
-
-    # 创建数据库
-    def create_db(self, db_name):
-        # 判定存在性, 确认为空，方可创建
-        if not self.verify_exist_db(db_name):
-            sql_create_db = SQL_CREATE_DB.format(db_name)
-            cursor = self.client.cursor()
-            res = cursor.execute(sql_create_db)
-            # 拉出来溜溜
-            self.list_all_dbs()
-        # 切换为当前数据库
-        self.client.cursor().execute(SQL_USE_DB.format(db_name))
-        # 确保数据表存在
-        self.verify_table()
-
-    # 删除数据库
-    def destroy_db(self, db_name):
-        sql_destroy_db = SQL_DESTROY_DB.format(db_name)
-        self.client.cursor().execute(sql_destroy_db)
-        # 确认一下
-        self.list_all_dbs()
-
-    # 确保数据表存在
-    def verify_table(self):
-        self.client.cursor().execute(SQL_TABLE_CREATE)
-
-    # 插入数据
-    def upsert(self, rows):
-        cnt = 0
-        for row in rows:
-            values = (row['name'], row['uid'], row['gid'], row['home'], row['shell'], row['brief'])
-            cursor = self.client.cursor()
-            cursor.execute(SQL_TABLE_INSERT, values)
-            cnt += cursor.rowcount
-        self.client.commit()  # 数据表内容有更新，必须使用到该语句
-        print("共计插入 - %d - 条记录" % cnt)
+        # 确保数据库存在
+        self.auto_create_db()
 
 
-class PyMySQLDemo(YHDemo):
+class PyMySQLDemo(MySQLMan):
     def __init__(self):
         super(PyMySQLDemo, self).__init__('PyMySQL')
 
+    def __del__(self):
+        if self.client:
+            # 关闭数据库连接
+            self.client.close()
+            self.client = None
+
     def connect(self, params):
-        pass
+        self.db_name = params['database']
+        self.client = pymysql.connect(params['host'], params['user'], params['passwd'], '')
+        # 确保数据库存在
+        self.auto_create_db()
 
-    def list_all_dbs(self):
-        pass
-
-    def verify_exist_db(self, db_name):
-        pass
-
-    def create_db(self, db_name):
-        pass
-
-    def destroy_db(self, db_name):
-        pass
-
-    def verify_table(self):
-        pass
-
-    # 插入数据
-    def upsert(self, rows):
-        cnt = 0
-        return cnt
+    def _fetch_one(self, sql):
+        return self._run_sql(sql)
 
 
-class MySQLDemo(YHDemo):
+class MySQLDemo(MySQLMan):
     def __init__(self):
         super(MySQLDemo, self).__init__('MySQL')
 
@@ -157,14 +172,13 @@ class MySQLDemo(YHDemo):
         rows = OSData.parse_passwd_file('dict')
 
         # 汇编-连接参数
-        con_params = {'host': 'localhost', 'user': user, 'passwd': passwd}
+        con_params = {'host': 'localhost', 'user': user, 'passwd': passwd, 'database': db_name}
 
-        # mysql-connector 测试
+        # for m in [PyMySQLDemo()]:
         for m in (MySQLOrgDemo(), PyMySQLDemo()):
             m.connect(con_params)
-            m.create_db(db_name)
             m.upsert(rows)
-            m.destroy_db(db_name)
+            m.destroy_db()
 
         x = MySQLDemo()
         print(x)
