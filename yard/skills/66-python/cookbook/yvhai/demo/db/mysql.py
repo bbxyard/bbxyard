@@ -70,10 +70,10 @@ class MySQLOrgDemo(YHDemo):
     def verify_exist_db(self, db_name):
         sql_exist_db = SQL_EXIST_DB.format(db_name)
         cursor = self.client.cursor()
-        res = cursor.execute(sql_exist_db)
+        cursor.execute(sql_exist_db)
         # cnt = cursor.rowcount
         cnt = 0
-        for x in cursor: cnt += 1
+        for it in cursor: cnt += 1
         return cnt > 0
 
     # 创建数据库
@@ -91,9 +91,9 @@ class MySQLOrgDemo(YHDemo):
         self.verify_table()
 
     # 删除数据库
-    def destory_db(self, db_name):
-        sql_destory_db = SQL_DESTROY_DB.format(db_name)
-        self.client.cursor().execute(sql_destory_db)
+    def destroy_db(self, db_name):
+        sql_destroy_db = SQL_DESTROY_DB.format(db_name)
+        self.client.cursor().execute(sql_destroy_db)
         # 确认一下
         self.list_all_dbs()
 
@@ -117,16 +117,33 @@ class PyMySQLDemo(YHDemo):
     def __init__(self):
         super(PyMySQLDemo, self).__init__('PyMySQL')
 
+    def connect(self, params):
+        pass
+
+    def list_all_dbs(self):
+        pass
+
+    def verify_exist_db(self, db_name):
+        pass
+
+    def create_db(self, db_name):
+        pass
+
+    def destroy_db(self, db_name):
+        pass
+
+    def verify_table(self):
+        pass
+
+    # 插入数据
+    def upsert(self, rows):
+        cnt = 0
+        return cnt
+
 
 class MySQLDemo(YHDemo):
     def __init__(self):
         super(MySQLDemo, self).__init__('MySQL')
-
-    def connect(self):
-        pass
-
-    def insert(self, rows):
-        pass
 
     @staticmethod
     def demo(args=[]):
@@ -143,11 +160,11 @@ class MySQLDemo(YHDemo):
         con_params = {'host': 'localhost', 'user': user, 'passwd': passwd}
 
         # mysql-connector 测试
-        m1 = MySQLOrgDemo()
-        m1.connect(con_params)
-        m1.create_db(db_name)
-        m1.upsert(rows)
-        m1.destory_db(db_name)
+        for m in (MySQLOrgDemo(), PyMySQLDemo()):
+            m.connect(con_params)
+            m.create_db(db_name)
+            m.upsert(rows)
+            m.destroy_db(db_name)
 
         x = MySQLDemo()
         print(x)
