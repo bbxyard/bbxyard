@@ -18,8 +18,11 @@ class OSData:
                 elif out_type == 'dict':
                     item = {}
                     item['name'] = row[0]
-                    item['uid'] = row[2]
-                    item['gid'] = row[3]
+                    item['uid'] = int(row[2])
+                    item['gid'] = int(row[3])
+                    item['home'] = row[5]
+                    item['shell'] = row[6]
+                    item['brief'] = row[4]
                     out.append(item)
                 # print(row)
         return out
