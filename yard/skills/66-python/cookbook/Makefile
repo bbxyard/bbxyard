@@ -20,7 +20,7 @@ office:
 # ####################################
 # Deps AREA
 # ####################################
-deps: $(VENV_HOME) http-libs office-libs
+deps: $(VENV_HOME) http-libs office-libs db-libs
 
 $(VENV_HOME):
 	virtualenv -p $(shell which python3) $@
@@ -30,7 +30,13 @@ http-libs:
 	$(PIP3) install httplib2
 
 office-libs:
+	$(PIP3) install pandas
 	$(PIP3) install openpyxl
+
+db-libs:
+	$(PIP3) install pymongo
+	$(PIP3) install pymysql
+
 
 # ####################################
 # Utils AREA
