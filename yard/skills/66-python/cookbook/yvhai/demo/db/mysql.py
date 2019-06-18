@@ -5,30 +5,41 @@ import mysql.connector
 import pymysql
 
 from yvhai.demo.base import YHDemo
+from yvhai.demo.input.os_data import OSData
+
 
 # SQL语句
-SQL_EXIST_DB  = '''
+
+# # 数据库管理
+SQL_EXIST_DB = '''
     SELECT * from information_schema.SCHEMATA where SCHEMA_NAME='{0}'
 '''
 SQL_CREATE_DB = '''
     CREATE DATABASE {0} DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
 '''
-SQL_DESTROY_DB = '''
-    DROP DATABASE {0}
-'''
+SQL_DESTROY_DB = ''' DROP DATABASE {0} '''
+SQL_USE_DB = ''' USE {0} '''
 
-SQL_CREATE_TABLE = '''
-    CREATE TABLE yh_etc_passwd (
-         id  INT NOT NULL,
-         user CHAR(64),
-         uid INT,
-         gid INT,  
-         home CHAR(128),
-         brief CHAR(128)
+# # 表管理
+SQL_TABLE_CREATE = '''
+    CREATE TABLE IF NOT EXISTS yh_etc_passwd (
+         id  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+         name CHAR(64) NOT NULL default '',
+         uid INT NOT NULL default 0,
+         gid INT NOT NULL default 0,
+         home CHAR(128) NOT NULL default '',
+         shell CHAR(128) NOT NULL default '',
+         brief CHAR(128) NOT NULL default '',
+         ctime timestamp not null default current_timestamp
     )
 '''
-SQL_DESTROY_TABLE = '''  '''
+SQL_TABLE_DESTROY = '''  '''
 
+# # 增删改查
+SQL_TABLE_INSERT = "INSERT INTO yh_etc_passwd (name, uid, gid, home, shell, brief) VALUES (%s, %s, %s, %s, %s, %s) "
+SQL_TABLE_UPDATE = ''' '''
+SQL_TABLE_DELETE = ''' '''
+SQL_TABLE_SELECT = ''' '''
 
 
 '''
@@ -60,10 +71,9 @@ class MySQLOrgDemo(YHDemo):
         sql_exist_db = SQL_EXIST_DB.format(db_name)
         cursor = self.client.cursor()
         res = cursor.execute(sql_exist_db)
-        # 先来个搓办法
+        # cnt = cursor.rowcount
         cnt = 0
-        for it in cursor:
-            cnt += 1
+        for x in cursor: cnt += 1
         return cnt > 0
 
     # 创建数据库
@@ -75,6 +85,10 @@ class MySQLOrgDemo(YHDemo):
             res = cursor.execute(sql_create_db)
             # 拉出来溜溜
             self.list_all_dbs()
+        # 切换为当前数据库
+        self.client.cursor().execute(SQL_USE_DB.format(db_name))
+        # 确保数据表存在
+        self.verify_table()
 
     # 删除数据库
     def destory_db(self, db_name):
@@ -82,6 +96,21 @@ class MySQLOrgDemo(YHDemo):
         self.client.cursor().execute(sql_destory_db)
         # 确认一下
         self.list_all_dbs()
+
+    # 确保数据表存在
+    def verify_table(self):
+        self.client.cursor().execute(SQL_TABLE_CREATE)
+
+    # 插入数据
+    def upsert(self, rows):
+        cnt = 0
+        for row in rows:
+            values = (row['name'], row['uid'], row['gid'], row['home'], row['shell'], row['brief'])
+            cursor = self.client.cursor()
+            cursor.execute(SQL_TABLE_INSERT, values)
+            cnt += cursor.rowcount
+        self.client.commit()  # 数据表内容有更新，必须使用到该语句
+        print("共计插入 - %d - 条记录" % cnt)
 
 
 class PyMySQLDemo(YHDemo):
@@ -105,14 +134,19 @@ class MySQLDemo(YHDemo):
         user = MySQLDemo.get_conf_value('MYSQL_USER', 'root')
         passwd = MySQLDemo.get_conf_value('MYSQL_PSWD', '')
         db_name = MySQLDemo.get_conf_value('DB_NAME', 'yh_os_fs')
-        tab_name = MySQLDemo.get_conf_value('DB_TAB_NAME', 'etc_passwd')
+        # tab_name = MySQLDemo.get_conf_value('DB_TAB_NAME', 'etc_passwd')
 
+        # 数据准备
+        rows = OSData.parse_passwd_file('dict')
+
+        # 汇编-连接参数
         con_params = {'host': 'localhost', 'user': user, 'passwd': passwd}
 
         # mysql-connector 测试
         m1 = MySQLOrgDemo()
         m1.connect(con_params)
         m1.create_db(db_name)
+        m1.upsert(rows)
         m1.destory_db(db_name)
 
         x = MySQLDemo()
