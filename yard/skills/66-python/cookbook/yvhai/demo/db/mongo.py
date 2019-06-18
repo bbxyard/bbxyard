@@ -10,6 +10,8 @@ from yvhai.demo.input.os_data import OSData
 class MongoDemo(YHDemo):
     def __init__(self):
         super(MongoDemo, self).__init__('Mongo')
+        self.client = None
+        self.db = None
 
     def connect(self, params):
         self.client = pymongo.MongoClient('localhost', 27017)
@@ -32,7 +34,7 @@ class MongoDemo(YHDemo):
         # MongoDemo.visit_cursor('查询name<z', tab.find({'name': {'$lt', 'z'}}))
         # 查询-数值
         MongoDemo.visit_cursor('查询uid=0', tab.find({'uid': 0}))
-        MongoDemo.visit_cursor('查询uid<10, 降序', tab.find({'uid': {'$lt': 10}}).sort('name', -1))
+        MongoDemo.visit_cursor('查询uid<=10, 降序', tab.find({'uid': {'$lte': 10}}).sort('name', -1))
         # 查询-正则
         MongoDemo.visit_cursor('查询-正则', tab.find({'name': {'$regex': '^[a-z]'}}))
 
@@ -53,10 +55,6 @@ class MongoDemo(YHDemo):
         left_rows = rows[0:mid]
         right_rows = rows[mid:]
 
-        # 文档化(加入_id)
-        for row in rows:
-            row['_id'] = row['uid']
-
         # 单个插入
         left_ids = []
         for row in left_rows:
@@ -71,6 +69,27 @@ class MongoDemo(YHDemo):
         print('right_ids: ', right_ids.inserted_ids)
         print('tablist: ', tab_name_list)
 
+    def write_or_update(self, tab_name, rows):
+        tab = self.db[tab_name]
+        res = []
+        for row in rows:
+            cursor = tab.find({'_id': row['_id']}, {'_id': 1})
+            if cursor.count() > 0:
+                r = tab.update_one({'_id': row['_id']}, {'$set': row})
+                res.append((r.upserted_id, r.matched_count, r.modified_count))
+            else:
+                r = tab.insert_one(row)
+                res.append((r.inserted_id, 1, 1))
+        print('write_or_update result: ', res)
+
+    def write_by_upsert(self, tab_name, rows):
+        tab = self.db[tab_name]
+        res = []
+        for row in rows:
+            r = tab.update_one({'_id': row['_id']}, {'$set': row}, upsert=True)
+            res.append((r.upserted_id, r.matched_count, r.modified_count))
+        print('write_by_upsert: ', res)
+
     def update(self, tab_name, cond, patch_item):
         tab = self.db[tab_name]
         # 查询、更新、再查
@@ -80,11 +99,21 @@ class MongoDemo(YHDemo):
 
     @staticmethod
     def demo(args=[]):
-        tab_name = 'etc_passwd_5'
+        tab_name = 'etc_passwd_8'
+
+        # 文档化(加入_id)
         rows = OSData.parse_passwd_file('dict')
+        for row in rows:
+            row['_id'] = row['uid']
+
+        # 写入数据
         m = MongoDemo()
         m.connect({'db': 'yh_os_fs'})
         # m.write(tab_name, rows)
+        m.write_or_update(tab_name, rows)
+        m.write_by_upsert(tab_name, rows)
+
+        # 查询数据
         m.show_info(tab_name)
         m.query(tab_name)
         # 测试更新

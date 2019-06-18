@@ -12,5 +12,6 @@ def main():
     # Mongo、Redis、SSDB
     MongoDemo.demo()
 
+
 if __name__ == '__main__':
     main()
