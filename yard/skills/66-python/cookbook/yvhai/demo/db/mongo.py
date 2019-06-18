@@ -97,6 +97,29 @@ class MongoDemo(YHDemo):
         tab.update_one(cond, patch_item)
         MongoDemo.visit_cursor('更新后: ', tab.find(cond))
 
+    # 删除满足条件的数据
+    def rm(self, tab_name, cond):
+        tab = self.db[tab_name]
+        # 方便演示，这里先查询一把
+        cursor = tab.find(cond, {'_id': 1})
+        expect_cnt = cursor.count()
+        rm_ed_cnt = 0
+        # 删除一条
+        if expect_cnt == 1:
+            r = tab.delete_one(cond)
+            rm_ed_cnt = r.deleted_count
+        # 删除多条
+        elif expect_cnt > 1:
+            r = tab.delete_many(cond)
+            rm_ed_cnt = r.deleted_count
+        res = (cond, expect_cnt, rm_ed_cnt)
+        print(res)
+        return res
+
+    '''
+    增删改查
+    '''
+
     @staticmethod
     def demo(args=[]):
         tab_name = 'etc_passwd_8'
@@ -116,7 +139,12 @@ class MongoDemo(YHDemo):
         # 查询数据
         m.show_info(tab_name)
         m.query(tab_name)
+
         # 测试更新
         m.update(tab_name, {'uid': 0}, {'$set': {'name': 'admin'}})
         m.update(tab_name, {'_id': 0}, {'$set': {'name': 'root'}})
+
+        # 删除数据
+        m.rm(tab_name, {'name': 'nobody'})
+        m.rm(tab_name, {'shell': {'$regex': '^\/usr\/bin'}})
         print(m)
