@@ -36,6 +36,7 @@ office-libs:
 db-libs:
 	$(PIP3) install pymongo
 	$(PIP3) install pymysql
+	$(PIP3) install mysql-connector
 
 
 # ####################################

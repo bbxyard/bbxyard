@@ -10,7 +10,7 @@ def main():
     # MySQL、
     MySQLDemo.demo()
     # Mongo、Redis、SSDB
-    MongoDemo.demo()
+    # MongoDemo.demo()
 
 
 if __name__ == '__main__':
