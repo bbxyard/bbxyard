@@ -38,7 +38,7 @@ SQL_TABLE_DESTROY = '''  '''
 # # 增删改查
 SQL_TABLE_INSERT = "INSERT INTO yh_etc_passwd (name, uid, gid, home, shell, brief) VALUES (%s, %s, %s, %s, %s, %s) "
 SQL_TABLE_UPDATE = ''' '''
-SQL_TABLE_DELETE = ''' '''
+SQL_TABLE_DELETE = '''DELETE FROM yh_etc_passwd WHERE uid > 200'''
 SQL_TABLE_SELECT = ''' '''
 
 
