@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+# xml 资源
+
+
+xml_w3_book = """
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<bookstore>
+
+<book>
+  <title lang="eng">Harry Potter</title>
+  <price>29.99</price>
+</book>
+
+<book>
+  <title lang="eng">Learning XML</title>
+  <price>39.95</price>
+</book>
+
+</bookstore>
+"""

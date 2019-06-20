@@ -34,6 +34,7 @@ office-libs:
 	$(PIP3) install openpyxl
 
 db-libs:
+	$(PIP3) install redis
 	$(PIP3) install pymongo
 	$(PIP3) install pymysql
 	$(PIP3) install mysql-connector
