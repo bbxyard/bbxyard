@@ -7,6 +7,7 @@ from yvhai.demo.std.shutil import ShUtilDemo
 from yvhai.demo.std.sys import SysDemo
 from yvhai.demo.std.datetime import DTDemo
 from yvhai.demo.std.re import RegexDemo
+from yvhai.demo.std.logging import LogerDemo
 
 
 if __name__ == '__main__':
@@ -16,3 +17,4 @@ if __name__ == '__main__':
     SysDemo.demo()
     DTDemo.demo()
     RegexDemo.demo()
+    LogerDemo.demo()

@@ -23,14 +23,14 @@ SQL_USE_DB = ''' USE {0} '''
 # # 表管理
 SQL_TABLE_CREATE = '''
     CREATE TABLE IF NOT EXISTS yh_etc_passwd (
-         id  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-         name CHAR(64) NOT NULL default '',
-         uid INT NOT NULL default 0,
-         gid INT NOT NULL default 0,
-         home CHAR(128) NOT NULL default '',
-         shell CHAR(128) NOT NULL default '',
-         brief CHAR(128) NOT NULL default '',
-         ctime timestamp not null default current_timestamp
+        id  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        name CHAR(64) NOT NULL default '',
+        uid INT NOT NULL default 0,
+        gid INT NOT NULL default 0,
+        home CHAR(128) NOT NULL default '',
+        shell CHAR(128) NOT NULL default '',
+        brief CHAR(128) NOT NULL default '',
+        ctime timestamp not null default current_timestamp
     )
 '''
 SQL_TABLE_DESTROY = '''  '''

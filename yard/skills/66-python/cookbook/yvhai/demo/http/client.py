@@ -5,12 +5,14 @@ import requests
 import urllib
 import httplib2
 
+from yvhai.demo.base import YHDemo
+
 headers = {
     'User-Agent': ''
 }
 
 
-class HttpRequester:
+class HttpRequester(YHDemo):
 
     @staticmethod
     def get(url, params):
@@ -41,11 +43,11 @@ class HttpRequester:
         res = (headers, content) = hObj.request(url, 'GET')
         return res
 
-
-def main():
-    res = HttpRequester.get('https://baidu.com', {'ie': 'utf-8', 'tn': 'baidu', 'wd': 'hallo'})
-    print(res)
+    @staticmethod
+    def demo(args=[]):
+        res = HttpRequester.get('https://baidu.com', {'ie': 'utf-8', 'tn': 'baidu', 'wd': 'hallo'})
+        print(res)
 
 
 if __name__ == "__main__":
-    main()
+    HttpRequester.demo()
