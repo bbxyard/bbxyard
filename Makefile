@@ -12,7 +12,7 @@ TOOLKIT_GIT_PREFIX := $(SUB_SDK_GIT_PREFIX)
 TOOLKIT_LOCAL_PREFIX := yard/toolkits
 
 REF_LIST := min-cli
-REF_GIT_PREFIX := git@github.com:meili
+REF_GIT_PREFIX := git@github.com:yh24
 REF_LOCAL_PREFIX := ref
 
 
@@ -69,7 +69,7 @@ gpull: gpull-self ginit
 gpush: gpom ginit
 	$(call doSubListPush,$(SUB_SDK_LIST),$(SUB_SDK_LOCAL_PREFIX),$(SUB_SDK_GIT_PREFIX))
 	$(call doSubListPush,$(TOOLKIT_LIST),$(TOOLKIT_LOCAL_PREFIX),$(TOOLKIT_GIT_PREFIX))
-	$(call doSubListPush,$(REF_LIST),$(REF_LOCAL_PREFIX),$(REF_GIT_PREFIX))
+	# $(call doSubListPush,$(REF_LIST),$(REF_LOCAL_PREFIX),$(REF_GIT_PREFIX))
 
 
 # ####################################
