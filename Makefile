@@ -1,5 +1,41 @@
-hallo:
-	echo "hallo"
+.PHONY: init clean
+all: gpull
+
+BRANCH := master
+
+SUB_SDK_LIST := cbox jbox nbox pbox wbox ybox
+SUB_SDK_GIT_PREFIX := git@github.com:0a0a
+SUB_SDK_LOCAL_PREFIX := yard/sdk
+
+TOOLKIT_LIST := docker
+TOOLKIT_GIT_PREFIX := $(SUB_SDK_GIT_PREFIX)
+TOOLKIT_LOCAL_PREFIX := yard/toolkits
+
+REF_LIST := min-cli
+REF_GIT_PREFIX := git@github.com:meili
+REF_LOCAL_PREFIX := ref
+
+
+DATA_SUF = $(shell date +"%Y.%m.%d.%H.%M.%S")
+GUP_MSG  = "Auto Commited at $(DATA_SUF)"
+DEPLOY_ENV =
+
+SUB_LIST = yh-os-init yh-user yh-brew yh-mongo \
+	  yh-run-clean yh-nodejs \
+	  yh-ssh-key
+
+ifdef MSG
+	GUP_MSG = "$(MSG)"
+endif
+
+ifdef HOST
+	DEPLOY_ENV = THIS_HOST_NAME=$(HOST)
+endif
+
+
+# ####################################
+# Dashboard AREA
+# ####################################
 
 # ################
 # Init
@@ -110,3 +146,97 @@ ybox-add: ybox
 ybox-pull: ybox
 ybox-push: ybox
 ybox:
+
+
+# ####################################
+# git
+# ####################################
+gpom:
+	git add .
+	git commit -am $(GUP_MSG) || >/dev/null
+	git push origin master
+	git status
+gs:
+	git status
+ga:
+	git add .
+gpull-self:
+	git pull
+gpush-self: gpom
+
+
+# gpull:  gpull-self gpull-sub-box gpull-deploy
+# gpull-sub-box:
+# 	for x in $(SUB_LIST); do \
+# 		grep "$$x" .git/config >/dev/null || git remote add -f $$x $(SUB_SDK_GIT_PREFIX)/$$x.git; \
+# 		[ ! -d "roles/$$x" ] && git subtree add --prefix=roles/$$x $$x $(BRANCH) --squash || >/dev/null; \
+# 		$(call doSubPull,$$x); \
+# 	done;
+# gpull-deploy:
+# 	grep "yh-roles-deploy" .git/config >/dev/null || git remote add -f yh-roles-deploy $(SUB_SDK_GIT_PREFIX)/yh-roles-deploy.git; \
+# 	[ ! -d "deploy" ] && git subtree add --prefix=deploy yh-roles-deploy $(BRANCH) --squash || >/dev/null; \
+# 	git subtree pull --prefix=deploy yh-roles-deploy $(BRANCH) --squash
+
+ginit:
+	$(call doSubListInit,$(SUB_SDK_LIST),$(SUB_SDK_LOCAL_PREFIX),$(SUB_SDK_GIT_PREFIX))
+	$(call doSubListInit,$(TOOLKIT_LIST),$(TOOLKIT_LOCAL_PREFIX),$(TOOLKIT_GIT_PREFIX))
+	$(call doSubListInit,$(REF_LIST),$(REF_LOCAL_PREFIX),$(REF_GIT_PREFIX))
+
+gpull: gpull-self ginit
+gpush: gpom ginit
+
+# gpush: gpush-self gpush-sub gpush-deploy
+# gpush-sub:
+# 	for x in $(SUB_LIST); do \
+# 		grep "$$x" .git/config >/dev/null || git remote add -f $$x $(SUB_SDK_GIT_PREFIX)/$$x.git; \
+# 		[ ! -d "roles/$$x" ] && git subtree add --prefix=roles/$$x $$x $(BRANCH) --squash || >/dev/null; \
+# 		$(call doSubPush,$$x); \
+# 	done;
+# gpush-deploy:
+# 	grep "yh-roles-deploy" .git/config >/dev/null || git remote add -f yh-roles-deploy $(SUB_SDK_GIT_PREFIX)/yh-roles-deploy.git; \
+# 	[ ! -d "deploy" ] && git subtree add --prefix=deploy yh-roles-deploy $(BRANCH) --squash || >/dev/null; \
+# 	git subtree push --prefix=deploy yh-roles-deploy $(BRANCH) || >/dev/null
+
+
+# ####################################
+# Utils AREA
+# ####################################
+define doSubListInit
+	for x in $(1); do \
+		grep "$$x" .git/config >/dev/null || git remote add -f $$x $(3)/$$x.git	\
+		[ ! -d "$(2)/$$x" ] && git subtree add --prefix=$(2)/$$x $$x $(BRANCH) --squash || >/dev/null	\
+	done;
+endef
+
+define doSubListPull
+	for x in $(1); do \
+		git subtree pull --prefix=$(2)/$$x $$x $(BRANCH) --squash; \
+	done;
+endef
+
+define doSubListPush
+	for x in $(1); do \
+		git subtree push --prefix=$(2)/$$x $$x $(BRANCH) || >/dev/null; \
+	done;
+endef
+
+
+# define doSubInit
+# 	grep "$(1)" .git/config >/dev/null || git remote add -f $(1) git@github.com:a0a0/$(1).git
+# 	[ ! -d "$(2)" ] && git subtree add --prefix=$(2) $(1) $(BRANCH) --squash || >/dev/null
+# endef
+
+# define doSubPull
+# 	git subtree pull --prefix=$(2) $(1) $(BRANCH) --squash
+# endef
+
+# define doSubPush
+# 	git subtree push --prefix=$(2) $(1) $(BRANCH) || >/dev/null
+# endef
+
+
+# ####################################
+# Fini AREA
+# ####################################
+clean:
+	rm -rvf *.bak *.log
