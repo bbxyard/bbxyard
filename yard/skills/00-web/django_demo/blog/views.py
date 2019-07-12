@@ -23,3 +23,19 @@ def article_content(request):
     }
     json_res = json.dumps(res)
     return HttpResponse(json_res)
+
+
+def display_article_list(request):
+    article_list = Article.objects.all()
+    context = {
+        "article_list": article_list
+    }
+    return render(request, "article/index.html", context=context)
+
+
+def display_article_detail(request):
+    article = Article.objects.all()[0]
+    context = {
+        "article": article
+    }
+    return render(request, "article/detail.html", context=context)

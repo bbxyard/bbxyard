@@ -8,6 +8,7 @@ class Article(models.Model):
     article_id = models.AutoField(primary_key=True)
     # 文章标题
     title = models.TextField()
+    subtitle = models.TextField(default='')
     # 文章摘要
     brief_content = models.TextField()
     # 文章内容
