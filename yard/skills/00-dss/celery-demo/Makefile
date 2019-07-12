@@ -7,6 +7,9 @@
 start-worker:
 	celery worker -A 'celery_app' -l info
 
+start-beat:
+	celery beat -A 'celery_app' -l info
+
 
 # ####################################
 # Utils AREA
