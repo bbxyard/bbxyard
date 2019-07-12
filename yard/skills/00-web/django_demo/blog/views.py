@@ -35,14 +35,18 @@ def display_article_list(request):
 
 def display_article_detail(request, article_id):
     article_list = Article.objects.all()
-    article = None
-    for x in article_list:
-        if x.article_id == article_id:
-            article = x
+    prev_article, article, next_article, cnt = None, None, None, len(article_list)
+    for index, item in enumerate(article_list):
+        if item.article_id == article_id:
+            article = item
+            if index > 0: prev_article = article_list[index - 1]
+            if index + 1 < cnt: next_article = article_list[index + 1]
             break
 
     context = {
         "article": article,
+        "prev_article": prev_article,
+        "next_article": next_article,
         "section_list": article.content.split('\n')
     }
     return render(request, "article/detail.html", context=context)

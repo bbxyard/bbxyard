@@ -21,12 +21,31 @@
         </div>
     </div>
     <div class="row page-body">
-        <div class="col-md-12 col-offset-10" style="background-color: cornsilk;">
+        <div class="col-md-12 col-offset-10" style="color: #cccccc;">
             {% for section in section_list %}
                 <p>{{ section }}</p>
             {% endfor %}
         </div>
     </div>
+
+    <nav aria-label="more pages">
+        <ul class="pagination">
+            {% if prev_article %}
+            <li class="page-item">
+                <a class="page-link" href="/blog/{{ prev_article.article_id }}">
+                  << {{ prev_article.title }}
+                </a>
+            </li>
+            {% endif %}
+            {% if next_article %}
+            <li class="page-item">
+                <a class="page-link" href="/blog/{{ next_article.article_id }}">
+                  {{ next_article.title }} >>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
 </div>
 
 <!-- Optional JavaScript -->
