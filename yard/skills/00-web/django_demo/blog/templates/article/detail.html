@@ -28,24 +28,29 @@
         </div>
     </div>
 
-    <nav aria-label="more pages">
-        <ul class="pagination">
-            {% if prev_article %}
-            <li class="page-item">
-                <a class="page-link" href="/blog/{{ prev_article.article_id }}">
-                  << {{ prev_article.title }}
-                </a>
-            </li>
-            {% endif %}
-            {% if next_article %}
-            <li class="page-item">
-                <a class="page-link" href="/blog/{{ next_article.article_id }}">
-                  {{ next_article.title }} >>
-                </a>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>
+    <div class="body-footer">
+        <div class="col-md-4 col-md-offset-3">
+            <nav aria-label="more pages">
+                <ul class="pagination justify-content-center">
+                    {% if prev_article %}
+                        <li class="page-item">
+                            <a class="page-link" href="/blog/{{ prev_article.article_id }}">
+                                << {{ prev_article.title }}
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if next_article %}
+                        <li class="page-item">
+                            <a class="page-link" href="/blog/{{ next_article.article_id }}">
+                                {{ next_article.title }} >>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+
 </div>
 
 <!-- Optional JavaScript -->

@@ -2,8 +2,8 @@ import json
 
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 from .models import Article
-
 
 # Create your views here.
 
@@ -26,9 +26,23 @@ def article_content(request):
 
 
 def display_article_list(request):
+    page = request.GET.get('page')
+    page = int(page) if page else 1
+
     article_list = Article.objects.all()
+    paginator = Paginator(article_list, 2)
+    page_num = paginator.num_pages
+    page_article_list = paginator.page(page)
+    prev_page = page - 1 if page_article_list.has_previous() else page
+    next_page = page + 1 if page_article_list.has_next() else page
+
     context = {
-        "article_list": article_list
+        "latest_article_list": article_list,
+        "article_list": page_article_list.object_list,
+        "page_num_range": range(1, page_num + 1),
+        "cur_page": page,
+        "prev_page": prev_page,
+        "next_page": next_page
     }
     return render(request, "article/index.html", context=context)
 
