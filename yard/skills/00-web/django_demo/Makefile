@@ -13,6 +13,18 @@ migrate:
 	$(CTL) makemigrations
 	$(CTL) migrate
 
+shell:
+	$(CTL) shell
+
+
+# ####################################
+# Admin AREA
+# ####################################
+admin-init:
+	$(CTL) createsuperuser
+admin-change-password:
+	$(CTL) changepassword
+
 
 # ####################################
 # Create AREA
