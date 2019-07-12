@@ -1,20 +1,24 @@
 .PHONY: clean all
 
-PORT := 8080
-
+PORT 	:= 8080
+CTL		:= python3 manage.py
 
 # ####################################
 # Dashboard AREA
 # ####################################
 start:
-	python3 manage.py runserver $(PORT)
+	$(CTL) runserver $(PORT)
+
+migrate:
+	$(CTL) makemigrations
+	$(CTL) migrate
 
 
 # ####################################
 # Create AREA
 # ####################################
 blog:
-	python3 manage.py startapp $@
+	$(CTL) startapp $@
 
 
 # ####################################
