@@ -36,8 +36,10 @@ def display_article_list(request):
     prev_page = page - 1 if page_article_list.has_previous() else page
     next_page = page + 1 if page_article_list.has_next() else page
 
+    latest_article_list = Article.objects.order_by('-publish_date')[:5]
+
     context = {
-        "latest_article_list": article_list,
+        "latest_article_list": latest_article_list,
         "article_list": page_article_list.object_list,
         "page_num_range": range(1, page_num + 1),
         "cur_page": page,
