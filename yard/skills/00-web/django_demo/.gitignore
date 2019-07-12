@@ -67,4 +67,4 @@ docs/_build/
 target/
 
 # data
-db.sqlite3
+# db.sqlite3
