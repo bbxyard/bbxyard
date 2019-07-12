@@ -22,9 +22,9 @@
     </div>
     <div class="row page-body">
         <div class="col-md-12 col-offset-10" style="background-color: cornsilk;">
-            <p>
-                {{ article.content }}
-            </p>
+            {% for section in section_list %}
+                <p>{{ section }}</p>
+            {% endfor %}
         </div>
     </div>
 </div>

@@ -33,9 +33,16 @@ def display_article_list(request):
     return render(request, "article/index.html", context=context)
 
 
-def display_article_detail(request):
-    article = Article.objects.all()[0]
+def display_article_detail(request, article_id):
+    article_list = Article.objects.all()
+    article = None
+    for x in article_list:
+        if x.article_id == article_id:
+            article = x
+            break
+
     context = {
-        "article": article
+        "article": article,
+        "section_list": article.content.split('\n')
     }
     return render(request, "article/detail.html", context=context)
