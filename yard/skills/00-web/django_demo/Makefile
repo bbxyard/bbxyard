@@ -3,15 +3,17 @@
 PORT 	:= 8080
 CTL		:= python3 manage.py
 
+FIXTURE_FILE = log/fixture.json
+FIXTURE_PRETTY_FILE = log/fixture-pretty.json
+
+
 # ####################################
 # Dashboard AREA
 # ####################################
 start:
 	$(CTL) runserver $(PORT)
 
-migrate:
-	$(CTL) makemigrations
-	$(CTL) migrate
+migrate: db-gen
 
 shell:
 	$(CTL) shell
@@ -24,6 +26,23 @@ admin-init:
 	$(CTL) createsuperuser
 admin-change-password:
 	$(CTL) changepassword
+
+
+# ####################################
+# Data AREA
+# ####################################
+log:
+	mkdir -p $@
+db-shell:
+	$(CTL) dbshell
+db-gen:
+	$(CTL) makemigrations
+	$(CTL) migrate
+db-dump: log
+	$(CTL) dumpdata -o $(FIXTURE_FILE)
+	$(CTL) dumpdata --indent 2 -o $(FIXTURE_PRETTY_FILE)
+db-load: log
+	$(CTL) loaddata $(FIXTURE_FILE)
 
 
 # ####################################

@@ -68,3 +68,4 @@ target/
 
 # data
 # db.sqlite3
+log/
