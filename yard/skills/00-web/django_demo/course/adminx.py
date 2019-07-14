@@ -1,10 +1,10 @@
-from django.contrib import admin
+import xadmin as admin
 from .models import Course, Teacher, Student, TeacherAssistant
 
 # Register your models here.
 
 
-class CourseAppAdmin(admin.ModelAdmin):
+class CourseAppAdmin(object):
     list_display = ('nickname', 'updated_at')
     list_filter = ('updated_at', )
 

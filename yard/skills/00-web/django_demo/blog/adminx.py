@@ -1,5 +1,5 @@
-from .models import Article
 import xadmin
+from .models import Article
 
 
 class ArticleAdmin(object):
