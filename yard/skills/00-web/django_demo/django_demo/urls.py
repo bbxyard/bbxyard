@@ -16,7 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from com.adapter.urls import path, include
 
+# xadmin
+from xadmin.plugins import xversion
+import xadmin
+
+xversion.register_models()
+xadmin.autodiscover()
+
 urlpatterns = [
+    path('xadmin/', xadmin.site.urls),
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
     path('course/', include('course.urls'))

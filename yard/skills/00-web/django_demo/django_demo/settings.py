@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # xadmin
+    'xadmin',
+    'crispy_forms',
+    'reversion',
+
     # diy
     'blog.apps.BlogConfig',
     'course.apps.CourseConfig'

@@ -3,6 +3,9 @@
 PORT 	:= 8080
 CTL		:= python3 manage.py
 
+VENV	:= py3-django-xadmin
+
+
 FIXTURE_FILE = log/fixture.json
 FIXTURE_PRETTY_FILE = log/fixture-pretty.json
 
@@ -52,6 +55,18 @@ db-orm-import:
 # ####################################
 blog:
 	$(CTL) startapp $@
+
+
+# ####################################
+# Django Evn AREA
+# ####################################
+verify-venv:
+	workon | grep $(VENV) || mkvirtualenv $(VENV)
+
+verify-venv-deps:
+	pip3 install pillow
+	pip3 install https://codeload.github.com/sshwsfc/xadmin/zip/django2
+	# pip3 install -r https://raw.githubusercontent.com/sshwsfc/xadmin/master/requirements.txt
 
 
 # ####################################
