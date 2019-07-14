@@ -11,6 +11,14 @@ class CourseAppAdmin(object):
 
 class CourseTabAdmin(CourseAppAdmin):
     list_display = ('title', 'updated_at')
+    data_charts = {
+        "order_stat": {
+            'title': "订单统计",
+            "x-field": "online_date",
+            "y-field": ("price", "volume"),
+            "order": ("online_date", )
+        }
+    }
 
 
 admin.site.register(Course, CourseTabAdmin)
