@@ -43,6 +43,8 @@ db-dump: log
 	$(CTL) dumpdata --indent 2 -o $(FIXTURE_PRETTY_FILE)
 db-load: log
 	$(CTL) loaddata $(FIXTURE_FILE)
+db-orm-import:
+	python3 orm_data.py
 
 
 # ####################################
