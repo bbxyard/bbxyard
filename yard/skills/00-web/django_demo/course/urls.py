@@ -1,4 +1,4 @@
-from django.urls import path, include
+from com.adapter.urls import path, include
 import course.views
 
 
