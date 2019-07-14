@@ -9,11 +9,28 @@ class CourseAppAdmin(admin.ModelAdmin):
     list_filter = ('updated_at', )
 
 
+@admin.register(Course)
 class CourseTabAdmin(CourseAppAdmin):
-    list_display = ('title', 'updated_at')
+    list_display = ('title', 'type', 'price', 'volume', 'online_date')
+
+    # list_per_page设置每页显示多少条记录，默认是100条
+    list_per_page = 5
+
+    # ordering设置默认排序字段，负号表示降序排序
+    ordering = ('-online_date',)
+
+    # list_editable 设置默认可编辑字段
+    list_editable = ['type', 'price']
+
+    # fk_fields 设置显示外键字段
+    # fk_fields = ('teacher_id',)
+
+    # 筛选器
+    list_filter = ('type', 'price', 'volume', 'online_date')
+    search_fields = ('type', 'price', 'volume')
+    date_hierarchy = 'online_date'
 
 
-admin.site.register(Course, CourseTabAdmin)
 admin.site.register(Teacher, CourseAppAdmin)
 admin.site.register(Student, CourseAppAdmin)
 admin.site.register(TeacherAssistant, CourseAppAdmin)
