@@ -31,6 +31,17 @@ class CourseTabAdmin(CourseAppAdmin):
     date_hierarchy = 'online_date'
 
 
+@admin.register(Student)
+class StudentTabAdmin(CourseAppAdmin):
+    # many to many
+    filter_horizontal = ('course', )
+    # 字段排列
+    fieldsets = (
+        ("基本信息", {"fields": [("nickname"), ("age", "gender", "study_time")]}),
+        ("内容", {"fields": ["course"]})
+    )
+
+
 admin.site.register(Teacher, CourseAppAdmin)
-admin.site.register(Student, CourseAppAdmin)
+# admin.site.register(Student, CourseAppAdmin)
 admin.site.register(TeacherAssistant, CourseAppAdmin)
