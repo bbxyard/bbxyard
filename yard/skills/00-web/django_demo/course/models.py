@@ -118,6 +118,9 @@ class Teacher(models.Model):
     def __str__(self):
         return self.nickname
 
+    def __getstate__(self):
+        return {"nickname": self.nickname, "fans": self.fans}
+
     class Meta:
         verbose_name = "讲师信息表"
         verbose_name_plural = verbose_name
@@ -156,6 +159,9 @@ class Student(models.Model):
 
     def __str__(self):
         return self.nickname
+
+    def __getstate__(self):
+        return {"nickname": self.nickname}
 
     class Meta:
         verbose_name = "学生信息表"
