@@ -12,5 +12,6 @@ urlpatterns = [
     # path('index', blog.views.display_article_list),
     # path('detail', blog.views.display_article_detail),
     # path('<int:article_id>', blog.views.display_article_detail),
-    # path('article/<int:article_id>', blog.views.display_article_detail)
+    path('address/index', course.views.display_address),
+    path('address/<int:address_id>', course.views.get_address)
 ]
