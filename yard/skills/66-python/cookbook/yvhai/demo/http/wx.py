@@ -5,6 +5,7 @@
 import requests
 import json
 import time
+import hashlib
 from pymongo import MongoClient
 
 url = 'http://mp.weixin.qq.com/mp/profile_ext'
@@ -55,10 +56,12 @@ def get_wx_article(meta_info, index=0, count=10):
             datetime = i['comm_msg_info']['datetime']
             datetime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(datetime))
 
+            md5 = hashlib.md5((meta_info["wx_id"] + "|" + title).encode(encoding="utf8")).hexdigest()
             mongo_wx.insert({
                 'wx_name': meta_info["wx_name"],
                 'wx_id': meta_info["wx_id"],
                 'title': title,
+                'md5': md5,
                 'content_url': content_url,
                 'cover': cover,
                 'datetime': datetime
@@ -79,6 +82,7 @@ if __name__ == '__main__':
         "uin": "MTEyNzgzMjU4Ng==",
         "key": "2dfd68df0f968e754e9f4b66f39407d798297df8859d40c12ecc2a454d267bf041bdc6cf7c53e716bfab3f91b1281bfb96396d001a1c84cf3b28b73553980777400468bc2ab8b33306fd88f10fb6605d"
     }
+
     index = 0
     while 1:
         print(f'开始抓取公众号第{index + 1} 页文章.')
