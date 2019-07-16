@@ -1,5 +1,7 @@
 .PHONY: clean all
 
+PIP_REPO_OPT = -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+
 PORT 	:= 8080
 CTL		:= python3 manage.py
 
@@ -14,6 +16,16 @@ FIXTURE_PRETTY_FILE = log/fixture-pretty.json
 # Dashboard AREA
 # ####################################
 start:
+	supervisord -c conf/supervisord.conf
+stop:
+ctl:
+	supervisorctl -c conf/supervisord.c
+
+
+# ####################################
+# Dashboard - Debug AREA
+# ####################################
+start-fg:
 	$(CTL) runserver $(PORT)
 
 migrate: db-gen
@@ -34,8 +46,6 @@ admin-change-password:
 # ####################################
 # Data AREA
 # ####################################
-log:
-	mkdir -p $@
 db-shell:
 	$(CTL) dbshell
 db-gen:
@@ -64,9 +74,27 @@ verify-venv:
 	workon | grep $(VENV) || mkvirtualenv $(VENV)
 
 verify-venv-deps:
+	pip3 install $(PIP_REPO_OPT) celery django redis supervisor
 	pip3 install pillow
 	pip3 install https://codeload.github.com/sshwsfc/xadmin/zip/django2
+	pip3 list
 	# pip3 install -r https://raw.githubusercontent.com/sshwsfc/xadmin/master/requirements.txt
+
+
+# ####################################
+# Deps AREA
+# ####################################
+deps: conf log
+
+conf:
+	mkdir -p $@
+	echo_supervisord_conf > $@/supervisord.conf
+log:
+	mkdir -p $@
+
+py3-celery4-dj2:
+	pip3 install $(PIP_REPO_OPT) celery django redis supervisor
+	pip3 list
 
 
 # ####################################
