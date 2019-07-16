@@ -68,3 +68,4 @@ target/
 
 # celery
 celerybeat*
+log/
