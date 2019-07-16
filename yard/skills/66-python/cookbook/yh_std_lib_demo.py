@@ -9,7 +9,9 @@ from yvhai.demo.std.datetime import DTDemo
 from yvhai.demo.std.re import RegexDemo
 from yvhai.demo.std.logging import LogerDemo
 from yvhai.demo.std.str import StrDemo
-
+from yvhai.demo.std.ds.deque import DequeDemo
+from yvhai.demo.std.ds.heapq import HeapqDemo
+from yvhai.demo.std.ds.dict import DictDemo
 
 if __name__ == '__main__':
     OSDemo.demo()
@@ -20,3 +22,6 @@ if __name__ == '__main__':
     RegexDemo.demo()
     LogerDemo.demo()
     StrDemo.demo()
+    DequeDemo.demo()
+    HeapqDemo.demo()
+    DictDemo.demo()

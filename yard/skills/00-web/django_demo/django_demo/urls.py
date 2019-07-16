@@ -21,5 +21,9 @@ from com.adapter.router import get_xadmin_router
 urlpatterns = get_xadmin_router(path) + [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
-    path('course/', include('course.urls'))
+    path('course/', include('course.urls')),
+    path('dss/', include('dss.urls')),
+
+    # Restful Style
+    path('courses/', include('course.urls'))
 ]

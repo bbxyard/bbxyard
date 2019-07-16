@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # dss
+    'djcelery',
+
     # xadmin
     'xadmin',
     'crispy_forms',
@@ -45,7 +48,8 @@ INSTALLED_APPS = [
 
     # diy
     'blog.apps.BlogConfig',
-    'course.apps.CourseConfig'
+    'course.apps.CourseConfig',
+    'dss.apps.DssConfig'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +132,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Celery
+from dss.celeryconfig import *
+REDIS_PORT = os.getenv('REDIS_PORT', 6379)
+BROKER_BACKEND = 'redis'
+BROKER_URL = 'redis://localhost:{}/1'.format(REDIS_PORT)
+CELERY_RESULT_BACKEND = 'redis://localhost:{}/2'.format(REDIS_PORT)
