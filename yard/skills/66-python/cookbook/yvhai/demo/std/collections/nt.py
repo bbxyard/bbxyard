@@ -1,9 +1,9 @@
-from collections import namedtuple as NT
+from collections import namedtuple as nt
 from yvhai.demo.base import YHDemo
 
 # 快速定义结构体
-Movie = NT("Movie", ["name", "alias", "brief", "tags"])
-User = NT("User", ["name", "age", "gender", "role"])
+Movie = nt("Movie", ["name", "alias", "brief", "tags"])
+User = nt("User", ["name", "age", "gender", "role"])
 
 
 class NamedTupleDemo(YHDemo):
@@ -32,9 +32,10 @@ class NamedTupleDemo(YHDemo):
         }
         user1 = User(*exist_row, "dev")
         dict1 = user1._asdict()
-        user2 =
+        user2 = User(**exist_kv2, role="test")
         print(" -- user1: ", user1.name, user1.age, user1.gender, user1.role)
         print(" -- dict1: ", dict1)
+        print(" -- user2: ", user2)
 
     @classmethod
     def test_args(cls, *args, **kwargs):
