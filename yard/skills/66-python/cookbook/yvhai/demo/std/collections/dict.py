@@ -1,6 +1,6 @@
 # 实现multdict
 
-from collections import defaultdict, OrderedDict
+from collections import defaultdict, OrderedDict, Counter
 from yvhai.demo.base import YHDemo
 
 
@@ -74,10 +74,17 @@ class WordCount(YHDemo):
         print(d)
 
     @classmethod
+    def stat_by_counter(cls, word_list):
+        cls.mark_section("WC: By Counter")
+        d = Counter(word_list)
+        print(d)
+
+    @classmethod
     def demo(cls):
         word_list = ["Linux", "Windows", "MacOS", "Linux", "Linux", "Cygwin", "MacOS", "Windows"]
         cls.stat_by_dict(word_list)
         cls.stat_by_default_dict(word_list)
+        cls.stat_by_counter(word_list)
 
 
 class NestedDict(YHDemo):
