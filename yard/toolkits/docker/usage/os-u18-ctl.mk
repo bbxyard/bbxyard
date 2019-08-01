@@ -1,13 +1,13 @@
-# OS-CentOS-7 管理
+# OS-Ubuntu-18 管理
 
 # 固定参数部分
 DK_RUN  := docker run --rm --privileged -v/etc/localtime:/etc/localtime -v/home:/home
 
 # 变化参数部分
-TAG       := os-c7:0.1
-NAME      := c7
-DF_URL    := https://raw.githubusercontent.com/0a0a/docker/master/df/1st/os-centos.dockerfile
-START_CMD := /usr/sbin/init
+TAG       := os-u18:0.1
+NAME      := u18
+DF_URL    := https://raw.githubusercontent.com/0a0a/docker/master/df/1st/os-ubuntu.dockerfile
+START_CMD := /bin/bash
 DK_V_OPT  := 
 
 
