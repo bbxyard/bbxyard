@@ -29,13 +29,16 @@ RUN yum -y install epel-release \
 # netdata
 RUN cd /usr/src && git clone https://github.com/netdata/netdata.git --depth=100 \
     && cd /usr/src/netdata \
-    && ./netdata-installer.sh --dont-start-it --dont-wait --disable-go --install /opt \
-    && curl https://raw.githubusercontent.com/0a0a/docker/master/bin/start-netdata.sh -o /usr/local/bin/start-netdata.sh \
+    && ./netdata-installer.sh --dont-start-it --dont-wait --disable-go --install /opt
+
+# script
+RUN curl "https://raw.githubusercontent.com/0a0a/docker/master/bin/start-netdata.sh?ver=20190801" -o /usr/local/bin/start-netdata.sh \
     && chmod +x /usr/local/bin/start-netdata.sh
 
 # 端口
 EXPOSE 19999
 
 # CMD
-ENTRYPOINT [ "/usr/local/bin/start-netdata.sh" ]
+# ENTRYPOINT [ "/bin/bash", "/usr/local/bin/start-netdata.sh" ]
 # CMD /usr/sbin/init
+CMD /usr/local/bin/start-netdata.sh
