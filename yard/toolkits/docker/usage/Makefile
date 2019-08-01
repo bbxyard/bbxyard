@@ -13,7 +13,7 @@ build-all:
 gen-download-scp:
 	> $(DL_SCP)
 	for x in $(MK_LIST); do \
-		echo "curl $(URL_BASE)/$$x -o $$x" >> $(DL_SCP); \
+		echo "curl -skSL $(URL_BASE)/$$x -o $$x" >> $(DL_SCP); \
 	done
 	chmod +x $(DL_SCP)
 	cat -n $(DL_SCP)
