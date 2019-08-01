@@ -10,7 +10,8 @@ NAME    := netdata
 # Dashboard AREA
 # ####################################
 start:
-	$(DK_RUN) -d -h $(NAME) --name $(NAME) -p19999:19999 $(TAG) 
+	$(DK_RUN) -d -h $(NAME) --name $(NAME) -p19999:19999 $(TAG)
+	docker ps -a
 stop:
 	docker stop $(NAME)
 bash:
@@ -24,11 +25,12 @@ status:
 # ####################################
 build:
 	docker build -t $(TAG) https://raw.githubusercontent.com/0a0a/docker/master/df/dashboard/netdata-centos.dockerfile
+	docker images
 
 
 # ####################################
 # Fini AREA
 # ####################################
 clean:
-	docker rmi $(TAG)
-	rm -rvf *.bak *.log
+	-docker rmi $(TAG)
+	-rm -rvf *.bak *.log
