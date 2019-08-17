@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Grid Demo - 01</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    .yh-grid-border {
+      background-color: #dedef8;
+      box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-lg-4 yh-grid-border">A11</div>
+      <div class="col-xs-12 col-lg-4 yh-grid-border">A12</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-lg-6 yh-grid-border">A21</div>
+      <div class="col-xs-12 col-lg-6 yh-grid-border">A22</div>
+    </div>
+  </div>
+
+  <hr>
+  <div class="container">
+    <h2>col-lg-3 vs col-lg-9</h2>
+    <div class="row">
+      <div class="col-lg-3 yh-grid-border">B11</div>
+      <div class="col-lg-9 yh-grid-border">
+        <div class="row">
+          <div class="col-lg-6 yh-grid-border">B12-11</div>
+          <div class="col-lg-6 yh-grid-border">B12-12</div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 yh-grid-border">B12-21</div>
+          <div class="col-lg-6 yh-grid-border">B12-22</div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 yh-grid-border pull-right">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+              quae ab illo inventore veritatis et quasi architecto beatae vitae
+              dicta sunt explicabo.
+            </p>
+          </div>
+          <div class="col-lg-4 yh-grid-border pull-left">
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              accusantium doloremque laudantium.
+            </p>
+            <p> Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+              consectetur, adipisci velit, sed quia non numquam eius modi
+              tempora incidunt ut labore et dolore magnam aliquam quaerat
+              voluptatem.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 yh-grid-border">Just do it</div>
+      <div class="col-lg-6 yh-grid-border">Python Go Java PHP</div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 yh-grid-border">
+        <p><code>&lt;header&gt;</code> 作为内联元素被包围。</p>
+      </div>
+      <div class="col-lg-6 yh-grid-border">
+        <p>如果需要把代码显示为一个独立的块元素，请使用 &lt;pre&gt; 标签：</p>
+        <pre style="background-color: #eeeeee;">
+          &lt;article&gt;
+            &lt;h1&gt;Article Heading&lt;/h1&gt;
+          &lt;/article&gt;
+        </pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding: 40px;">
+    <div class="row visible-on">
+      <div class="col-xs-6 col-sm-3" style="background-color: #dedef8;
+            box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+        <span class="hidden-xs">特别小型</span>
+        <span class="visible-xs">✔ 在特别小型设备上可见</span>
+      </div>
+      <div class="col-xs-6 col-sm-3" style="background-color: #dedef8;
+            box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+        <span class="hidden-sm">小型</span>
+        <span class="visible-sm">✔ 在小型设备上可见</span>
+      </div>
+      <div class="clearfix visible-xs"></div>
+      <div class="col-xs-6 col-sm-3" style="background-color: #dedef8;
+            box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+        <span class="hidden-md">中型</span>
+        <span class="visible-md">✔ 在中型设备上可见</span>
+      </div>
+      <div class="col-xs-6 col-sm-3" style="background-color: #dedef8;
+            box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+        <span class="hidden-lg">大型</span>
+        <span class="visible-lg">✔ 在大型设备上可见</span>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
