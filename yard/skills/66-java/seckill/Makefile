@@ -10,14 +10,24 @@ endif
 # Dashboard AREA
 # ####################################
 build:
-	mvn build
+	mvn compile
+	mvn package
+
+jar:
+	mvn jar:jar
+
+pub:
+	mvn install
+
+ide:
+	mvn idea:idea
 
 
 # ####################################
 # Init AREA
 # ####################################
-init:
-	mvn idea:idea
+depress:
+	mvn eclipse:eclipse
 
 
 # ####################################
