@@ -19,9 +19,6 @@ jar:
 pub:
 	mvn install
 
-ide:
-	mvn idea:idea
-
 
 # ####################################
 # Init AREA

@@ -3,8 +3,7 @@ target
 
 # idea
 *.iml
-*.ipr
-*.iws
+.idea
 
 # Compiled class file
 *.class
