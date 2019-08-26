@@ -10,7 +10,7 @@
     <!-- 这里id必须和对应的DAO接口的方法名一样 -->
     <update id="reduceNumber">
         UPDATE seckill
-        SET number = nubmer - 1
+        SET number = number - 1
         WHERE seckill_id=#{seckillId}
             AND start_time <![CDATA[ <= ]]> #{killTime}
             AND end_time >= #{killTime}
@@ -25,7 +25,7 @@
             select seckill_id as seckillId -->
         SELECT seckill_id,name,number,create_time,start_time,end_time
         FROM seckill
-        WHERE seckill_id#{seckillId}
+        WHERE seckill_id = #{seckillId}
     </select>
 
     <select id="queryAll" resultType="Seckill">
