@@ -1,46 +1,39 @@
--- 秒杀执行存储过程
 
-DELIMITER $$ -- onsole ;
+-- 创建数据库
+-- CREATE DATABASE demo_seckill DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-$$
--- 定义存储过程
--- 参数：in 输入参数; out 输出参数
--- row_count():返回上一条修改类型sql(delete,insert,upodate)的影响行数
--- row_count: 0:未修改数据; >0:表示修改的行数; <0:sql错误/未执行修改sql
-CREATE PROCEDURE `seckill`.`execute_seckill`
-    (IN v_seckill_id BIGINT, IN v_phone BIGINT,
-        IN v_kill_time TIMESTAMP, OUT r_result INT)
-    BEGIN
-        DECLARE insert_count INT DEFAULT 0;
-        START TRANSACTION;
-        INSERT ignore INTO success_killed (seckill_id, user_phone, create_time)
-        VALUES (v_seckill_id, v_phone, v_kill_time);
-        SELECT ROW_COUNT() INTO insert_count;
-        IF (insert_count = 0) THEN
-            ROLLBACK;
-            SET r_result = -1;
-        ELSEIF (insert_count < 0) THEN
-            ROLLBACK;
-            SET r_result = -2;
-        ELSE
-            UPDATE seckill
-            SET number = number - 1
-            WHERE seckill_id = v_seckill_id
-                AND end_time > v_kill_time
-                AND start_time < v_kill_time
-                AND number > 0;
-            SELECT ROW_COUNT() INTO insert_count;
-            IF (insert_count = 0) THEN
-                ROLLBACK;
-                SET r_result = 0;
-            ELSEIF (insert_count < 0) THEN
-                ROLLBACK;
-                SET r_result = -2;
-            ELSE
-                COMMIT;
-                SET r_result = 1;
-            END IF;
-        END IF;
-    END;
-$$
--- 代表存储过程定义结束
+-- 切换数据库
+use demo_seckill;
+use demo_seckill;
+CREATE TABLE seckill(
+    `seckill_id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '商品库存ID',
+    `name` varchar(120) NOT NULL COMMENT '商品名称',
+    `number` int NOT NULL COMMENT '库存数量',
+    `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `start_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP	COMMENT '秒杀开始时间',
+    `end_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '秒杀结束时间',
+    PRIMARY KEY(seckill_id),
+    key idx_start_time(start_time),
+    key idx_end_time(end_time),
+    key idx_create_time(create_time)
+)ENGINE=INNODB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COMMENT='秒杀库存表';
+
+-- 初始化数据
+INSERT into seckill(name,number,start_time,end_time)
+VALUES
+    ('6000元秒杀iPhoneX',100,'2019-08-26 00:00:00','2019-08-29 00:00:00'),
+    ('3000元秒杀iPad Mini 4',100,'2019-08-26 00:00:00','2019-08-29 00:00:00'),
+    ('8000元秒杀Mac Book Pro',100,'2019-08-26 00:00:00','2019-08-29 00:00:00'),
+    ('18000元秒杀Mac Pro',100,'2019-08-26 00:00:00','2019-08-29 00:00:00');
+
+-- 秒杀成功明细表
+-- 用户登录认证相关信息(简化为手机号
+CREATE TABLE success_killed(
+    `seckill_id` BIGINT NOT NULL COMMENT '秒杀商品ID',
+    `user_phone` BIGINT NOT NULL COMMENT '用户手机号',
+    `state` TINYINT NOT NULL DEFAULT -1 COMMENT '状态标识:-1:无效 0:成功 1:已付款 2:已发货',
+    `create_time` TIMESTAMP NOT NULL COMMENT '创建时间',
+    PRIMARY key(seckill_id,user_phone), /* 联合主键 */
+    KEY idx_create_time(create_time)
+)ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COMMENT='秒杀成功明细表';
+
