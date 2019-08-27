@@ -20,6 +20,14 @@ public class HttpRespMsg {
         this.code = code;
     }
 
+    public static HttpRespMsg Ok(Object data) {
+        return new HttpRespMsg(data, 200);
+    }
+
+    public static HttpRespMsg Error(String errmsg, int code) {
+        return new HttpRespMsg(errmsg, code);
+    }
+
     @Override
     public String toString() {
         String dataStr = data.toString();
