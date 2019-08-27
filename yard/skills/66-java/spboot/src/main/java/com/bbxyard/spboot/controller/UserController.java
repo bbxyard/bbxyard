@@ -19,4 +19,10 @@ public class UserController {
     }
 
 
+    @RequestMapping("/1949")
+    public Object getUserCn() {
+        User u = new User("PRC", 70, Gender.UNK);
+        HttpRespMsg msg = new HttpRespMsg(u, 200);
+        return msg;
+    }
 }
