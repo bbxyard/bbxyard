@@ -11,12 +11,12 @@ endif
 # ####################################
 build:
 	mvn compile
-	mvn package
 
 jar:
 	mvn jar:jar
 
 pub:
+	mvn package
 	mvn install
 
 
