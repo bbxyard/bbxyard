@@ -27,9 +27,9 @@ public interface SysUserService {
     /**
      * 删除用户
      *
-     * @param user
+     * @param userId
      */
-    public void deleteUser(SysUser user);
+    public void deleteUser(String userId);
 
     /**
      * 根据id查询用户
