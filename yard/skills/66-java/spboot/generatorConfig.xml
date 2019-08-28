@@ -12,24 +12,20 @@
             <property name="mappers" value="com.imooc.utils.MyMapper"/>
         </plugin>
 
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3307/leecx"
-                        userId="hero"
-                        password="1949.cn">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3307/leecx" userId="hero" password="1949.cn">
         </jdbcConnection>
 
         <!-- 对于生成的pojo所在包 -->
         <javaModelGenerator targetPackage="com.imooc.pojo" targetProject="src/main/java"/>
 
-		<!-- 对于生成的mapper所在目录 -->
+        <!-- 对于生成的mapper所在目录 -->
         <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
 
-		<!-- 配置mapper对应的java映射 -->
-        <javaClientGenerator targetPackage="com.imooc.mapper" targetProject="src/main/java"
-                             type="XMLMAPPER"/>
+        <!-- 配置mapper对应的java映射 -->
+        <javaClientGenerator targetPackage="com.imooc.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
 
 
-		<table tableName="sys_user"></table>
+        <table tableName="sys_user"></table>
         <table tableName="sys_role"></table>
         <table tableName="data_dict"></table>
 
