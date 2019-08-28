@@ -30,6 +30,8 @@
 
 
 		<table tableName="sys_user"></table>
-		 
+        <table tableName="sys_role"></table>
+        <table tableName="data_dict"></table>
+
     </context>
 </generatorConfiguration>
