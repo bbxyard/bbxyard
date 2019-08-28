@@ -7,12 +7,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-@ControllerAdvice
+// @ControllerAdvice
 public class IMoocExceptionHandler {
 
     public static final String IMOOC_ERROR_VIEW = "error";
 
-    @ExceptionHandler(value = Exception.class)
+    // @ExceptionHandler(value = Exception.class)
     public Object errorHandler(HttpServletRequest request, HttpServletRequest response, Exception e) throws Exception {
         e.printStackTrace();
 
