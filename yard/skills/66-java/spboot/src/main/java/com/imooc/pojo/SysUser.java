@@ -30,25 +30,25 @@ public class SysUser {
 
     /**
      * 性别
-     * 0：女
-     * 1：男
-     * 2：保密
+0：女
+1：男
+2：保密 
      */
     private Integer sex;
 
     /**
      * 职业类型：
-     * 1：Java开发
-     * 2：前端开发
-     * 3：大数据开发
-     * 4：ios开发
-     * 5：Android开发
-     * 6：Linux系统工程师
-     * 7：PHP开发
-     * 8：.net开发
-     * 9：C/C++
-     * 10：学生
-     * 11：其它
+1：Java开发
+2：前端开发
+3：大数据开发
+4：ios开发
+5：Android开发
+6：Linux系统工程师
+7：PHP开发
+8：.net开发
+9：C/C++
+10：学生
+11：其它
      */
     private Integer job;
 
@@ -190,14 +190,14 @@ public class SysUser {
 
     /**
      * 获取性别
-     * 0：女
-     * 1：男
-     * 2：保密
+0：女
+1：男
+2：保密 
      *
      * @return sex - 性别
-     * 0：女
-     * 1：男
-     * 2：保密
+0：女
+1：男
+2：保密 
      */
     public Integer getSex() {
         return sex;
@@ -205,14 +205,14 @@ public class SysUser {
 
     /**
      * 设置性别
-     * 0：女
-     * 1：男
-     * 2：保密
+0：女
+1：男
+2：保密 
      *
      * @param sex 性别
-     *            0：女
-     *            1：男
-     *            2：保密
+0：女
+1：男
+2：保密 
      */
     public void setSex(Integer sex) {
         this.sex = sex;
@@ -220,30 +220,30 @@ public class SysUser {
 
     /**
      * 获取职业类型：
-     * 1：Java开发
-     * 2：前端开发
-     * 3：大数据开发
-     * 4：ios开发
-     * 5：Android开发
-     * 6：Linux系统工程师
-     * 7：PHP开发
-     * 8：.net开发
-     * 9：C/C++
-     * 10：学生
-     * 11：其它
+1：Java开发
+2：前端开发
+3：大数据开发
+4：ios开发
+5：Android开发
+6：Linux系统工程师
+7：PHP开发
+8：.net开发
+9：C/C++
+10：学生
+11：其它
      *
      * @return job - 职业类型：
-     * 1：Java开发
-     * 2：前端开发
-     * 3：大数据开发
-     * 4：ios开发
-     * 5：Android开发
-     * 6：Linux系统工程师
-     * 7：PHP开发
-     * 8：.net开发
-     * 9：C/C++
-     * 10：学生
-     * 11：其它
+1：Java开发
+2：前端开发
+3：大数据开发
+4：ios开发
+5：Android开发
+6：Linux系统工程师
+7：PHP开发
+8：.net开发
+9：C/C++
+10：学生
+11：其它
      */
     public Integer getJob() {
         return job;
@@ -251,30 +251,30 @@ public class SysUser {
 
     /**
      * 设置职业类型：
-     * 1：Java开发
-     * 2：前端开发
-     * 3：大数据开发
-     * 4：ios开发
-     * 5：Android开发
-     * 6：Linux系统工程师
-     * 7：PHP开发
-     * 8：.net开发
-     * 9：C/C++
-     * 10：学生
-     * 11：其它
+1：Java开发
+2：前端开发
+3：大数据开发
+4：ios开发
+5：Android开发
+6：Linux系统工程师
+7：PHP开发
+8：.net开发
+9：C/C++
+10：学生
+11：其它
      *
      * @param job 职业类型：
-     *            1：Java开发
-     *            2：前端开发
-     *            3：大数据开发
-     *            4：ios开发
-     *            5：Android开发
-     *            6：Linux系统工程师
-     *            7：PHP开发
-     *            8：.net开发
-     *            9：C/C++
-     *            10：学生
-     *            11：其它
+1：Java开发
+2：前端开发
+3：大数据开发
+4：ios开发
+5：Android开发
+6：Linux系统工程师
+7：PHP开发
+8：.net开发
+9：C/C++
+10：学生
+11：其它
      */
     public void setJob(Integer job) {
         this.job = job;

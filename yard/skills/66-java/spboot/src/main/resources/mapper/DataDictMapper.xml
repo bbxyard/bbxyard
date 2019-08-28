@@ -1,15 +1,26 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.imooc.mapper.DataDictMapper" >
-  <resultMap id="BaseResultMap" type="com.imooc.pojo.DataDict" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.mapper.DataDictMapper">
+  <resultMap id="BaseResultMap" type="com.imooc.pojo.DataDict">
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
-    <result column="type_code" property="typeCode" jdbcType="VARCHAR" />
-    <result column="ddkey" property="ddkey" jdbcType="VARCHAR" />
-    <result column="ddvalue" property="ddvalue" jdbcType="VARCHAR" />
-    <result column="is_show" property="isShow" jdbcType="INTEGER" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="type_code" jdbcType="VARCHAR" property="typeCode" />
+    <result column="ddkey" jdbcType="VARCHAR" property="ddkey" />
+    <result column="ddvalue" jdbcType="VARCHAR" property="ddvalue" />
+    <result column="is_show" jdbcType="INTEGER" property="isShow" />
+  </resultMap>
+  <resultMap id="BaseResultMap" type="com.imooc.pojo.DataDict">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="type_code" jdbcType="VARCHAR" property="typeCode" />
+    <result column="ddkey" jdbcType="VARCHAR" property="ddkey" />
+    <result column="ddvalue" jdbcType="VARCHAR" property="ddvalue" />
+    <result column="is_show" jdbcType="INTEGER" property="isShow" />
   </resultMap>
 </mapper>
