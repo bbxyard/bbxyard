@@ -2,8 +2,6 @@ package com.bbxyard.spboot.controller;
 
 import com.bbxyard.spboot.dto.HttpRespMsg;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.HttpRequestHandler;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,7 +12,8 @@ public class ErrorController {
     @RequestMapping("/error")
     public String error() {
         int a = 1 / 0;
-        return "thymeleaf/error";
+        System.out.println("以下代码，不会可见");
+        return "将会被 [" + "/error" + "] 处理";
     }
 
     @RequestMapping("/ajaxerror")
