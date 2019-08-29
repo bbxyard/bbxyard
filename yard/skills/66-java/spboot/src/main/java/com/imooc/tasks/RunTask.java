@@ -1,5 +1,7 @@
 package com.imooc.tasks;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,11 +14,15 @@ import java.util.concurrent.Future;
 @RequestMapping("tasks")
 public class RunTask {
 
+    // Logger
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private AsyncTask asyncTask;
 
     @RequestMapping("run")
     public String run() throws Exception {
+        logger.info("START EXEC ASYNC TASK");
         long begin = System.currentTimeMillis();
 
         List<Future<Boolean>> list = new ArrayList<>();
@@ -32,6 +38,7 @@ public class RunTask {
                 }
                 finishedCnt++;
             }
+            logger.debug("Try to wait");
             if (finishedCnt == list.size()) {
                 break;
             }
@@ -41,7 +48,9 @@ public class RunTask {
 
         String times = String.format("Total task cost: %dms", end - begin);
         System.out.println(times);
+        logger.info(times);
 
         return times;
     }
+
 }
