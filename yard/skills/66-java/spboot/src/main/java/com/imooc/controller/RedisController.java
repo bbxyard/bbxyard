@@ -1,14 +1,20 @@
 package com.imooc.controller;
 
 import com.bbxyard.spboot.dto.HttpRespMsg;
+import com.imooc.pojo.SysUser;
+import me.n3r.utils.JsonUtils;
+import me.n3r.utils.RedisOperator;
+import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 
@@ -18,6 +24,12 @@ public class RedisController {
 
     @Autowired
     private StringRedisTemplate strRedis;
+
+    @Autowired
+    private RedisOperator redisCli;
+
+    @Autowired
+    private Sid sid;
 
     @RequestMapping("/test_raw_jedis")
     public HttpRespMsg testRedisPool() {
@@ -41,5 +53,28 @@ public class RedisController {
         String courseUrl = (String)strRedis.opsForValue().get("study:java:springboot:url");
 
         return HttpRespMsg.Ok(courseUrl);
+    }
+
+    @RequestMapping("/store_object_list")
+    public HttpRespMsg storeObjectList() {
+        List<SysUser> userList = new ArrayList<>();
+        final int len = 5;
+        for (int i = 0; i < len; ++i) {
+            SysUser user = new SysUser();
+            user.setAge(i * 10 + 5);
+            user.setId(sid.nextShort());
+            user.setUsername("user-name-" + i);
+            user.setNickname("nick-name-" + i);
+            user.setPassword("**aAfksdkfa**");
+            user.setLastLoginTime(new Date());
+            userList.add(user);
+        }
+
+        final String key = "study:java:springboot:str_list";
+        redisCli.set(key, JsonUtils.objectToJson(userList), 2000);
+
+        String userListJson = redisCli.get(key);
+        List<SysUser> userListBorn = JsonUtils.jsonToList(userListJson, SysUser.class);
+        return HttpRespMsg.Ok(userListBorn);
     }
 }

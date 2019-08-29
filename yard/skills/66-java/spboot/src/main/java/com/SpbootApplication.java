@@ -12,7 +12,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 // 扫描MyBatis mapper包路径
 @MapperScan(basePackages = "com.imooc.mapper")
 // 扫描所有需要包, 包含一些自用的工具包 所在路径
-@ComponentScan(basePackages = {"com.imooc", "com.bbxyard.spboot", "org.n3r.idworker"})
+@ComponentScan(basePackages = {"com.imooc", "com.bbxyard.spboot", "me", "org.n3r.idworker"})
 // 开启计划任务
 @EnableScheduling
 // 开启异步调用
