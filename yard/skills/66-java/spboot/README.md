@@ -19,6 +19,13 @@
 - 异步执行
 > @Async
 
+### 事务处理
+
+### 拦截器
+
+### Twitter Sid 生成器
+
+### 日志功能
 
 ## 生成代码
 - src/main/resources/mapper/*Mapper.xml
