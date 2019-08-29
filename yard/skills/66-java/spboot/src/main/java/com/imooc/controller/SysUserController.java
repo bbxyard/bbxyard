@@ -82,4 +82,18 @@ public class SysUserController {
         }
         return HttpRespMsg.Ok(list);
     }
+
+    @RequestMapping("/test_rollback")
+    public HttpRespMsg test_rollback() {
+        String id = sid.nextShort();
+        SysUser sysUser = new SysUser();
+        sysUser.setId(id);
+        sysUser.setNickname("rollback-nick" + new Date());
+        sysUser.setUsername("rollback-user" + new Date());
+        sysUser.setPassword("imooc-study");
+        sysUser.setIsDelete(0);
+        sysUser.setRegistTime(new Date());
+        sysUserService.saveUserTransactional(sysUser);
+        return HttpRespMsg.Ok("这里应该到不了");
+    }
 }
