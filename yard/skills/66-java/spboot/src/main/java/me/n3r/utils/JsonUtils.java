@@ -1,4 +1,4 @@
-package com.imooc.utils;
+package me.n3r.utils;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class JsonUtils {
 
     /**
      * 将对象转换成json字符串。
-     * <p>Title: pojoToJson</p>
+     * <p>Title: pojoToJson</p
      * <p>Description: </p>
      * @param data
      * @return

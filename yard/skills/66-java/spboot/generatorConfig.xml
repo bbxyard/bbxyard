@@ -9,7 +9,7 @@
         <property name="endingDelimiter" value="`"/>
 
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-            <property name="mappers" value="com.imooc.utils.MyMapper"/>
+            <property name="mappers" value="me.contrib.utils.db.MyMapper"/>
         </plugin>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3307/leecx" userId="hero" password="1949.cn">
