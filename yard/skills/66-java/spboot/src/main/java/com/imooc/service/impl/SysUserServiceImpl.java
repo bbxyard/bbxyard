@@ -2,6 +2,7 @@ package com.imooc.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.imooc.mapper.SysUserMapper;
+import com.imooc.mapper.SysUserMapperCustom;
 import com.imooc.pojo.SysUser;
 import com.imooc.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Autowired
     private SysUserMapper sysUserMapper;
+
+    @Autowired
+    private SysUserMapperCustom sysUserMapperCustom;
 
     @Override
     public void saveUser(SysUser user) throws Exception {
@@ -79,8 +83,8 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public SysUser queryUserByIdCustom(String userId) {
-        List<SysUser> userList = sysUserMapper.selectAll();
+    public SysUser queryUserByIdCustom(String id) {
+        List<SysUser> userList = sysUserMapperCustom.queryUserById(id);
         if (userList != null && !userList.isEmpty()) {
             return ((SysUser) userList.get(0));
         }

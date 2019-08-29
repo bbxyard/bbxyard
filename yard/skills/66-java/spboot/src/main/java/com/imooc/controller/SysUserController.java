@@ -64,6 +64,12 @@ public class SysUserController {
         return HttpRespMsg.Ok(sysUser);
     }
 
+    @RequestMapping("/custom_query_by_id")
+    public HttpRespMsg queryUserByIdCustom(String id) {
+        SysUser sysUser = sysUserService.queryUserByIdCustom(id);
+        return HttpRespMsg.Ok(sysUser);
+    }
+
     @RequestMapping("/query_all")
     public HttpRespMsg query_all(Integer p, Integer size) {
         SysUser user = new SysUser();

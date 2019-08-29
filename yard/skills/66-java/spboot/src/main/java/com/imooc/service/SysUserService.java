@@ -60,10 +60,10 @@ public interface SysUserService {
     /**
      * 自定义查询by id
      *
-     * @param userId
+     * @param id
      * @return
      */
-    public SysUser queryUserByIdCustom(String userId);
+    public SysUser queryUserByIdCustom(String id);
 
     /**
      * 保存用户，基于事务
