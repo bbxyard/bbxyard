@@ -24,7 +24,7 @@ public class SysUserController {
     private Sid sid;
 
     @RequestMapping("/create")
-    public HttpRespMsg saveUser(String id) throws Exception {
+    public HttpRespMsg saveUser(String id, Integer ms) throws Exception {
         String userId = StringUtils.isEmptyOrWhitespace(id) ? sid.nextShort() : id;
         SysUser sysUser = new SysUser();
         sysUser.setId(userId);
@@ -33,7 +33,9 @@ public class SysUserController {
         sysUser.setPassword("imooc-study");
         sysUser.setIsDelete(0);
         sysUser.setRegistTime(new Date());
-
+        if (ms != null && ms > 500) {
+            sysUser.setAge(ms);
+        }
         sysUserService.saveUser(sysUser);
         return HttpRespMsg.Ok("保存成功");
     }

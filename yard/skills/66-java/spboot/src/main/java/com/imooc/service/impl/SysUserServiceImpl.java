@@ -27,6 +27,17 @@ public class SysUserServiceImpl implements SysUserService {
     @Transactional(propagation = Propagation.REQUIRED)
     public void saveUser(SysUser user) throws Exception {
         sysUserMapper.insert(user);
+        // 模拟超时, 出错
+        Integer ms = user.getAge();
+        if (ms != null && ms > 0) {
+            try {
+                Thread.sleep(ms);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            // 触发错误
+            System.out.println("错误模拟: " + 1 / 0);
+        }
     }
 
     @Override
