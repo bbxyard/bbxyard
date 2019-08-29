@@ -14,11 +14,11 @@ public class CronTask {
 
     @Scheduled(fixedRate = 3000)
     public void taskA() {
-        System.out.println("[每3秒执行]现在时间: " + dateFormat.format(new Date()));
+        // System.out.println("[每3秒执行]现在时间: " + dateFormat.format(new Date()));
     }
 
     @Scheduled(cron="4-40 * * * * ?")
     public void testB() {
-        System.out.println("[每4-40秒执行]现在时间: " + dateFormat.format(new Date()));
+        // System.out.println("[每4-40秒执行]现在时间: " + dateFormat.format(new Date()));
     }
 }
