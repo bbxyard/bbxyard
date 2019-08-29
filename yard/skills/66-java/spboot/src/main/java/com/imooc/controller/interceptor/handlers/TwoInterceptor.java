@@ -17,11 +17,13 @@ public class TwoInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (true) {
-            // returnErrorResponse(response, IMoocJSONResult.errorMsg("被two拦截..."));
+            System.out.println("[TWO] 被Two拦截, 并改写...");
+            returnErrorResponse(response, IMoocJSONResult.errorMsg("被two拦截，并改写..."));
+            return false;
+        } else {
+            System.out.println("[TWO] 被Two拦截, 放行...");
+            return true;
         }
-
-        System.out.println("[TWO] 被TWO拦截...");
-        return true;
     }
 
     @Override
