@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        .user-info-group {
+            /* background-color: gray; */
+            border: 1px solid gray;
+            padding: 20px;
+        }
+
+        .user-info-group+.user-info-group {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="LG" class="container">
+            <div class="row">
+                <div class="span12">
+                    <h2>user.*解包</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 user-info-group">
+                用户姓名: <input th:id="${user.nickname}" th:name="${user.nickname}" th:value="${user.nickname}" /> <br>
+                用户年龄: <input th:value="${user.age}" /> <br>
+                用户生日: <input th:value="${user.lastLoginTime}" style="width: 320px;" /> <br>
+                用户生日: <input th:value="${#dates.format(user.lastLoginTime, 'yyyy-MM-dd')}" /> <br>
+            </div>
+            <!-- 对象解包，简写形式  -->
+            <div class="col-5 col-xs-offset-1 user-info-group" th:object="${user}">
+                用户姓名: <input th:id="*{nickname}" th:name="*{nickname}" th:value="*{nickname}" /> <br>
+                用户年龄: <input th:value="*{age}" /> <br>
+                用户生日: <input th:value="*{lastLoginTime}" style="width: 320px;" /> <br>
+                用户生日: <input th:value="*{#dates.format(lastLoginTime, 'yyyy-MM-dd hh:mm:ss')}" /> <br>
+            </div>
+        </div>
+
+        <hr>
+        <h2>text and utext</h2>
+        <div class="row">
+            <div class="col-md-12" th:text="${user.address}">th:text</div>
+            <div class="col-md-12" th:utext="${user.address}">th:utext</div>
+        </div>
+
+        <hr>
+        <h2>URL</h2>
+        <div class="row">
+            <div class="col">
+                <a href="" th:href="@{http://www.imooc.com}">网站地址</a>
+            </div>
+        </div>
+
+        <hr>
+        <h2>测试th:if</h2>
+        <div class="row">
+            <div class="col">
+                <div class="row" style="color: gray;">
+                    <div class="col" th:if="${user.age} == 18">十八岁的天空</div>
+                    <div class="col" th:if="${user.age} gt 18">你老了</div>
+                    <div class="col" th:if="${user.age} lt 18">你很年轻</div>
+                    <div class="col" th:if="${user.age} ge 18">大于等于</div>
+                    <div class="col" th:if="${user.age} le 18">小于等于</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row" style="border: 2px solid green; color: red; font-weight: bold;">
+                    <div class="col" th:if="${user.age} == 18">十八岁的天空</div>
+                    <div class="col" th:if="${user.age} gt 18">你老了</div>
+                    <div class="col" th:if="${user.age} lt 18">你很年轻</div>
+                    <div class="col" th:if="${user.age} ge 18">大于等于</div>
+                    <div class="col" th:if="${user.age} le 18">小于等于</div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <h2>选择框</h2>
+        <div class="row">
+            <select class="col">
+                <option th:selected="${user.nickname eq 'Freemarker'}">Freemarker</option>
+                <option th:selected="${user.nickname eq 'Thymeleaf'}">Thymeleaf</option>
+                <option th:selected="${user.nickname eq 'Other'}">Other</option>
+            </select>
+        </div>
+
+        <hr>
+        <h2>表格</h2>
+        <table>
+            <tr>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>年龄备注</th>
+                <th>最后登陆时间</th>
+            </tr>
+            <tr th:each="person:${userList}">
+                <td th:text="${person.nickname}">${person.nickname}</td>
+                <td th:text="${person.age}">${person.age}</td>
+                <td th:text="${person.age gt 18} ? 你老了 : 你很年轻">${person.age gt 18} ? 你老了 : 你很年轻</td>
+                <td th:text="${#dates.format(user.lastLoginTime, 'yyyy-MM-dd hh:mm:ss')}">这个太长了</td>
+            </tr>
+        </table>
+
+        <hr>
+        <h2>switch-case</h2>
+        <div class="row">
+            <div class="col" th:switch="${user.nickname}">
+                <p th:case="'Freemarker'">Freemarker模板</p>
+                <p th:case="'Thymeleaf'">Thymeleaf模板</p>
+                <p th:case="*">其他模板</p>
+            </div>
+        </div>
+
+        <hr>
+        <h2>提交表单</h2>
+        <div class="row">
+            <div class="col">
+                <form th:action="@{/th/postform}" th:object="${user}" method="post" th:method="post">
+                    <input type="text" th:field="*{nickname}"/>
+                    <input type="text" th:field="*{age}"/>
+                    <input type="submit"/>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
