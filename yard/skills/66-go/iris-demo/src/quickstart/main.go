@@ -27,8 +27,11 @@ func main() {
 	app.Get("/hallo", func(ctx iris.Context) {
 		ctx.ViewData("Title", "这是标题")
 		ctx.ViewData("Desc", "这是描述信息")
-		ctx.View("./templates/index.html", clientPage{"这是标题", "这是描述信息"})
+		ctx.View("index.html")
+		// ctx.View("index.html", clientPage{"这是标题", "这是描述信息"})
 	})
+
+	app.Favicon("./static/favicons/favicon.ico")
 
 	app.Run(iris.Addr(":8080"), iris.WithoutServerError(iris.ErrServerClosed))
 }
