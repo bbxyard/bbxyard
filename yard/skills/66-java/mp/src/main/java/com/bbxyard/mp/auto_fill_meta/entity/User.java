@@ -23,5 +23,6 @@ public class User {
     @Version
     private Integer version;    // 乐观锁 -> 版本
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String operator;    // 操作员
 }
