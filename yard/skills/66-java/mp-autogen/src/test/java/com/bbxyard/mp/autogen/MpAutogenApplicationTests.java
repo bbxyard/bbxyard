@@ -1,4 +1,4 @@
-package com.bbxyard.mpautogen;
+package com.bbxyard.mp.autogen;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

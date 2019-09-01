@@ -1,4 +1,4 @@
-package com.bbxyard.mpautogen.utils;
+package com.bbxyard.mp.autogen.utils;
 
 import java.util.ArrayList;
 import java.util.List;
