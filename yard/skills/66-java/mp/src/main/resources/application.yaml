@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/imooc_mp
+    username: hero
+    password: 1949.cn
+
+# Logger
+logging:
+  level:
+    com.bbxyard.mp: trace
+mybatis-plus:
+#  config-location: classpath:/mapper/*Mapper.xml
+  global-config:
+    banner: false
+    db-config:
+      logic-delete-value: 1 # 默认值1
+      logic-not-delete-value: 0 # 默认值0
