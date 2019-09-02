@@ -1,6 +1,7 @@
 DATA_SUF = $(shell date +"%Y.%m.%d.%H.%M.%S")
 GUP_MSG = "Auto Commited at $(DATA_SUF)"
 
+ORG_GOPATH = ${HOME}/opt/yh-go
 PROJ_PATH = $(shell pwd)
 APP_NAME = beego-demo
 
@@ -25,7 +26,9 @@ gen:
 	bee generate scaffold user -fields="id:int64,name:string,gender:int,age:int" -driver=mysql -conn="hero@tcp(127.0.0.1:3307)/imooc_beego"
 
 run: export GO111MODULE=off
+run: export GOPATH=$(PROJ_PATH)
 run:
+	echo $(GOPATH)
 	bee run
 
 
