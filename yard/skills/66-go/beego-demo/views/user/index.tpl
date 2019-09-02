@@ -1,1 +1,1 @@
-/var/x/sk/66-go/src/beego-demo/views/user/index.tpl
+/var/x/sk/66-go/beego-demo/views/user/index.tpl

@@ -5,7 +5,7 @@ import (
 	"errors"
 	"strconv"
 	"strings"
-	"var/x/sk/66-go/src/beego-demo/models"
+	"var/x/sk/66-go/beego-demo/models"
 
 	"github.com/astaxie/beego"
 )
