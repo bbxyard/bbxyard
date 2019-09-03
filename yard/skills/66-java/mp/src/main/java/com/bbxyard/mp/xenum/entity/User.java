@@ -24,7 +24,7 @@ public class User extends BaseEntity {
     private AgeEnum age;
 
     /**
-     * 原生枚举： 默认使用枚举值顺序： 0：MALE， 1：FEMALE
+     * 原生枚举： 默认使用枚举值顺序： 0: UNK, 1: MALE， 2: FEMALE
      */
     private GenderEnum gender;
 

@@ -38,6 +38,15 @@ public class UserTest {
         User fUserByS1 = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getId, user.getId()));
         printUser(fUserById, "selectById");
         printUser(fUserByS1, "selectOne");
+
+        // 更新
+        Assert.assertTrue(userMapper.update(new User().setAge(AgeEnum.THREE),
+                new QueryWrapper<User>().eq("age", AgeEnum.TWO)) > 0);
+
+        // 删除
+        Assert.assertTrue(userMapper.delete(new QueryWrapper<User>().
+                lambda().eq(User::getGrade, GradeEnum.G9)) > 0);
+
         Assert.assertEquals("Id Should be same", fUserById.getId(), fUserByS1.getId());
     }
 
