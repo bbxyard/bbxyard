@@ -24,9 +24,9 @@ public class UserTest {
     public void storeThenCheck() {
         // 插入一个新用户
         User user = new User();
-        user.setAge(AgeEnum.THREE.getValue());
-        user.setGender(GenderEnum.FEMALE.getCode());
-        user.setGrade(GradeEnum.G6.getCode());
+        user.setAge(AgeEnum.TWO);
+        user.setGender(GenderEnum.FEMALE);
+        user.setGrade(GradeEnum.G9);
         user.setName("Albert");
         user.setEmail("foobar@test.com");
         userMapper.insert(user);
