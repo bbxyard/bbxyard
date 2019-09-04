@@ -5,6 +5,7 @@
     <modules>
         <module>homepage-eureka</module>
         <module>homepage-zuul</module>
+        <module>homepage-service</module>
     </modules>
 
     <parent>
