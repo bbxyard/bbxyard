@@ -11,6 +11,8 @@ HOST := server1
 # ####################################
 # Dashboard AREA
 # ####################################
+start-eureka-dev:
+	java -jar homepage-eureka/target/homepage-eureka-0.0.1-SNAPSHOT.jar
 start-eureka:
 	java -jar homepage-eureka/target/homepage-eureka-0.0.1-SNAPSHOT.jar --spring.profiles.active=$(HOST)
 
