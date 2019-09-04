@@ -12,7 +12,7 @@ HOST := server1
 # Dashboard AREA
 # ####################################
 start-eureka:
-	java -jar homepage-eureka/target/homepage-eureka-0.0.1-SNAPSHOT.jar -spring.profiles.active=$(HOST)
+	java -jar homepage-eureka/target/homepage-eureka-0.0.1-SNAPSHOT.jar --spring.profiles.active=$(HOST)
 
 build:
 	mvn clean package -Dmaven.test.skip=true -U

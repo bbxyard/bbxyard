@@ -3,14 +3,14 @@ spring:
     name: homepage-eureka
   profiles: server1
 server:
-  port: 8010
+  port: 8011
 eureka:
   instance:
     hostname: server1
     prefer-ip-address: false
   client:
     service-url:
-      defaultZone: http://server2:8001/eureka/,http://server3:8002/eureka/
+      defaultZone: http://server2:8012/eureka/,http://server3:8013/eureka/
 
 ---
 spring:
@@ -18,14 +18,14 @@ spring:
     name: homepage-eureka
   profiles: server2
 server:
-  port: 8011
+  port: 8012
 eureka:
   instance:
     hostname: server2
     prefer-ip-address: false
   client:
     service-url:
-      defaultZone: http://server1:8000/eureka/,http://server3:8002/eureka/
+      defaultZone: http://server1:8011/eureka/,http://server3:8013/eureka/
 
 ---
 spring:
@@ -33,11 +33,11 @@ spring:
     name: homepage-eureka
   profiles: server3
 server:
-  port: 8012
+  port: 8013
 eureka:
   instance:
     hostname: server3
     prefer-ip-address: false
   client:
     service-url:
-      defaultZone: http://server1:8000/eureka/,http://server2:8001/eureka/
+      defaultZone: http://server1:8011/eureka/,http://server2:8012/eureka/
