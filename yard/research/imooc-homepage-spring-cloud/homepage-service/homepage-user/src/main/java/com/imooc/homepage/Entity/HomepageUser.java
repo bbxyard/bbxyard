@@ -1,4 +1,4 @@
-package com.imooc.homepage.Entity;
+package com.imooc.homepage.entity;
 
 
 import lombok.AllArgsConstructor;

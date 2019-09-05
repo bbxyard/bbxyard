@@ -2,8 +2,8 @@ package com.imooc.homepage.service.impl;
 
 import com.imooc.homepage.CourseInfo;
 import com.imooc.homepage.CourseInfoRequest;
-import com.imooc.homepage.Entity.HomepageUser;
-import com.imooc.homepage.Entity.HomepageUserCourse;
+import com.imooc.homepage.entity.HomepageUser;
+import com.imooc.homepage.entity.HomepageUserCourse;
 import com.imooc.homepage.UserInfo;
 import com.imooc.homepage.client.CourseClient;
 import com.imooc.homepage.dao.HomepageUserCourseDao;
