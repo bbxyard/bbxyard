@@ -42,6 +42,7 @@
         <dependency>
             <groupId>com.imooc.homepage</groupId>
             <artifactId>homepage-common</artifactId>
+            <version>${version}</version>
         </dependency>
     </dependencies>
 
