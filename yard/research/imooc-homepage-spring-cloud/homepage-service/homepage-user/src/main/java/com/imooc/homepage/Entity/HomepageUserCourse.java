@@ -14,6 +14,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "homepage_user_course")
 public class HomepageUserCourse {
@@ -45,6 +46,6 @@ public class HomepageUserCourse {
     /** 修改时间 */
     @Basic
     @LastModifiedDate
-    @Column(name = "modified_time", nullable = false)
-    private Date modifiedTime;
+    @Column(name = "update_time", nullable = false)
+    private Date updateTime;
 }

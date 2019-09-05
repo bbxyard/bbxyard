@@ -61,8 +61,8 @@ public class HomepageUser {
      */
     @Basic
     @LastModifiedDate
-    @Column(name = "modified_time", nullable = false)
-    private Date modifiedTime;
+    @Column(name = "update_time", nullable = false)
+    private Date updateTime;
 
 
     public HomepageUser(String username, String email) {
