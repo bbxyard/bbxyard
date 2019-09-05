@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CourseInfoRequest {
+public class CourseInfosRequest {
 
     private List<Long> ids;
 

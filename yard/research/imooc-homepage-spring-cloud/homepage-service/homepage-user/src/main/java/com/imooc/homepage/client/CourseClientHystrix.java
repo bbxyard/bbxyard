@@ -1,7 +1,7 @@
 package com.imooc.homepage.client;
 
 import com.imooc.homepage.CourseInfo;
-import com.imooc.homepage.CourseInfoRequest;
+import com.imooc.homepage.CourseInfosRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -20,7 +20,7 @@ public class CourseClientHystrix implements CourseClient {
     }
 
     @Override
-    public List<CourseInfo> getCourseInfos(CourseInfoRequest request) {
+    public List<CourseInfo> getCourseInfos(CourseInfosRequest request) {
         return Collections.emptyList();
     }
 }

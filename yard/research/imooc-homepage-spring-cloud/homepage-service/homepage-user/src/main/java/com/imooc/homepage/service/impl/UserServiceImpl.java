@@ -1,7 +1,7 @@
 package com.imooc.homepage.service.impl;
 
 import com.imooc.homepage.CourseInfo;
-import com.imooc.homepage.CourseInfoRequest;
+import com.imooc.homepage.CourseInfosRequest;
 import com.imooc.homepage.entity.HomepageUser;
 import com.imooc.homepage.entity.HomepageUserCourse;
 import com.imooc.homepage.UserInfo;
@@ -52,7 +52,7 @@ public class UserServiceImpl implements IUserService {
 
         // 调用数据库访问层，写入新用户
         final String email = request.getEmail();
-        HomepageUser  newUser = homepageUserDao.save(
+        HomepageUser newUser = homepageUserDao.save(
                 new HomepageUser(username, email)
         );
 
@@ -90,7 +90,7 @@ public class UserServiceImpl implements IUserService {
         }
 
         List<CourseInfo> courseInfos = courseClient.getCourseInfos(
-                new CourseInfoRequest(
+                new CourseInfosRequest(
                         userCourses.stream()
                                 .map(HomepageUserCourse::getCourseId)
                                 .collect(Collectors.toList())
