@@ -52,7 +52,7 @@ public class UserServiceImpl implements IUserService {
 
         // 调用数据库访问层，写入新用户
         final String email = request.getEmail();
-        HomepageUser  newUser = homepageUserCourseDao.save(
+        HomepageUser  newUser = homepageUserDao.save(
                 new HomepageUser(username, email)
         );
 
@@ -63,7 +63,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserInfo getUserInfo(Long id) {
 
-        Optional<HomepageUser> user = homepageUserCourseDao.findById(id);
+        Optional<HomepageUser> user = homepageUserDao.findById(id);
         if (!user.isPresent()) {
             return UserInfo.invalid();
         }
@@ -76,7 +76,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserCourseInfo getUserCourseInfo(Long id) {
 
-        Optional<HomepageUser> user = homepageUserCourseDao.findById(id);
+        Optional<HomepageUser> user = homepageUserDao.findById(id);
         if (!user.isPresent()) {
             return UserCourseInfo.invalid();
         }
