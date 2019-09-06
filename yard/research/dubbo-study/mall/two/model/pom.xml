@@ -11,5 +11,21 @@
 
     <artifactId>model</artifactId>
 
+    <dependencies>
+        <!--api-->
+        <dependency>
+            <groupId>com.debug.mooc.dubbo.two</groupId>
+            <artifactId>api</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <!--spring-mybatis-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis-spring-boot.version}</version>
+        </dependency>
+
+    </dependencies>
 
 </project>
