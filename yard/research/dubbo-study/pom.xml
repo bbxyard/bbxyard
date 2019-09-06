@@ -45,6 +45,13 @@
         <httpclient.version>4.3.6</httpclient.version>
     </properties>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.5.RELEASE</version>
+        <relativePath/>
+    </parent>
+
     <dependencies>
         <!-- lombok 工具通过在代码编译时期动态的将注解替换为具体的代码,
         IDEA 需要添加 lombok 插件 -->
