@@ -13,8 +13,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>api</module>
-        <module>model</module>
         <module>server</module>
+        <module>xmodel</module>
     </modules>
 
     <dependencies>
