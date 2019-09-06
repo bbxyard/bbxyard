@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>server</artifactId>
+    <artifactId>two-server</artifactId>
 
     <packaging>jar</packaging>
 
@@ -56,15 +56,15 @@
 
         <!--dubboOne发布的api-->
         <dependency>
-            <groupId>com.imooc.dubbo.one</groupId>
-            <artifactId>api</artifactId>
-            <version>${version}</version>
+            <groupId>com.imooc.dubbo</groupId>
+            <artifactId>one-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <!--model-->
         <dependency>
-            <groupId>com.imooc.dubbo.two</groupId>
-            <artifactId>model</artifactId>
+            <groupId>com.imooc.dubbo</groupId>
+            <artifactId>two-model</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
@@ -258,7 +258,7 @@
     </dependencies>
 
     <build>
-        <finalName>dubbo-study-mall-two-${project.parent.version}</finalName>
+        <!--<finalName>dubbo-study-mall-two-${project.parent.version}</finalName>-->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

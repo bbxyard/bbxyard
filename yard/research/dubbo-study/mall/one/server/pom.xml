@@ -9,12 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>server</artifactId>
+    <artifactId>one-server</artifactId>
 
     <packaging>jar</packaging>
 
     <properties>
-        <start-class>com.debug.mooc.dubbo.one.server.BootMoreApplication</start-class>
+        <start-class>com.imooc.dubbo.one.server.OneServerApplication</start-class>
 
         <!--<spring-boot.version>1.3.3.RELEASE</spring-boot.version>-->
         <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
@@ -56,8 +56,8 @@
 
         <!--model-->
         <dependency>
-            <groupId>com.imooc.dubbo.one</groupId>
-            <artifactId>model</artifactId>
+            <groupId>com.imooc.dubbo</groupId>
+            <artifactId>one-model</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
@@ -251,7 +251,7 @@
     </dependencies>
 
     <build>
-        <finalName>dubbo-study-mall-one-${project.parent.version}</finalName>
+        <!--<finalName>dubbo-study-mall-one-${project.parent.version}</finalName>-->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

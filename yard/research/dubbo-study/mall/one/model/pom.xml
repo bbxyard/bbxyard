@@ -9,13 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>model</artifactId>
+    <artifactId>one-model</artifactId>
 
     <dependencies>
         <!--api-->
         <dependency>
-            <groupId>com.debug.mooc.dubbo.one</groupId>
-            <artifactId>api</artifactId>
+            <groupId>com.imooc.dubbo</groupId>
+            <artifactId>one-api</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
