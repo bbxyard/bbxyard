@@ -5,6 +5,6 @@ import com.imooc.dubbo.m1.api.response.BaseResponse;
 
 public interface IDubboOrderService {
 
-    public BaseResponse makeOrder(RawOrderDto dto);
+    BaseResponse makeOrder(RawOrderDto dto);
 
 }
