@@ -13,9 +13,9 @@
 
     <packaging>jar</packaging>
 
-    <properties>
-        <start-class>com.imooc.dubbo.m1.server.M1ServerApplication</start-class>
-    </properties>
+    <!--<properties>-->
+        <!--<start-class>com.imooc.dubbo.m1.server.M1ServerApplication</start-class>-->
+    <!--</properties>-->
 
     <!-- 依赖管理 -->
     <!--<dependencyManagement>-->
