@@ -12,8 +12,6 @@
     <artifactId>mall</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>one</module>
-        <module>two</module>
         <module>m2</module>
         <module>m1</module>
     </modules>

@@ -9,7 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>model</artifactId>
+    <artifactId>m2-model</artifactId>
 
+    <dependencies>
+        <!--api-->
+        <dependency>
+            <groupId>com.imooc.dubbo</groupId>
+            <artifactId>m2-api</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
