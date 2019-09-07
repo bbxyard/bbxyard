@@ -1,3 +1,6 @@
+LOG_PATH=logs
+LOG_FILE=m1
+
 #Console Log
 log4j.rootLogger=INFO,console,debug,info,warn,error
 
