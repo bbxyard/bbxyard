@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mp-quickstart</module>
+        <module>mp-logic-delete</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
