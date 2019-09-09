@@ -9,10 +9,11 @@
 #    password: test
 
 
+#    url: jdbc:mysql://localhost:3307/java_study
 # DataSource Config
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3307/java_study
+    url: jdbc:mysql://127.0.0.1:3307/java_study?useUnicode=true&characterEncoding=utf-8&useSSL=false&zeroDateTimeBehavior=convertToNull
     username: hero
     password: 1949.cn

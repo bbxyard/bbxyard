@@ -9,6 +9,7 @@
         <module>mp-optimistic-locker</module>
         <module>mp-auto-fill-metainfo</module>
         <module>mp-xenum</module>
+        <module>mp-annotation</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
