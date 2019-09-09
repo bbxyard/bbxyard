@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mp-quickstart</module>
+        <module>mp-quickstart</module>
     </modules>
 
     <properties>
