@@ -1,21 +1,21 @@
 package com.bbxyard.mp.optlocker.mapper;
 
 import com.bbxyard.mp.optlocker.entity.User;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
+@Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserMapperTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserMapperTest.class);
+    // private static final Logger logger = LoggerFactory.getLogger(UserMapperTest.class);
 
     @Resource
     private UserMapper userMapper;
@@ -31,11 +31,12 @@ public class UserMapperTest {
         int updateRes = userMapper.updateById(user);
         Assert.assertEquals("Should update success", 1, updateRes);
         if (updateRes > 0) {
-            System.out.println("Update succesfully");
+            log.info("Update succesfully");
             Assert.assertEquals("Should version = version+1", lastVersion + 1, user.getVersion().intValue());
         } else {
-            System.out.println("Update failed due to modified by others");
+            log.error("Update failed due to modified by others");
         }
+
     }
 
     @Test
@@ -50,10 +51,10 @@ public class UserMapperTest {
         int updateRes = userMapper.updateById(user);
         Assert.assertEquals("Should update success", 0, updateRes);
         if (updateRes > 0) {
-            System.out.println("Update succesfully");
+            log.info("Update succesfully");
             Assert.assertEquals("Should version = version+1", lastVersion + 1, user.getVersion().intValue());
         } else {
-            System.out.println("Update failed due to modified by others");
+            log.error("Update failed due to modified by others");
         }
     }
 }
