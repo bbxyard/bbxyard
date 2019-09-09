@@ -6,6 +6,7 @@
     <modules>
         <module>mp-quickstart</module>
         <module>mp-logic-delete</module>
+        <module>mp-optimistic-locker</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
