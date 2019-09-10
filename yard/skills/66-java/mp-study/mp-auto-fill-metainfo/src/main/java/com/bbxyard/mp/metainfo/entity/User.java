@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,4 +34,13 @@ public class User {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String operator;    // 操作员
 
+    @TableField(fill = FieldFill.INSERT, value = "create_time")
+    private LocalDateTime createTime;
+
+    // @TableField(fill = FieldFill.INSERT_UPDATE, value = "update_time", update = "%s+1")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+    @TableField(exist = false)
+    private String remark;
 }
