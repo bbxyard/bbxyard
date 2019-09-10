@@ -10,6 +10,7 @@
         <module>mp-auto-fill-metainfo</module>
         <module>mp-xenum</module>
         <module>mp-annotation</module>
+        <module>mp-zz</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
