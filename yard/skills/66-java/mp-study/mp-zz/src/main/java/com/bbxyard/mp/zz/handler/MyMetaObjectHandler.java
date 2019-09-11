@@ -1,9 +1,8 @@
-package com.bbxyard.mp.metainfo.handler;
+package com.bbxyard.mp.zz.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -16,11 +15,10 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         boolean hasSetter = metaObject.hasSetter("createTime");
         if (hasSetter) {
-            log.info("start insert fill -->");
+            log.info("start insert fill ...");
             this.setFieldValByName("createTime", LocalDateTime.now(), metaObject);
             this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
             this.setFieldValByName("operator", "Jerry", metaObject);
-            log.info("end insert fill <--");
         }
     }
 
