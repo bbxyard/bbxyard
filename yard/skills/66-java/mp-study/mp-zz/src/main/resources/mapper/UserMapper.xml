@@ -4,4 +4,8 @@
     <select id="listAllByCustomFromXml" resultType="com.bbxyard.mp.zz.entity.User">
         select name,email from mp_zz_user ${ew.customSqlSegment}
     </select>
+
+    <select id="listPageByCustom" resultType="com.bbxyard.mp.zz.entity.User">
+        select * from mp_zz_user ${ew.customSqlSegment};
+    </select>
 </mapper>
