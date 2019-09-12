@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bbxyard.mp.zz.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -27,5 +28,5 @@ public interface UserMapper extends BaseMapper<User> {
      * @param wrapper
      * @return
      */
-    IPage<User> listPageByCustom(IPage<User> page, @Param(Constants.WRAPPER) Wrapper<User> wrapper);
+    IPage<User> listPageByCustom(Page<User> page, @Param(Constants.WRAPPER) Wrapper<User> wrapper);
 }
