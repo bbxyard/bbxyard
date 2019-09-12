@@ -11,6 +11,7 @@
         <module>mp-xenum</module>
         <module>mp-annotation</module>
         <module>mp-zz</module>
+        <module>mp-active-record</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
