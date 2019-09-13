@@ -12,6 +12,8 @@
         <module>mp-annotation</module>
         <module>mp-zz</module>
         <module>mp-active-record</module>
+        <module>mp-curd</module>
+        <module>mp-pagination</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
