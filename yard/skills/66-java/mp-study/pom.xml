@@ -14,6 +14,7 @@
         <module>mp-active-record</module>
         <module>mp-curd</module>
         <module>mp-pagination</module>
+        <module>mp-sql-injector</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
