@@ -15,6 +15,7 @@
         <module>mp-curd</module>
         <module>mp-pagination</module>
         <module>mp-sql-injector</module>
+        <module>mp-wrapper</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
