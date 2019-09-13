@@ -32,8 +32,8 @@ public interface UserMapper extends BaseMapper<User> {
 
     @ResultMap("userChildrenMap")
     @Select("<script>select u.id,u.name,u.email,u.age,c.id as \"c_id\",c.name as \"c_name\",c.user_id as \"c_user_id\" " +
-            "from user u " +
-            "left join children c on c.user_id = u.id " +
+            "from mp_page_user u " +
+            "left join mp_page_children c on c.user_id = u.id " +
             "<where>" +
             "<if test=\"selectInt != null\"> " +
             "and u.age = #{selectInt} " +

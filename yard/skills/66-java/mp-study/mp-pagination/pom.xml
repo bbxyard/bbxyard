@@ -11,5 +11,13 @@
 
     <artifactId>mp-pagination</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.49</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>
