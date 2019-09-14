@@ -1,6 +1,7 @@
 package com.bbxyard.mp.logic.entity;
 
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -22,5 +23,6 @@ public class User {
      * 逻辑删除字段
      */
     @TableLogic
+    @TableField(select = false)
     private Integer deleted;
 }
