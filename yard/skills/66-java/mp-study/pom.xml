@@ -17,6 +17,7 @@
         <module>mp-sql-injector</module>
         <module>mp-wrapper</module>
         <module>mp-tenant</module>
+        <module>mp-performance-analysis</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
