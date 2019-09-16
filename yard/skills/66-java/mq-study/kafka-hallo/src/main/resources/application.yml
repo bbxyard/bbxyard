@@ -1,0 +1,34 @@
+server:
+  port: 8081
+
+kafka:
+    consumer:
+        auto:
+            commit:
+                interval: 100
+            offset:
+                reset: latest
+        concurrency: 10
+        enable:
+            auto:
+                commit: true
+        group:
+            id: imooc
+        servers: 127.0.0.1:9092
+        session:
+            timeout: 6000
+        topic: imooc-kafka
+        zookeeper:
+            connect: 127.0.0.1:2181
+    producer:
+        batch:
+            size: 4096
+        buffer:
+            memory: 40960
+        linger: 1
+        retries: 0
+        servers: 127.0.0.1:9092
+    topic:
+        default: hallo-kafka-topic
+
+
