@@ -1,5 +1,9 @@
 package com.bbxyard.mq.kafka.common;
 
+import lombok.Data;
+
+
+@Data
 public class Response {
 
     private int code;

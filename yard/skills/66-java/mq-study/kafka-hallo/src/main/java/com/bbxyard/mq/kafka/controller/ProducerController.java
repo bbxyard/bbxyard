@@ -30,8 +30,9 @@ public class ProducerController {
     private Gson gson = new Gson();
 
 
-    @RequestMapping(value = "/hallo", method = RequestMethod.GET, produces = {"application/json"})
-    public Response sendKafka() {
+    // @RequestMapping(value = "/hallo", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping("/hallo")
+    public Object sendKafka() {
         return new Response(ErrorCode.SUCCESS, "OK");
     }
 
