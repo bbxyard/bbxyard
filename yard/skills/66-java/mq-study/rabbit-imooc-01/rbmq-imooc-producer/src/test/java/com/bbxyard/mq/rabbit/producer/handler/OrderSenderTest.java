@@ -1,6 +1,7 @@
 package com.bbxyard.mq.rabbit.producer.handler;
 
 import com.bbxyard.mq.rabbit.producer.entity.Order;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +20,7 @@ public class OrderSenderTest {
     @Resource
     private OrderSender orderSender;
 
+    @Test
     public void testSend1() throws Exception {
         Order order = new Order();
         order.setId("201909181101360315");
