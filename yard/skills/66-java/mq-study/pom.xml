@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>kafka-hallo</module>
+        <module>rabbit-imooc-01</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
