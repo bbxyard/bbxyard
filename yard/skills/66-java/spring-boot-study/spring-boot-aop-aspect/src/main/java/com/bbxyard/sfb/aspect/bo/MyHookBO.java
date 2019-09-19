@@ -12,7 +12,7 @@ public class MyHookBO {
 
     private String params;
 
-    private String execTime;
+    private Long execTime;
 
     private String remark;
 
