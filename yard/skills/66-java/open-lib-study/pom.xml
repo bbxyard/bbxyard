@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>open-lib-hutool</module>
+        <module>open-lib-google-guava</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
