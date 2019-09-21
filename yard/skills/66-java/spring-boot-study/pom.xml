@@ -6,6 +6,8 @@
     <modules>
         <module>spring-boot-aop-aspect</module>
         <module>spring-boot-swagger</module>
+        <module>spring-boot-rabbit-mq</module>
+        <module>spring-boot-redis</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
