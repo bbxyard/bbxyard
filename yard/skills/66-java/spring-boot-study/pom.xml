@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-boot-aop-aspect</module>
+        <module>spring-boot-swagger</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
