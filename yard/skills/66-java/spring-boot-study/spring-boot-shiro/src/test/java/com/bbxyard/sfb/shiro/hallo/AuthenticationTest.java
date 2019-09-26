@@ -28,10 +28,21 @@ public class AuthenticationTest {
         SecurityUtils.setSecurityManager(defaultSecurityManager);
         Subject subject = SecurityUtils.getSubject();
 
-        UsernamePasswordToken token = new UsernamePasswordToken("admin", "3.14159265");
-        subject.login(token);
-        System.out.println("是否通过认证: " + subject.isAuthenticated());
-        subject.logout();
-        System.out.println("是否通过认证: " + subject.isAuthenticated());
+        verify(subject, "admin", "3.14159265");
+        verify(subject, "adminX", "3.14159265");
+        verify(subject, "admin", "3.14");
+        verify(subject, "adminX", "0.618");
+    }
+
+    private void verify(Subject subject, String username, String password) {
+        try {
+            UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+            subject.login(token);
+            System.out.println("是否通过认证: " + subject.isAuthenticated());
+            subject.logout();
+            System.out.println("是否通过认证: " + subject.isAuthenticated());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
