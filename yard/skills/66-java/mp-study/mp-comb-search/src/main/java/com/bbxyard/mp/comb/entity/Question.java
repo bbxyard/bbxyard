@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import java.time.LocalDate;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -28,27 +30,32 @@ public class Question implements Serializable {
     /**
      * 问答主键id
      */
+    @ApiModelProperty(value = "问答主键id")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
      * 学生外键id
      */
+    @ApiModelProperty(value = "学生外键id")
     private Integer studentId;
 
     /**
      * 问题内容
      */
+    @ApiModelProperty(value = "问题内容")
     private String content;
 
     /**
      * 问题发布时间
      */
+    @ApiModelProperty(value = "问题发布时间")
     private LocalDate date;
 
     /**
      * 问题悬赏积分
      */
+    @ApiModelProperty(value = "问题悬赏积分")
     private Integer score;
 
 
