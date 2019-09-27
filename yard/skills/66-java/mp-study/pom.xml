@@ -19,6 +19,7 @@
         <module>mp-tenant</module>
         <module>mp-performance-analysis</module>
         <module>mp-type-handler</module>
+        <module>mp-auto-gen</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
