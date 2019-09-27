@@ -11,6 +11,8 @@ endif
 install:
 	mvn clean install -DskipTests
 
+gen:
+	rsync -avP /tmp/mp.gen/ mp-auto-gen/src/main/java/
 
 # ####################################
 # git
