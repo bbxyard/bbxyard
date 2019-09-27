@@ -13,6 +13,11 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
         <!-- 代码生成器默认使用如下模版引擎 -->
         <dependency>
             <groupId>org.apache.velocity</groupId>
