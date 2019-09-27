@@ -20,6 +20,7 @@
         <module>mp-performance-analysis</module>
         <module>mp-type-handler</module>
         <module>mp-auto-gen</module>
+        <module>mp-comb-search</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
