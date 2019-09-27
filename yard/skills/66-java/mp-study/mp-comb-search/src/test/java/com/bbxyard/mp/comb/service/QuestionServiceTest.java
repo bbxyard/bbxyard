@@ -1,6 +1,8 @@
 package com.bbxyard.mp.comb.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bbxyard.mp.comb.entity.Question;
+import com.bbxyard.mp.comb.vo.QuestionStudentVO;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,4 +37,10 @@ public class QuestionServiceTest {
         questionService.saveBatch(questions);
     }
 
+    @Test
+    public void testPageSearch() {
+        Page<QuestionStudentVO> page = new Page<>(2, 6);
+        Page<QuestionStudentVO> res = questionService.getQuestionStudent(page);
+        System.out.println(res);
+    }
 }

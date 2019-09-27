@@ -2,9 +2,13 @@ package com.bbxyard.mp.comb.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+
 import java.time.LocalDate;
+
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -25,7 +29,7 @@ import lombok.experimental.Accessors;
 @TableName("mp_comb_question")
 public class Question implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * 问答主键id
@@ -47,16 +51,14 @@ public class Question implements Serializable {
     private String content;
 
     /**
-     * 问题发布时间
-     */
-    @ApiModelProperty(value = "问题发布时间")
-    private LocalDate date;
-
-    /**
      * 问题悬赏积分
      */
     @ApiModelProperty(value = "问题悬赏积分")
     private Integer score;
 
-
+    /**
+     * 问题发布时间
+     */
+    @ApiModelProperty(value = "问题发布时间")
+    private LocalDateTime createTime;
 }

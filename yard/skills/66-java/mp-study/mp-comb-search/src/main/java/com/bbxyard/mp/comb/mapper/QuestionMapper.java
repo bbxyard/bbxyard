@@ -22,7 +22,7 @@ public interface QuestionMapper extends BaseMapper<Question> {
      * @param page 翻页对象，可以作为 xml 参数直接使用，传递参数 Page 即自动分页
      * @return
      */
-    @Select("SELECT mp_comb_question.*,t_student.`name` FROM mp_comb_question,mp_comb_student WHERE mp_comb_question.student_id=mp_comb_student.id")
+    @Select("SELECT mp_comb_question.*,mp_comb_student.`name` FROM mp_comb_question,mp_comb_student WHERE mp_comb_question.student_id=mp_comb_student.id")
     List<QuestionStudentVO> getQuestionStudent(Page<QuestionStudentVO> page);
 
 }

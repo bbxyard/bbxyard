@@ -7,13 +7,13 @@
         <id column="id" property="id" />
         <result column="student_id" property="studentId" />
         <result column="content" property="content" />
-        <result column="date" property="date" />
         <result column="score" property="score" />
+        <result column="create_time" property="createTime" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, student_id, content, date, score
+        id, student_id, content, score, create_time
     </sql>
 
 </mapper>
