@@ -2,18 +2,20 @@
 
 # 公众号文章下载
 
+import os
 import requests
 import json
 import time
 import hashlib
 from pymongo import MongoClient
+from yvhai.res.http.header import get_random_user_agent
 
 url = 'http://mp.weixin.qq.com/mp/profile_ext'
 
 # Mongo配置
 conn = MongoClient('127.0.0.1', 27017)
-db = conn.wx  #连接wx数据库，没有则自动创建
-mongo_wx = db.article  #使用article集合，没有则自动创建
+db = conn.wx  # 连接wx数据库，没有则自动创建
+mongo_wx = db.article  # 使用article集合，没有则自动创建
 
 
 def get_wx_article(meta_info, index=0, count=10):
@@ -74,13 +76,25 @@ def get_wx_article(meta_info, index=0, count=10):
         return False
 
 
-if __name__ == '__main__':
+"""
+获取公众号，所有文章列表，并存入数据库
+"""
+
+
+def fetch_list():
+    # meta_info = {
+    #     "wx_name": "Python3X",
+    #     "wx_id": "python3xxx",
+    #     "biz": "Mzg4MTA2Nzg0NA==",
+    #     "uin": "MTEyNzgzMjU4Ng==",
+    #     "key": "2dfd68df0f968e754e9f4b66f39407d798297df8859d40c12ecc2a454d267bf041bdc6cf7c53e716bfab3f91b1281bfb96396d001a1c84cf3b28b73553980777400468bc2ab8b33306fd88f10fb6605d"
+    # }
     meta_info = {
-        "wx_name": "Python3X",
-        "wx_id": "python3xxx",
-        "biz": "Mzg4MTA2Nzg0NA==",
+        "wx_name": "跨境法律服务专业智汇",
+        "wx_id": "Cross-borderLegal",
+        "biz": "MzU2NTQ5NjU0Ng==",
         "uin": "MTEyNzgzMjU4Ng==",
-        "key": "2dfd68df0f968e754e9f4b66f39407d798297df8859d40c12ecc2a454d267bf041bdc6cf7c53e716bfab3f91b1281bfb96396d001a1c84cf3b28b73553980777400468bc2ab8b33306fd88f10fb6605d"
+        "key": "56aa8a3ff1cbe0d9a563d2dcf05d9574e797a3fd15420844f2065249eef41a0f3df963415690f28ccc958ab545f7b1eea0a857bfe558d5b074573cf3977c0727beaeaeaaface54b6557208a5f8cd0181"
     }
 
     index = 0
@@ -95,3 +109,38 @@ if __name__ == '__main__':
             break
 
         print(f'..........准备抓取公众号第{index + 1} 页文章.')
+
+
+def download_all():
+    # 输出目录
+    out_dir = "wx-articles"
+    out_htm_dir = out_dir + os.sep + "html"
+    out_txt_dir = out_dir + os.sep + "txt"
+    os.mkdir(out_dir)
+    os.mkdir(out_htm_dir)
+    os.mkdir(out_txt_dir)
+    # 下载列表
+    items = mongo_wx.find()
+    for item in items:
+        title, url = item["title"], item["content_url"]
+        print(f'title={title}, url={url}')
+        if len(url) == 0:
+            continue
+
+        res = {}
+        params = {}
+        headers = {'User-Agent': get_random_user_agent()}
+        resp = requests.get(url=url, params=params, headers=headers)
+        if not resp:
+            continue
+        res["html"] = resp.content.decode("utf-8")
+        res["outfile"] = out_htm_dir + os.sep + title + ".html"
+        with open(res["outfile"], "wb") as f:
+            f.write(resp.content)
+        time.sleep(2)
+
+
+if __name__ == '__main__':
+    # fetch_list()
+    download_all()
+    pass
