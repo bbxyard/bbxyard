@@ -11,6 +11,10 @@ TOOLKIT_LIST := docker
 TOOLKIT_GIT_PREFIX := $(SUB_SDK_GIT_PREFIX)
 TOOLKIT_LOCAL_PREFIX := yard/toolkits
 
+TEMPLATE_LIST := hbx-demos
+TEMPLATE_GIT_PREFIX := $(SUB_SDK_GIT_PREFIX)
+TEMPLATE_LOCAL_PREFIX := template/web
+
 REF_LIST := min-cli
 REF_GIT_PREFIX := git@github.com:yh24
 REF_LOCAL_PREFIX := ref
@@ -20,9 +24,6 @@ DATA_SUF = $(shell date +"%Y.%m.%d.%H.%M.%S")
 GUP_MSG  = "Auto Commited at $(DATA_SUF)"
 DEPLOY_ENV =
 
-SUB_LIST = yh-os-init yh-user yh-brew yh-mongo \
-	  yh-run-clean yh-nodejs \
-	  yh-ssh-key
 
 ifdef MSG
 	GUP_MSG = "$(MSG)"
@@ -59,16 +60,19 @@ gpush-self: gpom
 ginit:
 	$(call doSubListInit,$(SUB_SDK_LIST),$(SUB_SDK_LOCAL_PREFIX),$(SUB_SDK_GIT_PREFIX))
 	$(call doSubListInit,$(TOOLKIT_LIST),$(TOOLKIT_LOCAL_PREFIX),$(TOOLKIT_GIT_PREFIX))
+	$(call doSubListInit,$(TEMPLATE_LIST),$(TEMPLATE_LOCAL_PREFIX),$(TEMPLATE_GIT_PREFIX))
 	$(call doSubListInit,$(REF_LIST),$(REF_LOCAL_PREFIX),$(REF_GIT_PREFIX))
 
 gpull: gpull-self ginit
 	$(call doSubListPull,$(SUB_SDK_LIST),$(SUB_SDK_LOCAL_PREFIX),$(SUB_SDK_GIT_PREFIX))
 	$(call doSubListPull,$(TOOLKIT_LIST),$(TOOLKIT_LOCAL_PREFIX),$(TOOLKIT_GIT_PREFIX))
+	$(call doSubListPull,$(TEMPLATE_LIST),$(TEMPLATE_LOCAL_PREFIX),$(TEMPLATE_GIT_PREFIX))
 	$(call doSubListPull,$(REF_LIST),$(REF_LOCAL_PREFIX),$(REF_GIT_PREFIX))
 
 gpush: gpom ginit
 	$(call doSubListPush,$(SUB_SDK_LIST),$(SUB_SDK_LOCAL_PREFIX),$(SUB_SDK_GIT_PREFIX))
 	$(call doSubListPush,$(TOOLKIT_LIST),$(TOOLKIT_LOCAL_PREFIX),$(TOOLKIT_GIT_PREFIX))
+	$(call doSubListPush,$(TEMPLATE_LIST),$(TEMPLATE_LOCAL_PREFIX),$(TEMPLATE_GIT_PREFIX))
 	# $(call doSubListPush,$(REF_LIST),$(REF_LOCAL_PREFIX),$(REF_GIT_PREFIX))
 
 
