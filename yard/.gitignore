@@ -1,0 +1,13 @@
+## generated files
+logs
+.DS_Store
+
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
