@@ -1,5 +1,5 @@
 /*
-Copyright © 2019 NAME HERE <EMAIL ADDRESS>
+Copyright © 2019 boxu@yvhai.com
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -12,11 +12,14 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+Ref: https://github.com/spf13/cobra
+
 */
 package main
 
 import "bbxyard.com/cli/cobra-demo/cmd"
 
 func main() {
-  cmd.Execute()
+	cmd.Execute()
 }

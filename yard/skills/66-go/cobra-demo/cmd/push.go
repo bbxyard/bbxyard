@@ -21,6 +21,15 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var (
+	srcDir    string = "./"
+	destDir   string = "/tmp"
+	hostname  string = "localhost"
+	debugMode bool   = false
+	hosts     []string
+	port      uint16 = 36036
+)
+
 // pushCmd represents the push command
 var pushCmd = &cobra.Command{
 	Use:   "push",
@@ -32,20 +41,27 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("push called")
+		fmt.Printf("push called %v\n", args)
+		fmt.Println("=== Args ===")
+		fmt.Printf("  ==> src-dir: %s\n", srcDir)
+		fmt.Printf("  ==> dest-dir: %s\n", destDir)
+		fmt.Printf("  ==> hostname: %s\n", hostname)
+		fmt.Printf("  ==> debug: %v\n", debugMode)
+		fmt.Printf("  ==> hosts: %v, %d\n", hosts, len(hosts))
+		fmt.Printf("  ==> port: %d\n", port)
+		fmt.Printf("  ==> cfg-file: %s\n", cfgFile)
+		fmt.Printf("  ==> author: %s\n", author)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(pushCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// pushCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// pushCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	pushCmd.Flags().StringVarP(&srcDir, "src-dir", "i", srcDir, "src/input dir")
+	pushCmd.Flags().StringVarP(&destDir, "dest-dir", "o", destDir, "dest/output dir")
+	pushCmd.Flags().StringVar(&hostname, "hostname", hostname, "dest hostname")
+	pushCmd.Flags().StringArrayVar(&hosts, "hosts", hosts, "dest hosts")
+	pushCmd.Flags().BoolVarP(&debugMode, "debugMode", "D", debugMode, "show debugMode info")
+	pushCmd.Flags().Uint16VarP(&port, "port", "p", port, "host port")
+	pushCmd.MarkFlagRequired("src-dir")
 }

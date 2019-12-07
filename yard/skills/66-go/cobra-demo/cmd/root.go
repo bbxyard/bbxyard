@@ -25,7 +25,27 @@ import (
 	"github.com/spf13/viper"
 )
 
-var cfgFile string
+const (
+	AppMajorVersion = 3
+	AppMinorVersion = 1
+	AppPatchVersion = 4
+)
+
+var AppVersion = fmt.Sprintf("%d.%d.%d", AppMajorVersion, AppMinorVersion, AppPatchVersion)
+
+var (
+	cfgFile    string = "$HOME/.cobra-demo.yaml"
+	author     string = "boxu@yvhai.com"
+	hasVersion bool   = false
+)
+
+func showAppInfo() {
+	fmt.Printf("+ - - - - app info begin - - - - - +\n")
+	fmt.Printf("  AppVersion: %s\n", AppVersion)
+	fmt.Printf("  Author: %s\n", author)
+	fmt.Printf("  CfgFile: %s\n", cfgFile)
+	fmt.Printf("+ - - - - app info end - - - - - +\n")
+}
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -45,6 +65,10 @@ to quickly create a Cobra application.`,
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Printf("Inside rootCmd Run with args: %v\n", args)
+		if hasVersion {
+			fmt.Println(" show version: ", AppVersion)
+		}
+		showAppInfo()
 	},
 	PostRun: func(cmd *cobra.Command, args []string) {
 		fmt.Printf("Inside rootCmd PostRun with args: %v\n", args)
@@ -52,9 +76,6 @@ to quickly create a Cobra application.`,
 	PersistentPostRun: func(cmd *cobra.Command, args []string) {
 		fmt.Printf("Inside rootCmd PersistentPostRun with args: %v\n", args)
 	},
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	//	Run: func(cmd *cobra.Command, args []string) { },
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -69,15 +90,18 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.cobra-demo.yaml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", cfgFile, "config file")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	rootCmd.PersistentFlags().BoolVar(&hasVersion, "version", hasVersion, "show version")
+
+	rootCmd.PersistentFlags().StringVar(&author, "author", author, "Author name for copyright attribution")
+	viper.BindPFlag("author", rootCmd.PersistentFlags().Lookup("author"))
+
+	// rootCmd.SetVersionTemplate("version: 1.0.0")
 }
 
 // initConfig reads in config file and ENV variables if set.
