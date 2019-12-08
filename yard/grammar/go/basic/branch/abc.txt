@@ -1,0 +1,5 @@
+Ich komme aus China
+设计模式
+创建型(5): AB???
+结构型(7): ABCDSPF
+行为型(11): I2 M2 C2 SOS TV
