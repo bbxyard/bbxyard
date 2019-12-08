@@ -1,7 +1,7 @@
 package main
 
 import (
-	"go/study/rpc/jsonrpc/api"
+	"go/study/1024-rpc/jsonrpc/api"
 	"log"
 	"net"
 	"net/rpc"
