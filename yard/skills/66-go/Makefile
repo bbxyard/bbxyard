@@ -14,6 +14,18 @@ init: init-cobra-demo
 
 
 # ####################################
+# Deps AREA
+# ####################################
+deps: deps-http deps-logs
+
+deps-http:
+	go get -u github.com/gin-gonic/gin
+
+deps-logs:
+	go get -u go.uber.org/zap
+
+
+# ####################################
 # Init AREA
 # ####################################
 init-cobra-demo:
