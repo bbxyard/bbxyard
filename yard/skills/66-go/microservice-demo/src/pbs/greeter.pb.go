@@ -4,8 +4,12 @@
 package pb
 
 import (
+	context "context"
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
+	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	math "math"
 )
 
@@ -116,4 +120,84 @@ var fileDescriptor_e585294ab3f34af5 = []byte{
 	0x07, 0x4c, 0xab, 0x90, 0xb0, 0x5e, 0x41, 0x92, 0x1e, 0x9a, 0x7d, 0x52, 0x22, 0xa8, 0x82, 0x10,
 	0xd3, 0x95, 0x18, 0x92, 0xd8, 0xc0, 0xae, 0x34, 0x06, 0x04, 0x00, 0x00, 0xff, 0xff, 0x53, 0x28,
 	0x84, 0xf0, 0xb6, 0x00, 0x00, 0x00,
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// GreeterClient is the client API for Greeter service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type GreeterClient interface {
+	Greeting(ctx context.Context, in *GreetingRequest, opts ...grpc.CallOption) (*GreetingResponse, error)
+}
+
+type greeterClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewGreeterClient(cc *grpc.ClientConn) GreeterClient {
+	return &greeterClient{cc}
+}
+
+func (c *greeterClient) Greeting(ctx context.Context, in *GreetingRequest, opts ...grpc.CallOption) (*GreetingResponse, error) {
+	out := new(GreetingResponse)
+	err := c.cc.Invoke(ctx, "/pb.Greeter/Greeting", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// GreeterServer is the server API for Greeter service.
+type GreeterServer interface {
+	Greeting(context.Context, *GreetingRequest) (*GreetingResponse, error)
+}
+
+// UnimplementedGreeterServer can be embedded to have forward compatible implementations.
+type UnimplementedGreeterServer struct {
+}
+
+func (*UnimplementedGreeterServer) Greeting(ctx context.Context, req *GreetingRequest) (*GreetingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Greeting not implemented")
+}
+
+func RegisterGreeterServer(s *grpc.Server, srv GreeterServer) {
+	s.RegisterService(&_Greeter_serviceDesc, srv)
+}
+
+func _Greeter_Greeting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GreetingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GreeterServer).Greeting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.Greeter/Greeting",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GreeterServer).Greeting(ctx, req.(*GreetingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Greeter_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "pb.Greeter",
+	HandlerType: (*GreeterServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Greeting",
+			Handler:    _Greeter_Greeting_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "greeter.proto",
 }

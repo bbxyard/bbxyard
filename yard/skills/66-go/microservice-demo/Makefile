@@ -11,7 +11,7 @@ SELF_DO := make --no-print-directory -C .
 
 DATA_SUF = $(shell date +"%Y.%m.%d.%H.%M.%S")
 
-include ./.env
+-include ./.env
 
 PROJ_NAME := $(shell basename $(CURDIR))
 
@@ -34,7 +34,7 @@ CMD := bash
 gen: gen-pb
 gen-pb:
 	# protoc -Istub/protos --micro_out=src/pbs/ --go_out=src/pbs/ stub/protos/greeter.proto
-	protoc -Istub/protos --micro_out=src/pbs/ --go_out=src/pbs/ greeter.proto
+	protoc -Istub/protos --micro_out=src/pbs/ --go_out=plugins=grpc:src/pbs/ greeter.proto
 
 
 # ####################################

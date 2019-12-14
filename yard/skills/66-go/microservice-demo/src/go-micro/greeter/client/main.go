@@ -34,7 +34,7 @@ func main() {
 		}),
 	)
 
-	client := pb.NewGreeterClient(svc_name, service.Client())
+	client := pb.NewGreeterService(svc_name, service.Client())
 	resp, err := client.Greeting(context.Background(), &pb.GreetingRequest{Name: name})
 	if err != nil {
 		fmt.Println(err)
