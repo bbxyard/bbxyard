@@ -26,13 +26,15 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
-	pb "google.golang.org/grpc/examples/helloworld/helloworld"
+	pb "bbxyard.com/helloworld"
 )
 
 const (
 	address     = "localhost:50051"
 	defaultName = "world"
 )
+
+type HalloFunc func(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error)
 
 func main() {
 	// Set up a connection to the server.
@@ -50,7 +52,13 @@ func main() {
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
-	r, err := c.SayHello(ctx, &pb.HelloRequest{Name: name})
+
+	pfn := c.SayHello
+	if len(name) % 2 == 0 {
+		pfn = c.SayHelloAgain
+	}
+	r, err := pfn(ctx, &pb.HelloRequest{Name: name})
+	// r, err := c.SayHelloAgain(ctx, &pb.HelloRequest{Name: name})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
