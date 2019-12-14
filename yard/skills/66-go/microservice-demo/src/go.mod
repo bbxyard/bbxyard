@@ -6,8 +6,9 @@ require (
 	github.com/coreos/etcd v3.3.18+incompatible // indirect
 	github.com/go-kit/kit v0.9.0 // indirect
 	github.com/gogo/protobuf v1.3.1 // indirect
+	github.com/golang/protobuf v1.3.2
 	github.com/lucas-clemente/quic-go v0.14.1 // indirect
-	github.com/micro/go-micro v1.18.0 // indirect
+	github.com/micro/go-micro v1.18.0
 	github.com/miekg/dns v1.1.25 // indirect
 	github.com/nats-io/jwt v0.3.2 // indirect
 	go.uber.org/atomic v1.5.1 // indirect

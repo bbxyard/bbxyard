@@ -5,26 +5,22 @@ package pb
 
 import (
 	fmt "fmt"
-	proto "github.com/golang/protobuf/proto"
-	math "math"
-)
 
-import (
-	context "context"
+	proto "github.com/golang/protobuf/proto"
+
+	math "math"
+
 	client "github.com/micro/go-micro/client"
+
 	server "github.com/micro/go-micro/server"
+
+	context "context"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the proto package it is being compiled against.
-// A compilation error at this line likely means your copy of the
-// proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ context.Context
@@ -33,30 +29,30 @@ var _ server.Option
 
 // Client API for Greeter service
 
-type GreeterService interface {
+type GreeterClient interface {
 	Greeting(ctx context.Context, in *GreetingRequest, opts ...client.CallOption) (*GreetingResponse, error)
 }
 
-type greeterService struct {
-	c    client.Client
-	name string
+type greeterClient struct {
+	c           client.Client
+	serviceName string
 }
 
-func NewGreeterService(name string, c client.Client) GreeterService {
+func NewGreeterClient(serviceName string, c client.Client) GreeterClient {
 	if c == nil {
 		c = client.NewClient()
 	}
-	if len(name) == 0 {
-		name = "pb"
+	if len(serviceName) == 0 {
+		serviceName = "pb"
 	}
-	return &greeterService{
-		c:    c,
-		name: name,
+	return &greeterClient{
+		c:           c,
+		serviceName: serviceName,
 	}
 }
 
-func (c *greeterService) Greeting(ctx context.Context, in *GreetingRequest, opts ...client.CallOption) (*GreetingResponse, error) {
-	req := c.c.NewRequest(c.name, "Greeter.Greeting", in)
+func (c *greeterClient) Greeting(ctx context.Context, in *GreetingRequest, opts ...client.CallOption) (*GreetingResponse, error) {
+	req := c.c.NewRequest(c.serviceName, "Greeter.Greeting", in)
 	out := new(GreetingResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -71,21 +67,14 @@ type GreeterHandler interface {
 	Greeting(context.Context, *GreetingRequest, *GreetingResponse) error
 }
 
-func RegisterGreeterHandler(s server.Server, hdlr GreeterHandler, opts ...server.HandlerOption) error {
-	type greeter interface {
-		Greeting(ctx context.Context, in *GreetingRequest, out *GreetingResponse) error
-	}
-	type Greeter struct {
-		greeter
-	}
-	h := &greeterHandler{hdlr}
-	return s.Handle(s.NewHandler(&Greeter{h}, opts...))
+func RegisterGreeterHandler(s server.Server, hdlr GreeterHandler, opts ...server.HandlerOption) {
+	s.Handle(s.NewHandler(&Greeter{hdlr}, opts...))
 }
 
-type greeterHandler struct {
+type Greeter struct {
 	GreeterHandler
 }
 
-func (h *greeterHandler) Greeting(ctx context.Context, in *GreetingRequest, out *GreetingResponse) error {
+func (h *Greeter) Greeting(ctx context.Context, in *GreetingRequest, out *GreetingResponse) error {
 	return h.GreeterHandler.Greeting(ctx, in, out)
 }
