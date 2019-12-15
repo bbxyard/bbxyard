@@ -26,7 +26,11 @@ deps-msvc:
 	go get -u github.com/NYTimes/gizmo
 	go get -u github.com/NYTimes/gziphandler
 	go get -u github.com/sirupsen/logrus
-	go get -u github.com/hashicorp/consul
+#	go get -u github.com/hashicorp/consul
+	go get -u github.com/gorilla/mux
+
+deps-msvc-deps:
+	go get -u github.com/oklog/oklog/pkg/group
 
 
 # ####################################
