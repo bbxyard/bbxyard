@@ -1,4 +1,4 @@
-package cto
+package dto
 
 import (
 	pb "bbxyard.com/msvc/pbs"

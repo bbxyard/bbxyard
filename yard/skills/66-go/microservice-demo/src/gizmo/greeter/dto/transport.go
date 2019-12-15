@@ -1,4 +1,4 @@
-package cto
+package dto
 
 import (
 	"github.com/NYTimes/gizmo/server"
