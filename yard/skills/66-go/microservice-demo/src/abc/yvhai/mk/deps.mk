@@ -30,7 +30,7 @@ deps-msvc:
 
 deps-msvc-deps:
 	go get -u github.com/oklog/oklog/pkg/group
-
+	go get -u github.com/prometheus/client_golang
 
 
 # ####################################

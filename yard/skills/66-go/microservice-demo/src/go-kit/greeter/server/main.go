@@ -66,7 +66,7 @@ func main() {
 		}
 		g.Add(func() error {
 			logger.Log("transport", "debug/HTTP", "addr", *debugAddr)
-			return http.serve(debugListener, http.DefaultServeMux)
+			return http.Serve(debugListener, http.DefaultServeMux)
 		}, func(err error) {
 			debugListener.Close()
 		})
