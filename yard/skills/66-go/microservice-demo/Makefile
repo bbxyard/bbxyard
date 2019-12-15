@@ -48,4 +48,4 @@ deps:
 # Utils AREA
 # ####################################
 clean:
-	rm -rvf bin/* src/pbs/*
+	rm -rvf bin/* src/pbs/*.pb.*go

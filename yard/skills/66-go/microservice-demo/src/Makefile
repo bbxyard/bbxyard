@@ -23,6 +23,10 @@ deps-grpc:
 deps-msvc:
 	go get -u github.com/go-kit/kit
 	go get -u github.com/micro/go-micro
+	go get -u github.com/NYTimes/gizmo
+	go get -u github.com/NYTimes/gziphandler
+	go get -u github.com/sirupsen/logrus
+	go get -u github.com/hashicorp/consul
 
 
 # ####################################
