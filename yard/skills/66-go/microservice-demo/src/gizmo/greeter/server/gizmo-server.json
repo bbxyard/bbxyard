@@ -1,0 +1,10 @@
+{
+  "Server": {
+    "ServerType": "rpc",
+    "HTTPPort": 9210,
+    "RPCPort": 9220,
+    "Log": "../log/gizmo-app.log",
+    "HTTPAccessLog": "../log/gizmo-access.log",
+    "RPCAccessLog": "../log/gizmo-rpc-access.log"
+  }
+}

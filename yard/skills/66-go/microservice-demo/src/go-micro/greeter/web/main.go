@@ -25,7 +25,7 @@ func main() {
 				name = names[0]
 			}
 
-			theClient := pb.NewGreeterClient("go-micro-serv-greeter", client.DefaultClient)
+			theClient := pb.NewGreeterService("go-micro-serv-greeter", client.DefaultClient)
 			resp, err := theClient.Greeting(context.Background(), &pb.GreetingRequest{Name: name})
 			if err != nil {
 				http.Error(w, err.Error(), 500)

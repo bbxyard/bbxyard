@@ -1,36 +1,45 @@
+
+# 引入依赖
+include abc/yvhai/mk/deps.mk
+
+# ####################################
+# Configure AREA
+# ####################################
+BIN_DIR := $(CURDIR)/../bin
+
+
 # ####################################
 # Dashboard AREA
 # ####################################
 
 
 
+
 # ####################################
-# Deps AREA
+# Build AREA
 # ####################################
-deps: deps-http deps-logs deps-grpc deps-msvc
+go-micro: go-micro-web go-micro-server go-micro-client
+go-micro-web:
+	go build -o $(BIN_DIR)/$@ go-micro/greeter/web/main.go
+go-micro-server:
+	go build -o $(BIN_DIR)/$@ go-micro/greeter/server/main.go
+go-micro-client:
+	go build -o $(BIN_DIR)/$@ go-micro/greeter/client/main.go
 
-deps-http:
-	# go get -u github.com/gin-gonic/gin
+gizmo: gizmo-server gizmo-client
+gizmo-server: $(BIN_DIR)/gizmo-server.json
+	go build -o $(BIN_DIR)/$@ gizmo/greeter/server/main.go
+gizmo-client:
+	go build -o $(BIN_DIR)/$@ gizmo/greeter/client/main.go
 
-deps-logs:
-	# go get -u go.uber.org/zap
+$(BIN_DIR)/gizmo-server.json:
+	[ -f $@ ] || cp gizmo/greeter/server/gizmo-server.json $@
 
-deps-grpc:
-	go get -u google.golang.org/grpc
-	go get -u github.com/golang/protobuf/protoc-gen-go
-	go get -u github.com/micro/protoc-gen-micro
-
-deps-msvc:
-	go get -u github.com/go-kit/kit
-	go get -u github.com/micro/go-micro
-	go get -u github.com/NYTimes/gizmo
-	go get -u github.com/NYTimes/gziphandler
-	go get -u github.com/sirupsen/logrus
-#	go get -u github.com/hashicorp/consul
-	go get -u github.com/gorilla/mux
-
-deps-msvc-deps:
-	go get -u github.com/oklog/oklog/pkg/group
+go-kit: go-kit-server go-kit-client
+go-kit-server:
+	go build -o $(BIN_DIR)/$@ go-kit/greeter/server/main.go
+go-kit-client:
+	go build -o $(BIN_DIR)/$@ go-kit/greeter/client/main.go
 
 
 # ####################################

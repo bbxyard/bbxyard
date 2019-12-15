@@ -19,7 +19,7 @@ func main() {
 		serviceAddr = fs.String("service.addr", "127.0.0.1:9220", "The Gizmo greeter service address")
 		name        = fs.String("name", "gizmo RPC call", "The Name to greet")
 	)
-	fmt.Printf("%v", fs)
+	// fmt.Println("app: ", os.Args[0])
 	fs.Usage = cmd.UsageFor(fs, os.Args[0]+" [flags]")
 	fs.Parse(os.Args[1:])
 
