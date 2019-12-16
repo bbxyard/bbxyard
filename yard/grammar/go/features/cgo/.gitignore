@@ -1,0 +1,8 @@
+
+# 生成目录
+c/so/lib/
+
+cgo-with-src/c/
+
+cgo-with-so/include/
+cgo-with-so/lib/

@@ -1,7 +1,7 @@
 package main
 
 /*
-#include "test.h"
+#include "c/test.c"
 */
 import "C"
 import (
