@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/micro/go-micro/client"
 
 	pb "bbxyard.com/msvc/pbs"
 	"github.com/micro/cli"
@@ -34,8 +35,10 @@ func main() {
 		}),
 	)
 
-	client := pb.NewGreeterService(svc_name, service.Client())
-	resp, err := client.Greeting(context.Background(), &pb.GreetingRequest{Name: name})
+	theClient := pb.NewGreeterService("go-micro-serv-greeter", client.DefaultClient)
+
+	// client := pb.NewGreeterService(svc_name, service.Client())
+	resp, err := theClient.Greeting(context.Background(), &pb.GreetingRequest{Name: name})
 	if err != nil {
 		fmt.Println(err)
 	}

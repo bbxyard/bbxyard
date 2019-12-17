@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"github.com/micro/go-micro"
@@ -16,6 +17,7 @@ type Greeter struct {
 // Greeting method implementation.
 func (g *Greeter) Greeting(ctx context.Context, in *pb.GreetingRequest, out *pb.GreetingResponse) error {
 	out.Greeting = "GO-MIRCO Hello " + in.Name
+	fmt.Println("Handled:", out.Greeting)
 	return nil
 }
 

@@ -19,18 +19,21 @@ deps-grpc:
 	go get -u github.com/golang/protobuf/protoc-gen-go
 	go get -u github.com/micro/protoc-gen-micro
 
-deps-msvc:
-	go get -u github.com/go-kit/kit
+deps-msvc: deps-msvc-micro deps-msvc-gizmo deps-msvc-go-kit deps-msvc-deps
+deps-msvc-micro:
+	go get -u github.com/micro/micro
 	go get -u github.com/micro/go-micro
+deps-msvc-gizmo:
 	go get -u github.com/NYTimes/gizmo
 	go get -u github.com/NYTimes/gziphandler
-	go get -u github.com/sirupsen/logrus
-#	go get -u github.com/hashicorp/consul
-	go get -u github.com/gorilla/mux
-
+deps-msvc-go-kit:
+	go get -u github.com/go-kit/kit
 deps-msvc-deps:
 	go get -u github.com/oklog/oklog/pkg/group
 	go get -u github.com/prometheus/client_golang
+	go get -u github.com/sirupsen/logrus
+#	go get -u github.com/hashicorp/consul
+	go get -u github.com/gorilla/mux
 
 
 # ####################################
