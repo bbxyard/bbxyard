@@ -9,10 +9,10 @@
 deps: deps-http deps-logs deps-grpc deps-msvc
 
 deps-http:
-	# go get -u github.com/gin-gonic/gin
+	 go get -u github.com/gin-gonic/gin
 
 deps-logs:
-	# go get -u go.uber.org/zap
+	 go get -u go.uber.org/zap
 
 deps-grpc:
 	go get -u google.golang.org/grpc
