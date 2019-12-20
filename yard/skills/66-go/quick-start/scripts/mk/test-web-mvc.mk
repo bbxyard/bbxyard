@@ -12,7 +12,9 @@ IRIS_WEB_MVC_PORT  := 18194
 # ####################################
 # Dashboard AREA
 # ####################################
-run-web-mvc: run-web-mvc-beego-normal-case run-web-mvc-gin-normal-case run-web-mvc-iris-normal-case
+run-web-mvc: run-web-mvc-beego-normal-case \
+	run-web-mvc-gin-normal-case \
+	run-web-mvc-iris-normal-case
 
 
 # ####################################

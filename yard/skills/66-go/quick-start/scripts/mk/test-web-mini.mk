@@ -12,7 +12,9 @@ IRIS_WEB_MINI_PORT  := 18094
 # ####################################
 # Dashboard AREA
 # ####################################
-run-web-mini: run-web-mini-beego-normal-case run-web-mini-gin-normal-case run-web-mini-iris-normal-case
+run-web-mini: run-web-mini-beego-normal-case \
+	run-web-mini-gin-normal-case \
+	run-web-mini-iris-normal-case
 
 
 # ####################################
@@ -42,5 +44,5 @@ run-web-mini-iris-normal-case:
 # Misc AREA
 # ####################################
 run-web-mini-favicon:
-	md5sum ../src/web/static/favicons/favicon.ico
+	md5sum ../src/web-mini/static/favicons/favicon.ico
 	curl -s localhost:${IRIS_WEB_MINI_PORT}/favicon.ico | md5sum

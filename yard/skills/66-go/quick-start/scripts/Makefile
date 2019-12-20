@@ -32,7 +32,7 @@ start-client:
 # Test AREA
 # ####################################
 include ./mk/test-restful.mk
-include ./mk/test-web.mk
+include ./mk/test-web-mini.mk
 
 
 # ####################################
@@ -42,8 +42,8 @@ start-restful-beego:
 	go run $(SRC_DIR)/restful/beego/main.go
 start-restful-gin:
 	go run $(SRC_DIR)/restful/gin/main.go
-start-restful-gin:
-	go run $(SRC_DIR)/restful/gin/main.go
+start-restful-iris:
+	go run $(SRC_DIR)/restful/iris/main.go
 
 start-web-mini-iris:
 	cd $(SRC_DIR)/web-mini/iris && go run main.go
