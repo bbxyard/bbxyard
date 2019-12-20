@@ -10,6 +10,13 @@ IRIS_PORT  := 18084
 # ####################################
 # Dashboard AREA
 # ####################################
+start-restful-beego:
+	go run $(SRC_DIR)/restful/beego/main.go
+start-restful-gin:
+	go run $(SRC_DIR)/restful/gin/main.go
+start-restful-iris:
+	go run $(SRC_DIR)/restful/iris/main.go
+
 run-restful: run-restful-beego-normal-case \
 	run-restful-gin-normal-case \
 	run-restful-iris-normal-case

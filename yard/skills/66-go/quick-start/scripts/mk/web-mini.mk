@@ -12,6 +12,9 @@ IRIS_WEB_MINI_PORT  := 18094
 # ####################################
 # Dashboard AREA
 # ####################################
+start-web-mini-iris:
+	cd $(SRC_DIR)/web-mini/iris && go run main.go
+
 run-web-mini: run-web-mini-beego-normal-case \
 	run-web-mini-gin-normal-case \
 	run-web-mini-iris-normal-case
