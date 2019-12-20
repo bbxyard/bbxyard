@@ -12,6 +12,7 @@ DK_EXEC := docker exec -it
 
 DATA_SUF:= $(shell date +"%Y.%m.%d.%H.%M.%S")
 
+SRC_DIR	:= ../src
 
 
 # ####################################
@@ -30,16 +31,16 @@ start-client:
 # ####################################
 # Test AREA
 # ####################################
-include ../../scripts/mk/test-restful.mk
+include ./mk/test-restful.mk
 
 
 # ####################################
 # supervisor 托管区域
 # ####################################
 start-restful-beego:
-	go run beego/main.go
+	go run $(SRC_DIR)/restful/beego/main.go
 start-restful-gin:
-	go run gin/main.go
+	go run $(SRC_DIR)/restful/gin/main.go
 
 
 # ####################################
