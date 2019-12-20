@@ -10,7 +10,9 @@ IRIS_PORT  := 18084
 # ####################################
 # Dashboard AREA
 # ####################################
-run-restful: run-restful-beego-normal-case run-restful-gin-normal-case
+run-restful: run-restful-beego-normal-case \
+	run-restful-gin-normal-case \
+	run-restful-iris-normal-case
 
 
 # ####################################
@@ -48,3 +50,12 @@ run-restful-gin-normal-case:
 	curl http://localhost:${GIN_PORT}/g1/action1
 	curl http://localhost:${GIN_PORT}/g1/action2
 	curl http://localhost:${GIN_PORT}/g1/action3
+
+
+# ####################################
+# Iris AREA
+# ####################################
+run-restful-iris-normal-case:
+	curl http://localhost:${IRIS_PORT}/user
+	curl -d '' http://localhost:${IRIS_PORT}/user
+	curl -d '' http://localhost:${IRIS_PORT}/json
