@@ -13,9 +13,6 @@ DK_EXEC := docker exec -it
 DATA_SUF:= $(shell date +"%Y.%m.%d.%H.%M.%S")
 
 
-BEEGO_PORT := 18081
-GIN_PORT   := 18082
-
 
 # ####################################
 # Dashboard AREA
@@ -33,9 +30,7 @@ start-client:
 # ####################################
 # Test AREA
 # ####################################
-run-restful-beego:
-	curl http://localhost:${BEEGO_PORT}/user
-	curl -d '' http://localhost:${BEEGO_PORT}/user
+include ../../scripts/mk/test-restful.mk
 
 
 # ####################################
@@ -43,6 +38,8 @@ run-restful-beego:
 # ####################################
 start-restful-beego:
 	go run beego/main.go
+start-restful-gin:
+	go run gin/main.go
 
 
 # ####################################
@@ -59,6 +56,13 @@ ctl-sv:
 	supervisorctl -c ./supervisord.conf
 init-sv:
 	[ -d /tmp/quick-start ] || mkdir -p /tmp/quick-start
+
+
+# ####################################
+# Deps AREA
+# ####################################
+go-deps:
+	go get -u github.com/gin-gonic/gin
 
 
 # ####################################
