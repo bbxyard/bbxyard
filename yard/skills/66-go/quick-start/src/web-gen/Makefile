@@ -24,9 +24,13 @@ status:
 # ####################################
 gen: export GO111MODULE=off
 gen: export GOPATH=$(SLN_ROOT_PATH)
-gen:
-	bee api beego-api-demo
+gen: beego-api-demo beego-new-demo
 	# bee generate scaffold user -fields="id:int64,name:string,gender:int,age:int" -driver=mysql -conn="hero@tcp(127.0.0.1:3307)/imooc_beego"
+beego-api-demo:
+	bee api beego-api-demo
+beego-new-demo:
+	bee new beego-new-demo
+
 
 run: export GO111MODULE=off
 run: export GOPATH=$(PROJ_PATH)
