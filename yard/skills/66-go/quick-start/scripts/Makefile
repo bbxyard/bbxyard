@@ -42,8 +42,11 @@ start-restful-beego:
 	go run $(SRC_DIR)/restful/beego/main.go
 start-restful-gin:
 	go run $(SRC_DIR)/restful/gin/main.go
-start-web-iris:
-	cd $(SRC_DIR)/web/iris && go run main.go
+start-restful-gin:
+	go run $(SRC_DIR)/restful/gin/main.go
+
+start-web-mini-iris:
+	cd $(SRC_DIR)/web-mini/iris && go run main.go
 
 
 # ####################################
