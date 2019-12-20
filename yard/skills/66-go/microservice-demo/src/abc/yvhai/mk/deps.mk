@@ -41,8 +41,21 @@ deps-msvc-deps:
 	go get -u github.com/oklog/oklog/pkg/group
 	go get -u github.com/prometheus/client_golang
 	go get -u github.com/sirupsen/logrus
-#	go get -u github.com/hashicorp/consul
 	go get -u github.com/gorilla/mux
+
+
+# ####################################
+# Web AREA
+# ####################################
+deps-web: deps-web-beego deps-web-gin deps-web-echo deps-web-iris
+deps-web-beego:
+	go get -u github.com/astaxie/beego
+	go get -u github.com/beego/bee
+deps-web-gin:
+	go get -u github.com/gin-gonic/gin
+deps-web-echo:
+deps-web-iris:
+	go get -u github.com/kataras/iris
 
 
 # ####################################
