@@ -1,19 +1,18 @@
 DATA_SUF = $(shell date +"%Y.%m.%d.%H.%M.%S")
 GUP_MSG = "Auto Commited at $(DATA_SUF)"
 
-ORG_GOPATH = ${HOME}/opt/yh-go
 PROJ_PATH = $(shell pwd)
-APP_NAME = beego-demo
-
+MOD_NAME  = web-gen
 
 SLN_ROOT_PATH := $(shell cd ../.. && pwd)
+DIST_DIR      := $(SLN_ROOT_PATH)/dist
 
 
 # ####################################
 # Dashboard AREA
 # ####################################
 init:
-	go mod init $(APP_NAME)
+	go mod init $(MOD_NAME)
 
 status:
 	echo ${SLN_ROOT_PATH}
@@ -32,12 +31,26 @@ beego-new-demo:
 	bee new beego-new-demo
 
 
-run: export GO111MODULE=off
-run: export GOPATH=$(PROJ_PATH)
-run:
-	echo $(GOPATH)
-	bee run
+# ####################################
+# Pack AREA
+# ####################################
+pack: pack-beego
+pack-beego: export GOPATH=$(SLN_ROOT_PATH)
+pack-beego: dist
+	@echo GOPATH=${GOPATH}
+	cd beego-api-demo && bee pack -o "${DIST_DIR}"
+	cd beego-new-demo && bee pack -o "${DIST_DIR}"
 
 
+# ####################################
+# Distribute AREA
+# ####################################
+dist:
+	[ -d "${DIST_DIR}" ] || mkdir -p "${DIST_DIR}"
+
+
+# ####################################
+# Deps AREA
+# ####################################
 deps:
 	go get -u github.com/astaxie/beego
