@@ -22,8 +22,9 @@ DB_CMD_CREATE := CREATE DATABASE IF NOT EXISTS ${DB_NAME} DEFAULT CHARACTER SET 
 # ####################################
 # Dashboard AREA
 # ####################################
-demo:
-	node node/hallo-mysql.js | tee -ai run.log
+up: start-mysql
+down: stop-mysql
+test: init do-test
 
 
 # ####################################
@@ -34,16 +35,28 @@ start-mysql:
 stop-mysql:
 	make -C .open-helper/mysql down
 
-init:
+sh:
+	make -C .open-helper/mysql sh
+
+init: init-db init-deps
+init-db:
 	make -C .open-helper/mysql sh CMD='mysql -u${DB_USER} -p${DB_PASSWD} -se"${DB_CMD_CREATE}"'
 	make -C .open-helper/mysql sh CMD='mysql -u${DB_USER} -p${DB_PASSWD} -se"show databases;"'
 	make -C .open-helper/mysql exec CMD='mysql -u${DB_USER} -p${DB_PASSWD} -D${DB_NAME} < ./stub/init.sql'
-sh:
-	make -C .open-helper/mysql sh
+init-deps:
+	cd node && cnpm i
+
+do-test:
+	cd node && node hallo-mysql.js
 
 
 # ####################################
 # Utils AREA
 # ####################################
+purge: stop-mysql
+	make -C .open-helper/mysql $@
+	rm -rvf node/node_modules
+	du -sh .
+
 clean:
 	rm -rvf *.log

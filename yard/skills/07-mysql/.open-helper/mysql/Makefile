@@ -26,7 +26,7 @@ stop: down
 up: init-dir
 	$(DC) up -d
 down:
-	$(DC) down
+	$(DC) down --remove-orphans 
 config:
 	$(DC) config
 start-fg: init-dir
@@ -56,5 +56,10 @@ init-dir:
 # ####################################
 # Utils AREA
 # ####################################
+purge:
+	make -C . down
+	[ ! -d data ] || sudo rm -rvf data
+	[ ! -d log ] || sudo rm -rvf log
+
 clean:
 	rm -rvf log/* *.bak
