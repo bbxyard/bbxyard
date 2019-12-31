@@ -5,10 +5,10 @@ class DBDemo {
   constructor() {
     this.db = mysql.createConnection({
       host     : '127.0.0.1',
-      user     : 'test',
-      password : '',
-      port     : '3306',
-      database : 'test',
+      user     : 'root',
+      password : 'passwd',
+      port     : '53306',
+      database : 'smoke',
     });
     this.db.connect();
   }
@@ -25,8 +25,8 @@ class DBDemo {
   // 增
   add() {
     const ADD_SQL_PAIR_LIST = [
-      // ['INSERT INTO demo_user(id, name, age) VALUES(128, ?, ?)', ['0x80', 128]],
-      ['insert into demo_user(name, age) values(?, ?)', ['boxu', 34]]
+      // ['INSERT INTO node_user(id, name, age) VALUES(128, ?, ?)', ['0x80', 128]],
+      ['insert into node_user(name, age) values(?, ?)', ['boxu', 34]]
     ];
     console.log('-----INSERT----');
     for (const item of ADD_SQL_PAIR_LIST) {
@@ -42,7 +42,7 @@ class DBDemo {
   // 改
   update() {
     const UP_SQL_PAIR_LIST = [
-      ['update demo_user set name=?,age=? where id=?', ['char-bound', 64, 128]]
+      ['update node_user set name=?,age=? where id=?', ['char-bound', 64, 128]]
     ];
     console.log('-----UPDATE----');
     for (const item of UP_SQL_PAIR_LIST) {
@@ -58,8 +58,8 @@ class DBDemo {
   // 删除
   del() {
     const DEL_SQL_PAIR_LIST = [
-      ['delete from demo_user where id=?', [128]],
-      ['delete from demo_user where name=?', ['boxu']],
+      ['delete from node_user where id=?', [128]],
+      ['delete from node_user where name=?', ['boxu']],
     ];
     console.log('-----DELETE----');
     for (const item of DEL_SQL_PAIR_LIST) {
@@ -76,8 +76,8 @@ class DBDemo {
   query() {
     const QUERY_SQL_LIST = [
       'show databases',
-      'select * from test.demo_user',
-      'select name,age from test.demo_user where id > 2',
+      'select * from node_user',
+      'select name,age from node_user where id > 2',
     ];
     for (const sql of QUERY_SQL_LIST) {
       this.db.query(sql, (err, result) => {
