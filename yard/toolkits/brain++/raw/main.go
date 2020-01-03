@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/kataras/iris"
 	"math/rand"
+
+	"github.com/kataras/iris"
 )
 
 func genRandNum(row, col uint16) [][]string {
@@ -14,7 +15,7 @@ func genRandNum(row, col uint16) [][]string {
 	}
 	for i = 0; i < row; i++ {
 		for j = 0; j < col; j++ {
-			mat[i][j] = fmt.Sprintf("%02d", uint16(rand.Uint32() % 100))
+			mat[i][j] = fmt.Sprintf("%d", uint16(rand.Uint32()%10))
 		}
 	}
 	return mat
@@ -40,10 +41,10 @@ func main() {
 
 	app.Get("/num", func(ctx iris.Context) {
 		ctx.ViewData("Title", "随机数字")
-		mat := genRandNum(25, 40)
+		mat := genRandNum(20, 50)
 		fmt.Printf("%v\n", mat)
 		ctx.ViewData("Mat", mat)
-		ctx.ViewData("Content", "Hello world! -- from template")
+		ctx.ViewData("Content", "随机数字")
 		ctx.View("templates/num.html")
 	})
 
