@@ -42,7 +42,6 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime
       - ./conf:/etc/mysql/conf.d
-      - ./stub:/stub
       - ${XDC_MYSQL_DATA:-./data}:/var/lib/mysql
       - ${XDC_MYSQL_LOG:-./log}:/var/log/mysql
     environment:
