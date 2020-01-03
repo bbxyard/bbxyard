@@ -49,8 +49,11 @@ init-db:
 init-deps:
 	cd node && cnpm i
 
-do-test:
+do-test: test-node test-go
+test-node:
 	cd node && node hallo-mysql.js
+test-go:
+	cd go-xorm && go run main.go
 
 export:
 	[ -d "${BACKUP_DIR}" ] || mkdir -p "${BACKUP_DIR}"
