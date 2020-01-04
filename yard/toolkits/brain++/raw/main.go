@@ -26,7 +26,7 @@ func main() {
 	//app.Use(logger.New())
 
 	htmlEngine := iris.HTML("./", ".html")
-	//htmlEngine.Reload(false)
+	htmlEngine.Reload(true)
 	app.RegisterView(htmlEngine)
 
 	app.Get("/", func(ctx iris.Context) {
