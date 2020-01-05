@@ -34,7 +34,7 @@ func main() {
 	app.RegisterView(htmlEngine)
 
 	app.Get("/", func(ctx iris.Context) {
-		ctx.WriteString("Hello world! -- from iris.")
+		ctx.Redirect("/num")
 	})
 
 	app.Get("/hello", func(ctx iris.Context) {
@@ -52,5 +52,5 @@ func main() {
 		ctx.View("templates/num.html")
 	})
 
-	app.Run(iris.Addr(":8080"), iris.WithCharset("UTF-8"))
+	app.Run(iris.Addr(":2514"), iris.WithCharset("UTF-8"))
 }
