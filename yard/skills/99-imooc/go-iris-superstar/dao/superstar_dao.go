@@ -43,7 +43,7 @@ func (d *SuperstarDao) Search(country string) []models.StarInfo {
 
 func (d *SuperstarDao) Delete(id int) error {
 	inData := &models.StarInfo{Id: id, SysStatus: 1}
-	_, err := d.engine.Id(inOutData.Id).Delete(inData)
+	_, err := d.engine.Id(inData.Id).Delete(inData)
 	return err
 }
 
