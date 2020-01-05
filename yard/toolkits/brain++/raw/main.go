@@ -15,7 +15,7 @@ func genRandNum(row, col uint16) [][]string {
 	}
 	for i = 0; i < row; i++ {
 		for j = 0; j < col; j++ {
-			mat[i][j] = fmt.Sprintf("%d", uint16(rand.Uint32()%10))
+			mat[i][j] = fmt.Sprintf("%02d", uint16(rand.Uint32()%100))
 		}
 	}
 	return mat
@@ -27,6 +27,10 @@ func main() {
 
 	htmlEngine := iris.HTML("./", ".html")
 	htmlEngine.Reload(true)
+	htmlEngine.AddFunc("label", func(offset int) string {
+		return fmt.Sprintf("Row%02d: ", offset+1)
+	})
+
 	app.RegisterView(htmlEngine)
 
 	app.Get("/", func(ctx iris.Context) {
@@ -41,8 +45,8 @@ func main() {
 
 	app.Get("/num", func(ctx iris.Context) {
 		ctx.ViewData("Title", "随机数字")
-		mat := genRandNum(20, 50)
-		fmt.Printf("%v\n", mat)
+		mat := genRandNum(25, 40)
+		// fmt.Printf("%v\n", mat)
 		ctx.ViewData("Mat", mat)
 		ctx.ViewData("Content", "随机数字")
 		ctx.View("templates/num.html")

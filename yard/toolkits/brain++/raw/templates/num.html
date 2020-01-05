@@ -7,7 +7,16 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
 
     <style>
-        .cell-item { margin-right: 10px; }
+        .num-row { display: flex; flex-wrap: wrap; margin-bottom: 10px; align-items: center; justify-content: flex-start; }
+        .num-row:nth-of-type(2n) { background-color: #fff; }
+        .num-row:nth-of-type(2n+1) { background-color: #fff; }
+
+        .num-col { display: flex; }
+        .num-col:nth-of-type(2n) { color: #333; }
+        .num-col:nth-of-type(2n+1) { color: #777; }
+
+        .cell-item { margin-right: 10px; font-size: 1.4rem; }
+        .num-lable { color: #ddd; font-size: 1rem; font-style: italic; }
     </style>
 </head>
 <body>
@@ -16,15 +25,16 @@
 
         <h2>{{.Content}}</h2>
 
-        <div class="row">
-            {{range $i, $row := .Mat}}
-                <div class="col">
-                    {{ range $j, $col := $row}}
-                        <span class="cell-item">{{ $col }}</span>
-                    {{ end }}
+        {{range $i, $row := .Mat}}
+        <div class="num-row">
+            <span class="cell-item num-lable">{{ label $i }}</span>
+            {{ range $j, $col := $row}}
+                <div class="num-col">
+                    <span class="cell-item">{{ $col }}</span>
                 </div>
-            {{end}}
-        </div>    
+            {{ end }}
+        </div>
+        {{end}}
     </div>
 
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.slim.min.js" crossorigin="anonymous"></script>
