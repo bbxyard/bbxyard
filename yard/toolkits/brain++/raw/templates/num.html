@@ -11,12 +11,12 @@
         .num-row:nth-of-type(2n) { background-color: #fff; }
         .num-row:nth-of-type(2n+1) { background-color: #fff; }
 
-        .num-col { display: flex; }
+        .num-col { display: flex; min-width: 2rem; }
         .num-col:nth-of-type(2n) { color: #333; }
         .num-col:nth-of-type(2n+1) { color: #777; }
 
-        .cell-item { margin-right: 10px; font-size: 1.4rem; }
-        .num-lable { color: #ddd; font-size: 1rem; font-style: italic; }
+        .cell-item { margin-right: 0px; font-size: 1.2rem; }
+        .num-lable { color: #ddd; font-size: 0.8rem; font-style: italic; }
     </style>
 </head>
 <body>
@@ -27,12 +27,12 @@
 
         {{range $i, $row := .Mat}}
         <div class="num-row">
-            <span class="cell-item num-lable">{{ label $i }}</span>
             {{ range $j, $col := $row}}
                 <div class="num-col">
                     <span class="cell-item">{{ $col }}</span>
                 </div>
             {{ end }}
+            <span class="cell-item num-lable">{{ label $i }}</span>
         </div>
         {{end}}
     </div>

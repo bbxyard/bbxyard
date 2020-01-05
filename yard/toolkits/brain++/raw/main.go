@@ -28,7 +28,7 @@ func main() {
 	htmlEngine := iris.HTML("./", ".html")
 	htmlEngine.Reload(true)
 	htmlEngine.AddFunc("label", func(offset int) string {
-		return fmt.Sprintf("Row%02d: ", offset+1)
+		return fmt.Sprintf("R%02d", offset+1)
 	})
 
 	app.RegisterView(htmlEngine)
@@ -45,7 +45,9 @@ func main() {
 
 	app.Get("/num", func(ctx iris.Context) {
 		ctx.ViewData("Title", "随机数字")
-		mat := genRandNum(25, 40)
+		row := ctx.URLParamIntDefault("row", 25)
+		col := ctx.URLParamIntDefault("col", 20)
+		mat := genRandNum(uint16(row), uint16(col))
 		// fmt.Printf("%v\n", mat)
 		ctx.ViewData("Mat", mat)
 		ctx.ViewData("Content", "随机数字")
