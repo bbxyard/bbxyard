@@ -1,7 +1,7 @@
 # ####################################
 # @file: Makefile
-# @name: yard/toolkits/brain++
-# @date: 2020-01-05 12:28:07
+# @name: yard/skills/99-imooc/go-iris-superstar
+# @date: 2020-01-05 17:04:49
 # @tver: 20191217
 # ####################################
 
@@ -34,6 +34,19 @@ start-xx2-fg:
 
 
 # ####################################
+# Init AREA
+# ####################################
+go-deps: go-deps-cur
+go-deps-once:
+	go env -w GOPROXY=https://goproxy.cn,direct
+	go env -w GO111MODULE=on
+	go get -u golang.org/x/tools/cmd/goimport
+go-deps-cur:
+	go get -u github.com/kataras/iris
+	go get -u github.com/gorilla/securecookie
+	go get -u github.com/go-xorm/xorm
+
+# ####################################
 # supervisor AREA
 # ####################################
 start-sv: init-sv
@@ -46,16 +59,7 @@ status-sv:
 ctl-sv:
 	supervisorctl -c ./supervisord.conf
 init-sv:
-	[ -d /tmp/go-stack-guide ] || mkdir -p /tmp/go-stack-guide
-
-
-# ####################################
-# Init AREA
-# ####################################
-deps:
-	go env -w GOPROXY=https://goproxy.cn,direct
-	go env -w GO111MODULE=on
-	go get -u golang.org/x/tools/cmd/goimport
+	[ -d /tmp/99-go-imooc ] || mkdir -p /tmp/99-go-imooc
 
 
 # ####################################
