@@ -45,6 +45,8 @@ go-deps-cur:
 	go get -u github.com/kataras/iris
 	go get -u github.com/gorilla/securecookie
 	go get -u github.com/go-xorm/xorm
+	go get -u github.com/go-sql-driver/mysql
+
 
 # ####################################
 # supervisor AREA
