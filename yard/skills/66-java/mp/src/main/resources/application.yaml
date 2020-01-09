@@ -19,7 +19,7 @@ mybatis-plus:
       logic-delete-value: 1 # 默认值1
       logic-not-delete-value: 0 # 默认值0
 
-  # 检举配置
+  # 枚举配置
   type-enums-package: com.baomidou.mybatisplus.samples.enums.enums
   configuration:
     # 3.0.8之前版本问题默认将枚举注册为EnumOrdinalTypeHandler,这是错误的方式,默认是 org.apache.ibatis.type.EnumTypeHandler
