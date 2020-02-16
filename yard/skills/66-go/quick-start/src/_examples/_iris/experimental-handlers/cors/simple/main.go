@@ -50,5 +50,5 @@ func main() {
 	// on the server side if you wish
 	// to directly fire the handler instead of redirection (which is the default behavior)
 	// on request paths like "/v1/mailer/" when "/v1/mailer" route handler is registered.
-	app.Run(iris.Addr(":80"), iris.WithoutPathCorrectionRedirection)
+	app.Run(iris.Addr(":18080"), iris.WithoutPathCorrectionRedirection)
 }

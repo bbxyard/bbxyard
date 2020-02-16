@@ -11,7 +11,7 @@ import (
 //
 // Replace the '8fc93b1c.ngrok.io' with a domain which
 // exposes the cors/simple/main.go server side.
-const url = "http://8fc93b1c.ngrok.io/api/v1/mailer"
+const url = "http://localhost:18080/api/v1/mailer"
 
 var clientSide = []byte(`<script type="text/javascript">
 fetch("` + url + `", {
