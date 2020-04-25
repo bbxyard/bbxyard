@@ -13,6 +13,15 @@ PB_DIR    := pb
 
 
 # ####################################
+# Init AREA
+# ####################################
+init:
+	[ -f go.mod ] || go mod init bbxyard.com
+	go get -u google.golang.org/grpc@v1.28.1
+	go get -u github.com/golang/protobuf
+
+
+# ####################################
 # Gen AREA
 # ####################################
 gen: gen-init gen-pb gen-pb-go
@@ -60,6 +69,6 @@ run-client:
 # Utils AREA
 # ####################################
 clean:
-	rm -rvf *.bak *.log
-	rm -rvf bin/hallo-* pb/*
+	rm -rvf *.bak *.log go.sum
+	rm -rvf bin/hallo-* pb bin
 

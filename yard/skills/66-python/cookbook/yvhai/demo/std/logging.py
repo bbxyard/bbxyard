@@ -26,3 +26,7 @@ class LogerDemo(YHDemo):
     def demo(args=[]):
         inst = LogerDemo()
         inst.test()
+
+
+if __name__ == "__main__":
+    LogerDemo.demo()

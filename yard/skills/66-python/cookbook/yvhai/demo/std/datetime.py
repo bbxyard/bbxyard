@@ -32,3 +32,7 @@ class DTDemo(YHDemo):
     @classmethod
     def demo(args=[]):
         DTDemo.show_time()
+
+
+if __name__ == "__main__":
+    DTDemo.demo()
