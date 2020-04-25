@@ -9,7 +9,15 @@
 # ####################################
 
 gen:
-	make -C examples/helloworld
+	make -C examples/helloworld init gen
+
+# ####################################
+# Init AREA
+# ####################################
+init:
+	[ -f go.mod ] || go mod init grpc-demo
+	go get -u google.golang.org/grpc@v1.28.1
+
 
 # ####################################
 # utis AREA
