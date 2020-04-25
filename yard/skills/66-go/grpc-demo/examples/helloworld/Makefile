@@ -21,6 +21,13 @@ init:
 	go get -u github.com/golang/protobuf
 
 
+start-server:
+	go run greeter_server/main.go
+
+start-client:
+	go run greeter_client/main.go $@
+
+
 # ####################################
 # Gen AREA
 # ####################################
@@ -48,11 +55,10 @@ gen-pb-go:
 # ####################################
 # Deploy AREA
 # ####################################
-build: build-server build-client
-build-server:
-	go build  -o bin/hallo-server greeter_server/main.go
-build-client:
-	go build  -o bin/hallo-client greeter_client/main.go
+build: init gen
+	[ -d "$(BIN_DIR)" ] || mkdir -p "$(BIN_DIR)"
+	go build -o $(BIN_DIR)/greeter_server greeter_server/main.go
+	go build -o $(BIN_DIR)/greeter_client greeter_client/main.go
 
 
 # ####################################
