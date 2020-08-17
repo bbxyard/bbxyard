@@ -103,4 +103,5 @@ endef
 # Fini AREA
 # ####################################
 clean:
+	find . -type d -name "node_modules" | xargs rm -rvf
 	rm -rvf *.bak *.log
