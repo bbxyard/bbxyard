@@ -3,6 +3,9 @@ logs
 .DS_Store
 
 
+## ide
+.idea
+
 ### STS ###
 .apt_generated
 .classpath
