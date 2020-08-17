@@ -27,13 +27,10 @@ start-fg-beat:
 # ####################################
 # Deps AREA
 # ####################################
-deps: conf log
+deps:
+	install -d conf log
+	echo_supervisord_conf > conf/supervisord.conf
 
-conf:
-	mkdir -p $@
-	echo_supervisord_conf > $@/supervisord.conf
-log:
-	mkdir -p $@
 	
 py3-celery4-dj2:
 	pip3 install $(PIP_REPO_OPT) celery django redis supervisor
@@ -44,4 +41,7 @@ py3-celery4-dj2:
 # Utils AREA
 # ####################################
 clean:
-	rm -rvf *.bak *.log
+	-rm -rvf *.bak *.log celerybeat-schedule log/*
+
+purge: clean
+	rm -rvf .idea
