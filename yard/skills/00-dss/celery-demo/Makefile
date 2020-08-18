@@ -30,7 +30,8 @@ start-fg-beat:
 deps:
 	install -d conf log
 	echo_supervisord_conf > conf/supervisord.conf
-
+init-nonce:
+	mkvirtualenv py3-celery4-dj2
 	
 py3-celery4-dj2:
 	pip3 install $(PIP_REPO_OPT) celery django redis supervisor
